@@ -13,6 +13,7 @@ import Text  from './ui/text';
 // }
 
 async function getPosts() {
+  console.log('Home getPosts');
   const database = await getDatabase();
   return database;
 }

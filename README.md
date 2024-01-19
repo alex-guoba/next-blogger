@@ -34,3 +34,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Feaatures
+
+- Next.js SSG supported
+
+  [SSG](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation) make all pages generated when you run `next build`
+
+  - how to update content with SSG rendering.
+
+  - cache is only available in React’s Canary and experimental channels. Please ensure you understand the limitations before using cache in production. Learn more about React’s release channels here.

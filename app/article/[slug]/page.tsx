@@ -7,15 +7,13 @@ import {renderBlock} from "@/app/ui/notion/render";
 import { getDatabase, getPageFromSlug, getBlocks } from "@/app/lib/notion";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
-export const revalidate = 60; // revalidate the data at most every hour
+export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || '', 10) || 300; // revalidate the data interval
 
 // export const dynamicParams = true; // true | false,
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-
   const database = await getDatabase();
-  
   return database.map((page: any) => {
     const slug = page.properties.Slug?.rich_text[0].plain_text;
     return ({ slug });
@@ -23,7 +21,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: {params: {slug: string}}) {
-  console.log(params)
+  console.log(params, "environment variables:", revalidate)
   const page: any = await getPageFromSlug(params.slug);
   const blocks = page && await getBlocks(page.id);
 

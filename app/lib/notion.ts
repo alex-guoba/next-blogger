@@ -1,7 +1,6 @@
 import { Client } from '@notionhq/client';
-import { cache } from 'react';
+// import { cache } from 'react';
 import {QueryDatabaseResponse, ListBlockChildrenResponse} from '@notionhq/client/build/src/api-endpoints';
-
 
 const databaseId = process.env.NOTION_DATABASE_ID || '';
 
@@ -25,7 +24,7 @@ const notion = new Client({
 
 // 取db中的pages列表数据（posts）
 // API: https://developers.notion.com/reference/post-database-query
-export const getDatabase = cache(async (): Promise<QueryDatabaseResponse['results']> => {
+export const getDatabase = async (): Promise<QueryDatabaseResponse['results']> => {
   const start = new Date().getTime();
 
   const response = await notion.databases.query({
@@ -34,23 +33,23 @@ export const getDatabase = cache(async (): Promise<QueryDatabaseResponse['result
   const end = new Date().getTime();
   console.log('[getDatabase]', `${end - start}ms`);
   return response.results;
-});
+};
 
 //
 // 读取一个page的基础数据（page object）
 // API: https://developers.notion.com/reference/retrieve-a-page
-export const getPage = cache(async (pageId: any) => {
+export const getPage = async (pageId: any) => {
   const start = new Date().getTime();
   const response = await notion.pages.retrieve({ page_id: pageId });
   const end = new Date().getTime();
   console.log('[getPage]', `${end - start}ms`);
   return response;
-});
+};
 
 //
 // slug:（计算机）处理后的标题（用于构建固定链接）
 // 根据标题取db中的page列表数据，限制一条
-export const getPageFromSlug = cache(async (slug: string) => {
+export const getPageFromSlug = async (slug: string) => {
   const start = new Date().getTime();
 
   const response = await notion.databases.query({
@@ -70,11 +69,11 @@ export const getPageFromSlug = cache(async (slug: string) => {
   if (response?.results?.length) {
     return response?.results?.[0];
   }
-});
+};
 
 //
 // 取page/block的children列表数据 (blocks)
-export const getBlocks = cache(async (blockID: string): Promise<any> => {
+export const getBlocks = async (blockID: string): Promise<any> => {
   const start = new Date().getTime();
 
   const blockId = blockID.replaceAll('-', '');
@@ -129,4 +128,4 @@ export const getBlocks = cache(async (blockID: string): Promise<any> => {
     }
     return acc;
   }, []));
-});
+};
