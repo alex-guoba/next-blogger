@@ -1,8 +1,8 @@
 // import Image from 'next/image'
 import Link from 'next/link';
 import { getDatabase } from '@/app/lib/notion';
-import './globals.css'
-import Text  from './ui/text';
+import '@/app/styles/globals.css'
+import Text  from '../ui/text';
 
 // export default function Home() {
 //   return (

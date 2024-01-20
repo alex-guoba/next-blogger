@@ -1,3 +1,6 @@
+import { SiteFooter } from "@/components/layouts/site-footer"
+import { SiteHeader } from "@/components/layouts/site-header"
+
 export default function ArticleLayout({
     children, // will be a page or nested layout
   }: {
@@ -9,8 +12,11 @@ export default function ArticleLayout({
         {/* <seciton className="w-full flex-none md:w-64">
           <SideNav />
         </seciton> */}
-   
-      <div className="grow p-6 md:overflow-y-auto md:p-12">{children}</div>
+        <SiteHeader />
+          <main className="grow p-6 md:overflow-y-auto md:p-12">
+            {children}
+          </main>
+        <SiteFooter />
       </div>
     )
   }
