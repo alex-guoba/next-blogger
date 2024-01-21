@@ -24,7 +24,9 @@ const notion = new Client({
 
 // 取db中的pages列表数据（posts）
 // API: https://developers.notion.com/reference/post-database-query
-export const getDatabase = async (): Promise<QueryDatabaseResponse['results']> => {
+export type TypePostList = QueryDatabaseResponse["results"];
+// export type TypePostItem = QueryDatabaseResponse["results"][0];
+export const getDatabase = async (): Promise<TypePostList> => {
   const start = new Date().getTime();
 
   const response = await notion.databases.query({

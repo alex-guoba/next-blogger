@@ -9,8 +9,6 @@ const links = {
   twitter: "https://twitter.com/gelco",
   github: "https://github.com/alex-guoba",
   githubAccount: "https://github.com/alex-guoba",
-//   discord: "https://discord.com/gelco",
-//   calDotCom: "https://cal.com/gelco",
 }
 
 export const siteConfig = {
@@ -25,21 +23,32 @@ export const siteConfig = {
       title: "Utopian",
       items: [
         {
-          title: "Products",
-          href: "/products",
+          title: "Tags",
+          href: "/tags",
           description: "All the products we have to offer.",
           items: [],
         },
         {
-          title: "Build a Board",
-          href: "/build-a-board",
+          title: "Recent",
+          href: "/recent",
           description: "Build your own custom skateboard.",
           items: [],
         },
+      ],
+    },
+    {
+      title: "About",
+      items: [
         {
-          title: "Blog",
-          href: "/blog",
-          description: "Read our latest blog posts.",
+          title: "Project",
+          href: "/project",
+          description: "About the project behind Utopian.",
+          items: [],
+        },
+        {
+          title: "Author",
+          href: "/author",
+          description: "About author of Utopian.",
           items: [],
         },
       ],
@@ -67,21 +76,6 @@ export const siteConfig = {
       title: "Credits",
       items: [
         {
-          title: "OneStopShop",
-          href: "https://onestopshop.jackblatch.com",
-          external: true,
-        },
-        {
-          title: "Acme Corp",
-          href: "https://acme-corp.jumr.dev",
-          external: true,
-        },
-        {
-          title: "craft.mxkaske.dev",
-          href: "https://craft.mxkaske.dev",
-          external: true,
-        },
-        {
           title: "Taxonomy",
           href: "https://tx.shadcn.com/",
           external: true,
@@ -99,16 +93,6 @@ export const siteConfig = {
         {
           title: "About",
           href: "/pages/about",
-          external: false,
-        },
-        {
-          title: "Contact",
-          href: "/pages/Contact",
-          external: false,
-        },
-        {
-          title: "Terms",
-          href: "/pages/terms",
           external: false,
         },
         {
@@ -131,42 +115,32 @@ export const siteConfig = {
           href: links.githubAccount,
           external: true,
         },
-        {
-          title: "Discord",
-          href: links.discord,
-          external: true,
-        },
-        {
-          title: "cal.com",
-          href: links.calDotCom,
-          external: true,
-        },
       ],
     },
-    {
-      title: "Lofi",
-      items: [
-        {
-          title: "beats to study to",
-          href: "https://www.youtube.com/watch?v=jfKfPfyJRdk",
-          external: true,
-        },
-        {
-          title: "beats to chill to",
-          href: "https://www.youtube.com/watch?v=rUxyKA_-grg",
-          external: true,
-        },
-        {
-          title: "a fresh start",
-          href: "https://www.youtube.com/watch?v=rwionZbOryo",
-          external: true,
-        },
-        {
-          title: "coffee to go",
-          href: "https://www.youtube.com/watch?v=2gliGzb2_1I",
-          external: true,
-        },
-      ],
-    },
+    // {
+    //   title: "Lofi",
+    //   items: [
+    //     {
+    //       title: "beats to study to",
+    //       href: "https://www.youtube.com/watch?v=jfKfPfyJRdk",
+    //       external: true,
+    //     },
+    //     {
+    //       title: "beats to chill to",
+    //       href: "https://www.youtube.com/watch?v=rUxyKA_-grg",
+    //       external: true,
+    //     },
+    //     {
+    //       title: "a fresh start",
+    //       href: "https://www.youtube.com/watch?v=rwionZbOryo",
+    //       external: true,
+    //     },
+    //     {
+    //       title: "coffee to go",
+    //       href: "https://www.youtube.com/watch?v=2gliGzb2_1I",
+    //       external: true,
+    //     },
+    //   ],
+    // },
   ] satisfies FooterItem[],
 }

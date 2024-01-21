@@ -19,7 +19,8 @@ export interface NavItemWithOptionalChildren extends NavItem {
   items?: NavItemWithChildren[];
 }
 
-export type MainNavItem = NavItemWithOptionalChildren;
+export type MainNavItem = NavItemWithOptionalChildren
+export type SidebarNavItem = NavItemWithChildren
 
 
 export interface FooterItem {
