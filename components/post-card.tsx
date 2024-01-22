@@ -29,11 +29,11 @@ interface PostCardProps {
   title: string;
   image?: string;
   desc: string;
-  date: string;
+  edit_time: string;
   i: number;
 }
 
-export function PostCard({ slug, title, image, desc, date, i }: PostCardProps) {
+export function PostCard({ slug, title, image, desc, edit_time, i }: PostCardProps) {
   return (
     <Link key={slug} href={slug}>
       <span className="sr-only">{title}</span>
@@ -57,7 +57,7 @@ export function PostCard({ slug, title, image, desc, date, i }: PostCardProps) {
             <CardTitle className="line-clamp-1">{title}</CardTitle>
             <CardDescription className="line-clamp-2">{desc}</CardDescription>
           </CardHeader>
-          <CardDescription>{formatDate(date)}</CardDescription>
+          <CardDescription>{formatDate(edit_time)}</CardDescription>
         </div>
       </article>
     </Link>

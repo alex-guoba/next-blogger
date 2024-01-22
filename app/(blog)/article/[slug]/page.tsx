@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import Text from "@/app/ui/text";
 
 import {renderBlock} from "@/app/ui/notion/render";
-import { getDatabase, getPageFromSlug, getBlocks } from "@/app/api/notion";
+import { QueryDatabase, getPageFromSlug, getBlocks } from "@/app/api/notion";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
 export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || '', 10) || 300; // revalidate the data interval
@@ -13,7 +13,7 @@ export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || '', 10) 
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const database = await getDatabase();
+  const database = await QueryDatabase();
   return database.map((page: any) => {
     const slug = page.properties.Slug?.rich_text[0].plain_text;
     return ({ slug });

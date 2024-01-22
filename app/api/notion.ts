@@ -22,18 +22,18 @@ const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-// 取db中的pages列表数据（posts）
+// Get pages from database
 // API: https://developers.notion.com/reference/post-database-query
-export type TypePostList = QueryDatabaseResponse["results"];
 // export type TypePostItem = QueryDatabaseResponse["results"][0];
-export const getDatabase = async (): Promise<TypePostList> => {
+export type TypePostList = QueryDatabaseResponse["results"];
+export const QueryDatabase = async (): Promise<TypePostList> => {
   const start = new Date().getTime();
 
   const response = await notion.databases.query({
     database_id: databaseId,
   });
   const end = new Date().getTime();
-  console.log('[getDatabase]', `${end - start}ms`);
+  console.log('[QueryDatabase]', `${end - start}ms`);
   return response.results;
 };
 

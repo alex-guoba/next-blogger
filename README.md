@@ -45,3 +45,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
   - how to update content with SSG rendering.
 
   - cache is only available in React’s Canary and experimental channels. Please ensure you understand the limitations before using cache in production. Learn more about React’s release channels here.
+
+## TODO
+
+- add cover, description for home page

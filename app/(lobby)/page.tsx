@@ -1,7 +1,7 @@
 // import Image from 'next/image'
 import Link from 'next/link';
 
-import { getDatabase } from '@/app/api/notion';
+import { QueryDatabase } from '@/app/api/notion';
 import '@/app/styles/globals.css'
 import Text  from '../ui/text';
 import Shell from '@/components/shells/shell';
@@ -12,7 +12,7 @@ import { PostCard, PostCardSkeleton } from '@/components/post-card';
 
 export default async function Home() {
   console.log('Home getPosts');
-  const posts = await getDatabase();
+  const posts = await QueryDatabase();
 
   return (
     <div>
@@ -33,43 +33,19 @@ export default async function Home() {
             {posts.map((post: any, i) => {
               const title = post.properties?.Title.title[0].text.content;
               const slug = post.properties?.Slug?.rich_text[0].plain_text;
-              const date = post.last_edited_time;
+              const edit_time = post.last_edited_time;
+              const image = post.cover?.external?.url;
+              const desc = post.properties?.Summary?.rich_text[0].plain_text;
 
               return <PostCard key={slug} 
                 title={title} 
                 slug={`/article/${slug}`}
-                date={date}
-                desc={title}
-                image=""
+                edit_time={edit_time}
+                desc={desc}
+                image={image}
                 i={i} />
             })}
-          </React.Suspense>
-          {/* <h2>All Posts</h2> */}
-          {/* <ol>
-            {posts.map((post: any) => {
-              const date = new Date(post.last_edited_time).toLocaleString(
-                'en-US',
-                {
-                  month: 'short',
-                  day: '2-digit',
-                  year: 'numeric',
-                },
-              );
-              const slug = post.properties?.Slug?.rich_text[0].plain_text;
-              return (
-                <li key={post.id}>
-                  <h3>
-                    <Link href={`/article/${slug}`}>
-                      <Text title={post.properties?.Title?.title} />
-                    </Link>
-                  </h3>
-
-                  <p >{date}</p>
-                  <Link href={`/article/${slug}`}>Read post →</Link>
-                </li>
-              );
-            })}
-          </ol> */}
+          </React.Suspense>          
         </section>
       </Shell>
     </div>
