@@ -13,9 +13,9 @@ export default function ArticleLayout({
           <SideNav />
         </seciton> */}
         <SiteHeader />
-          <main className="grow p-6 md:overflow-y-auto md:p-12">
+          {/* <main className="grow p-6 md:overflow-y-auto md:p-12"> */}
             {children}
-          </main>
+          {/* </main> */}
         <SiteFooter />
       </div>
     )

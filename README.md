@@ -48,4 +48,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-- add cover, description for home page
+### MPV version
+- [X] add cover, description for home page
+- [ ] render blog page
+- [ ] data statics
+- [ ] share

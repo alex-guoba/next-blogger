@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client';
-// import { cache } from 'react';
+import { cache } from 'react';
 import {QueryDatabaseResponse, ListBlockChildrenResponse} from '@notionhq/client/build/src/api-endpoints';
 
 const databaseId = process.env.NOTION_DATABASE_ID || '';
@@ -75,7 +75,7 @@ export const getPageFromSlug = async (slug: string) => {
 
 //
 // 取page/block的children列表数据 (blocks)
-export const getBlocks = async (blockID: string): Promise<any> => {
+export const getBlocks = cache(async (blockID: string): Promise<any> => {
   const start = new Date().getTime();
 
   const blockId = blockID.replaceAll('-', '');
@@ -130,4 +130,4 @@ export const getBlocks = async (blockID: string): Promise<any> => {
     }
     return acc;
   }, []));
-};
+});
