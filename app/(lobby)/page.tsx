@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { QueryDatabase } from '@/app/api/notion';
 import '@/app/styles/globals.css'
-import Text  from '../ui/text';
+import Text  from '../notion/text';
 import Shell from '@/components/shells/shell';
 import { PageHeader, PageHeaderHeading, PageHeaderDescription } from '@/components/page-header';
 import { Separator } from '@/components/ui/separator';

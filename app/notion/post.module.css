@@ -23,7 +23,20 @@
   .container figcaption {
     opacity: 0.6;
   } */
-  
+/*   
+  h1{
+    font-size: 64px;
+    font-weight:700;
+  }
+  h2{
+    font-size: 48px;
+    font-weight:700
+  }
+ h3{
+    font-size: 32px;
+    font-weight:700
+  } */
+
   .name {
     font-size: 36px;
   }

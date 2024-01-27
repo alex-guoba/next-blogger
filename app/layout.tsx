@@ -6,6 +6,9 @@ import { cn } from "@/lib/utils"
 // const inter = Inter({ subsets: ['latin'] })
 import { fontMono, fontSans } from "@/lib/fonts"
 import { ThemeProvider } from '@/components/providers'
+import TailwindIndicator from '@/components/helpers/tailwind-indicator'
+import { SiteHeader } from '@/components/layouts/site-header'
+import { SiteFooter } from '@/components/layouts/site-footer'
 
 // use tempated metadata
 export const metadata: Metadata = {
@@ -37,13 +40,18 @@ export default function RootLayout({
           fontMono.variable
         )}
       >
+        <TailwindIndicator />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-        >
-          {children}
+        >      
+          <SiteHeader />
+            <main>
+              {children}
+            </main>
+          <SiteFooter />
           {/* <TailwindIndicator />
           <Analytics /> */}
         </ThemeProvider>

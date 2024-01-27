@@ -75,35 +75,51 @@ export function MobileNav({ mainNavItems, sidebarNavItems }: MobileNavProps) {
               className="w-full"
             >
               {navItems?.map((item, index) => (
-                <AccordionItem value={item.title} key={index}>
-                  <AccordionTrigger className="text-sm capitalize">
-                    {item.title}
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="flex flex-col space-y-2">
-                      {item.items?.map((subItem, index) =>
-                        subItem.href ? (
-                          <MobileLink
-                            key={index}
-                            href={String(subItem.href)}
-                            segment={String(segment)}
-                            setIsOpen={setIsOpen}
-                            disabled={subItem.disabled}
-                          >
-                            {subItem.title}
-                          </MobileLink>
-                        ) : (
-                          <div
-                            key={index}
-                            className="text-foreground/70 transition-colors"
-                          >
-                            {item.title}
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
+                item.items && (item.items?.length > 0) ? (
+                  <AccordionItem value={item.title} key={index}>
+                    <AccordionTrigger className="text-sm capitalize">
+                      {item.title}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="flex flex-col space-y-2">
+                        {item.items?.map((subItem, index) =>
+                          subItem.href ? (
+                            <MobileLink
+                              key={index}
+                              href={String(subItem.href)}
+                              segment={String(segment)}
+                              setIsOpen={setIsOpen}
+                              disabled={subItem.disabled}
+                            >
+                              {subItem.title}
+                            </MobileLink>
+                          ) : (
+                            <div
+                              key={index}
+                              className="text-foreground/70 transition-colors"
+                            >
+                              {item.title}
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                ) : (
+                  item.href && (
+                    <AccordionItem key={index} value={item.title}>
+                      <Link href={item.href} legacyBehavior passHref>
+                        {/* <MobileLink
+                          className={cn(navigationMenuTriggerStyle(), "h-auto")}
+                        > */}
+                        <div className="flex flex-col space-y-2 py-4 font-medium transition-all hover:underline">
+                          {item.title}
+                        </div>
+                        {/* </MobileLink> */}
+                      </Link>
+                    </AccordionItem>
+                  )
+                )
               ))}
             </Accordion>
           </div>

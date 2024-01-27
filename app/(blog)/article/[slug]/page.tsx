@@ -1,12 +1,10 @@
 // import Head from "next/head";
 import Link from "next/link";
 import { Fragment } from "react";
-import Text from "@/app/ui/text";
+// import Text from "@/app/ui/text";
 import { Metadata, ResolvingMetadata } from "next";
 
-// import styles from "@/app/ui/post.module.css";
-
-import { renderBlock } from "@/app/ui/notion/render";
+import { renderBlock } from "@/app/notion/render";
 import { QueryDatabase, getPageFromSlug, getBlocks } from "@/app/api/notion";
 import Shell from "@/components/shells/shell";
 import React from "react";
@@ -14,6 +12,8 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import { formatDate } from "@/lib/utils";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/page-header";
+import { Separator } from "@/components/ui/separator";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
 export const revalidate =
@@ -60,33 +60,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <Shell as="article">
-      <div className="space-y-2">
-        <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-          {page.last_edited_time && (
-            <time dateTime={page.last_edited_time}>
-              {formatDate(page.last_edited_time)}
-            </time>
-          )}
-          {/* {page.last_edited_time ? <div>•</div> : null} */}
-          {/* <div>{post.readingTime}min</div> */}
-        </div>
-        <h1 className="inline-block text-4xl font-bold leading-tight lg:text-5xl">
-          {title}
-          {/* <Text title={page.properties.Title?.title} /> */}
-        </h1>
-      </div>
+      <PageHeader>
+        <PageHeaderDescription variant="sm">{formatDate(page.last_edited_time)}</PageHeaderDescription>
+        <PageHeaderHeading>{title}</PageHeaderHeading>
+        </PageHeader>
+      <Separator className="mb-2.5" />
 
-      {/* <Separator className="mb-2.5" /> */}
-      {/* <section className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"> */}
-      {/* <React.Suspense
-          fallback={Array.from({ length: 4 }).map((_, i) => (
-            <PostCardSkeleton key={i} />
-          ))}
-        > */}
-      {/* <div> */}
-      {/* <article className={styles.container}> */}
-
-      <section>
+      <section className="">
         {blocks.map((block: any) => (
           <Fragment key={block.id}>{renderBlock(block)}</Fragment>
         ))}

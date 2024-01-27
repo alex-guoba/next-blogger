@@ -53,23 +53,10 @@ export const siteConfig = {
         },
       ],
     },
-    // ...productCategories.map((category) => ({
-    //   title: category.title,
-    //   items: [
-    //     {
-    //       title: "All",
-    //       href: `/categories/${slugify(category.title)}`,
-    //       description: `All ${category.title}.`,
-    //       items: [],
-    //     },
-    //     ...category.subcategories.map((subcategory) => ({
-    //       title: subcategory.title,
-    //       href: `/categories/${slugify(category.title)}/${subcategory.slug}`,
-    //       description: subcategory.description,
-    //       items: [],
-    //     })),
-    //   ],
-    // })),
+    {
+      title: "Contact",
+      href: "/contact",
+    },
   ] satisfies MainNavItem[],
   footerNav: [
     {
@@ -117,30 +104,5 @@ export const siteConfig = {
         },
       ],
     },
-    // {
-    //   title: "Lofi",
-    //   items: [
-    //     {
-    //       title: "beats to study to",
-    //       href: "https://www.youtube.com/watch?v=jfKfPfyJRdk",
-    //       external: true,
-    //     },
-    //     {
-    //       title: "beats to chill to",
-    //       href: "https://www.youtube.com/watch?v=rUxyKA_-grg",
-    //       external: true,
-    //     },
-    //     {
-    //       title: "a fresh start",
-    //       href: "https://www.youtube.com/watch?v=rwionZbOryo",
-    //       external: true,
-    //     },
-    //     {
-    //       title: "coffee to go",
-    //       href: "https://www.youtube.com/watch?v=2gliGzb2_1I",
-    //       external: true,
-    //     },
-    //   ],
-    // },
   ] satisfies FooterItem[],
 }

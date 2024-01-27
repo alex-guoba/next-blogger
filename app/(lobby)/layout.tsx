@@ -13,15 +13,9 @@ export default async function LobyLayout({
   }: {
     children: React.ReactNode
   }) {
-//   const user = await currentUser()
-
   return (
     <div className="relative flex min-h-screen flex-col">
-      <SiteHeader />
-      <main className="flex-1">
         {children}
-      </main>
-      <SiteFooter />
     </div>
   )
 }

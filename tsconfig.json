@@ -22,6 +22,14 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/ui/argo/tab-group"],
+  "include": [
+    "next-env.d.ts", 
+    "**/*.ts", 
+    "**/*.tsx", 
+    "**/*.mjs",
+    ".next/types/**/*.ts",
+    "app/notion/argo/tab-group",
+
+  ],
   "exclude": ["node_modules"]
 }

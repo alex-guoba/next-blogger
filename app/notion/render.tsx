@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import Link from 'next/link';
 
-import Text from '../text';
-import styles from '../post.module.css';
+import Text from './text';
+import styles from './post.module.css';
 
 export function renderBlock(block: any) {
   const { type, id } = block;
