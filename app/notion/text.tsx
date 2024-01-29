@@ -1,30 +1,134 @@
 import styles from './post.module.css';
 
-export default function Text({ title }: any) {
-  if (!title) {
-    return null;
+// convert notion color to tailwind css class name for each annotation style: 
+// - "blue"
+// - "blue_background"
+// - "brown"
+// - "brown_background"
+// - "default"
+// - "gray"
+// - "gray_background"
+// - "green"
+// - "green_background"
+// - "orange"
+// -"orange_background"
+// - "pink"
+// - "pink_background"
+// - "purple"
+// - "purple_background"
+// - "red"
+// - "red_background”
+// - "yellow"
+// - "yellow_background"
+// see: https://davidpiesse.github.io/tailwind-md-colours/
+const colorMap = new Map<string, string>([
+  ["blue", "text-blue-400"],
+  ["blue_background", "bg-blue-200"],
+  ["brown", "text-[#8d6e63]"],
+  ["brown_background", "bg-[#d7ccc8]"],
+  ["default", ""],
+  ["gray", "text-gray-400"],
+  ["gray_background", "bg-gray-200"],
+  ["green", "text-green-800"],
+  ["green_background", "bg-green-100"],
+  ["orange", "text-orange-500"],
+  ["orange_background", "bg-orange-100"],
+  ["pink", "text-pink-400"],
+  ["pink_background", "bg-pink-200"],
+  ["purple", "text-purple-400"],
+  ["purple_background", "bg-purple-100"],
+  ["red", "text-red-600"],
+  ["red_background", "bg-red-100"],
+  ["yellow", "text-yellow-600"],
+  ["yellow_background", "bg-yellow-100"],
+]);
+
+const linkTextStyle = 'text-gray-400 underline'
+
+// https://developers.notion.com/reference/rich-text#the-annotation-object
+function AnnotationStyle(annotations: any){
+  const {bold, code, color, italic, strikethrough, underline} = annotations;
+  const names = [
+    bold ? 'font-bold' : '',
+    code ? 'text-red-600 bg-slate-200	' : '',
+    italic ? 'italic' : '',
+    strikethrough ? 'line-through' : '',
+    underline ? 'underline' : '',
+    color ? colorMap.get(color) : '',
+  ];
+
+  return names.filter((el) => el != '' && el != undefined).join(' ');
+}
+
+function Text(rt : any) {
+  const {
+    annotations,
+    text,
+  } = rt;
+  const styels = AnnotationStyle(annotations);
+  return (
+    <span
+      className={styels}
+      key={text.content}
+    >
+      {text.link ? <a href={text.link.url} className={linkTextStyle}>{text.content}</a> : text.content}
+    </span>
+  )
+}
+
+// https://developers.notion.com/reference/rich-text#mention
+function Mention(rt : any) {
+  const {
+    annotations,
+    href,
+    plain_text
+  } = rt;
+  const styels = AnnotationStyle(annotations);
+
+  return (
+    <span
+      className={`${styels} font-medium`}
+    >
+      {href ? <a className='underline' href={href}>{plain_text}</a> : plain_text}
+    </span>
+  )
+}
+
+function Equation(rt : any) {
+  const {
+    annotations,
+    equation,
+  } = rt;
+  const styels = AnnotationStyle(annotations);
+  return (
+    <span
+      className={styels}
+    >
+      {equation.href ? <a href={equation.href}>{equation.plain_text}</a> : equation.plain_text}
+    </span>
+  )
+}
+
+// Notion uses rich text to allow users to customize their content. 
+// Rich text refers to a type of document where content can be styled and formatted in a variety of customizable ways. 
+// This includes styling decisions, such as the use of italics, font size, and font color, as well as formatting, 
+// such as the use of hyperlinks or code blocks.
+// See:  https://developers.notion.com/reference/rich-text
+export default function RichText({ title}: any) {
+  // empmty lines should be rendered with &emsp
+  if (!title || title?.length == 0) {
+    return <span>&nbsp;</span>
   }
   return title.map((value: any) => {
-    const {
-      annotations: {
-        bold, code, color, italic, strikethrough, underline,
-      },
-      text,
-    } = value;
-    return (
-      <span
-        className={[
-          bold ? styles.bold : '',
-          code ? styles.code : '',
-          italic ? styles.italic : '',
-          strikethrough ? styles.strikethrough : '',
-          underline ? styles.underline : '',
-        ].join(' ')}
-        style={color !== 'default' ? { color } : {}}
-        key={text.content}
-      >
-        {text.link ? <a href={text.link.url}>{text.content}</a> : text.content}
-      </span>
-    );
+    const { type } = value;
+    if (type == 'text') {
+      return Text(value);
+    } else if (type == 'mention') {
+      return Mention(value)
+    } else if (type == 'equation') {
+      return Equation(value)
+    }
+
+    return null
   });
 }

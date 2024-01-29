@@ -37,116 +37,152 @@
     font-weight:700
   } */
 
-  .name {
-    font-size: 36px;
-  }
-  
-  .back {
-    display: inline-block;
-    margin-bottom: 20px;
-  }
-  
-  .bold {
-    font-weight: bold;
-  }
-  
-  .code {
-    font-family: monospace;
-    background-color: rgb(242, 242, 242);
-    padding: 2px 4px;
-    border-radius: 2px;
-  }
-  
-  .italic {
-    font-style: italic;
-  }
-  
+.name {
+  font-size: 36px;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.code {
+  font-family: monospace;
+  background-color: rgb(242, 242, 242);
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.pre {
+  background-color: rgb(242, 242, 242);
+  padding: 2px 4px;
+  margin: 20px 0;
+  line-height: 2.3;
+  border-radius: 12px;
+  overflow: auto;
+}
+
+.code_block {
+  padding: 20px;
+  font-family: monospace;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.file {
+  padding: 2px 4px;
+  text-decoration: none;
+}
+
+.file a {
+  color: inherit;
+}
+
+.file:hover {
+  background: rgba(55, 53, 47, 0.08);
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.bookmark {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.table {
+  border: 1px solid currentColor;
+  border-collapse: collapse;
+}
+.table th {
+  border: 1px solid currentColor;
+  background-color: rgb(242, 242, 242);
+  padding: 6px 12px;
+}
+.table td {
+  border: 1px solid currentColor;
+  padding: 6px 12px;
+}
+
+.row {
+  display: flex;
+}
+
+.row > div {
+  flex: 1;
+}
+
+.childPage {
+  border: 1px solid currentColor;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .code,
+  .table,
   .pre {
-    background-color: rgb(242, 242, 242);
-    padding: 2px 4px;
-    margin: 20px 0;
-    line-height: 2.3;
-    border-radius: 12px;
-    overflow: auto;
+    background-color: rgb(15, 8, 28);
   }
-  
-  .code_block {
-    padding: 20px;
-    font-family: monospace;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .file {
-    padding: 2px 4px;
-    text-decoration: none;
-  }
-  
-  .file a {
-    color: inherit;
-  }
-  
   .file:hover {
-    background: rgba(55, 53, 47, 0.08);
+    background: rgba(255, 255, 255, 0.1);
     cursor: pointer;
     border-radius: 2px;
   }
-  
-  .italic {
-    font-style: italic;
-  }
-  
-  .strikethrough {
-    text-decoration: line-through;
-  }
-  
-  .underline {
-    text-decoration: underline;
-  }
-  
-  .bookmark {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .table {
-    border: 1px solid currentColor;
-    border-collapse: collapse;
-  }
-  .table th {
-    border: 1px solid currentColor;
-    background-color: rgb(242, 242, 242);
-    padding: 6px 12px;
-  }
-  .table td {
-    border: 1px solid currentColor;
-    padding: 6px 12px;
-  }
-  
-  .row {
-    display: flex;
-  }
-  
-  .row > div {
-    flex: 1;
-  }
-  
-  .childPage {
-    border: 1px solid currentColor;
-    padding: 20px;
-    border-radius: 12px;
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    .code,
-    .table,
-    .pre {
-      background-color: rgb(15, 8, 28);
-    }
-    .file:hover {
-      background: rgba(255, 255, 255, 0.1);
-      cursor: pointer;
-      border-radius: 2px;
-    }
-  }
-  
+}
+/* 
+.notion-h {
+  position: relative;
+  display: inline-block;
+
+  font-weight: 600;
+  line-height: 1.3;
+  padding: 3px 2px;
+  margin-bottom: 1px;
+
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.notion-h1 {
+  font-size: 1.875em;
+  margin-top: 1.08em;
+}
+
+.notion-title + .notion-h1,
+.notion-title + .notion-h2,
+.notion-title + .notion-h3 {
+  margin-top: 0;
+}
+.notion-h1:first-child {
+  margin-top: 0;
+}
+.notion-h2 {
+  font-size: 1.5em;
+  margin-top: 1.1em;
+}
+.notion-h3 {
+  font-size: 1.25em;
+  margin-top: 1em;
+} */
+

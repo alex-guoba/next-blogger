@@ -103,7 +103,7 @@ export const getBlocks = cache(async (blockID: string): Promise<any> => {
   console.log('[getBlocks]', `${end - start}ms`);
 
   return Promise.all(childBlocks).then((blocks) => blocks.reduce((acc, curr) => {
-    // 符号列表类型的特殊处理：转换为parent -> {children} 结构，并增加uniqID（更加方便渲染？）
+    // special conversation for list(bullet、number)：convert to children array and add uniqed IDs inn each item
     // https://developers.notion.com/reference/block#bulleted-list-item
     if (curr.type === 'bulleted_list_item') {
       if (acc[acc.length - 1]?.type === 'bulleted_list') {

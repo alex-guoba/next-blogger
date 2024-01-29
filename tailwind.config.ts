@@ -78,6 +78,14 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    listStyleType: {
+      none: 'none',
+      disc: 'disc',
+      decimal: 'decimal',
+      alpha: "lower-alpha",
+      roman: "lower-roman",
+      circle: "circle",
+    }
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config

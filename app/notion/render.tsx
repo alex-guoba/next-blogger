@@ -1,60 +1,83 @@
 import { Fragment } from 'react';
 import Link from 'next/link';
 
-import Text from './text';
+import RichText from './text';
 import styles from './post.module.css';
+import { bulletListStyle, numberListStyle } from './tools';
 
-export function renderBlock(block: any) {
+
+export function renderBlock(block: any, level: number = 1) {
   const { type, id } = block;
   const value = block[type];
 
+  // console.log(type, id, value);
+
   switch (type) {
+    // https://developers.notion.com/reference/block#paragraph
+    // RichText: 
+    // - 当包含多段不同样式的文本时，会被拆分为对应的多个 paragraph.rich_text[]，包括：带link、bold、strikethrough、italic、code（使用``包裹）的文本
+    // - 空白换行
+    // - mention: no rich_text exist
     case 'paragraph':
       return (
-        <p>
-          <Text title={value.rich_text} />
+        <p id={id} className='py-1'>
+          <RichText title={value.rich_text} />
         </p>
       );
     case 'heading_1':
       return (
-        <h1>
-          <Text title={value.rich_text} />
+        <h1 id={id} className='text-3xl font-bold dark:text-white py-4'>
+          <RichText title={value.rich_text} />
         </h1>
       );
     case 'heading_2':
       return (
-        <h2>
-          <Text title={value.rich_text} />
+        <h2 id={id} className='text-2xl font-bold dark:text-white py-3'>
+          <RichText title={value.rich_text} />
         </h2>
       );
     case 'heading_3':
       return (
-        <h3>
-          <Text title={value.rich_text} />
+        <h3 id={id} className='text-1xl font-bold dark:text-white py-2'>
+          <RichText title={value.rich_text} />
         </h3>
       );
+    
+
+    // before list rendering, array should be convert into children array. See getBlocks function.
     case 'bulleted_list': {
-      return <ul>{value.children.map((child: any) => renderBlock(child))}</ul>;
+      const styels = bulletListStyle(level)
+      return (
+        <ul className={`${styels} pt-1 pl-5`}>
+          {value.children.map((child: any) => renderBlock(child, level + 1))}
+        </ul>
+      );
     }
     case 'numbered_list': {
-      return <ol>{value.children.map((child: any) => renderBlock(child))}</ol>;
+      const styels = numberListStyle(level)
+      return (
+        <ol className={`${styels} pt-1 pl-5`}>
+          {value.children.map((child: any) => renderBlock(child, level + 1))}
+        </ol>
+      );
     }
     case 'bulleted_list_item':
     case 'numbered_list_item':
+      // console.log('item: ', type, value, value.children)
       return (
-        <li key={block.id}>
-          <Text title={value.rich_text} />
-          {/* eslint-disable-next-line no-use-before-define */}
-          {!!value.children && renderNestedList(block)}
+        <li key={block.id} className='pt-1'>
+          <RichText title={value.rich_text} />
+          {!!block.children && renderNestedList(block, level + 1)}
         </li>
       );
+    
     case 'to_do':
       return (
         <div>
           <label htmlFor={id}>
             <input type="checkbox" id={id} defaultChecked={value.checked} />
             {' '}
-            <Text title={value.rich_text} />
+            <RichText title={value.rich_text} />
           </label>
         </div>
       );
@@ -62,10 +85,10 @@ export function renderBlock(block: any) {
       return (
         <details>
           <summary>
-            <Text title={value.rich_text} />
+            <RichText title={value.rich_text} />
           </summary>
           {block.children?.map((child: any) => (
-            <Fragment key={child.id}>{renderBlock(child)}</Fragment>
+            <Fragment key={child.id}>{renderBlock(child, level + 1)}</Fragment>
           ))}
         </details>
       );
@@ -73,7 +96,7 @@ export function renderBlock(block: any) {
       return (
         <div className={styles.childPage}>
           <strong>{value?.title}</strong>
-          {block.children.map((child: any) => renderBlock(child))}
+          {block.children.map((child: any) => renderBlock(child, level + 1))}
         </div>
       );
     case 'image': {
@@ -135,7 +158,7 @@ export function renderBlock(block: any) {
                   {child.table_row?.cells?.map((cell: { plain_text: any; }, i: any) => (
                     // eslint-disable-next-line react/no-array-index-key
                     <RowElement key={`${cell.plain_text}-${i}`}>
-                      <Text title={cell} />
+                      <RichText title={cell} />
                     </RowElement>
                   ))}
                 </tr>
@@ -148,12 +171,12 @@ export function renderBlock(block: any) {
     case 'column_list': {
       return (
         <div className={styles.row}>
-          {block.children.map((childBlock: any) => renderBlock(childBlock))}
+          {block.children.map((childBlock: any) => renderBlock(childBlock, level + 1))}
         </div>
       );
     }
     case 'column': {
-      return <div>{block.children.map((child: any) => renderBlock(child))}</div>;
+      return <div>{block.children.map((child: any) => renderBlock(child, level + 1))}</div>;
     }
     default:
       return `❌ Unsupported block (${
@@ -162,15 +185,16 @@ export function renderBlock(block: any) {
   }
 }
 
-export function renderNestedList(blocks: { [x: string]: any; type?: any; }) {
+export function renderNestedList(blocks: any, level: number) {
   const { type } = blocks;
   const value = blocks[type];
+
   if (!value) return null;
 
-  const isNumberedList = value.children[0].type === 'numbered_list_item';
-
+  const isNumberedList = blocks.children[0].type === 'numbered_list_item';
   if (isNumberedList) {
-    return <ol>{value.children.map((block: any) => renderBlock(block))}</ol>;
+    // style not neccessary for grand-child lists as it will inherit from parent
+    return <div>{blocks.children.map((block: any) => renderBlock(block, level))}</div>;
   }
-  return <ul>{value.children.map((block: any) => renderBlock(block))}</ul>;
+  return <div>{blocks.children.map((block: any) => renderBlock(block, level))}</div>;
 }
