@@ -27,6 +27,7 @@
     "lucide-react": "^0.312.0",
     "next": "14.0.4",
     "next-themes": "^0.2.1",
+    "prismjs": "^1.29.0",
     "react": "^18",
     "react-dom": "^18",
     "react-wrap-balancer": "^1.1.0",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "@types/ms": "^0.7.34",
     "@types/node": "^20",
+    "@types/prismjs": "^1.26.3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",

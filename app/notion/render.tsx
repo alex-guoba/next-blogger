@@ -4,13 +4,16 @@ import Link from 'next/link';
 import RichText from './text';
 import styles from './post.module.css';
 import { bulletListStyle, numberListStyle } from './tools';
+import { cn } from '@/lib/utils';
+import { CodeRender } from './_components/code';
+import React from 'react';
 
 
 export function renderBlock(block: any, level: number = 1) {
   const { type, id } = block;
   const value = block[type];
 
-  // console.log(type, id, value);
+  // console.log(type, id);
 
   switch (type) {
     // https://developers.notion.com/reference/block#paragraph
@@ -20,7 +23,7 @@ export function renderBlock(block: any, level: number = 1) {
     // - mention: no rich_text exist
     case 'paragraph':
       return (
-        <p id={id} className='py-1'>
+        <p id={id} className='mt-1.5'>
           <RichText title={value.rich_text} />
         </p>
       );
@@ -43,29 +46,25 @@ export function renderBlock(block: any, level: number = 1) {
         </h3>
       );
     
-
     // before list rendering, array should be convert into children array. See getBlocks function.
     case 'bulleted_list': {
-      const styels = bulletListStyle(level)
       return (
-        <ul className={`${styels} pt-1 pl-5`}>
+        <ul key={id} className={cn(bulletListStyle(level), level == 1 ? 'mt-1.5' : '', "pl-5")}>
           {value.children.map((child: any) => renderBlock(child, level + 1))}
         </ul>
       );
     }
     case 'numbered_list': {
-      const styels = numberListStyle(level)
       return (
-        <ol className={`${styels} pt-1 pl-5`}>
+        <ol key={id} className={cn(numberListStyle(level), level == 1 ? 'mt-1.5' : '', 'pl-5')}>
           {value.children.map((child: any) => renderBlock(child, level + 1))}
         </ol>
       );
     }
     case 'bulleted_list_item':
     case 'numbered_list_item':
-      // console.log('item: ', type, value, value.children)
       return (
-        <li key={block.id} className='pt-1'>
+        <li key={id} className='mt-1.5'>
           <RichText title={value.rich_text} />
           {!!block.children && renderNestedList(block, level + 1)}
         </li>
@@ -73,25 +72,28 @@ export function renderBlock(block: any, level: number = 1) {
     
     case 'to_do':
       return (
-        <div>
+        <div className='mt-1.5'>
           <label htmlFor={id}>
-            <input type="checkbox" id={id} defaultChecked={value.checked} />
-            {' '}
-            <RichText title={value.rich_text} />
+            <input className='w-4 h-4 border-black border-4 rounded-none mr-2' type="checkbox" id={id} defaultChecked={value.checked} />
+            {value.checked ? <RichText title={value.rich_text} extended='text-gray-500 line-through'/> : <RichText title={value.rich_text}/>}
           </label>
         </div>
       );
+    
     case 'toggle':
       return (
-        <details>
+        <details className='mt-1.5'>
           <summary>
             <RichText title={value.rich_text} />
           </summary>
-          {block.children?.map((child: any) => (
-            <Fragment key={child.id}>{renderBlock(child, level + 1)}</Fragment>
-          ))}
+          <div className='ml-4'>
+            {block.children?.map((child: any) => (
+              <Fragment key={child.id}>{renderBlock(child, level + 1)}</Fragment>
+            ))}
+          </div>
         </details>
       );
+
     case 'child_page':
       return (
         <div className={styles.childPage}>
@@ -109,18 +111,28 @@ export function renderBlock(block: any, level: number = 1) {
         </figure>
       );
     }
+
     case 'divider':
-      return <hr key={id} />;
+      return <hr className='mt-1.5 border-gray-200' key={id} />;
+    
     case 'quote':
-      return <blockquote key={id}>{value.rich_text[0].plain_text}</blockquote>;
+      return <blockquote className='mt-1.5 border-black border-l-4 pl-4 py-1.5 whitespace-pre-wrap' key={id}>{value.rich_text[0].plain_text}</blockquote>;
+    
     case 'code':
+      // return (
+      //   <pre className={styles.pre}>
+      //     <code className={styles.code_block} key={id}>
+      //       {value.rich_text[0].plain_text}
+      //     </code>
+      //   </pre>
+      // );
       return (
-        <pre className={styles.pre}>
-          <code className={styles.code_block} key={id}>
-            {value.rich_text[0].plain_text}
-          </code>
-        </pre>
-      );
+        <React.Suspense fallback={<div>Loading...</div>}> 
+          <CodeRender block={block} className='mt-1.5'></CodeRender> 
+        </React.Suspense>
+      )
+        // <CodeRender block={block}></CodeRender>
+      // );
     case 'file': {
       const srcFile = value.type === 'external' ? value.external.url : value.file.url;
       const splitSourceArray = srcFile.split('/');

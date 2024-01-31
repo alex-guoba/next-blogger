@@ -1,4 +1,6 @@
+import { cn } from '@/lib/utils';
 import styles from './post.module.css';
+import React from 'react';
 
 // convert notion color to tailwind css class name for each annotation style: 
 // - "blue"
@@ -27,7 +29,7 @@ const colorMap = new Map<string, string>([
   ["brown", "text-[#8d6e63]"],
   ["brown_background", "bg-[#d7ccc8]"],
   ["default", ""],
-  ["gray", "text-gray-400"],
+  ["gray", "text-gray-500"],
   ["gray_background", "bg-gray-200"],
   ["green", "text-green-800"],
   ["green_background", "bg-green-100"],
@@ -43,10 +45,10 @@ const colorMap = new Map<string, string>([
   ["yellow_background", "bg-yellow-100"],
 ]);
 
-const linkTextStyle = 'text-gray-400 underline'
+const linkTextStyle = 'text-gray-500 underline'
 
 // https://developers.notion.com/reference/rich-text#the-annotation-object
-function AnnotationStyle(annotations: any){
+function AnnotationStyle(annotations: any, extended ?: string){
   const {bold, code, color, italic, strikethrough, underline} = annotations;
   const names = [
     bold ? 'font-bold' : '',
@@ -55,17 +57,18 @@ function AnnotationStyle(annotations: any){
     strikethrough ? 'line-through' : '',
     underline ? 'underline' : '',
     color ? colorMap.get(color) : '',
+    extended ? extended : '',
   ];
 
   return names.filter((el) => el != '' && el != undefined).join(' ');
 }
 
-function Text(rt : any) {
+function Text(rt : any, extended?: string) {
   const {
     annotations,
     text,
   } = rt;
-  const styels = AnnotationStyle(annotations);
+  const styels = AnnotationStyle(annotations, extended);
   return (
     <span
       className={styels}
@@ -77,29 +80,29 @@ function Text(rt : any) {
 }
 
 // https://developers.notion.com/reference/rich-text#mention
-function Mention(rt : any) {
+function Mention(rt : any, extended?: string) {
   const {
     annotations,
     href,
     plain_text
   } = rt;
-  const styels = AnnotationStyle(annotations);
+  const styels = AnnotationStyle(annotations, extended);
 
   return (
     <span
-      className={`${styels} font-medium`}
+      className={cn(styels, 'font-medium')}
     >
       {href ? <a className='underline' href={href}>{plain_text}</a> : plain_text}
     </span>
   )
 }
 
-function Equation(rt : any) {
+function Equation(rt : any, extended?: string) {
   const {
     annotations,
     equation,
   } = rt;
-  const styels = AnnotationStyle(annotations);
+  const styels = AnnotationStyle(annotations, extended);
   return (
     <span
       className={styels}
@@ -114,21 +117,37 @@ function Equation(rt : any) {
 // This includes styling decisions, such as the use of italics, font size, and font color, as well as formatting, 
 // such as the use of hyperlinks or code blocks.
 // See:  https://developers.notion.com/reference/rich-text
-export default function RichText({ title}: any) {
+export default function RichText({ title, extended }: any) {
   // empmty lines should be rendered with &emsp
   if (!title || title?.length == 0) {
     return <span>&nbsp;</span>
   }
-  return title.map((value: any) => {
-    const { type } = value;
-    if (type == 'text') {
-      return Text(value);
-    } else if (type == 'mention') {
-      return Mention(value)
-    } else if (type == 'equation') {
-      return Equation(value)
-    }
 
-    return null
-  });
+  return (
+    <React.Fragment>
+      {title.map((value: any) => {
+        const { type } = value;
+        if (type == 'text') {
+          return Text(value, extended);
+        } else if (type == 'mention') {
+          return Mention(value, extended)
+        } else if (type == 'equation') {
+          return Equation(value, extended)
+        }
+        return null
+      })}
+    </React.Fragment>
+  )
+  // return title.map((value: any) => {
+  //   const { type } = value;
+  //   if (type == 'text') {
+  //     return Text(value, extended);
+  //   } else if (type == 'mention') {
+  //     return Mention(value, extended)
+  //   } else if (type == 'equation') {
+  //     return Equation(value, extended)
+  //   }
+
+  //   return null
+  // });
 }
