@@ -4,8 +4,8 @@ import React from "react";
 // import copyToClipboard from 'clipboard-copy'
 // import { CodeBlock } from 'notion-types'
 // import { getBlockTitle } from 'notion-utils'
-import Prism, { highlightElement } from "prismjs";
-import { languages as Lan } from "prismjs";
+import { highlightElement } from "prismjs";
+// import { languages as Lan } from "prismjs";
 
 // TODO: make it to dynamic 
 import "prismjs/components/prism-clike.min.js";
@@ -65,8 +65,6 @@ interface CodeBlockProps {
 
 
 export function CodeRender({block, defaultLanguage, className} : CodeBlockProps) {
-
-
   const codeRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     if (codeRef.current) {
@@ -93,6 +91,8 @@ export function CodeRender({block, defaultLanguage, className} : CodeBlockProps)
   code.rich_text?.map((item: any) => {
     codes += item?.plain_text
   })
+
+  // TODO: add copy to clipboard feature
   return (
     <div id={id} className={cn(className, "text-sm")}>
       <pre className="rounded py-8">

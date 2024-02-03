@@ -63,7 +63,7 @@ function AnnotationStyle(annotations: any, extended ?: string){
   return names.filter((el) => el != '' && el != undefined).join(' ');
 }
 
-function Text(rt : any, extended?: string) {
+function Text(rt : any, extended?: string, index?: number) {
   const {
     annotations,
     text,
@@ -72,7 +72,8 @@ function Text(rt : any, extended?: string) {
   return (
     <span
       className={styels}
-      key={text.content}
+      key={index}
+      // key={text.content}
     >
       {text.link ? <a href={text.link.url} className={linkTextStyle}>{text.content}</a> : text.content}
     </span>
@@ -80,7 +81,7 @@ function Text(rt : any, extended?: string) {
 }
 
 // https://developers.notion.com/reference/rich-text#mention
-function Mention(rt : any, extended?: string) {
+function Mention(rt : any, extended?: string, index?: number) {
   const {
     annotations,
     href,
@@ -91,13 +92,14 @@ function Mention(rt : any, extended?: string) {
   return (
     <span
       className={cn(styels, 'font-medium')}
+      key={index}
     >
       {href ? <a className='underline' href={href}>{plain_text}</a> : plain_text}
     </span>
   )
 }
 
-function Equation(rt : any, extended?: string) {
+function Equation(rt : any, extended?: string, index?: number) {
   const {
     annotations,
     equation,
@@ -106,6 +108,7 @@ function Equation(rt : any, extended?: string) {
   return (
     <span
       className={styels}
+      key={index}
     >
       {equation.href ? <a href={equation.href}>{equation.plain_text}</a> : equation.plain_text}
     </span>
@@ -125,14 +128,14 @@ export default function RichText({ title, extended }: any) {
 
   return (
     <React.Fragment>
-      {title.map((value: any) => {
+      {title.map((value: any, index: number) => {
         const { type } = value;
         if (type == 'text') {
-          return Text(value, extended);
+          return Text(value, extended, index);
         } else if (type == 'mention') {
-          return Mention(value, extended)
+          return Mention(value, extended, index)
         } else if (type == 'equation') {
-          return Equation(value, extended)
+          return Equation(value, extended, index)
         }
         return null
       })}

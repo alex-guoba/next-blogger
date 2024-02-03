@@ -5,15 +5,17 @@ import RichText from './text';
 import styles from './post.module.css';
 import { bulletListStyle, numberListStyle } from './tools';
 import { cn } from '@/lib/utils';
-import { CodeRender } from './_components/code';
 import React from 'react';
+import { CodeRender } from './_components/code';
+import { CalloutRender } from './_components/callout';
+import { ImageRender } from './_components/image';
 
 
 export function renderBlock(block: any, level: number = 1) {
   const { type, id } = block;
   const value = block[type];
 
-  // console.log(type, id);
+  console.log(type, id);
 
   switch (type) {
     // https://developers.notion.com/reference/block#paragraph
@@ -23,7 +25,7 @@ export function renderBlock(block: any, level: number = 1) {
     // - mention: no rich_text exist
     case 'paragraph':
       return (
-        <p id={id} className='mt-1.5'>
+        <p key={id} id={id} className='mt-1.5'>
           <RichText title={value.rich_text} />
         </p>
       );
@@ -101,16 +103,9 @@ export function renderBlock(block: any, level: number = 1) {
           {block.children.map((child: any) => renderBlock(child, level + 1))}
         </div>
       );
-    case 'image': {
-      const src = value.type === 'external' ? value.external.url : value.file.url;
-      const caption = value.caption ? value.caption[0]?.plain_text : '';
-      return (
-        <figure>
-          <img src={src} alt={caption} />
-          {caption && <figcaption>{caption}</figcaption>}
-        </figure>
-      );
-    }
+    
+    case 'image':
+      return <ImageRender block={block} className='mt-1.5'></ImageRender>
 
     case 'divider':
       return <hr className='mt-1.5 border-gray-200' key={id} />;
@@ -119,20 +114,12 @@ export function renderBlock(block: any, level: number = 1) {
       return <blockquote className='mt-1.5 border-black border-l-4 pl-4 py-1.5 whitespace-pre-wrap' key={id}>{value.rich_text[0].plain_text}</blockquote>;
     
     case 'code':
-      // return (
-      //   <pre className={styles.pre}>
-      //     <code className={styles.code_block} key={id}>
-      //       {value.rich_text[0].plain_text}
-      //     </code>
-      //   </pre>
-      // );
       return (
         <React.Suspense fallback={<div>Loading...</div>}> 
           <CodeRender block={block} className='mt-1.5'></CodeRender> 
         </React.Suspense>
       )
-        // <CodeRender block={block}></CodeRender>
-      // );
+
     case 'file': {
       const srcFile = value.type === 'external' ? value.external.url : value.file.url;
       const splitSourceArray = srcFile.split('/');
@@ -190,6 +177,10 @@ export function renderBlock(block: any, level: number = 1) {
     case 'column': {
       return <div>{block.children.map((child: any) => renderBlock(child, level + 1))}</div>;
     }
+
+    case 'callout': 
+      return <CalloutRender block={block} className='mt-1.5'></CalloutRender>;
+
     default:
       return `❌ Unsupported block (${
         type === 'unsupported' ? 'unsupported by Notion API' : type

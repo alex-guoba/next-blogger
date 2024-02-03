@@ -59,14 +59,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const title = page.properties?.Title.title[0].text.content;
 
   return (
-    <Shell as="article">
+    <Shell as="article" className="relative flex min-h-screen flex-col">
       <PageHeader>
         <PageHeaderDescription variant="sm">{formatDate(page.last_edited_time)}</PageHeaderDescription>
         <PageHeaderHeading>{title}</PageHeaderHeading>
         </PageHeader>
       <Separator className="mb-2.5" />
 
-      <section className="">
+      <section className="w-full">
         {blocks.map((block: any) => (
           <Fragment key={block.id}>{renderBlock(block)}</Fragment>
         ))}
