@@ -1,8 +1,9 @@
-import { cn } from '@/lib/utils';
-import styles from './post.module.css';
-import React from 'react';
+import { cn } from "@/lib/utils";
+import styles from "./post.module.css";
+import React from "react";
+import { EquationRender } from "./_components/equation";
 
-// convert notion color to tailwind css class name for each annotation style: 
+// convert notion color to tailwind css class name for each annotation style:
 // - "blue"
 // - "blue_background"
 // - "brown"
@@ -45,29 +46,26 @@ const colorMap = new Map<string, string>([
   ["yellow_background", "bg-yellow-100"],
 ]);
 
-const linkTextStyle = 'text-gray-500 underline'
+const linkTextStyle = "text-gray-500 underline";
 
 // https://developers.notion.com/reference/rich-text#the-annotation-object
-function AnnotationStyle(annotations: any, extended ?: string){
-  const {bold, code, color, italic, strikethrough, underline} = annotations;
+function AnnotationStyle(annotations: any, extended?: string) {
+  const { bold, code, color, italic, strikethrough, underline } = annotations;
   const names = [
-    bold ? 'font-bold' : '',
-    code ? 'text-red-600 bg-slate-200	' : '',
-    italic ? 'italic' : '',
-    strikethrough ? 'line-through' : '',
-    underline ? 'underline' : '',
-    color ? colorMap.get(color) : '',
-    extended ? extended : '',
+    bold ? "font-bold" : "",
+    code ? "text-red-600 bg-slate-200	" : "",
+    italic ? "italic" : "",
+    strikethrough ? "line-through" : "",
+    underline ? "underline" : "",
+    color ? colorMap.get(color) : "",
+    extended ? extended : "",
   ];
 
-  return names.filter((el) => el != '' && el != undefined).join(' ');
+  return names.filter((el) => el != "" && el != undefined).join(" ");
 }
 
-function Text(rt : any, extended?: string, index?: number) {
-  const {
-    annotations,
-    text,
-  } = rt;
+function Text(rt: any, extended?: string, index?: number) {
+  const { annotations, text } = rt;
   const styels = AnnotationStyle(annotations, extended);
   return (
     <span
@@ -75,82 +73,83 @@ function Text(rt : any, extended?: string, index?: number) {
       key={index}
       // key={text.content}
     >
-      {text.link ? <a href={text.link.url} className={linkTextStyle}>{text.content}</a> : text.content}
+      {text.link ? (
+        <a href={text.link.url} className={linkTextStyle}>
+          {text.content}
+        </a>
+      ) : (
+        text.content
+      )}
     </span>
-  )
+  );
 }
 
 // https://developers.notion.com/reference/rich-text#mention
-function Mention(rt : any, extended?: string, index?: number) {
-  const {
-    annotations,
-    href,
-    plain_text
-  } = rt;
+function Mention(rt: any, extended?: string, index?: number) {
+  const { annotations, href, plain_text } = rt;
   const styels = AnnotationStyle(annotations, extended);
 
   return (
-    <span
-      className={cn(styels, 'font-medium')}
-      key={index}
-    >
-      {href ? <a className='underline' href={href}>{plain_text}</a> : plain_text}
+    <span className={cn(styels, "font-medium")} key={index}>
+      {href ? (
+        <a className="underline" href={href}>
+          {plain_text}
+        </a>
+      ) : (
+        plain_text
+      )}
     </span>
-  )
+  );
 }
 
-function Equation(rt : any, extended?: string, index?: number) {
-  const {
-    annotations,
-    equation,
-  } = rt;
+function Equation(rt: any, extended?: string, index?: number) {
+  const { annotations, equation } = rt;
   const styels = AnnotationStyle(annotations, extended);
+  // console.log("quation", equation.expression)
   return (
     <span
-      className={styels}
+      className={cn(styels, "mt-1.5")}
       key={index}
+      // key={text.content}
     >
-      {equation.href ? <a href={equation.href}>{equation.plain_text}</a> : equation.plain_text}
+      <EquationRender block={rt} displayMode={false}></EquationRender>
     </span>
-  )
+  );
+
+  // return (
+  //   <span
+  //     className={styels}
+  //     key={index}
+  //   >
+  //     {equation.href ? <a href={equation.href}>{equation.expression}</a> : equation.expression}
+  //   </span>
+  // )
 }
 
-// Notion uses rich text to allow users to customize their content. 
-// Rich text refers to a type of document where content can be styled and formatted in a variety of customizable ways. 
-// This includes styling decisions, such as the use of italics, font size, and font color, as well as formatting, 
+// Notion uses rich text to allow users to customize their content.
+// Rich text refers to a type of document where content can be styled and formatted in a variety of customizable ways.
+// This includes styling decisions, such as the use of italics, font size, and font color, as well as formatting,
 // such as the use of hyperlinks or code blocks.
 // See:  https://developers.notion.com/reference/rich-text
 export default function RichText({ title, extended }: any) {
   // empmty lines should be rendered with &emsp
   if (!title || title?.length == 0) {
-    return <span>&nbsp;</span>
+    return <span>&nbsp;</span>;
   }
 
   return (
     <React.Fragment>
       {title.map((value: any, index: number) => {
         const { type } = value;
-        if (type == 'text') {
+        if (type == "text") {
           return Text(value, extended, index);
-        } else if (type == 'mention') {
-          return Mention(value, extended, index)
-        } else if (type == 'equation') {
-          return Equation(value, extended, index)
+        } else if (type == "mention") {
+          return Mention(value, extended, index);
+        } else if (type == "equation") {
+          return Equation(value, extended, index);
         }
-        return null
+        return null;
       })}
     </React.Fragment>
-  )
-  // return title.map((value: any) => {
-  //   const { type } = value;
-  //   if (type == 'text') {
-  //     return Text(value, extended);
-  //   } else if (type == 'mention') {
-  //     return Mention(value, extended)
-  //   } else if (type == 'equation') {
-  //     return Equation(value, extended)
-  //   }
-
-  //   return null
-  // });
+  );
 }

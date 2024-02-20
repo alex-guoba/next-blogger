@@ -35,7 +35,7 @@ export default async function Home() {
               const slug = post.properties?.Slug?.rich_text[0].plain_text;
               const edit_time = post.last_edited_time;
               const image = post.cover?.external?.url;
-              const desc = post.properties?.Summary?.rich_text[0].plain_text;
+              const desc = post.properties?.Summary?.rich_text[0]?.plain_text;
 
               return <PostCard key={slug} 
                 title={title} 

@@ -9,13 +9,21 @@ import React from 'react';
 import { CodeRender } from './_components/code';
 import { CalloutRender } from './_components/callout';
 import { ImageRender } from './_components/image';
+import { BookmarkRender } from './_components/bookmark';
+import { FileRender } from './_components/file';
+import { ColumnListRender, ColumnRender } from './_components/column';
+import { QuoteRender } from './_components/quote';
+import { TableRender } from './_components/table';
+import { EquationRender } from './_components/equation';
+import { LinkPreviewRender } from './_components/link_preview';
+import { PDFRender } from './_components/pdf';
 
 
 export function renderBlock(block: any, level: number = 1) {
   const { type, id } = block;
   const value = block[type];
 
-  console.log(type, id);
+  // console.log(type, id);
 
   switch (type) {
     // https://developers.notion.com/reference/block#paragraph
@@ -26,24 +34,24 @@ export function renderBlock(block: any, level: number = 1) {
     case 'paragraph':
       return (
         <p key={id} id={id} className='mt-1.5'>
-          <RichText title={value.rich_text} />
+          <RichText title={value.rich_text} extended='whitespace-pre-wrap' />
         </p>
       );
     case 'heading_1':
       return (
-        <h1 id={id} className='text-3xl font-bold dark:text-white py-4'>
+        <h1 key={id} className='text-3xl font-bold dark:text-white py-4'>
           <RichText title={value.rich_text} />
         </h1>
       );
     case 'heading_2':
       return (
-        <h2 id={id} className='text-2xl font-bold dark:text-white py-3'>
+        <h2 key={id} className='text-2xl font-bold dark:text-white py-3'>
           <RichText title={value.rich_text} />
         </h2>
       );
     case 'heading_3':
       return (
-        <h3 id={id} className='text-1xl font-bold dark:text-white py-2'>
+        <h3 key={id} className='text-1xl font-bold dark:text-white py-2'>
           <RichText title={value.rich_text} />
         </h3>
       );
@@ -111,8 +119,8 @@ export function renderBlock(block: any, level: number = 1) {
       return <hr className='mt-1.5 border-gray-200' key={id} />;
     
     case 'quote':
-      return <blockquote className='mt-1.5 border-black border-l-4 pl-4 py-1.5 whitespace-pre-wrap' key={id}>{value.rich_text[0].plain_text}</blockquote>;
-    
+      return <QuoteRender block={block} className="mt-1.5" level={level+1}></QuoteRender>
+
     case 'code':
       return (
         <React.Suspense fallback={<div>Loading...</div>}> 
@@ -120,67 +128,53 @@ export function renderBlock(block: any, level: number = 1) {
         </React.Suspense>
       )
 
-    case 'file': {
-      const srcFile = value.type === 'external' ? value.external.url : value.file.url;
-      const splitSourceArray = srcFile.split('/');
-      const lastElementInArray = splitSourceArray[splitSourceArray.length - 1];
-      const captionFile = value.caption ? value.caption[0]?.plain_text : '';
-      return (
-        <figure>
-          <div className={styles.file}>
-            📎
-            {' '}
-            <Link href={srcFile} passHref>
-              {lastElementInArray.split('?')[0]}
-            </Link>
-          </div>
-          {captionFile && <figcaption>{captionFile}</figcaption>}
-        </figure>
-      );
-    }
-    case 'bookmark': {
-      const href = value.url;
-      return (
-        <a href={href} target="_blank" rel="noreferrer noopener" className={styles.bookmark}>
-          {href}
-        </a>
-      );
-    }
+    case 'file':
+      return <FileRender block={block} className='mt-1.5'></FileRender>;
+
+    case 'pdf':
+        return <PDFRender block={block} className='mt-1.5'></PDFRender>;
+
+    case 'bookmark': 
+      return <BookmarkRender block={block} className='mt-1.5'></BookmarkRender>;
+
+    case 'link_preview': 
+      return <LinkPreviewRender block={block} className='mt-1.5'></LinkPreviewRender>;
+
     case 'table': {
-      return (
-        <table className={styles.table}>
-          <tbody>
-            {block.children?.map((child: any, index: number) => {
-              const RowElement = value.has_column_header && index === 0 ? 'th' : 'td';
-              return (
-                <tr key={child.id}>
-                  {child.table_row?.cells?.map((cell: { plain_text: any; }, i: any) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <RowElement key={`${cell.plain_text}-${i}`}>
-                      <RichText title={cell} />
-                    </RowElement>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      );
+      return <TableRender block={block} className='mt-1.5'></TableRender>;
+
+      // return (
+      //   <table className={styles.table}>
+      //     <tbody>
+      //       {block.children?.map((child: any, index: number) => {
+      //         const RowElement = value.has_column_header && index === 0 ? 'th' : 'td';
+      //         return (
+      //           <tr key={child.id}>
+      //             {child.table_row?.cells?.map((cell: { plain_text: any; }, i: any) => (
+      //               // eslint-disable-next-line react/no-array-index-key
+      //               <RowElement key={`${cell.plain_text}-${i}`}>
+      //                 <RichText title={cell} />
+      //               </RowElement>
+      //             ))}
+      //           </tr>
+      //         );
+      //       })}
+      //     </tbody>
+      //   </table>
+      // );
     }
-    case 'column_list': {
-      return (
-        <div className={styles.row}>
-          {block.children.map((childBlock: any) => renderBlock(childBlock, level + 1))}
-        </div>
-      );
-    }
-    case 'column': {
-      return <div>{block.children.map((child: any) => renderBlock(child, level + 1))}</div>;
-    }
+    case 'column_list': 
+      return <ColumnListRender block={block} className="mt-1.5" level={level+1}></ColumnListRender>
+
+    case 'column': 
+      return <ColumnRender block={block} level={level+1}></ColumnRender>
 
     case 'callout': 
       return <CalloutRender block={block} className='mt-1.5'></CalloutRender>;
 
+    case 'equation':
+      return <EquationRender block={block} className='mt-1.5' displayMode={true}></EquationRender>
+      
     default:
       return `❌ Unsupported block (${
         type === 'unsupported' ? 'unsupported by Notion API' : type

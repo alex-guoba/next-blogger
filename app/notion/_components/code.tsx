@@ -1,14 +1,12 @@
 "use client"
 
 import React from "react";
-// import copyToClipboard from 'clipboard-copy'
-// import { CodeBlock } from 'notion-types'
-// import { getBlockTitle } from 'notion-utils'
 import { highlightElement } from "prismjs";
 // import { languages as Lan } from "prismjs";
 
 // TODO: make it to dynamic 
-import "prismjs/components/prism-clike.min.js";
+import "prismjs/components/prism-c.min.js";
+import "prismjs/components/prism-cpp.min.js";
 import "prismjs/components/prism-css-extras.min.js";
 import "prismjs/components/prism-css.min.js";
 import "prismjs/components/prism-javascript.min.js";
@@ -19,49 +17,22 @@ import "prismjs/components/prism-tsx.min.js";
 import "prismjs/components/prism-typescript.min.js";
 import "prismjs/components/prism-go.js";
 import "prismjs/components/prism-ini.js";
+import "prismjs/components/prism-shell-session.js";
+import "prismjs/components/prism-bash.min.js";
+import "prismjs/components/prism-java.min.js";
+import "prismjs/components/prism-python.min.js";
 
 import "prismjs/themes/prism-tomorrow.css";
 import { cn } from '@/lib/utils';
 
-// import { Text } from "../components/text";
-// import { useNotionContext } from "../context";
 import RichText from "../text";
-// import CopyIcon from '../icons/copy'
-// import { cs } from "../utils";
+
 
 interface CodeBlockProps {
   block: any;
   defaultLanguage?: string | undefined;
   className?: string | undefined;
 }
-
-// const Code = React.forwardRef<
-//   HTMLDivElement,
-//   React.HTMLAttributes<HTMLDivElement>
-// >(({ className, children, ...props }, ref) => (
-//   <code
-//     ref={ref}
-//     className={cn("space-y-1.5", className)}
-//     {...props}
-//   >
-//     {children}
-//   </code>
-// ))
-// Code.displayName = "CardHeader"
-
-// const Code = React.forwardRef((props: any, ref) => {
-//   const {className, children, ...prop} = props;
-//   return (
-//     <code
-//       ref={ref}
-//       className={cn("space-y-1.5", className)}
-//       {...prop}
-//     >
-//       {children}
-//     </code>
-//   )
-// });
-// Code.displayName = "CardHeader"
 
 
 export function CodeRender({block, defaultLanguage, className} : CodeBlockProps) {
@@ -81,7 +52,10 @@ export function CodeRender({block, defaultLanguage, className} : CodeBlockProps)
     return null;
   }
 
-  const lang = (code.language || defaultLanguage).toLowerCase();
+  let lang = (code.language || defaultLanguage).toLowerCase();
+  if (lang == "c++") {
+    lang = "cpp";
+  }
   const caption = code.caption;
   
   // Text cann't be nested in code element. So there are two ways to render code
@@ -92,12 +66,12 @@ export function CodeRender({block, defaultLanguage, className} : CodeBlockProps)
     codes += item?.plain_text
   })
 
-  // TODO: add copy to clipboard feature
+  // TODO: 1. add copy to clipboard feature
+  // TODO: 2. support mermaid diagram. see https://stackblitz.com/edit/react-ts-mermaid?file=Mermaid.tsx
   return (
     <div id={id} className={cn(className, "text-sm")}>
       <pre className="rounded py-8">
         <code className={`language-${lang}`} ref={codeRef}>
-          {/* <RichText title={code.rich_text} /> */}
           {codes}
         </code>
       </pre>

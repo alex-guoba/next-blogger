@@ -109,7 +109,7 @@
   margin-bottom: 10px;
 }
 
-.table {
+/* .table {
   border: 1px solid currentColor;
   border-collapse: collapse;
 }
@@ -121,15 +121,15 @@
 .table td {
   border: 1px solid currentColor;
   padding: 6px 12px;
-}
+} */
 
-.row {
+/* .row {
   display: flex;
 }
 
 .row > div {
   flex: 1;
-}
+} */
 
 .childPage {
   border: 1px solid currentColor;
