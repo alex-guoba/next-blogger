@@ -70,7 +70,6 @@ export function PDFRender({ block, className }: PDFBlockProps) {
 
   return (
     <div key={id} className={cn(className, "w-full max-w-ful")}>
-      <NavTool pageNumber={pageNumber} numPages={numPages} title={title} ></NavTool>
       <Nav pageNumber={pageNumber} numPages={numPages} title={title} />
       <div
         hidden={loading}
@@ -159,24 +158,3 @@ function Nav({
     </nav>
   );
 }
-
-function NavTool({
-    pageNumber,
-    numPages,
-    title,
-  }: {
-    pageNumber: number;
-    numPages: number;
-    title: string;
-  }) {
-    return (
-      <nav className="bg-gray-400 absolute flex items-center text-[white] px-[15px] rounded-[19px] bottom-[35px]">
-        <div className='cursor-pointer pl-2.5 px-[15px] py-2'> Prev </div>
-        <div className='cursor-pointer pl-2.5 px-[15px] py-2'> Next </div>
-        <div className="inline-block w-[50px] text-center h-6 mr-2.5"> <input type="number" /> / </div>
-        <div className='cursor-pointer pl-2.5 px-[15px] py-2'> ScaleUp </div>
-        <div className='cursor-pointer pl-2.5 px-[15px] py-2' > ScaleDown </div>
-      </nav>
-    );
-  }
-  
