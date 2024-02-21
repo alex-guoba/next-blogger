@@ -36,6 +36,40 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Supported Blocks
+
+Most common block types are supported. But some blocks information not supported in Public API, So we give an abbreviated rendering.
+
+| Block Type             | Supported | Notes                               |
+|------------------------|-----------|-------------------------------------|
+| Paragraph              | ✅ Yes     |                                     |
+| Headings               | ✅ Yes     |                                     |
+| Bookmark               | ✅ Yes     | No detail info, only link           |
+| Breadcrumb             | ❌ Missing | Not planned                         |
+| Bulleted List          | ✅ Yes     |                                     |
+| Callout                | ✅ Yes     |                                     |
+| Child Databases        | ❌ Missing | Not planned.                        |
+| Child page             | ❌ Missing |                                     |
+| Code                   | ✅ Yes     | Use [prismjs](https://prismjs.com/) |
+| Column list and column | ✅ Yes     |                                     |
+| Divider                | ❌ Missing |                                     |
+| Embed                  | ❌ Missing |                                     |
+| Equation               | ✅ Yes     | Use [katex ](https://katex.org/)    |
+| File                   | ✅ Yes     |                                     |
+| Image                  | ✅ Yes     | No position、size info in API       |
+| Link Preview           | ❌ Missing |                                     |
+| Mention                | ✅ Yes     | Only Date                           |
+| Numbered List          | ✅ Yes     |                                     |
+| PDF                    | ✅ Yes     |                                     |
+| Quote                  | ✅ Yes     |                                     |
+| Synced block           | ❌ Missing |                                     |
+| Table                  | ✅ Yes     |                                     |
+| Table Of Contents      | ❌ Missing |                                     |
+| Template               | ❌ Missing | Not planned.                        |
+| To do                  | ✅ Yes     |                                     |
+| Toggle blocks          | ✅ Yes     |                                     |
+| Video                  | ❌ Missing |                                     |
+
 
 ## Learn More
 
