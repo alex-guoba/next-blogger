@@ -5,14 +5,23 @@ import { Fragment } from "react";
 import { Metadata, ResolvingMetadata } from "next";
 
 import { renderBlock } from "@/app/notion/render";
-import { QueryDatabase, getPageFromSlug, getBlocks } from "@/app/api/notion";
+import {
+  QueryDatabase,
+  queryPageBySlug,
+  retrieveBlockChildren,
+  retrievePage,
+} from "@/app/api/notion";
 import Shell from "@/components/shells/shell";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import { formatDate } from "@/lib/utils";
-import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/page-header";
+import {
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderHeading,
+} from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
@@ -25,7 +34,7 @@ export const revalidate =
 export async function generateStaticParams() {
   const database = await QueryDatabase();
   return database.map((page: any) => {
-    const slug = page.properties.Slug?.rich_text[0].plain_text;
+    const slug = [page.properties.Slug?.rich_text[0].plain_text];
     return { slug };
   });
 }
@@ -47,23 +56,46 @@ export async function generateMetadata(
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: { slug: string[] } }) {
   console.log(params, "environment variables:", revalidate);
-  const page: any = await getPageFromSlug(params.slug);
-  const blocks = page && (await getBlocks(page.id));
+  console.log(params, "page params:", params);
 
-  if (!page || !blocks) {
-    return <div />;
+  let pageID, lastEditTime, title;
+
+  // retrieve page meta info by page ID
+  if (params.slug.length > 1) {
+    pageID = params.slug[1];
+
+    const page: any = await retrievePage(pageID);
+    if (!page) {
+      return <div />;
+    }
+    lastEditTime = page?.last_edited_time;
+    title = page?.properties?.title?.title[0].plain_text;
+  } else {
+    // query from database by slug
+    const page: any = await queryPageBySlug(params.slug[0]);
+    if (!page) {
+      return <div />;
+    }
+    pageID = page.id;
+    title = page.properties?.Title.title[0].plain_text;
+    lastEditTime = page.last_edited_time;
   }
 
-  const title = page.properties?.Title.title[0].text.content;
+  const blocks = await retrieveBlockChildren(pageID);
+  if (!blocks) {
+    return <div />;
+  }
 
   return (
     <Shell as="article" className="relative flex min-h-screen flex-col">
       <PageHeader>
-        <PageHeaderDescription variant="sm">{formatDate(page.last_edited_time)}</PageHeaderDescription>
+        <PageHeaderDescription variant="sm">
+          {formatDate(lastEditTime)}
+        </PageHeaderDescription>
         <PageHeaderHeading>{title}</PageHeaderHeading>
-        </PageHeader>
+      </PageHeader>
       <Separator className="mb-2.5" />
 
       <section className="w-full">

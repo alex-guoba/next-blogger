@@ -18,7 +18,7 @@ export function LinkPreviewRender({ block, className }: LinkPreviewBlockProps) {
 
   return (
     <div className={cn(className, "inline-flex w-full items-center flex-wrap")} title="link preview">
-      <Icons.linkpreview className="h-6 w-6 p-[0.5]"/>
+      <Icons.linkpreview className="h-6 w-6 p-[0.8] text-gray-600"/>
       <a
         id={id}
         href={url}

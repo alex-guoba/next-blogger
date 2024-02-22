@@ -31,7 +31,7 @@ export function FileRender({ block, className }: FileBlockProps) {
 
   return (
     <div className={cn(className, "inline-flex w-full items-center flex-wrap")}>
-      <Icons.fileblock className="h-6 w-6 p-[0.5]" />
+      <Icons.fileblock className="h-6 w-6 p-[0.8] text-gray-600" />
       <a
         id={id}
         href={url}

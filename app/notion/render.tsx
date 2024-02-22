@@ -17,6 +17,7 @@ import { TableRender } from './_components/table';
 import { EquationRender } from './_components/equation';
 import { LinkPreviewRender } from './_components/link_preview';
 import { PDFRender } from './_components/pdf';
+import { SubPageRender } from './_components/sub_page';
 
 
 export function renderBlock(block: any, level: number = 1) {
@@ -105,12 +106,14 @@ export function renderBlock(block: any, level: number = 1) {
       );
 
     case 'child_page':
-      return (
-        <div className={styles.childPage}>
-          <strong>{value?.title}</strong>
-          {block.children.map((child: any) => renderBlock(child, level + 1))}
-        </div>
-      );
+      return <SubPageRender block={block} className='mt-1.5'></SubPageRender>
+
+      // return (
+      //   <div className={styles.childPage}>
+      //     <strong>{value?.title}</strong>
+      //     {block.children.map((child: any) => renderBlock(child, level + 1))}
+      //   </div>
+      // );
     
     case 'image':
       return <ImageRender block={block} className='mt-1.5'></ImageRender>
@@ -140,29 +143,9 @@ export function renderBlock(block: any, level: number = 1) {
     case 'link_preview': 
       return <LinkPreviewRender block={block} className='mt-1.5'></LinkPreviewRender>;
 
-    case 'table': {
+    case 'table': 
       return <TableRender block={block} className='mt-1.5'></TableRender>;
-
-      // return (
-      //   <table className={styles.table}>
-      //     <tbody>
-      //       {block.children?.map((child: any, index: number) => {
-      //         const RowElement = value.has_column_header && index === 0 ? 'th' : 'td';
-      //         return (
-      //           <tr key={child.id}>
-      //             {child.table_row?.cells?.map((cell: { plain_text: any; }, i: any) => (
-      //               // eslint-disable-next-line react/no-array-index-key
-      //               <RowElement key={`${cell.plain_text}-${i}`}>
-      //                 <RichText title={cell} />
-      //               </RowElement>
-      //             ))}
-      //           </tr>
-      //         );
-      //       })}
-      //     </tbody>
-      //   </table>
-      // );
-    }
+    
     case 'column_list': 
       return <ColumnListRender block={block} className="mt-1.5" level={level+1}></ColumnListRender>
 

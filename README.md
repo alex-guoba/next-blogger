@@ -12,29 +12,31 @@ Blog build on [Next.js](https://nextjs.org/) and [Notion Public API](https://www
 3. Full support for dark mode
 4. Support [Static Site Generation](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation)
 
-## Setup
+## ✨ Getting Started
 
-1. Fork / clone this repo
-2. Duplicate [this Notion template](https://gelco.notion.site/910de43a0db24ebc9a34209ffab613a7?v=7f2614c5918f4a5bab3a6637b12a19f9&pvs=4), and edit your blog content. 
-3. follow Notions [getting started guide](https://developers.notion.com/docs/getting-started) to get a NOTION_TOKEN and a NOTION_DATABASE_ID, then add them to a file called .env.local.
+### Prerequisites
 
+1. Duplicate [this Notion template](https://gelco.notion.site/910de43a0db24ebc9a34209ffab613a7?v=7f2614c5918f4a5bab3a6637b12a19f9&pvs=4), and edit your blog. 
+2. Follow Notions [getting started guide](https://developers.notion.com/docs/getting-started) to get a `NOTION_TOKEN` and a `NOTION_DATABASE_ID`.
+
+### Development
+1. Setup: Star and Fork the repository
+2. install the dependences:
+```bash
+npm install
+```
+3. Set up you `env.local` with `NOTION_TOKEN` and `NOTION_DATABASE_ID`.
 ```
 NOTION_TOKEN=
 NOTION_DATABASE_ID=
 ```
-
-4. install the dependences:
-
-```bash
-npm install
-```
-
-5. run locally 
+4. run locally 
 ```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
 
 ## Supported Blocks
 
@@ -49,7 +51,7 @@ Most common block types are supported. But some blocks information not supported
 | Bulleted List          | ✅ Yes     |                                     |
 | Callout                | ✅ Yes     |                                     |
 | Child Databases        | ❌ Missing | Not planned.                        |
-| Child page             | ❌ Missing |                                     |
+| Child page             | ✅ Yes     |                                     |
 | Code                   | ✅ Yes     | Use [prismjs](https://prismjs.com/) |
 | Column list and column | ✅ Yes     |                                     |
 | Divider                | ❌ Missing |                                     |
@@ -57,7 +59,7 @@ Most common block types are supported. But some blocks information not supported
 | Equation               | ✅ Yes     | Use [katex ](https://katex.org/)    |
 | File                   | ✅ Yes     |                                     |
 | Image                  | ✅ Yes     | No position、size info in API       |
-| Link Preview           | ❌ Missing |                                     |
+| Link Preview           | ✅ Yes     |                                     |
 | Mention                | ✅ Yes     | Only Date                           |
 | Numbered List          | ✅ Yes     |                                     |
 | PDF                    | ✅ Yes     |                                     |

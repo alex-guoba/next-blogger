@@ -69,7 +69,7 @@ export function PDFRender({ block, className }: PDFBlockProps) {
   }
 
   return (
-    <div key={id} className={cn(className, "w-full max-w-ful")}>
+    <div key={id} className={cn(className, "w-full max-w-ful min-w-full")}>
       <Nav pageNumber={pageNumber} numPages={numPages} title={title} />
       <div
         hidden={loading}
@@ -112,7 +112,7 @@ export function PDFRender({ block, className }: PDFBlockProps) {
               renderTextLayer={false}
               onLoadSuccess={onPageLoadSuccess}
               onRenderError={() => setLoading(false)}
-              width={Math.max(pageWidth * 0.75, 320)}
+              // width={Math.max(pageWidth * 0.75, 320)}
             />
           </Document>
         </div>

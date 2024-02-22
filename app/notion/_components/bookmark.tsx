@@ -18,7 +18,7 @@ export function BookmarkRender({ block, className }: BookmarkBlockProps) {
 
   return (
     <div className={cn(className, "inline-flex w-full items-center flex-wrap")} title="bookmark">
-      <Icons.bookmark className="h-6 w-6 p-[0.5]"/>
+      <Icons.bookmark className="h-6 w-6 p-[0.8] text-gray-600"/>
       <a
         id={id}
         href={url}
