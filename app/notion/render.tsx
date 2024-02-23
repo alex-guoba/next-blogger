@@ -9,7 +9,7 @@ import React from 'react';
 import { CodeRender } from './_components/code';
 import { CalloutRender } from './_components/callout';
 import { ImageRender } from './_components/image';
-import { BookmarkRender } from './_components/bookmark';
+import { BookmarkPreviewRender, BookmarkRender } from './_components/bookmark';
 import { FileRender } from './_components/file';
 import { ColumnListRender, ColumnRender } from './_components/column';
 import { QuoteRender } from './_components/quote';
@@ -138,7 +138,7 @@ export function renderBlock(block: any, level: number = 1) {
         return <PDFRender block={block} className='mt-1.5'></PDFRender>;
 
     case 'bookmark': 
-      return <BookmarkRender block={block} className='mt-1.5'></BookmarkRender>;
+      return <BookmarkPreviewRender block={block} className='mt-1.5'></BookmarkPreviewRender>;
 
     case 'link_preview': 
       return <LinkPreviewRender block={block} className='mt-1.5'></LinkPreviewRender>;

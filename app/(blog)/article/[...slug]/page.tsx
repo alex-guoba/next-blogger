@@ -1,7 +1,6 @@
 // import Head from "next/head";
 import Link from "next/link";
 import { Fragment } from "react";
-// import Text from "@/app/ui/text";
 import { Metadata, ResolvingMetadata } from "next";
 
 import { renderBlock } from "@/app/notion/render";
@@ -10,7 +9,7 @@ import {
   queryPageBySlug,
   retrieveBlockChildren,
   retrievePage,
-} from "@/app/api/notion";
+} from "@/app/notion/api";
 import Shell from "@/components/shells/shell";
 import React from "react";
 import { cn } from "@/lib/utils";
