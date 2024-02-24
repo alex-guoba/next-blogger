@@ -4,9 +4,9 @@ type RequestStatus = "iddle" | "loading" | "success" | "error";
 
 export type UrlData = {
   title: string | null;
-  description: string | null;
-  favicon: string | null;
-  imageSrc: string | null;
+  description?: string | null;
+  favicon?: string | null;
+  imageSrc?: string | null;
 };
 
 export function useUnfurlUrl(url: string) {

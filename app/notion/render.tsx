@@ -15,7 +15,7 @@ import { ColumnListRender, ColumnRender } from './_components/column';
 import { QuoteRender } from './_components/quote';
 import { TableRender } from './_components/table';
 import { EquationRender } from './_components/equation';
-import { LinkPreviewRender } from './_components/link_preview';
+import { LinkPreviewRender } from './_components/link-preview';
 import { PDFRender } from './_components/pdf';
 import { SubPageRender } from './_components/sub_page';
 

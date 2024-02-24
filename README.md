@@ -46,7 +46,7 @@ Most common block types are supported. But some blocks information not supported
 |------------------------|-----------|-------------------------------------|
 | Paragraph              | ✅ Yes     |                                     |
 | Headings               | ✅ Yes     |                                     |
-| Bookmark               | ✅ Yes     | No detail info, only link           |
+| Bookmark               | ✅ Yes     | Use unfurl.js                       |
 | Breadcrumb             | ❌ Missing | Not planned                         |
 | Bulleted List          | ✅ Yes     |                                     |
 | Callout                | ✅ Yes     |                                     |
@@ -59,7 +59,7 @@ Most common block types are supported. But some blocks information not supported
 | Equation               | ✅ Yes     | Use [katex ](https://katex.org/)    |
 | File                   | ✅ Yes     |                                     |
 | Image                  | ✅ Yes     | No position、size info in API       |
-| Link Preview           | ✅ Yes     |                                     |
+| Link Preview           | ✅ Yes     | Use unfurl.js                       |
 | Mention                | ✅ Yes     | Only Date                           |
 | Numbered List          | ✅ Yes     |                                     |
 | PDF                    | ✅ Yes     |                                     |

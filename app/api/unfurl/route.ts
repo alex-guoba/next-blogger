@@ -33,8 +33,7 @@ export async function GET(
 
   return unfurl(url)
     .then((unfurlResponse) => {
-
-      console.log(unfurlResponse)
+      // console.log(unfurlResponse)
 
       const response = {
         title: unfurlResponse.title ?? null,

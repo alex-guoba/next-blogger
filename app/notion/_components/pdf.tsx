@@ -69,7 +69,7 @@ export function PDFRender({ block, className }: PDFBlockProps) {
   }
 
   return (
-    <div key={id} className={cn(className, "w-full max-w-ful min-w-full")}>
+    <div key={id} className={cn(className, "flex-wrap w-full max-w-ful min-w-full")}>
       <Nav pageNumber={pageNumber} numPages={numPages} title={title} />
       <div
         hidden={loading}
