@@ -7,6 +7,7 @@ type SuccessResponse = {
   description?: string | null;
   favicon?: string | null;
   imageSrc?: string | null;
+  oEmbed?: any;
 };
 
 const CACHE_RESULT_SECONDS = 60 * 60 * 24; // 1 day
@@ -33,13 +34,14 @@ export async function GET(
 
   return unfurl(url)
     .then((unfurlResponse) => {
-      // console.log(unfurlResponse)
+      console.log(unfurlResponse)
 
       const response = {
         title: unfurlResponse.title ?? null,
         description: unfurlResponse.description ?? null,
         favicon: unfurlResponse.favicon ?? null,
         imageSrc: unfurlResponse.open_graph?.images?.[0]?.url ?? null,
+        oEmbed: unfurlResponse.oEmbed ?? null,
       };
 
       const res = NextResponse.json(response);

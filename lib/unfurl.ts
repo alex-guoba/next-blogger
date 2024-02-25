@@ -7,6 +7,7 @@ export type UrlData = {
   description?: string | null;
   favicon?: string | null;
   imageSrc?: string | null;
+  oEmbed?: any;
 };
 
 export function useUnfurlUrl(url: string) {

@@ -18,6 +18,7 @@ import { EquationRender } from './_components/equation';
 import { LinkPreviewRender } from './_components/link-preview';
 import { PDFRender } from './_components/pdf';
 import { SubPageRender } from './_components/sub_page';
+import { VideoRender } from './_components/video';
 
 
 export function renderBlock(block: any, level: number = 1) {
@@ -158,6 +159,9 @@ export function renderBlock(block: any, level: number = 1) {
     case 'equation':
       return <EquationRender block={block} className='mt-1.5' displayMode={true}></EquationRender>
       
+    case 'video':
+        return <VideoRender block={block} className='mt-1.5'></VideoRender>
+  
     default:
       return `❌ Unsupported block (${
         type === 'unsupported' ? 'unsupported by Notion API' : type

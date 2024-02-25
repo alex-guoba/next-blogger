@@ -70,7 +70,7 @@ Most common block types are supported. But some blocks information not supported
 | Template               | ❌ Missing | Not planned.                        |
 | To do                  | ✅ Yes     |                                     |
 | Toggle blocks          | ✅ Yes     |                                     |
-| Video                  | ❌ Missing |                                     |
+| Video                  | ✅ Yes     |                                     |
 
 
 ## Learn More
