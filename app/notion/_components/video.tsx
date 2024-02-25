@@ -4,8 +4,9 @@
 import { cn } from "@/lib/utils";
 // import Image from "next/image";
 import RichText from "../text";
-import { useUnfurlUrl } from "@/lib/unfurl";
+// import { useUnfurlUrl } from "@/lib/unfurl";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useIFramelyURL } from "@/lib/iframely";
 // import ReactPlayer from "react-player";
 
 interface VideoProps {
@@ -33,14 +34,16 @@ function VideoOmbed({ block, className }: VideoProps) {
 
   const url = external?.url || file?.url;
 
-  const { status, data } = useUnfurlUrl(url);
+  const { status, data } = useIFramelyURL(url);
+
+  console.log(status, data);
 
   if (status == "error") {
     // default iframe fallback
     return (
       <iframe
-        width="853"
-        height="480"
+        width="100%"
+        height="600"
         src={url}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
@@ -50,7 +53,7 @@ function VideoOmbed({ block, className }: VideoProps) {
     );
   }
   if (status == "success") {
-    const html = data?.oEmbed?.html;
+    const html = data?.html;
     if (html) {
       return (
         <div
@@ -61,8 +64,8 @@ function VideoOmbed({ block, className }: VideoProps) {
     }
     return (
       <iframe
-        width="853"
-        height="480"
+        width="95%"
+        height="600"
         src={url}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
@@ -93,7 +96,7 @@ export function VideoRender({ block, className }: VideoProps) {
         "max-w-full min-w-full self-center flex flex-col mx-0 my-2"
       )}
     >
-      <div className=" flex justify-center self-center w-full max-w-full ">
+      <div className="flex justify-center self-center w-full max-w-full ">
         {type == "external" ? (
           <VideoOmbed block={block} className={className} />
         ) : (

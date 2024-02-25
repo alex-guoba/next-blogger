@@ -10,6 +10,8 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+      IFRAMELY_URI: z.string(),
+      IFRAMELY_KEY: z.string().optional(),
     // DATABASE_URL: z.string().url(),
     // CLERK_SECRET_KEY: z.string().min(1),
     // RESEND_API_KEY: z.string().min(1),
@@ -40,6 +42,8 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    IFRAMELY_URI: process.env.IFRAMELY_URI,
+    IFRAMELY_KEY: process.env.IFRAMELY_KEY,
     // DATABASE_URL: process.env.DATABASE_URL,
     // NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     // NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:

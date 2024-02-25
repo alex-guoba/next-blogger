@@ -55,6 +55,7 @@ export async function generateMetadata(
   };
 }
 
+
 export default async function Page({ params }: { params: { slug: string[] } }) {
   console.log(params, "environment variables:", revalidate);
   console.log(params, "page params:", params);
