@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { env } from "@/env.mjs";
 
-
-
 const CACHE_RESULT_SECONDS = 60 * 60 * 24; // 1 day
 
 export async function GET(
-  req: NextRequest,
+  req: NextRequest
   // res: NextResponse
 ) {
   const searchParams = req.nextUrl.searchParams;

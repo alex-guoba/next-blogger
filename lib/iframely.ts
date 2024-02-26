@@ -18,7 +18,7 @@ export type IFramelyData = {
 export function useIFramelyURL(url: string) {
   const [status, setStatus] = useState<RequestStatus>("iddle");
   const [data, setData] = useState<null | IFramelyData>(null);
-  
+
   useEffect(() => {
     if (url) {
       setStatus("loading");

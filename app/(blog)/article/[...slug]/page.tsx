@@ -1,31 +1,21 @@
 // import Head from "next/head";
 import Link from "next/link";
 import { Fragment } from "react";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 import { renderBlock } from "@/app/notion/render";
-import {
-  QueryDatabase,
-  queryPageBySlug,
-  retrieveBlockChildren,
-  retrievePage,
-} from "@/app/notion/api";
+import { QueryDatabase, queryPageBySlug, retrieveBlockChildren, retrievePage } from "@/app/notion/api";
 import Shell from "@/components/shells/shell";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import { formatDate } from "@/lib/utils";
-import {
-  PageHeader,
-  PageHeaderDescription,
-  PageHeaderHeading,
-} from "@/components/page-header";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
-export const revalidate =
-  parseInt(process.env.NEXT_REVALIDATE_PAGES || "", 10) || 300; // revalidate the data interval
+export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || "", 10) || 300; // revalidate the data interval
 
 // export const dynamicParams = true; // true | false,
 
@@ -45,16 +35,12 @@ type Props = {
 
 // Generate metadata for this page.
 // TODO: add more fields and site name
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
   return {
     title: params.slug,
   };
 }
-
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   console.log(params, "environment variables:", revalidate);
@@ -91,9 +77,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   return (
     <Shell as="article" className="relative flex min-h-screen flex-col">
       <PageHeader>
-        <PageHeaderDescription variant="sm">
-          {formatDate(lastEditTime)}
-        </PageHeaderDescription>
+        <PageHeaderDescription variant="sm">{formatDate(lastEditTime)}</PageHeaderDescription>
         <PageHeaderHeading>{title}</PageHeaderHeading>
       </PageHeader>
       <Separator className="mb-2.5" />
@@ -107,12 +91,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
       {/* </React.Suspense> */}
       {/* </section> */}
-      <Link
-        href="/"
-        className={cn(
-          buttonVariants({ variant: "ghost", className: "mx-auto mt-4 w-fit" })
-        )}
-      >
+      <Link href="/" className={cn(buttonVariants({ variant: "ghost", className: "mx-auto mt-4 w-fit" }))}>
         <ChevronLeftIcon className="mr-2 h-4 w-4" aria-hidden="true" />
         See all posts
         <span className="sr-only">See all posts</span>

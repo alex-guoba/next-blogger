@@ -72,8 +72,19 @@ import RichText from "../text";
 //     | undefined;
 // }
 
-export function ImageRender({block, className, size = "md"}: {block: any, className?: string | undefined, size ?: string | undefined}) {
-  const { id, image: {caption, type, external, file} } = block;
+export function ImageRender({
+  block,
+  className,
+  size = "md",
+}: {
+  block: any;
+  className?: string | undefined;
+  size?: string | undefined;
+}) {
+  const {
+    id,
+    image: { caption, external, file },
+  } = block;
 
   const url = external?.url || file?.url;
   if (!url) {
@@ -83,26 +94,17 @@ export function ImageRender({block, className, size = "md"}: {block: any, classN
   // TODO: use nextconfig.js to get the base path
   let hosted = false;
   const u = new URL(url || "");
-  if (
-    u.hostname.endsWith("s3.us-west-2.amazonaws.com") ||
-    u.hostname.startsWith("www.notion.so")
-  ) {
+  if (u.hostname.endsWith("s3.us-west-2.amazonaws.com") || u.hostname.startsWith("www.notion.so")) {
     hosted = true;
   }
 
   // TODO: Notion API don't return the correct image size. May be we need to set the image size in caption?
   return (
-    <figure
-      key={id}
-      className={cn(
-        className,
-        "max-w-[100vw] min-w-full self-center flex flex-col mx-0 my-2 text-sm "
-      )}
-    >
+    <figure key={id} className={cn(className, "mx-0 my-2 flex min-w-full max-w-[100vw] flex-col self-center text-sm ")}>
       {hosted ? (
         <Image
           src={url}
-          className={cn("rounded-lg shadow-md w-fit")}
+          className={cn("w-fit rounded-lg shadow-md")}
           width={448}
           height={448}
           sizes="(min-width: 1024px) 384px, (min-width: 768px) 288px, (min-width: 640px) 224px, 100vw"
@@ -113,7 +115,7 @@ export function ImageRender({block, className, size = "md"}: {block: any, classN
         <img
           src={url}
           width="auto"
-          className={cn("rounded-lg shadow-md w-fit", {
+          className={cn("w-fit rounded-lg shadow-md", {
             "h-32": size === "sxm",
             "h-64": size === "md",
             "h-96": size === "lg",
@@ -124,7 +126,7 @@ export function ImageRender({block, className, size = "md"}: {block: any, classN
         />
       )}
       {caption && caption.length > 0 && (
-        <figcaption className="px-1.5 font-normal text-sm text-slate-600">
+        <figcaption className="px-1.5 text-sm font-normal text-slate-600">
           <RichText title={caption} />
         </figcaption>
       )}

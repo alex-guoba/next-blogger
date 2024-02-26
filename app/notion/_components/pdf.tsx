@@ -30,11 +30,7 @@ export function PDFRender({ block, className }: PDFBlockProps) {
   const [loading, setLoading] = React.useState(true);
   const [pageWidth, setPageWidth] = React.useState(0);
 
-  function onDocumentLoadSuccess({
-    numPages: nextNumPages,
-  }: {
-    numPages: number;
-  }) {
+  function onDocumentLoadSuccess({ numPages: nextNumPages }: { numPages: number }) {
     setNumPages(nextNumPages);
   }
 
@@ -43,11 +39,11 @@ export function PDFRender({ block, className }: PDFBlockProps) {
     setLoading(false);
   }
 
-//   const options = {
-//     cMapUrl: "cmaps/",
-//     cMapPacked: true,
-//     standardFontDataUrl: "standard_fonts/",
-//   };
+  //   const options = {
+  //     cMapUrl: "cmaps/",
+  //     cMapPacked: true,
+  //     standardFontDataUrl: "standard_fonts/",
+  //   };
 
   // Go to next page
   function goToNextPage() {
@@ -69,20 +65,14 @@ export function PDFRender({ block, className }: PDFBlockProps) {
   }
 
   return (
-    <div key={id} className={cn(className, "flex-wrap w-full max-w-ful min-w-full")}>
+    <div key={id} className={cn(className, "max-w-ful w-full min-w-full flex-wrap")}>
       <Nav pageNumber={pageNumber} numPages={numPages} title={title} />
-      <div
-        hidden={loading}
-        style={{ height: "calc(100vh - 192px)" }}
-        className="flex items-center"
-      >
-        <div
-          className={`flex items-center justify-between w-full max-w-full absolute z-10 px-2`}
-        >
+      <div hidden={loading} style={{ height: "calc(100vh - 192px)" }} className="flex items-center">
+        <div className={`absolute z-10 flex w-full max-w-full items-center justify-between px-2`}>
           <button
             onClick={goToPreviousPage}
             disabled={pageNumber <= 1}
-            className="relative h-[calc(100vh - 192px)] px-2  text-gray-400 hover:text-gray-50 focus:z-20"
+            className="h-[calc(100vh - 192px)] relative px-2  text-gray-400 hover:text-gray-50 focus:z-20"
           >
             {/* <span className="sr-only">Previous</span> */}
             <Icons.caretLeft className="h-10 w-10" aria-hidden="true" />
@@ -90,13 +80,13 @@ export function PDFRender({ block, className }: PDFBlockProps) {
           <button
             onClick={goToNextPage}
             disabled={pageNumber >= numPages!}
-            className="relative h-[calc(100vh - 192px)] px-2 text-gray-400 hover:text-gray-50 focus:z-20"
+            className="h-[calc(100vh - 192px)] relative px-2 text-gray-400 hover:text-gray-50 focus:z-20"
           >
             {/* <span className="sr-only">Next</span> */}
             <Icons.caretRight className="h-10 w-10" aria-hidden="true" />
           </button>
         </div>
-        <div className="flex justify-center mx-auto h-full">
+        <div className="mx-auto flex h-full justify-center">
           <Document
             file={url}
             onLoadSuccess={onDocumentLoadSuccess}
@@ -127,28 +117,18 @@ export function PDFRender({ block, className }: PDFBlockProps) {
   );
 }
 
-function Nav({
-  pageNumber,
-  numPages,
-  title,
-}: {
-  pageNumber: number;
-  numPages: number;
-  title: string;
-}) {
+function Nav({ pageNumber, numPages, title }: { pageNumber: number; numPages: number; title: string }) {
   return (
-    <nav className="bg-gray-400 rounded-md">
+    <nav className="rounded-md bg-gray-400">
       <div className="mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-12 items-center justify-between">
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
-              <p className="text-2xl font-bold tracking-tighter text-white">
-                {title}
-              </p>
+              <p className="text-2xl font-bold tracking-tighter text-white">{title}</p>
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <div className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">
+            <div className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">
               <span>{pageNumber}</span>
               <span className="text-gray-400"> / {numPages}</span>
             </div>

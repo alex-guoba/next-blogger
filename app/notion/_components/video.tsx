@@ -15,26 +15,26 @@ interface VideoProps {
 
 function LoadingSkeleton() {
   return (
-    <div className="border border-gray-200 flex overflow-hidden w-full max-w-full">
+    <div className="flex w-full max-w-full overflow-hidden border border-gray-200">
       <div className="flex-[4_1_180px] space-y-2 p-4">
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-full" />
       </div>
-      <Skeleton className="flex-[1_1_180px] relative hidden md:flex max-h-32" />
+      <Skeleton className="relative hidden max-h-32 flex-[1_1_180px] md:flex" />
     </div>
   );
 }
 
-function VideoOmbed({ block, className }: VideoProps) {
+function VideoOmbed({ block }: VideoProps) {
   const {
     // id,
-    video: {external, file },
+    video: { external, file },
   } = block;
 
   const url = external?.url || file?.url;
   const { status, data } = useIFramelyURL(url);
 
-//   console.log(status, data);
+  //   console.log(status, data);
 
   if (status == "error") {
     // default iframe fallback
@@ -54,12 +54,7 @@ function VideoOmbed({ block, className }: VideoProps) {
   if (status == "success") {
     const html = data?.html;
     if (html) {
-      return (
-        <div
-          className="w-full max-w-full"
-          dangerouslySetInnerHTML={{ __html: html }}
-        ></div>
-      );
+      return <div className="w-full max-w-full" dangerouslySetInnerHTML={{ __html: html }}></div>;
     }
     return (
       <iframe
@@ -89,30 +84,17 @@ export function VideoRender({ block, className }: VideoProps) {
   }
 
   return (
-    <figure
-      key={id}
-      className={cn(
-        className,
-        "max-w-full min-w-full self-center flex flex-col mx-0 my-2"
-      )}
-    >
-      <div className="flex justify-center self-center w-full max-w-full ">
+    <figure key={id} className={cn(className, "mx-0 my-2 flex min-w-full max-w-full flex-col self-center")}>
+      <div className="flex w-full max-w-full justify-center self-center ">
         {type == "external" ? (
-          <VideoOmbed block={block} className={className} />
+          <VideoOmbed block={block} />
         ) : (
-          <video
-            playsInline
-            controls
-            preload="metadata"
-            src={url}
-            className={cn("block")}
-            title="video"
-          />
+          <video playsInline controls preload="metadata" src={url} className={cn("block")} title="video" />
         )}
       </div>
 
       {caption && caption.length > 0 && (
-        <figcaption className="px-1.5 font-normal text-sm text-slate-600 self-center">
+        <figcaption className="self-center px-1.5 text-sm font-normal text-slate-600">
           <RichText title={caption} />
         </figcaption>
       )}

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import styles from "./post.module.css";
+// import styles from "./post.module.css";
 import React from "react";
 import { EquationRender } from "./_components/equation";
 
@@ -103,27 +103,14 @@ function Mention(rt: any, extended?: string, index?: number) {
 }
 
 function Equation(rt: any, extended?: string, index?: number) {
-  const { annotations, equation } = rt;
+  const { annotations } = rt;
   const styels = AnnotationStyle(annotations, extended);
   // console.log("quation", equation.expression)
   return (
-    <span
-      className={cn(styels, "mt-1.5")}
-      key={index}
-      // key={text.content}
-    >
+    <span className={cn(styels, "mt-1.5")} key={index}>
       <EquationRender block={rt} displayMode={false}></EquationRender>
     </span>
   );
-
-  // return (
-  //   <span
-  //     className={styels}
-  //     key={index}
-  //   >
-  //     {equation.href ? <a href={equation.href}>{equation.expression}</a> : equation.expression}
-  //   </span>
-  // )
 }
 
 // Notion uses rich text to allow users to customize their content.

@@ -33,7 +33,7 @@ export function useUnfurlUrl(url: string) {
           setStatus("error");
         });
     } else {
-        setStatus("error");
+      setStatus("error");
     }
   }, [url]);
 

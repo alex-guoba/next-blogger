@@ -1,7 +1,7 @@
 import { unfurl } from "unfurl.js";
 import { NextRequest, NextResponse } from "next/server";
 
-type ErrorResponse = { error: string };
+// type ErrorResponse = { error: string };
 type SuccessResponse = {
   title?: string | null;
   description?: string | null;
@@ -12,14 +12,9 @@ type SuccessResponse = {
 
 const CACHE_RESULT_SECONDS = 60 * 60 * 24; // 1 day
 
-export async function GET(
-  req: NextRequest,
-  res: NextResponse<SuccessResponse | ErrorResponse>
-) {
+export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const url = searchParams.get("url");
-
-  console.log('query url', url);
 
   if (!url || typeof url !== "string") {
     return NextResponse.json(
@@ -34,9 +29,7 @@ export async function GET(
 
   return unfurl(url)
     .then((unfurlResponse) => {
-      console.log(unfurlResponse)
-
-      const response = {
+      const response: SuccessResponse = {
         title: unfurlResponse.title ?? null,
         description: unfurlResponse.description ?? null,
         favicon: unfurlResponse.favicon ?? null,
@@ -45,10 +38,7 @@ export async function GET(
       };
 
       const res = NextResponse.json(response);
-      res.headers.set(
-        "Cache-Control",
-        `public, max-age=${CACHE_RESULT_SECONDS}`
-      );
+      res.headers.set("Cache-Control", `public, max-age=${CACHE_RESULT_SECONDS}`);
       return res;
     })
     .catch((error) => {

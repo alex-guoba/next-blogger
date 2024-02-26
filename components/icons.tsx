@@ -7,6 +7,7 @@ import {
   FileTextIcon,
   DownloadIcon,
 } from "@radix-ui/react-icons";
+import React from "react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
 

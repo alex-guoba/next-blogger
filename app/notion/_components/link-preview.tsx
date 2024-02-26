@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 import RichText from "../text";
 // import { Icons } from "@/components/icons";
 import { UrlData, useUnfurlUrl } from "@/lib/unfurl";
@@ -9,7 +9,7 @@ import Link from "next/link";
 
 // import { PlaceholderImage } from "@/components/placeholder-image";
 // import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { CardContent, CardDescription } from "@/components/ui/card";
 
 interface LinkPreviewBlockProps {
   block: any;
@@ -43,12 +43,12 @@ interface LinkPreviewBlockProps {
 
 function LoadingSkeleton() {
   return (
-    <div className="border border-gray-200 flex overflow-hidden w-full max-w-full">
+    <div className="flex w-full max-w-full overflow-hidden border border-gray-200">
       <div className="flex-[4_1_180px] space-y-2 p-4">
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-full" />
       </div>
-      <Skeleton className="flex-[1_1_180px] relative hidden md:flex max-h-32" />
+      <Skeleton className="relative hidden max-h-32 flex-[1_1_180px] md:flex" />
     </div>
   );
 }
@@ -75,28 +75,20 @@ function UnfurledLinkPreview({
   return (
     <div key={id} className={className}>
       <Link href={url} target="_blank">
-        <div className="border border-gray-200 flex overflow-hidden w-full max-w-full">
+        <div className="flex w-full max-w-full overflow-hidden border border-gray-200">
           <span className="sr-only">{url}</span>
           {icon ? (
-            <div className="flex-none w-12 flex justify-center">
+            <div className="flex w-12 flex-none justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={icon}
-                alt={url}
-                className="px-1.5"
-              />
+              <img src={icon} alt={url} className="px-1.5" />
             </div>
           ) : null}
 
-          <div className="flex-auto w-96 space-y-2 p-2">
+          <div className="w-96 flex-auto space-y-2 p-2">
             {/* <CardHeader className="p-0"> */}
-              <CardContent className="line-clamp-1 font-bold p-0 text-sm overflow-hidden">
-                {title}
-              </CardContent>
+            <CardContent className="line-clamp-1 overflow-hidden p-0 text-sm font-bold">{title}</CardContent>
             {/* </CardHeader> */}
-            <CardDescription className="text-xs max-h-4 overflow-hidden">
-              {desc}
-            </CardDescription>
+            <CardDescription className="max-h-4 overflow-hidden text-xs">{desc}</CardDescription>
             {/* <CardContent className="text-xs p-0 max-h-8 overflow-hidden">
               {url}
             </CardContent> */}
@@ -105,7 +97,7 @@ function UnfurledLinkPreview({
       </Link>
 
       {caption && caption.length > 0 ? (
-        <figcaption className="x-1.5 font-normal text-sm text-slate-600">
+        <figcaption className="x-1.5 text-sm font-normal text-slate-600">
           <RichText title={caption} />
         </figcaption>
       ) : null}
@@ -126,14 +118,10 @@ export function LinkPreviewRender({ block, className }: LinkPreviewBlockProps) {
       description: "",
     };
 
-    return (
-      <UnfurledLinkPreview block={block} className={className} data={empty} />
-    );
+    return <UnfurledLinkPreview block={block} className={className} data={empty} />;
   }
   if (status == "success") {
-    return (
-      <UnfurledLinkPreview block={block} className={className} data={data} />
-    );
+    return <UnfurledLinkPreview block={block} className={className} data={data} />;
   }
   return <LoadingSkeleton />;
 }

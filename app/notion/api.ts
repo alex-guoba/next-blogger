@@ -1,8 +1,8 @@
-import { Client } from '@notionhq/client';
-import { cache } from 'react';
-import {QueryDatabaseResponse, ListBlockChildrenResponse} from '@notionhq/client/build/src/api-endpoints';
+import { Client } from "@notionhq/client";
+import { cache } from "react";
+import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 
-const databaseId = process.env.NOTION_DATABASE_ID || '';
+const databaseId = process.env.NOTION_DATABASE_ID || "";
 
 /**
  * Returns a random integer between the specified values, inclusive.
@@ -33,7 +33,7 @@ export const QueryDatabase = async (): Promise<TypePostList> => {
     database_id: databaseId,
   });
   const end = new Date().getTime();
-  console.log('[QueryDatabase]', `${end - start}ms`);
+  console.log("[QueryDatabase]", `${end - start}ms`);
   return response.results;
 };
 
@@ -44,7 +44,7 @@ export const retrievePage = cache(async (pageId: any) => {
   const start = new Date().getTime();
   const response = await notion.pages.retrieve({ page_id: pageId });
   const end = new Date().getTime();
-  console.log('[getPage]', `${end - start}ms`);
+  console.log("[getPage]", `${end - start}ms`);
   return response;
 });
 
@@ -57,7 +57,7 @@ export const queryPageBySlug = cache(async (slug: string) => {
   const response = await notion.databases.query({
     database_id: databaseId,
     filter: {
-      property: 'Slug',
+      property: "Slug",
       formula: {
         string: {
           equals: slug,
@@ -66,7 +66,7 @@ export const queryPageBySlug = cache(async (slug: string) => {
     },
   });
   const end = new Date().getTime();
-  console.log('[getPageFromSlug]', `${end - start}ms`);
+  console.log("[getPageFromSlug]", `${end - start}ms`);
 
   if (response?.results?.length) {
     return response?.results?.[0];
@@ -79,7 +79,7 @@ export const queryPageBySlug = cache(async (slug: string) => {
 export const retrieveBlockChildren = cache(async (blockID: string): Promise<any> => {
   const start = new Date().getTime();
 
-  const blockId = blockID.replaceAll('-', '');
+  const blockId = blockID.replaceAll("-", "");
 
   // TODO: only 100, not finished.
   const { results } = await notion.blocks.children.list({
@@ -92,7 +92,7 @@ export const retrieveBlockChildren = cache(async (blockID: string): Promise<any>
   // See https://developers.notion.com/docs/working-with-page-content#reading-nested-blocks
   const childBlocks = results.map(async (block: any) => {
     // ignore child pages
-    if (block.has_children && block.type != 'child_page') {
+    if (block.has_children && block.type != "child_page") {
       const children = await retrieveBlockChildren(block.id);
       return { ...block, children };
     }
@@ -101,34 +101,36 @@ export const retrieveBlockChildren = cache(async (blockID: string): Promise<any>
   });
 
   const end = new Date().getTime();
-  console.log('[retrieveBlockChildren]', `${end - start}ms`);
+  console.log("[retrieveBlockChildren]", `${end - start}ms`);
 
-  return Promise.all(childBlocks).then((blocks) => blocks.reduce((acc, curr) => {
-    // special conversation for list(bullet、number)：convert to children array and add uniqed IDs inn each item
-    // https://developers.notion.com/reference/block#bulleted-list-item
-    if (curr.type === 'bulleted_list_item') {
-      if (acc[acc.length - 1]?.type === 'bulleted_list') {
-        acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
+  return Promise.all(childBlocks).then((blocks) =>
+    blocks.reduce((acc, curr) => {
+      // special conversation for list(bullet、number)：convert to children array and add uniqed IDs inn each item
+      // https://developers.notion.com/reference/block#bulleted-list-item
+      if (curr.type === "bulleted_list_item") {
+        if (acc[acc.length - 1]?.type === "bulleted_list") {
+          acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
+        } else {
+          acc.push({
+            id: getRandomInt(10 ** 99, 10 ** 100).toString(),
+            type: "bulleted_list",
+            bulleted_list: { children: [curr] },
+          });
+        }
+      } else if (curr.type === "numbered_list_item") {
+        if (acc[acc.length - 1]?.type === "numbered_list") {
+          acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
+        } else {
+          acc.push({
+            id: getRandomInt(10 ** 99, 10 ** 100).toString(),
+            type: "numbered_list",
+            numbered_list: { children: [curr] },
+          });
+        }
       } else {
-        acc.push({
-          id: getRandomInt(10 ** 99, 10 ** 100).toString(),
-          type: 'bulleted_list',
-          bulleted_list: { children: [curr] },
-        });
+        acc.push(curr);
       }
-    } else if (curr.type === 'numbered_list_item') {
-      if (acc[acc.length - 1]?.type === 'numbered_list') {
-        acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
-      } else {
-        acc.push({
-          id: getRandomInt(10 ** 99, 10 ** 100).toString(),
-          type: 'numbered_list',
-          numbered_list: { children: [curr] },
-        });
-      }
-    } else {
-      acc.push(curr);
-    }
-    return acc;
-  }, []));
+      return acc;
+    }, [])
+  );
 });

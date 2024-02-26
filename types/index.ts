@@ -1,6 +1,6 @@
 // common types defination
 
-import type { Icons } from "@/components/icons"
+import type { Icons } from "@/components/icons";
 
 export interface NavItem {
   title: string;
@@ -19,9 +19,8 @@ export interface NavItemWithOptionalChildren extends NavItem {
   items?: NavItemWithChildren[];
 }
 
-export type MainNavItem = NavItemWithOptionalChildren
-export type SidebarNavItem = NavItemWithChildren
-
+export type MainNavItem = NavItemWithOptionalChildren;
+export type SidebarNavItem = NavItemWithChildren;
 
 export interface FooterItem {
   title: string;
@@ -31,4 +30,3 @@ export interface FooterItem {
     external?: boolean;
   }[];
 }
-

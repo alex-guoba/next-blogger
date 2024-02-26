@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 import RichText from "../text";
-import { Icons } from "@/components/icons";
+// import { Icons } from "@/components/icons";
 import { UrlData, useUnfurlUrl } from "@/lib/unfurl";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -11,12 +11,7 @@ import Link from "next/link";
 
 // import { PlaceholderImage } from "@/components/placeholder-image";
 // import { AspectRatio } from "@/components/ui/aspect-ratio";
-import {
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 
 interface BookmarkBlockProps {
   block: any;
@@ -59,13 +54,13 @@ interface BookmarkBlockProps {
 
 function LoadingSkeleton() {
   return (
-    <div className="border border-gray-200 flex overflow-hidden w-full max-w-full">
+    <div className="flex w-full max-w-full overflow-hidden border border-gray-200">
       <div className="flex-[4_1_180px] space-y-2 p-4">
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-full" />
       </div>
-      <Skeleton className="flex-[1_1_180px] relative hidden md:flex max-h-32" />
+      <Skeleton className="relative hidden max-h-32 flex-[1_1_180px] md:flex" />
     </div>
   );
 }
@@ -92,36 +87,30 @@ function UnfurledBookmarkPreview({
   return (
     <div key={id} className={className}>
       <Link href={url} target="_blank">
-        <div className="border border-gray-200 flex overflow-hidden w-full max-w-full">
+        <div className="flex w-full max-w-full overflow-hidden border border-gray-200">
           {/* <span className="sr-only">{url}</span> */}
 
-          <div className="flex-auto w-96 space-y-2 p-4">
+          <div className="w-96 flex-auto space-y-2 p-4">
             <CardHeader className="p-0">
-              <CardContent className="line-clamp-1 font-normal p-0 text-sm">
-                {title}
-              </CardContent>
+              <CardContent className="line-clamp-1 p-0 text-sm font-normal">{title}</CardContent>
             </CardHeader>
 
             {desc ? (
-              <CardDescription className="text-xs max-h-4 h-8 leading-4 overflow-hidden">
-                {desc}
-              </CardDescription>
+              <CardDescription className="h-8 max-h-4 overflow-hidden text-xs leading-4">{desc}</CardDescription>
             ) : null}
 
-            <div className="flex overflow-hidden w-full max-w-full mt-4">
+            <div className="mt-4 flex w-full max-w-full overflow-hidden">
               {icon ? (
-                <div className="flex-none w-6 flex justify-center">
+                <div className="flex w-6 flex-none justify-center">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={icon} alt={url} className="pr-1" />
                 </div>
               ) : null}
-              <CardContent className="text-xs p-0 max-h-4 overflow-hidden">
-                {url}
-              </CardContent>
+              <CardContent className="max-h-4 overflow-hidden p-0 text-xs">{url}</CardContent>
             </div>
           </div>
           {image ? (
-            <div className="flex-auto w-32 relative md:block hidden max-h-24 h-full">
+            <div className="relative hidden h-full max-h-24 w-32 flex-auto md:block">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={image}
@@ -136,7 +125,7 @@ function UnfurledBookmarkPreview({
       </Link>
 
       {caption && caption.length > 0 ? (
-        <figcaption className="px-1.5 font-normal text-sm text-slate-600">
+        <figcaption className="px-1.5 text-sm font-normal text-slate-600">
           <RichText title={caption} />
         </figcaption>
       ) : null}
@@ -144,10 +133,7 @@ function UnfurledBookmarkPreview({
   );
 }
 
-export function BookmarkPreviewRender({
-  block,
-  className,
-}: BookmarkBlockProps) {
+export function BookmarkPreviewRender({ block, className }: BookmarkBlockProps) {
   const {
     bookmark: { url },
   } = block;
@@ -160,22 +146,10 @@ export function BookmarkPreviewRender({
       description: "",
     };
     // return <BookmarkRender block={block} className={className} />;
-    return (
-      <UnfurledBookmarkPreview
-        block={block}
-        className={className}
-        data={empty}
-      />
-    );
+    return <UnfurledBookmarkPreview block={block} className={className} data={empty} />;
   }
   if (status == "success") {
-    return (
-      <UnfurledBookmarkPreview
-        block={block}
-        className={className}
-        data={data}
-      />
-    );
+    return <UnfurledBookmarkPreview block={block} className={className} data={data} />;
   }
   return <LoadingSkeleton />;
 }

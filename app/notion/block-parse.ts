@@ -1,10 +1,9 @@
-
 export const extractFileUrl = (obj: any) => {
-  if (obj?.type == 'file') {
+  if (obj?.type == "file") {
     return obj?.file?.url;
   }
-  if (obj?.type == 'external') {
+  if (obj?.type == "external") {
     return obj?.external?.url;
   }
   return null;
-}
+};

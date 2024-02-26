@@ -19,7 +19,7 @@ function fileName(name: string, url: string) {
 export function FileRender({ block, className }: FileBlockProps) {
   const {
     id,
-    file: { caption, file, external, type, name},
+    file: { caption, file, external, name },
   } = block;
 
   const url = external?.url || file?.url;
@@ -30,17 +30,16 @@ export function FileRender({ block, className }: FileBlockProps) {
   const fname = fileName(name, url);
 
   return (
-    <div className={cn(className, "inline-flex w-full items-center flex-wrap")}>
+    <div key={id} className={cn(className, "inline-flex w-full flex-wrap items-center")}>
       <Icons.fileblock className="h-6 w-6 p-[0.8] text-gray-600" />
       <a
-        id={id}
         href={url}
         target="_blank"
         rel="noreferrer noopener"
-        className="whitespace-pre-wrap break-words font-normal truncate"
+        className="truncate whitespace-pre-wrap break-words font-normal"
       >
         {caption && caption.length > 0 ? (
-          <figcaption className="px-1.5 font-normal text-sm text-slate-600">
+          <figcaption className="px-1.5 text-sm font-normal text-slate-600">
             <RichText title={caption} />
           </figcaption>
         ) : (

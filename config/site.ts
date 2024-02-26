@@ -1,20 +1,19 @@
-import type { FooterItem, MainNavItem } from "@/types"
+import type { FooterItem, MainNavItem } from "@/types";
 
 // import { productCategories } from "@/config/products"
 // import { slugify } from "@/lib/utils"
 
-export type SiteConfig = typeof siteConfig
+export type SiteConfig = typeof siteConfig;
 
 const links = {
   twitter: "https://twitter.com/gelco",
   github: "https://github.com/alex-guoba",
   githubAccount: "https://github.com/alex-guoba",
-}
+};
 
 export const siteConfig = {
   name: "Utopian",
-  description:
-    "An open source blog build with everything new in Next.js.",
+  description: "An open source blog build with everything new in Next.js.",
   url: "https://skateshop.sadmn.com",
   ogImage: "https://skateshop.sadmn.com/opengraph-image.png",
   links,
@@ -105,4 +104,4 @@ export const siteConfig = {
       ],
     },
   ] satisfies FooterItem[],
-}
+};

@@ -17,14 +17,8 @@ export function EmbedRender({ block, className }: EmbedProps) {
   }
 
   return (
-    <figure
-      key={id}
-      className={cn(
-        className,
-        "max-w-full min-w-full self-center flex flex-col mx-0 my-2"
-      )}
-    >
-      <div className="flex justify-center self-center w-full max-w-full ">
+    <figure key={id} className={cn(className, "mx-0 my-2 flex min-w-full max-w-full flex-col self-center")}>
+      <div className="flex w-full max-w-full justify-center self-center ">
         <iframe
           width="95%"
           height="540"
@@ -37,8 +31,7 @@ export function EmbedRender({ block, className }: EmbedProps) {
       </div>
 
       {caption && caption.length > 0 && (
-        
-        <figcaption className="px-1.5 font-normal text-sm text-slate-600 self-center">
+        <figcaption className="self-center px-1.5 text-sm font-normal text-slate-600">
           <RichText title={caption} />
         </figcaption>
       )}

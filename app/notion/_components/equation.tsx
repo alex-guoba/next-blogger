@@ -3,10 +3,10 @@
 import React from "react";
 
 import { cn } from "@/lib/utils";
-import RichText from "../text";
+// import RichText from "../text";
 import katex from "katex";
 import "katex/dist/katex.min.css";
-import 'katex/dist/contrib/mhchem.mjs';
+import "katex/dist/contrib/mhchem.mjs";
 
 interface EquationProps {
   block: any;
@@ -22,11 +22,7 @@ interface EquationProps {
   displayMode: boolean;
 }
 
-export function EquationRender({
-  block,
-  className,
-  displayMode = true,
-}: EquationProps) {
+export function EquationRender({ block, className, displayMode = true }: EquationProps) {
   const katexTextRef = React.useRef<HTMLDivElement>(null);
   const {
     equation: { expression },
@@ -50,11 +46,7 @@ export function EquationRender({
 
   // TODO: add copy to clipboard feature
   return (
-    <span
-      id={id}
-      ref={katexTextRef}
-      className={cn(className, "text-base block", displayMode ? "my-12" : "")}
-    >
+    <span key={id} ref={katexTextRef} className={cn(className, "block text-base", displayMode ? "my-12" : "")}>
       {expression}
     </span>
   );

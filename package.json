@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "shadcn:add": "npx shadcn-ui@latest add"
+    "shadcn:add": "npx shadcn-ui@latest add",
+    "prettier": "prettier --check --ignore-path .gitignore  \"**/*.{js,jsx,ts,tsx}\"",
+    "prettier:fix": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "@notionhq/client": "^2.2.14",
@@ -25,6 +27,7 @@
     "@types/katex": "^0.16.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "eslint": "^8.57.0",
     "katex": "^0.16.9",
     "lucide-react": "^0.312.0",
     "next": "^14.1.0",
@@ -39,15 +42,18 @@
     "unfurl.js": "^6.4.0"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^14.1.0",
     "@types/ms": "^0.7.34",
     "@types/node": "^20",
     "@types/prismjs": "^1.26.3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
+    "eslint-config-next": "^14.0.4",
+    "eslint-config-prettier": "^9.1.0",
     "postcss": "^8",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }

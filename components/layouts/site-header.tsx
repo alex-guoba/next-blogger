@@ -11,11 +11,8 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <nav className="container flex h-16 items-center">
         <MainNav items={siteConfig.mainNav} />
-        <MobileNav
-          mainNavItems={siteConfig.mainNav}
-          sidebarNavItems={dashboardConfig.sidebarNav}
-        />
+        <MobileNav mainNavItems={siteConfig.mainNav} sidebarNavItems={dashboardConfig.sidebarNav} />
       </nav>
     </header>
-  )
+  );
 }

@@ -1,14 +1,9 @@
-// import Image from 'next/image'
-import Link from "next/link";
+// import Link from "next/link";
 
 import { QueryDatabase } from "@/app/notion/api";
 import "@/app/styles/globals.css";
 import Shell from "@/components/shells/shell";
-import {
-  PageHeader,
-  PageHeaderHeading,
-  PageHeaderDescription,
-} from "@/components/page-header";
+import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
 import { PostCard, PostCardSkeleton } from "@/components/post-card";
@@ -22,9 +17,7 @@ export default async function Home() {
       <Shell className="md:pb-10">
         <PageHeader>
           <PageHeaderHeading>Blog</PageHeaderHeading>
-          <PageHeaderDescription>
-            Explore the latest blogs.
-          </PageHeaderDescription>
+          <PageHeaderDescription>Explore the latest blogs.</PageHeaderDescription>
         </PageHeader>
         <Separator className="mb-2.5" />
         <section className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

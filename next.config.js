@@ -29,16 +29,16 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "*.s3.us-west-2.amazonaws.com",  
+        hostname: "*.s3.us-west-2.amazonaws.com",
       },
       {
         protocol: "https",
-        hostname: "radix-ui.com",  
+        hostname: "radix-ui.com",
       },
       {
         protocol: "https",
-        hostname: "*.medium.com",  
-      }
+        hostname: "*.medium.com",
+      },
     ],
     // unoptimized: true,
   },
