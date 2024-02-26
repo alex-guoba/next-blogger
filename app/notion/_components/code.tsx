@@ -77,7 +77,7 @@ export function CodeRender({block, defaultLanguage, className} : CodeBlockProps)
       </pre>
 
       {caption && caption.length > 0 && (
-        <figcaption className="font-normal">
+        <figcaption className="px-1.5 font-normal text-sm text-slate-600">
           <RichText title={caption} />
         </figcaption>
       )}

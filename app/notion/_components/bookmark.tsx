@@ -23,7 +23,7 @@ interface BookmarkBlockProps {
   className?: string | undefined;
 }
 
-export function BookmarkRender({ block, className }: BookmarkBlockProps) {
+/*export function BookmarkRender({ block, className }: BookmarkBlockProps) {
   const {
     id,
     bookmark: { caption, url },
@@ -55,7 +55,7 @@ export function BookmarkRender({ block, className }: BookmarkBlockProps) {
       </a>
     </div>
   );
-}
+}*/
 
 function LoadingSkeleton() {
   return (
@@ -101,19 +101,18 @@ function UnfurledBookmarkPreview({
                 {title}
               </CardContent>
             </CardHeader>
-            <CardDescription className="text-xs max-h-8 overflow-hidden">
-              {desc}
-            </CardDescription>
-            
-            <div className="flex overflow-hidden w-full max-w-full">
+
+            {desc ? (
+              <CardDescription className="text-xs max-h-4 h-8 leading-4 overflow-hidden">
+                {desc}
+              </CardDescription>
+            ) : null}
+
+            <div className="flex overflow-hidden w-full max-w-full mt-4">
               {icon ? (
                 <div className="flex-none w-6 flex justify-center">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={icon}
-                    alt={url}
-                    className="px-1"
-                  />
+                  <img src={icon} alt={url} className="pr-1" />
                 </div>
               ) : null}
               <CardContent className="text-xs p-0 max-h-4 overflow-hidden">
@@ -122,7 +121,7 @@ function UnfurledBookmarkPreview({
             </div>
           </div>
           {image ? (
-            <div className="flex-auto w-32 relative md:block hidden max-h-32 h-full">
+            <div className="flex-auto w-32 relative md:block hidden max-h-24 h-full">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={image}
@@ -137,9 +136,9 @@ function UnfurledBookmarkPreview({
       </Link>
 
       {caption && caption.length > 0 ? (
-        <div className="px-1.5 font-light">
+        <figcaption className="px-1.5 font-normal text-sm text-slate-600">
           <RichText title={caption} />
-        </div>
+        </figcaption>
       ) : null}
     </div>
   );

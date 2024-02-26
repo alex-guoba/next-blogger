@@ -7,7 +7,6 @@ import RichText from "../text";
 // import { useUnfurlUrl } from "@/lib/unfurl";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useIFramelyURL } from "@/lib/iframely";
-// import ReactPlayer from "react-player";
 
 interface VideoProps {
   block: any;
@@ -28,15 +27,14 @@ function LoadingSkeleton() {
 
 function VideoOmbed({ block, className }: VideoProps) {
   const {
-    id,
-    video: { caption, type, external, file },
+    // id,
+    video: {external, file },
   } = block;
 
   const url = external?.url || file?.url;
-
   const { status, data } = useIFramelyURL(url);
 
-  console.log(status, data);
+//   console.log(status, data);
 
   if (status == "error") {
     // default iframe fallback
@@ -47,7 +45,8 @@ function VideoOmbed({ block, className }: VideoProps) {
         src={url}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        sandbox=""
+        // sandbox=""
+        sandbox="allow-same-origin allow-scripts allow-forms"
         title="video"
       />
     );
@@ -69,7 +68,8 @@ function VideoOmbed({ block, className }: VideoProps) {
         src={url}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        sandbox=""
+        // sandbox=""
+        sandbox="allow-same-origin allow-scripts allow-forms"
         title="video"
       />
     );
@@ -112,7 +112,7 @@ export function VideoRender({ block, className }: VideoProps) {
       </div>
 
       {caption && caption.length > 0 && (
-        <figcaption className="font-normal self-center">
+        <figcaption className="px-1.5 font-normal text-sm text-slate-600 self-center">
           <RichText title={caption} />
         </figcaption>
       )}

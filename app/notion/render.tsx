@@ -1,15 +1,15 @@
 import { Fragment } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 import RichText from './text';
-import styles from './post.module.css';
+// import styles from './post.module.css';
 import { bulletListStyle, numberListStyle } from './tools';
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { CodeRender } from './_components/code';
 import { CalloutRender } from './_components/callout';
 import { ImageRender } from './_components/image';
-import { BookmarkPreviewRender, BookmarkRender } from './_components/bookmark';
+import { BookmarkPreviewRender } from './_components/bookmark';
 import { FileRender } from './_components/file';
 import { ColumnListRender, ColumnRender } from './_components/column';
 import { QuoteRender } from './_components/quote';
@@ -19,7 +19,7 @@ import { LinkPreviewRender } from './_components/link-preview';
 import { PDFRender } from './_components/pdf';
 import { SubPageRender } from './_components/sub_page';
 import { VideoRender } from './_components/video';
-
+import { EmbedRender } from './_components/embed';
 
 export function renderBlock(block: any, level: number = 1) {
   const { type, id } = block;
@@ -41,19 +41,19 @@ export function renderBlock(block: any, level: number = 1) {
       );
     case 'heading_1':
       return (
-        <h1 key={id} className='text-3xl font-bold dark:text-white py-4'>
+        <h1 key={id} className='text-3xl font-bold dark:text-white py-4 mt-1.5'>
           <RichText title={value.rich_text} />
         </h1>
       );
     case 'heading_2':
       return (
-        <h2 key={id} className='text-2xl font-bold dark:text-white py-3'>
+        <h2 key={id} className='text-2xl font-bold dark:text-white py-3 mt-1.5'>
           <RichText title={value.rich_text} />
         </h2>
       );
     case 'heading_3':
       return (
-        <h3 key={id} className='text-1xl font-bold dark:text-white py-2'>
+        <h3 key={id} className='text-1xl font-bold dark:text-white py-2 mt-1.5'>
           <RichText title={value.rich_text} />
         </h3>
       );
@@ -84,9 +84,9 @@ export function renderBlock(block: any, level: number = 1) {
     
     case 'to_do':
       return (
-        <div className='mt-1.5'>
+        <div key={id} className='mt-1.5'>
           <label htmlFor={id}>
-            <input className='w-4 h-4 border-black border-4 rounded-none mr-2' type="checkbox" id={id} defaultChecked={value.checked} />
+            <input className='w-4 h-4 mr-2 align-middle border-8 rounded-none' type="checkbox" id={id} defaultChecked={value.checked} />
             {value.checked ? <RichText title={value.rich_text} extended='text-gray-500 line-through'/> : <RichText title={value.rich_text}/>}
           </label>
         </div>
@@ -122,6 +122,9 @@ export function renderBlock(block: any, level: number = 1) {
     case 'divider':
       return <hr className='mt-1.5 border-gray-200' key={id} />;
     
+    case 'embed':
+      return <EmbedRender block={block} className='mt-1.5'></EmbedRender>
+  
     case 'quote':
       return <QuoteRender block={block} className="mt-1.5" level={level+1}></QuoteRender>
 

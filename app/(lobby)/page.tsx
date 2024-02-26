@@ -1,16 +1,20 @@
 // import Image from 'next/image'
-import Link from 'next/link';
+import Link from "next/link";
 
-import { QueryDatabase } from '@/app/notion/api';
-import '@/app/styles/globals.css'
-import Shell from '@/components/shells/shell';
-import { PageHeader, PageHeaderHeading, PageHeaderDescription } from '@/components/page-header';
-import { Separator } from '@/components/ui/separator';
-import React from 'react';
-import { PostCard, PostCardSkeleton } from '@/components/post-card';
+import { QueryDatabase } from "@/app/notion/api";
+import "@/app/styles/globals.css";
+import Shell from "@/components/shells/shell";
+import {
+  PageHeader,
+  PageHeaderHeading,
+  PageHeaderDescription,
+} from "@/components/page-header";
+import { Separator } from "@/components/ui/separator";
+import React from "react";
+import { PostCard, PostCardSkeleton } from "@/components/post-card";
+import { extractFileUrl } from "@/app/notion/block-parse";
 
 export default async function Home() {
-  console.log('Home getPosts');
   const posts = await QueryDatabase();
 
   return (
@@ -19,7 +23,7 @@ export default async function Home() {
         <PageHeader>
           <PageHeaderHeading>Blog</PageHeaderHeading>
           <PageHeaderDescription>
-            Explore the latest news.
+            Explore the latest blogs.
           </PageHeaderDescription>
         </PageHeader>
         <Separator className="mb-2.5" />
@@ -33,18 +37,22 @@ export default async function Home() {
               const title = post.properties?.Title.title[0].text.content;
               const slug = post.properties?.Slug?.rich_text[0].plain_text;
               const edit_time = post.last_edited_time;
-              const image = post.cover?.external?.url;
+              const image = extractFileUrl(post.cover);
               const desc = post.properties?.Summary?.rich_text[0]?.plain_text;
 
-              return <PostCard key={slug} 
-                title={title} 
-                slug={`/article/${slug}`}
-                edit_time={edit_time}
-                desc={desc}
-                image={image}
-                i={i} />
+              return (
+                <PostCard
+                  key={slug}
+                  title={title}
+                  slug={`/article/${slug}`}
+                  edit_time={edit_time}
+                  desc={desc}
+                  image={image}
+                  i={i}
+                />
+              );
             })}
-          </React.Suspense>          
+          </React.Suspense>
         </section>
       </Shell>
     </div>

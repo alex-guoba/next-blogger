@@ -105,9 +105,9 @@ function UnfurledLinkPreview({
       </Link>
 
       {caption && caption.length > 0 ? (
-        <div className="px-1.5 font-light">
+        <figcaption className="x-1.5 font-normal text-sm text-slate-600">
           <RichText title={caption} />
-        </div>
+        </figcaption>
       ) : null}
     </div>
   );
