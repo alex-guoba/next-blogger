@@ -102,7 +102,7 @@ export function PDFRender({ block, className }: PDFBlockProps) {
               renderTextLayer={false}
               onLoadSuccess={onPageLoadSuccess}
               onRenderError={() => setLoading(false)}
-              // width={Math.max(pageWidth * 0.75, 320)}
+              width={Math.max(pageWidth * 0.75, 320)}
             />
           </Document>
         </div>

@@ -7,7 +7,7 @@ Blog build on [Next.js](https://nextjs.org/) and [Notion Public API](https://www
 
 ## Features
 
-1. Built using Next.js, TS, Tailwind CSS and other plugins(Prism、React-pdf and others).
+1. Built using Next.js, TS, Tailwind CSS and other plugins(Shiki、React-pdf and others).
 2. Use [Notion Public API](https://developers.notion.com/)。
 3. Full support for dark mode
 4. Support [Static Site Generation](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation)
@@ -52,7 +52,7 @@ Most common block types are supported. But some blocks information not supported
 | Callout                | ✅ Yes     |                                       |
 | Child Databases        | ❌ Missing | Not planned.                          |
 | Child page             | ✅ Yes     |                                       |
-| Code                   | ✅ Yes     | Use [prismjs](https://prismjs.com/)   |
+| Code                   | ✅ Yes     | Use [shiki](https://shiki.style/)     |
 | Column list and column | ✅ Yes     |                                       |
 | Divider                | ❌ Missing |                                       |
 | Embed                  | ✅ Yes     |                                       |

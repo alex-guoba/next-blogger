@@ -6,7 +6,7 @@ import RichText from "./text";
 import { bulletListStyle, numberListStyle } from "./tools";
 import { cn } from "@/lib/utils";
 import React from "react";
-import { CodeRender } from "./_components/code";
+import { ShikiCodeRender } from "./_components/code";
 import { CalloutRender } from "./_components/callout";
 import { ImageRender } from "./_components/image";
 import { BookmarkPreviewRender } from "./_components/bookmark";
@@ -131,7 +131,7 @@ export function renderBlock(block: any, level: number = 1) {
     case "code":
       return (
         <React.Suspense fallback={<div>Loading...</div>}>
-          <CodeRender block={block} className="mt-1.5"></CodeRender>
+          <ShikiCodeRender block={block} className="mt-1.5"></ShikiCodeRender>
         </React.Suspense>
       );
 

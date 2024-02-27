@@ -32,7 +32,6 @@
     "lucide-react": "^0.312.0",
     "next": "^14.1.0",
     "next-themes": "^0.2.1",
-    "prismjs": "^1.29.0",
     "react": "^18",
     "react-dom": "^18",
     "react-pdf": "^7.7.0",
@@ -45,7 +44,6 @@
     "@next/eslint-plugin-next": "^14.1.0",
     "@types/ms": "^0.7.34",
     "@types/node": "^20",
-    "@types/prismjs": "^1.26.3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
@@ -54,6 +52,7 @@
     "postcss": "^8",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "shiki": "^1.1.7",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
