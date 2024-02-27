@@ -75,7 +75,7 @@ function UnfurledLinkPreview({
   return (
     <div key={id} className={className}>
       <Link href={url} target="_blank">
-        <div className="flex w-full max-w-full overflow-hidden border border-gray-200">
+        <div className="flex w-full max-w-full overflow-hidden border border-gray-200  hover:bg-slate-200 dark:hover:bg-stone-500 rounded-md">
           <span className="sr-only">{url}</span>
           {icon ? (
             <div className="flex w-12 flex-none justify-center">

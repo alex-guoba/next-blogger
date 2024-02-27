@@ -16,7 +16,7 @@ import { QuoteRender } from "./_components/quote";
 import { TableRender } from "./_components/table";
 import { EquationRender } from "./_components/equation";
 import { LinkPreviewRender } from "./_components/link-preview";
-import { PDFRender } from "./_components/pdf";
+import { PdfRenderer } from "./_components/pdf";
 import { SubPageRender } from "./_components/sub_page";
 import { VideoRender } from "./_components/video";
 import { EmbedRender } from "./_components/embed";
@@ -139,7 +139,7 @@ export function renderBlock(block: any, level: number = 1) {
       return <FileRender block={block} className="mt-1.5"></FileRender>;
 
     case "pdf":
-      return <PDFRender block={block} className="mt-1.5"></PDFRender>;
+      return <PdfRenderer block={block} className="mt-1.5"></PdfRenderer>;
 
     case "bookmark":
       return <BookmarkPreviewRender block={block} className="mt-1.5"></BookmarkPreviewRender>;

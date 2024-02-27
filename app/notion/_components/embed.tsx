@@ -18,7 +18,7 @@ export function EmbedRender({ block, className }: EmbedProps) {
 
   return (
     <figure key={id} className={cn(className, "mx-0 my-2 flex min-w-full max-w-full flex-col self-center")}>
-      <div className="flex w-full max-w-full justify-center self-center ">
+      <div className="flex w-full max-w-full justify-center self-center">
         <iframe
           width="95%"
           height="540"
