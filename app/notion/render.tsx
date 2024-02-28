@@ -13,7 +13,7 @@ import { BookmarkPreviewRender } from "./_components/bookmark";
 import { FileRender } from "./_components/file";
 import { ColumnListRender, ColumnRender } from "./_components/column";
 import { QuoteRender } from "./_components/quote";
-import { TableRender } from "./_components/table";
+import { TableRender, TableRenderer } from "./_components/table";
 import { EquationRender } from "./_components/equation";
 import { LinkPreviewRender } from "./_components/link-preview";
 import { PdfRenderer } from "./_components/pdf";
@@ -148,7 +148,7 @@ export function renderBlock(block: any, level: number = 1) {
       return <LinkPreviewRender block={block} className="mt-1.5"></LinkPreviewRender>;
 
     case "table":
-      return <TableRender block={block} className="mt-1.5"></TableRender>;
+      return <TableRenderer block={block} className="mt-1.5"></TableRenderer>;
 
     case "column_list":
       return <ColumnListRender block={block} className="mt-1.5" level={level + 1}></ColumnListRender>;

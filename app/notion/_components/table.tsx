@@ -1,50 +1,85 @@
+// "use client"
+
 import { cn } from "@/lib/utils";
 import RichText from "../text";
+
+import {
+  Table,
+  TableBody,
+  // TableCaption,
+  TableCell,
+  // TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 interface TableProps {
   block: any;
   className?: string | undefined;
 }
 
-const columnStyle = function (index: number, has_row_header: any): string {
-  if (index === 0 && has_row_header) {
-    return "bg-stone-100";
+function renderHeader(children: any) {
+  const first = children[0];
+  if (!first) {
+    return null;
   }
-  return "";
-};
+  return (
+    <TableHeader>
+      <TableRow>
+        {first.table_row?.cells?.map((cell: { plain_text: any }, i: number) => (
+          <TableHead
+            key={`head-${cell.plain_text}-${i}`}
+            className="w-[100px] bg-stone-100"
+          >
+            <RichText title={cell} />
+          </TableHead>
+        ))}
+      </TableRow>
+    </TableHeader>
+  );
+}
 
-export function TableRender({ block, className }: TableProps) {
+function renderCell(has_column_header: boolean, has_row_header: boolean, children: any) {
+  // console.log(children);
+  return (
+    <TableBody>
+      {/* <TableRow> */}
+      {children?.map((child: any, index: number) => {
+        if (has_column_header && index == 0) {
+          return null;
+        }
+        // const RowElement = has_column_header && index === 0 ? "th" : "td";
+        // const RowStyle = RowElement == "th" ? "bg-stone-100" : "";
+        return (
+          <TableRow key={`row-${index}`}>
+            {child.table_row?.cells?.map((cell: { plain_text: any }, i: number) => (
+              <TableCell key={`${index}-${i}`} className={i == 0 && has_row_header ? "bg-stone-100" : ""}>
+                <RichText title={cell} />
+              </TableCell>
+            ))}
+          </TableRow>
+        );
+      })}
+      {/* </TableRow> */}
+    </TableBody>
+  );
+}
+
+export function TableRenderer({ block, className }: TableProps) {
   const {
     id,
     table: { has_column_header, has_row_header },
   } = block;
+
+  if (!block?.children) {
+    return null;
+  }
   return (
-    <table
-      key={id}
-      className={cn(className, "max-w-ful w-full border-collapse border border-solid border-inherit text-left")}
-    >
-      <tbody>
-        {block.children?.map((child: any, index: number) => {
-          const RowElement = has_column_header && index === 0 ? "th" : "td";
-          const RowStyle = RowElement == "th" ? "bg-stone-100" : "";
-          return (
-            <tr key={child.id}>
-              {child.table_row?.cells?.map((cell: { plain_text: any }, i: number) => (
-                <RowElement
-                  key={`${cell.plain_text}-${i}`}
-                  className={cn(
-                    RowStyle,
-                    columnStyle(i, has_row_header),
-                    "border border-solid border-inherit px-3 py-1.5"
-                  )}
-                >
-                  <RichText title={cell} />
-                </RowElement>
-              ))}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <Table key={id} className={cn(className, "border border-solid border-inherit")}>
+      {has_column_header && renderHeader(block.children)}
+      {renderCell(has_column_header, has_row_header, block.children)}
+      {/* <TableHeader></TableHeader> */}
+    </Table>
   );
 }
