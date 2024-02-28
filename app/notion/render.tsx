@@ -120,7 +120,7 @@ export function renderBlock(block: any, level: number = 1) {
       return <ImageRender block={block} className="mt-1.5"></ImageRender>;
 
     case "divider":
-      return <hr key={id} className="mt-1.5 border-gray-200"/>;
+      return <hr key={id} className="mt-1.5 border-gray-200" />;
 
     case "embed":
       return <EmbedRender block={block} className="mt-1.5"></EmbedRender>;
@@ -166,9 +166,11 @@ export function renderBlock(block: any, level: number = 1) {
       return <VideoRender block={block} className="mt-1.5"></VideoRender>;
 
     default:
-      return <p key={id} className="mt-1.5">
-        {`❌ Unsupported block (${type === "unsupported" ? "unsupported by Notion API" : type})`}
-      </p>;
+      return (
+        <p key={id} className="mt-1.5">
+          {`❌ Unsupported block (${type === "unsupported" ? "unsupported by Notion API" : type})`}
+        </p>
+      );
   }
 }
 

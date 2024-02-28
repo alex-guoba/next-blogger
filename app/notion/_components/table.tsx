@@ -26,10 +26,7 @@ function renderHeader(children: any) {
     <TableHeader>
       <TableRow>
         {first.table_row?.cells?.map((cell: { plain_text: any }, i: number) => (
-          <TableHead
-            key={`head-${cell.plain_text}-${i}`}
-            className="w-[100px] bg-stone-100"
-          >
+          <TableHead key={`head-${cell.plain_text}-${i}`} className="w-[100px] bg-stone-100">
             <RichText title={cell} />
           </TableHead>
         ))}

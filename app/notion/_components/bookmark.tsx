@@ -87,7 +87,7 @@ function UnfurledBookmarkPreview({
   return (
     <div key={id} className={className}>
       <Link href={url} target="_blank">
-        <div className="flex w-full max-w-full overflow-hidden border rounded-md border-gray-200  hover:bg-slate-200 dark:hover:bg-stone-500">
+        <div className="flex w-full max-w-full overflow-hidden rounded-md border border-gray-200  hover:bg-slate-200 dark:hover:bg-stone-500">
           {/* <span className="sr-only">{url}</span> */}
 
           <div className="w-96 flex-auto space-y-2 p-4">

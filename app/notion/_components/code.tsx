@@ -84,13 +84,13 @@ interface CodeBlockProps {
 //         </figcaption>
 //       )}
 //     </div>
-  // );
+// );
 
-  // Solution 3:  https://drupal-way.com/blog/nextjs-and-prismjs-integration
-  // const highlightedCode = Prism.highlight(codes, Lan[lang], lang);
-  // return <div
-  //   dangerouslySetInnerHTML={{__html: `<pre class="language-${lang}" tabIndex="0"><code class="language-${lang}">${highlightedCode}</code></pre>`}}
-  //   />
+// Solution 3:  https://drupal-way.com/blog/nextjs-and-prismjs-integration
+// const highlightedCode = Prism.highlight(codes, Lan[lang], lang);
+// return <div
+//   dangerouslySetInnerHTML={{__html: `<pre class="language-${lang}" tabIndex="0"><code class="language-${lang}">${highlightedCode}</code></pre>`}}
+//   />
 // }
 
 // let highlighter: Highlighter;
@@ -114,16 +114,16 @@ export async function ShikiCodeRender({ block, defaultLanguage, className }: Cod
     throw new Error('Unsupported language "' + lang + '"');
   }
 
-  const theme = 'github-dark';
+  const theme = "github-dark";
   let codes = "";
   code.rich_text?.map((item: any) => {
     codes += item?.plain_text;
   });
 
   const highlighter = await getHighlighter({
-      langs: [lang],
-      themes: [theme],
-    });
+    langs: [lang],
+    themes: [theme],
+  });
 
   const html = await highlighter.codeToHtml(codes, {
     lang: lang,
@@ -134,7 +134,7 @@ export async function ShikiCodeRender({ block, defaultLanguage, className }: Cod
   const caption = code.caption;
 
   return (
-    <div key={id} className={cn(className, "text-sm flex-col w-full max-w-full overflow-hidden")}>
+    <div key={id} className={cn(className, "w-full max-w-full flex-col overflow-hidden text-sm")}>
       <div
         dangerouslySetInnerHTML={{
           __html: `<pre class="language-${lang}" style="background: #24292e; padding: 1em; margin: 0.5em 0px; overflow: auto;" tabIndex="0"><code class="language-${lang}">${html}</code></pre>`,

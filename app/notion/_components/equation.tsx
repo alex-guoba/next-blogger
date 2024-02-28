@@ -46,7 +46,15 @@ export function EquationRender({ block, className, displayMode = true }: Equatio
 
   // TODO: add copy to clipboard feature
   return (
-    <span key={id} ref={katexTextRef} className={cn(className, "block text-base p-4 hover:bg-slate-200 dark:hover:bg-stone-500", displayMode ? "my-6" : "")}>
+    <span
+      key={id}
+      ref={katexTextRef}
+      className={cn(
+        className,
+        "block p-4 text-base hover:bg-slate-200 dark:hover:bg-stone-500",
+        displayMode ? "my-6" : ""
+      )}
+    >
       {expression}
     </span>
   );
