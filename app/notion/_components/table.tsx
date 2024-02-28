@@ -1,5 +1,3 @@
-// "use client"
-
 import { cn } from "@/lib/utils";
 import RichText from "../text";
 
@@ -44,13 +42,10 @@ function renderCell(has_column_header: boolean, has_row_header: boolean, childre
   // console.log(children);
   return (
     <TableBody>
-      {/* <TableRow> */}
       {children?.map((child: any, index: number) => {
         if (has_column_header && index == 0) {
           return null;
         }
-        // const RowElement = has_column_header && index === 0 ? "th" : "td";
-        // const RowStyle = RowElement == "th" ? "bg-stone-100" : "";
         return (
           <TableRow key={`row-${index}`}>
             {child.table_row?.cells?.map((cell: { plain_text: any }, i: number) => (
@@ -61,7 +56,6 @@ function renderCell(has_column_header: boolean, has_row_header: boolean, childre
           </TableRow>
         );
       })}
-      {/* </TableRow> */}
     </TableBody>
   );
 }
@@ -79,7 +73,6 @@ export function TableRenderer({ block, className }: TableProps) {
     <Table key={id} className={cn(className, "border border-solid border-inherit")}>
       {has_column_header && renderHeader(block.children)}
       {renderCell(has_column_header, has_row_header, block.children)}
-      {/* <TableHeader></TableHeader> */}
     </Table>
   );
 }
