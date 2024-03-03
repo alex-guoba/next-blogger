@@ -1,8 +1,8 @@
 import { Client } from "@notionhq/client";
 import { cache } from "react";
-import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
+import { env } from "@/env.mjs";
 
-const databaseId = process.env.NOTION_DATABASE_ID || "";
+import { GetDatabaseResponse, QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 
 /**
  * Returns a random integer between the specified values, inclusive.
@@ -19,18 +19,29 @@ function getRandomInt(minimum: number, maximum: number): number {
 }
 
 const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
+  auth: env.NOTION_TOKEN,
 });
+
+/*
+ ** retrieve database
+ ** see: https://developers.notion.com/reference/retrieve-a-database
+ */
+export const RetrieveDatabase = async (database_id: string): Promise<GetDatabaseResponse> => {
+  const response = await notion.databases.retrieve({
+    database_id: database_id,
+  });
+  return response;
+};
 
 // Get pages from database
 // API: https://developers.notion.com/reference/post-database-query
 // export type TypePostItem = QueryDatabaseResponse["results"][0];
 export type TypePostList = QueryDatabaseResponse["results"];
-export const QueryDatabase = async (): Promise<TypePostList> => {
+export const QueryDatabase = async (database_id: string): Promise<TypePostList> => {
   const start = new Date().getTime();
 
   const response = await notion.databases.query({
-    database_id: databaseId,
+    database_id: database_id,
   });
   const end = new Date().getTime();
   console.log("[QueryDatabase]", `${end - start}ms`);
@@ -51,11 +62,11 @@ export const retrievePage = cache(async (pageId: any) => {
 //
 // slug:（计算机）处理后的标题（用于构建固定链接）
 // 根据标题取db中的page列表数据，限制一条
-export const queryPageBySlug = cache(async (slug: string) => {
+export const queryPageBySlug = cache(async (database_id: string, slug: string) => {
   const start = new Date().getTime();
 
   const response = await notion.databases.query({
-    database_id: databaseId,
+    database_id: database_id,
     filter: {
       property: "Slug",
       formula: {

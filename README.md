@@ -43,7 +43,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Most common block types are supported. But some blocks information not supported in Public API, So we give an abbreviated rendering.
 
 | Block Type             | Supported | Notes                                 |
-|------------------------|-----------|---------------------------------------|
+|------------------------|------------|---------------------------------------|
 | Paragraph              | ✅ Yes     |                                       |
 | Headings               | ✅ Yes     |                                       |
 | Bookmark               | ✅ Yes     | Use unfurl.js                         |
@@ -54,7 +54,7 @@ Most common block types are supported. But some blocks information not supported
 | Child page             | ✅ Yes     |                                       |
 | Code                   | ✅ Yes     | Use [shiki](https://shiki.style/)     |
 | Column list and column | ✅ Yes     |                                       |
-| Divider                | ❌ Missing |                                       |
+| Divider                | ❌ Missing | API Unsupported.                      |
 | Embed                  | ✅ Yes     |                                       |
 | Equation               | ✅ Yes     | Use [katex ](https://katex.org/)      |
 | File                   | ✅ Yes     |                                       |
@@ -64,9 +64,9 @@ Most common block types are supported. But some blocks information not supported
 | Numbered List          | ✅ Yes     |                                       |
 | PDF                    | ✅ Yes     |                                       |
 | Quote                  | ✅ Yes     |                                       |
-| Synced block           | ❌ Missing |                                       |
+| Synced block           | ✅ Yes     |                                       |
 | Table                  | ✅ Yes     |                                       |
-| Table Of Contents      | ❌ Missing |                                       |
+| Table Of Contents      | ❌ Missing | API Unsupported.                      |
 | Template               | ❌ Missing | Not planned.                          |
 | To do                  | ✅ Yes     |                                       |
 | Toggle blocks          | ✅ Yes     |                                       |

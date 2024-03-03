@@ -49,11 +49,7 @@ export function EquationRender({ block, className, displayMode = true }: Equatio
     <span
       key={id}
       ref={katexTextRef}
-      className={cn(
-        className,
-        "block p-4 text-base hover:bg-slate-200 dark:hover:bg-stone-500",
-        displayMode ? "my-6" : ""
-      )}
+      className={cn(className, "text-base hover:bg-slate-200 dark:hover:bg-stone-500", displayMode ? "my-6" : "")}
     >
       {expression}
     </span>

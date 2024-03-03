@@ -25,3 +25,20 @@ export function formatDate(
     ...options,
   }).format(new Date(date));
 }
+
+export function formatTime(
+  date: Date | string | number,
+  options: Intl.DateTimeFormatOptions = {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    // hour12: false,
+  }
+) {
+  return new Intl.DateTimeFormat("en-US", {
+    ...options,
+  }).format(new Date(date));
+}

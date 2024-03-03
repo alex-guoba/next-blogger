@@ -14,6 +14,8 @@ import { formatDate } from "@/lib/utils";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 
+import { env } from "@/env.mjs";
+
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
 export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || "", 10) || 300; // revalidate the data interval
 
@@ -21,7 +23,7 @@ export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || "", 10) 
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const database = await QueryDatabase();
+  const database = await QueryDatabase(env.NOTION_DATABASE_ID);
   return database.map((page: any) => {
     const slug = [page.properties.Slug?.rich_text[0].plain_text];
     return { slug };
@@ -60,7 +62,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     title = page?.properties?.title?.title[0].plain_text;
   } else {
     // query from database by slug
-    const page: any = await queryPageBySlug(params.slug[0]);
+    const page: any = await queryPageBySlug(env.NOTION_DATABASE_ID, params.slug[0]);
     if (!page) {
       return <div />;
     }

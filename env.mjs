@@ -12,6 +12,8 @@ export const env = createEnv({
       .default("development"),
       IFRAMELY_URI: z.string(),
       IFRAMELY_KEY: z.string().optional(),
+      NOTION_TOKEN: z.string(),
+      NOTION_DATABASE_ID: z.string(),
     // DATABASE_URL: z.string().url(),
     // CLERK_SECRET_KEY: z.string().min(1),
     // RESEND_API_KEY: z.string().min(1),
@@ -44,6 +46,8 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     IFRAMELY_URI: process.env.IFRAMELY_URI,
     IFRAMELY_KEY: process.env.IFRAMELY_KEY,
+    NOTION_TOKEN: process.env.NOTION_TOKEN,
+    NOTION_DATABASE_ID: process.env.NOTION_DATABASE_ID,
     // DATABASE_URL: process.env.DATABASE_URL,
     // NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     // NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:

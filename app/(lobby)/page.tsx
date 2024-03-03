@@ -8,9 +8,10 @@ import { Separator } from "@/components/ui/separator";
 import React from "react";
 import { PostCard, PostCardSkeleton } from "@/components/post-card";
 import { extractFileUrl } from "@/app/notion/block-parse";
+import { env } from "@/env.mjs";
 
 export default async function Home() {
-  const posts = await QueryDatabase();
+  const posts = await QueryDatabase(env.NOTION_DATABASE_ID);
 
   return (
     <div>

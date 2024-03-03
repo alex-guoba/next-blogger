@@ -17,9 +17,10 @@ import { TableRender, TableRenderer } from "./_components/table";
 import { EquationRender } from "./_components/equation";
 import { LinkPreviewRender } from "./_components/link-preview";
 import { PdfRenderer } from "./_components/pdf";
-import { SubPageRender } from "./_components/sub_page";
+import { SubPageRender } from "./_components/sub-page";
 import { VideoRender } from "./_components/video";
 import { EmbedRender } from "./_components/embed";
+import { SyncedBlockRenderer } from "./_components/synced-block";
 
 export function renderBlock(block: any, level: number = 1) {
   const { type, id } = block;
@@ -164,6 +165,9 @@ export function renderBlock(block: any, level: number = 1) {
 
     case "video":
       return <VideoRender block={block} className="mt-1.5"></VideoRender>;
+
+    case "synced_block":
+      return <SyncedBlockRenderer block={block} className="mt-1.5"></SyncedBlockRenderer>;
 
     default:
       return (

@@ -24,7 +24,7 @@ import { EquationRender } from "./_components/equation";
 // - "yellow"
 // - "yellow_background"
 // see: https://davidpiesse.github.io/tailwind-md-colours/
-const colorMap = new Map<string, string>([
+export const ColorMap = new Map<string, string>([
   ["blue", "text-blue-400"],
   ["blue_background", "bg-blue-200"],
   ["brown", "text-[#8d6e63]"],
@@ -53,11 +53,11 @@ function AnnotationStyle(annotations: any, extended?: string) {
   const { bold, code, color, italic, strikethrough, underline } = annotations;
   const names = [
     bold ? "font-bold" : "",
-    code ? "text-red-600 bg-slate-200	" : "",
+    code ? "text-red-600 bg-slate-200	px-1" : "",
     italic ? "italic" : "",
     strikethrough ? "line-through" : "",
     underline ? "underline" : "",
-    color ? colorMap.get(color) : "",
+    color ? ColorMap.get(color) : "",
     extended ? extended : "",
   ];
 
