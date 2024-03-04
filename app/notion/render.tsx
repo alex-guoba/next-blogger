@@ -21,8 +21,9 @@ import { VideoRender } from "./_components/video";
 import { EmbedRender } from "./_components/embed";
 import { SyncedBlockRenderer } from "./_components/synced-block";
 import { ChildDatabaseRenderer } from "./_components/child-database";
+import { ParagraphRender } from "./_components/paragraph";
 
-export function renderBlock(block: any, level: number = 1) {
+export function renderBlock(block: any, level: number = 1, index: number = 0) {
   const { type, id } = block;
   const value = block[type];
 
@@ -30,11 +31,8 @@ export function renderBlock(block: any, level: number = 1) {
 
   switch (type) {
     case "paragraph":
-      return (
-        <p key={id} className="mt-1.5">
-          <RichText title={value.rich_text} extended="whitespace-pre-wrap" />
-        </p>
-      );
+      return <ParagraphRender block={block}></ParagraphRender>;
+
     case "heading_1":
       return (
         <h1 key={id} id={id} className="mt-1.5 py-4 text-3xl font-bold dark:text-white">
@@ -57,30 +55,32 @@ export function renderBlock(block: any, level: number = 1) {
     // before list rendering, array should be convert into children array. See getBlocks function.
     case "bulleted_list": {
       return (
-        <ul key={id} className={cn(bulletListStyle(level), level == 1 ? "mt-1.5" : "", "pl-5")}>
-          {value.children.map((child: any) => renderBlock(child, level + 1))}
+        <ul key={id} className={cn(bulletListStyle(level), "pl-5 space-y-2")}>
+          {value.children.map((child: any, index: number) => renderBlock(child, level + 1, index))}
         </ul>
       );
     }
     case "numbered_list": {
       return (
-        <ol key={id} className={cn(numberListStyle(level), level == 1 ? "mt-1.5" : "", "pl-5")}>
-          {value.children.map((child: any) => renderBlock(child, level + 1))}
+        <ol key={id} className={cn(numberListStyle(level), "pl-5 space-y-2")}>
+          {value.children.map((child: any) => renderBlock(child, level + 1, index))}
         </ol>
       );
     }
     case "bulleted_list_item":
     case "numbered_list_item":
       return (
-        <li key={id} className="mt-1.5">
-          <RichText title={value.rich_text} />
+        <li key={id}>
+          <div className={index == 0 ? "mt-2" : ""}>
+          <RichText title={value.rich_text}/>
+          </div>
           {!!block.children && renderNestedList(block, level + 1)}
         </li>
       );
 
     case "to_do":
       return (
-        <div key={id} className="mt-1.5">
+        <div key={id} >
           <label htmlFor={id}>
             <input
               className="mr-2 h-4 w-4 rounded-none border-8 align-middle"
@@ -99,81 +99,81 @@ export function renderBlock(block: any, level: number = 1) {
 
     case "toggle":
       return (
-        <details key={id} className="mt-1.5">
+        <details key={id} className="">
           <summary>
-            <RichText title={value.rich_text} />
+              <RichText title={value.rich_text} />
           </summary>
-          <div className="ml-4">
+          <div className="ml-2">
             {block.children?.map((child: any) => <Fragment key={child.id}>{renderBlock(child, level + 1)}</Fragment>)}
           </div>
         </details>
       );
 
     case "child_page":
-      return <SubPageRender block={block} className="mt-1.5"></SubPageRender>;
+      return <SubPageRender block={block} ></SubPageRender>;
 
     case "image":
-      return <ImageRender block={block} className="mt-1.5"></ImageRender>;
+      return <ImageRender block={block} ></ImageRender>;
 
     case "divider":
       return <hr key={id} className="mt-1.5 border-gray-200" />;
 
     case "embed":
-      return <EmbedRender block={block} className="mt-1.5"></EmbedRender>;
+      return <EmbedRender block={block} ></EmbedRender>;
 
     case "quote":
-      return <QuoteRender block={block} className="mt-1.5" level={level + 1}></QuoteRender>;
+      return <QuoteRender block={block}  level={level + 1}></QuoteRender>;
 
     case "code":
       return (
         <React.Suspense fallback={<div>Loading...</div>}>
-          <ShikiCodeRender block={block} className="mt-1.5"></ShikiCodeRender>
+          <ShikiCodeRender block={block} ></ShikiCodeRender>
         </React.Suspense>
       );
 
     case "file":
-      return <FileRender block={block} className="mt-1.5"></FileRender>;
+      return <FileRender block={block} ></FileRender>;
 
     case "pdf":
-      return <PdfRenderer block={block} className="mt-1.5"></PdfRenderer>;
+      return <PdfRenderer block={block} ></PdfRenderer>;
 
     case "bookmark":
-      return <BookmarkPreviewRender block={block} className="mt-1.5"></BookmarkPreviewRender>;
+      return <BookmarkPreviewRender block={block}></BookmarkPreviewRender>;
 
     case "link_preview":
-      return <LinkPreviewRender block={block} className="mt-1.5"></LinkPreviewRender>;
+      return <LinkPreviewRender block={block} ></LinkPreviewRender>;
 
     case "table":
-      return <TableRenderer block={block} className="mt-1.5"></TableRenderer>;
+      return <TableRenderer block={block} ></TableRenderer>;
 
     case "column_list":
-      return <ColumnListRender block={block} className="mt-1.5" level={level + 1}></ColumnListRender>;
+      return <ColumnListRender block={block}  level={level + 1}></ColumnListRender>;
 
     case "column":
       return <ColumnRender block={block} level={level + 1}></ColumnRender>;
 
     case "callout":
-      return <CalloutRender block={block} className="mt-1.5"></CalloutRender>;
+      return <CalloutRender block={block} ></CalloutRender>;
 
     case "equation":
-      return <EquationRender block={block} className="mt-1.5" displayMode={true}></EquationRender>;
+      return <EquationRender block={block}  displayMode={true}></EquationRender>;
 
     case "video":
-      return <VideoRender block={block} className="mt-1.5"></VideoRender>;
+      return <VideoRender block={block} ></VideoRender>;
 
     case "synced_block":
-      return <SyncedBlockRenderer block={block} className="mt-1.5"></SyncedBlockRenderer>;
+      return <SyncedBlockRenderer block={block} ></SyncedBlockRenderer>;
 
     case "child_database":
       return (
         <React.Suspense fallback={<div>Loading...</div>}>
-          <ChildDatabaseRenderer block={block} className="mt-1.5"></ChildDatabaseRenderer>
+          <ChildDatabaseRenderer block={block} ></ChildDatabaseRenderer>
         </React.Suspense>
       );
 
     default:
       return (
-        <p key={id} className="mt-1.5">
+        <p key={id} >
           {`❌ Unsupported block (${type === "unsupported" ? "unsupported by Notion API" : type})`}
         </p>
       );
@@ -189,7 +189,7 @@ export function renderNestedList(blocks: any, level: number) {
   const isNumberedList = blocks.children[0].type === "numbered_list_item";
   if (isNumberedList) {
     // style not neccessary for grand-child lists as it will inherit from parent
-    return <div>{blocks.children.map((block: any) => renderBlock(block, level))}</div>;
+    return <div>{blocks.children.map((block: any, index: number) => renderBlock(block, level, index))}</div>;
   }
-  return <div>{blocks.children.map((block: any) => renderBlock(block, level))}</div>;
+  return <div>{blocks.children.map((block: any, index: number) => renderBlock(block, level, index))}</div>;
 }

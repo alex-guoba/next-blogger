@@ -29,7 +29,7 @@ export const ColorMap = new Map<string, string>([
   ["blue_background", "bg-blue-200"],
   ["brown", "text-[#8d6e63]"],
   ["brown_background", "bg-[#d7ccc8]"],
-  ["default", ""],
+  // ["default", ""],
   ["gray", "text-gray-500"],
   ["gray_background", "bg-gray-200"],
   ["green", "text-green-800"],

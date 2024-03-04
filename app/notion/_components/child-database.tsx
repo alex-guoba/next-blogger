@@ -37,7 +37,7 @@ export async function ChildDatabaseRenderer({ block, className }: ChildDatabaseB
   }
 
   const data = await QueryDatabase(id);
-  return <DatabaseRenderer property={columns} data={data}></DatabaseRenderer>;
+  return <DatabaseRenderer property={columns} data={data} className="py-1"></DatabaseRenderer>;
 
   // true if the database appears in the page as an inline block.
 
