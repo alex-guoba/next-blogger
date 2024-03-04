@@ -26,11 +26,20 @@ const notion = new Client({
  ** retrieve database
  ** see: https://developers.notion.com/reference/retrieve-a-database
  */
-export const RetrieveDatabase = async (database_id: string): Promise<GetDatabaseResponse> => {
-  const response = await notion.databases.retrieve({
-    database_id: database_id,
-  });
-  return response;
+export const RetrieveDatabase = async (database_id: string): Promise<GetDatabaseResponse | null> => {
+  try {
+    const response = await notion.databases.retrieve({
+      database_id: database_id,
+    });
+    return response;
+  } catch (error) {
+     console.log(error);
+     return null;
+  }
+  // const response = await notion.databases.retrieve({
+  //   database_id: database_id,
+  // });
+  // return response;
 };
 
 // Get pages from database

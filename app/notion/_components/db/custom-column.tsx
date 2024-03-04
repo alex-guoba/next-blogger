@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from "./column-header";
+import { DataTableColumnHeader } from "@/components/ui/data-table//column-header";
 
-import { NotionRowProps } from "./basic-columns";
+import { NotionRowProps } from "./base-column";
 import React from "react";
 import {
   checkBoxCell,
@@ -25,7 +25,7 @@ import {
 - "rollup"
 */
 
-export function PropertiesColumn(dbProps: any): ColumnDef<NotionRowProps>[] {
+export function CustomColumn(dbProps: any): ColumnDef<NotionRowProps>[] {
   if (!dbProps) {
     return [];
   }
@@ -169,7 +169,7 @@ export function PropertiesColumn(dbProps: any): ColumnDef<NotionRowProps>[] {
         break;
 
       default: // ignore other types
-        console.log("Unsupported type: ", value?.type);
+        console.log("Unsupported column type: ", value?.type);
         break;
     }
   }

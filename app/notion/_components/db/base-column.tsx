@@ -1,6 +1,6 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from "./column-header";
+import { DataTableColumnHeader } from "@/components/ui/data-table/column-header";
 import { formatDate } from "@/lib/utils";
 
 export type NotionRowProps = {
@@ -13,7 +13,7 @@ export type NotionRowProps = {
   properties: Map<string, object>;
 };
 
-export function BasicColumn(): ColumnDef<NotionRowProps>[] {
+export function BaseColumn(): ColumnDef<NotionRowProps>[] {
   const columns: ColumnDef<NotionRowProps>[] = [
     {
       id: "__rows_selected",

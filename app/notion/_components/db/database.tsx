@@ -4,9 +4,9 @@ import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { cn } from "@/lib/utils";
-import { DataBaseTable } from "./database-table";
-import { BasicColumn } from "./basic-columns";
-import { PropertiesColumn } from "./property-columns";
+import { DataTable } from "@/components/ui/data-table/database-table";
+import { BaseColumn } from "./base-column";
+import { CustomColumn } from "./custom-column";
 
 interface DatabaseRendererProps {
   property: any;
@@ -15,17 +15,17 @@ interface DatabaseRendererProps {
 }
 
 export function DatabaseRenderer({ property, data, className }: DatabaseRendererProps) {
-  const baisc = BasicColumn();
-  const extended = PropertiesColumn(property);
+  const base = BaseColumn();
+  const custom = CustomColumn(property);
 
-  const columns: ColumnDef<any>[] = [...baisc, ...extended];
+  const columns: ColumnDef<any>[] = [...base, ...custom];
   //   console.log(columns);
 
   const rows = data || [];
 
   return (
     <div className={cn(className, "w-full max-w-full")}>
-      <DataBaseTable columns={columns} data={rows}></DataBaseTable>
+      <DataTable columns={columns} data={rows}></DataTable>
     </div>
   );
 }

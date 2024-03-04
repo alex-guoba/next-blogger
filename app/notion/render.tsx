@@ -1,11 +1,10 @@
 import { Fragment } from "react";
-// import Link from 'next/link';
+import React from "react";
 
 import RichText from "./text";
-// import styles from './post.module.css';
 import { bulletListStyle, numberListStyle } from "./tools";
 import { cn } from "@/lib/utils";
-import React from "react";
+
 import { ShikiCodeRender } from "./_components/code";
 import { CalloutRender } from "./_components/callout";
 import { ImageRender } from "./_components/image";
@@ -13,7 +12,7 @@ import { BookmarkPreviewRender } from "./_components/bookmark";
 import { FileRender } from "./_components/file";
 import { ColumnListRender, ColumnRender } from "./_components/column";
 import { QuoteRender } from "./_components/quote";
-import { TableRender, TableRenderer } from "./_components/table";
+import { TableRenderer } from "./_components/table";
 import { EquationRender } from "./_components/equation";
 import { LinkPreviewRender } from "./_components/link-preview";
 import { PdfRenderer } from "./_components/pdf";
@@ -21,6 +20,7 @@ import { SubPageRender } from "./_components/sub-page";
 import { VideoRender } from "./_components/video";
 import { EmbedRender } from "./_components/embed";
 import { SyncedBlockRenderer } from "./_components/synced-block";
+import { ChildDatabaseRenderer } from "./_components/child-database";
 
 export function renderBlock(block: any, level: number = 1) {
   const { type, id } = block;
@@ -29,11 +29,6 @@ export function renderBlock(block: any, level: number = 1) {
   // console.log(type, id);
 
   switch (type) {
-    // https://developers.notion.com/reference/block#paragraph
-    // RichText:
-    // - 当包含多段不同样式的文本时，会被拆分为对应的多个 paragraph.rich_text[]，包括：带link、bold、strikethrough、italic、code（使用``包裹）的文本
-    // - 空白换行
-    // - mention: no rich_text exist
     case "paragraph":
       return (
         <p key={id} className="mt-1.5">
@@ -168,6 +163,13 @@ export function renderBlock(block: any, level: number = 1) {
 
     case "synced_block":
       return <SyncedBlockRenderer block={block} className="mt-1.5"></SyncedBlockRenderer>;
+
+    case "child_database":
+      return (
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <ChildDatabaseRenderer block={block} className="mt-1.5"></ChildDatabaseRenderer>
+        </React.Suspense>
+      );
 
     default:
       return (
