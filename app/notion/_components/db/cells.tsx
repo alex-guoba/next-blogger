@@ -8,7 +8,7 @@ export function titleCell(value: any) {
   }
   return (
     <span>
-      <RichText title={value} extended="whitespace-pre-wrap" />
+      <RichText title={value} className="whitespace-pre-wrap" />
     </span>
   );
 }
@@ -96,7 +96,7 @@ export function urlCell(value: any) {
     return null;
   }
   return (
-    <div className="max-w-48 truncate underline">
+    <div className="max-w-48 truncate underline underline-offset-4 decoration-1">
       <a href={value} target="_blank" rel="noreferrer noopener" className="text-gray-500">
         {value}
       </a>

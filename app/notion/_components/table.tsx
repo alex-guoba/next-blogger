@@ -67,7 +67,7 @@ export function TableRenderer({ block, className }: TableProps) {
     return null;
   }
   return (
-    <Table key={id} className={cn(className, "border border-solid border-inherit")}>
+    <Table key={id} className={cn(className, "my-1 border border-solid border-inherit")}>
       {has_column_header && renderHeader(block.children)}
       {renderCell(has_column_header, has_row_header, block.children)}
     </Table>

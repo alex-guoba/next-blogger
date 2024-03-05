@@ -28,7 +28,7 @@ export async function ChildDatabaseRenderer({ block, className }: ChildDatabaseB
     return (
       <Link key={id} href={slug} className={cn(className, "flex")}>
         {icon && <IconRender type={icon.type} emoji={icon.emoji} external={icon.external} file={icon.file} />}
-        <div className="underline">
+        <div className="underline underline-offset-4 decoration-1">
           <RichText title={title} />
         </div>
         <span className="sr-only">Inner database</span>

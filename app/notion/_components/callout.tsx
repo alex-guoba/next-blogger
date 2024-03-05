@@ -17,7 +17,7 @@ export function CalloutRender({ block, className }: CalloutBlockProps) {
       key={id}
       className={cn(
         className,
-        "inline-flex w-full items-center rounded-md border border-none bg-stone-100 p-4 dark:bg-stone-500"
+        "inline-flex w-full items-center rounded-md border border-none bg-stone-100 p-4 dark:bg-stone-500 my-0.5"
       )}
     >
       {icon && <IconRender type={icon.type} emoji={icon.emoji} external={icon.external} file={icon.file} />}

@@ -29,7 +29,7 @@ export const ColorMap = new Map<string, string>([
   ["blue_background", "bg-blue-200"],
   ["brown", "text-[#8d6e63]"],
   ["brown_background", "bg-[#d7ccc8]"],
-  // ["default", ""],
+  ["default", ""],
   ["gray", "text-gray-500"],
   ["gray_background", "bg-gray-200"],
   ["green", "text-green-800"],
@@ -46,27 +46,27 @@ export const ColorMap = new Map<string, string>([
   ["yellow_background", "bg-yellow-100"],
 ]);
 
-const linkTextStyle = "text-gray-500 underline";
+const linkTextStyle = "text-gray-500 underline underline-offset-4 decoration-1";
 
 // https://developers.notion.com/reference/rich-text#the-annotation-object
-function AnnotationStyle(annotations: any, extended?: string) {
+function annotationStyle(annotations: any, className?: string) {
   const { bold, code, color, italic, strikethrough, underline } = annotations;
   const names = [
     bold ? "font-bold" : "",
     code ? "text-red-600 bg-slate-200	px-1" : "",
     italic ? "italic" : "",
     strikethrough ? "line-through" : "",
-    underline ? "underline" : "",
+    underline ? "underline underline-offset-4 decoration-1" : "",
     color ? ColorMap.get(color) : "",
-    extended ? extended : "",
+    className ? className : "",
   ];
 
   return names.filter((el) => el != "" && el != undefined).join(" ");
 }
 
-function Text(rt: any, extended?: string, index?: number) {
+function text(rt: any, className: string = "", index: number = 0) {
   const { annotations, text } = rt;
-  const styels = AnnotationStyle(annotations, extended);
+  const styels = annotationStyle(annotations, className);
   return (
     <span
       className={styels}
@@ -85,14 +85,15 @@ function Text(rt: any, extended?: string, index?: number) {
 }
 
 // https://developers.notion.com/reference/rich-text#mention
-function Mention(rt: any, extended?: string, index?: number) {
-  const { annotations, href, plain_text } = rt;
-  const styels = AnnotationStyle(annotations, extended);
+function mention(rt: any, className: string = "", index: number = 0) {
+  const { mention, annotations, href, plain_text } = rt;
+  const styels = annotationStyle(annotations, className);
+  const color = mention?.type == "date" ? "text-gray-500" : "";
 
   return (
-    <span className={cn(styels, "font-medium")} key={index}>
+    <span className={cn(styels, "font-medium", color)} key={index}>
       {href ? (
-        <a className="underline" href={href}>
+        <a className="underline underline-offset-4 decoration-1" href={href}>
           {plain_text}
         </a>
       ) : (
@@ -102,10 +103,9 @@ function Mention(rt: any, extended?: string, index?: number) {
   );
 }
 
-function Equation(rt: any, extended?: string, index?: number) {
+function equation(rt: any, className: string = "", index: number = 0) {
   const { annotations } = rt;
-  const styels = AnnotationStyle(annotations, extended);
-  // console.log("quation", equation.expression)
+  const styels = annotationStyle(annotations, className);
   return (
     <span className={cn(styels, "mt-1.5")} key={index}>
       <EquationRender block={rt} displayMode={false}></EquationRender>
@@ -118,7 +118,7 @@ function Equation(rt: any, extended?: string, index?: number) {
 // This includes styling decisions, such as the use of italics, font size, and font color, as well as formatting,
 // such as the use of hyperlinks or code blocks.
 // See:  https://developers.notion.com/reference/rich-text
-export default function RichText({ title, extended }: any) {
+export default function RichText({title, className} : any) {
   // empmty lines should be rendered with &emsp
   if (!title || title?.length == 0) {
     return <span>&nbsp;</span>;
@@ -129,11 +129,11 @@ export default function RichText({ title, extended }: any) {
       {title.map((value: any, index: number) => {
         const { type } = value;
         if (type == "text") {
-          return Text(value, extended, index);
+          return text(value, className, index);
         } else if (type == "mention") {
-          return Mention(value, extended, index);
+          return mention(value, className, index);
         } else if (type == "equation") {
-          return Equation(value, extended, index);
+          return equation(value, className, index);
         }
         return null;
       })}

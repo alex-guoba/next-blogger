@@ -42,35 +42,36 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Most common block types are supported. But some blocks information not supported in Public API, So we give an abbreviated rendering.
 
-| Block Type             | Supported | Notes                                 |
-|------------------------|------------|---------------------------------------|
-| Paragraph              | ✅ Yes     |                                       |
-| Headings               | ✅ Yes     |                                       |
-| Bookmark               | ✅ Yes     | Use unfurl.js                         |
-| Breadcrumb             | ❌ Missing | Not planned                           |
-| Bulleted List          | ✅ Yes     |                                       |
-| Callout                | ✅ Yes     |                                       |
-| Child Databases        | ❌ Missing | Not planned.                          |
-| Child page             | ✅ Yes     |                                       |
-| Code                   | ✅ Yes     | Use [shiki](https://shiki.style/)     |
-| Column list and column | ✅ Yes     |                                       |
-| Divider                | ❌ Missing | API Unsupported.                      |
-| Embed                  | ✅ Yes     |                                       |
-| Equation               | ✅ Yes     | Use [katex ](https://katex.org/)      |
-| File                   | ✅ Yes     |                                       |
-| Image                  | ✅ Yes     | No position、size info in API         |
-| Link Preview           | ✅ Yes     | Use unfurl.js                         |
-| Mention                | ✅ Yes     | Only Date                             |
-| Numbered List          | ✅ Yes     |                                       |
-| PDF                    | ✅ Yes     |                                       |
-| Quote                  | ✅ Yes     |                                       |
-| Synced block           | ✅ Yes     |                                       |
-| Table                  | ✅ Yes     |                                       |
-| Table Of Contents      | ❌ Missing | API Unsupported.                      |
-| Template               | ❌ Missing | Not planned.                          |
-| To do                  | ✅ Yes     |                                       |
-| Toggle blocks          | ✅ Yes     |                                       |
-| Video                  | ✅ Yes     | Use [iframely](https://iframely.com/) |
+| Block Type             | Supported | Notes                                                   |
+|------------------------|-----------|---------------------------------------------------------|
+| Paragraph              | ✅ Yes     |                                                         |
+| Headings               | ✅ Yes     |                                                         |
+| Bookmark               | ✅ Yes     | Use unfurl.js                                           |
+| Bulleted List          | ✅ Yes     |                                                         |
+| Callout                | ✅ Yes     |                                                         |
+| Child Databases        | ✅ Yes     | Use [tanstack/table](https://tanstack.com/table/latest) |
+| Child page             | ✅ Yes     |                                                         |
+| Code                   | ✅ Yes     | Use [shiki](https://shiki.style/)                       |
+| Column list and column | ✅ Yes     |                                                         |
+| Embed                  | ✅ Yes     |                                                         |
+| Equation               | ✅ Yes     | Use [katex ](https://katex.org/)                        |
+| File                   | ✅ Yes     |                                                         |
+| Image                  | ✅ Yes     | No position、size info in API                            |
+| Link Preview           | ✅ Yes     | Use unfurl.js                                           |
+| Mention                | ✅ Yes     | Only Date                                               |
+| Numbered List          | ✅ Yes     |                                                         |
+| PDF                    | ✅ Yes     |                                                         |
+| Quote                  | ✅ Yes     |                                                         |
+| Synced block           | ✅ Yes     |                                                         |
+| Table                  | ✅ Yes     |                                                         |
+| To do                  | ✅ Yes     |                                                         |
+| Toggle blocks          | ✅ Yes     |                                                         |
+| Video                  | ✅ Yes     | Use [iframely](https://iframely.com/)                   |
+| Breadcrumb             | ❌ Missing | Not planned                                             |
+| Template               | ❌ Missing | Not planned.                                            |
+| Divider                | ❌ Missing | API Unsupported.                                        |
+| Table Of Contents      | ❌ Missing | API Unsupported.                                        |
+
 
 
 ## Learn More

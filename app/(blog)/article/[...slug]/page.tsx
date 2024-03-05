@@ -84,7 +84,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
       </PageHeader>
       <Separator className="mb-2.5" />
 
-      <section className="w-full space-y-0.5">
+      <section className="w-full flex flex-col gap-y-0.5">
         {blocks.map((block: any) => (
           <Fragment key={block.id}>{renderBlock(block)}</Fragment>
         ))}
