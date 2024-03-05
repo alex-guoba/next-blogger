@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { Metadata } from "next";
 
-import { renderBlock } from "@/app/notion/render";
+import { RenderBlock } from "@/app/notion/render";
 import { QueryDatabase, queryPageBySlug, retrieveBlockChildren, retrievePage } from "@/app/notion/api";
 import Shell from "@/components/shells/shell";
 import React from "react";
@@ -84,9 +84,10 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
       </PageHeader>
       <Separator className="mb-2.5" />
 
-      <section className="w-full flex flex-col gap-y-0.5">
+      <section className="flex w-full flex-col gap-y-0.5">
         {blocks.map((block: any) => (
-          <Fragment key={block.id}>{renderBlock(block)}</Fragment>
+          // <Fragment key={block.id}>{RenderBlock(block)}</Fragment>
+          <RenderBlock key={block.id} block={block}></RenderBlock>
         ))}
       </section>
       {/* </div> */}

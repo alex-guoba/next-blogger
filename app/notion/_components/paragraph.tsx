@@ -21,9 +21,7 @@ export function ParagraphRender({ block, level = 0, className }: ParagraphProps)
       <p className="p-1">
         <RichText title={rich_text} className="whitespace-pre-wrap" />
       </p>
-      {children && (
-        <IndentChildren cb={children} level={level}></IndentChildren>
-      )}
+      {children && <IndentChildren cb={children} level={level}></IndentChildren>}
     </div>
   );
 }

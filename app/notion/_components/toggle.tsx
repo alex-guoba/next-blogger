@@ -1,9 +1,7 @@
 import { cn } from "@/lib/utils";
 import RichText, { ColorMap } from "../text";
-// import { renderBlock } from "../render";
-import { IndentChildren } from "../render-helper";
 import React from "react";
-import { renderBlock } from "../render";
+import { RenderBlock } from "../render";
 
 interface ToggleProps {
   block: any;
@@ -28,7 +26,7 @@ export function ToggleRender({ block, className, level = 0 }: ToggleProps) {
 
         <div className="ml-2">
           {children?.map((child: any) => (
-            <React.Fragment key={child.id}>{renderBlock(child, level + 1)}</React.Fragment>
+            <RenderBlock key={child.id} block={child} level={level+1}></RenderBlock>
           ))}
         </div>
       </details>

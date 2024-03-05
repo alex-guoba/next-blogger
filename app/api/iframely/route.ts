@@ -10,8 +10,6 @@ export async function GET(
   const searchParams = req.nextUrl.searchParams;
   const url = searchParams.get("url");
 
-  console.log("iframely query url: ", url);
-
   if (!url || typeof url !== "string") {
     return NextResponse.json(
       {
@@ -42,7 +40,7 @@ export async function GET(
     res.headers.set("Cache-Control", `public, max-age=${CACHE_RESULT_SECONDS}`);
     return res;
   } catch (e) {
-    console.error(e);
+    console.error('iframely query error: ', url, e);
     return NextResponse.json(
       {
         error: "Something went wrong",

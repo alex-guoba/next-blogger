@@ -21,7 +21,7 @@ export function SubPageRender({ block, className }: SubPageProps) {
       <Icons.textFile className="h-6 w-6 p-[0.8] text-gray-400" />
       <Link
         href={slug}
-        className="truncate whitespace-pre-wrap break-words font-semibold underline underline-offset-4 decoration-1 decoration-slate-300"
+        className="truncate whitespace-pre-wrap break-words font-semibold underline decoration-slate-300 decoration-1 underline-offset-4"
       >
         {title}
       </Link>

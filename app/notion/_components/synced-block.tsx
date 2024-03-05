@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { renderBlock } from "../render";
+import { RenderBlock } from "../render";
 
 interface SyncedBlocksProp {
   block: any;
@@ -8,7 +8,7 @@ interface SyncedBlocksProp {
 }
 
 // https://developers.notion.com/reference/block#synced-block
-export function SyncedBlockRenderer({ block, className, level }: SyncedBlocksProp) {
+export function SyncedBlockRenderer({ block, className, level = 1 }: SyncedBlocksProp) {
   const {
     id,
     children,
@@ -25,7 +25,9 @@ export function SyncedBlockRenderer({ block, className, level }: SyncedBlocksPro
       key={id}
       className={cn(className, `flex flex-1 flex-col overflow-hidden rounded-md border border-white p-1 ${hover}`)}
     >
-      {children.map((childBlock: any) => renderBlock(childBlock, level))}
+      {children.map((child: any) => (
+        <RenderBlock key={child.id} block={child} level={level+1}></RenderBlock>
+      ))}
     </div>
   );
 }

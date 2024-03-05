@@ -33,8 +33,8 @@ export const RetrieveDatabase = async (database_id: string): Promise<GetDatabase
     });
     return response;
   } catch (error) {
-     console.log(error);
-     return null;
+    console.log(error);
+    return null;
   }
   // const response = await notion.databases.retrieve({
   //   database_id: database_id,

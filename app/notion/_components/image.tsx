@@ -100,7 +100,10 @@ export function ImageRender({
 
   // TODO: Notion API don't return the correct image size. May be we need to set the image size in caption?
   return (
-    <figure key={id} className={cn(className, "mx-0 my-2 flex min-w-full max-w-[100vw] flex-col self-center text-sm py-1")}>
+    <figure
+      key={id}
+      className={cn(className, "mx-0 my-2 flex min-w-full max-w-[100vw] flex-col self-center py-1 text-sm")}
+    >
       {hosted ? (
         <Image
           src={url}

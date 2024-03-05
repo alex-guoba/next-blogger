@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
       return res;
     })
     .catch((error) => {
-      console.error(error);
+      console.error(error.info);
       return NextResponse.json(
         {
           error: "Internal server error",

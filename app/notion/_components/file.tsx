@@ -30,14 +30,9 @@ export function FileRender({ block, className }: FileBlockProps) {
   const fname = fileName(name, url);
 
   return (
-    <div key={id} className={cn(className, "flex w-full items-center whitespace-nowrap overflow-hidden text-ellipsis")}>
+    <div key={id} className={cn(className, "flex w-full items-center overflow-hidden text-ellipsis whitespace-nowrap")}>
       <Icons.fileblock className="h-6 min-w-6 p-[0.8] text-gray-600" />
-      <a
-        href={url}
-        target="_blank"
-        rel="noreferrer noopener"
-        className="truncate font-normal "
-      >
+      <a href={url} target="_blank" rel="noreferrer noopener" className="truncate font-normal ">
         {caption && caption.length > 0 ? (
           <figcaption className="px-1.5 text-sm font-normal text-slate-600">
             <RichText title={caption} />

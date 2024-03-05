@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { renderBlock } from "../render";
+import { RenderBlock } from "../render";
 import RichText, { ColorMap } from "../text";
 import { IndentChildren } from "../render-helper";
 
@@ -28,14 +28,18 @@ interface ListProps {
   className?: string | undefined;
 }
 
+// notion应该是使用了div来代替li，样式上会有差别。为保留html语义，这里保留list实现
 export function ListRenderer({ block, level = 0, className }: ListProps) {
   const { id, type } = block;
   const value = block[type];
 
   if (type == "bulleted_list") {
     return (
-      <ul key={id} className={cn(className, bulletListStyle(level), "list-inside space-y-0.5")}>
-        {value?.children && value.children.map((child: any, index: number) => renderBlock(child, level + 1, index))}
+      <ul key={id} className={cn(className, bulletListStyle(level), "list-inside space-y-0.5 marker:text-lg")}>
+        {value?.children &&
+          value.children.map((child: any) => (
+            <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>
+          ))}
       </ul>
     );
   }
@@ -43,7 +47,10 @@ export function ListRenderer({ block, level = 0, className }: ListProps) {
   if (type == "numbered_list") {
     return (
       <ol key={id} className={cn(className, numberListStyle(level), "list-inside space-y-0.5")}>
-        {value?.children && value.children.map((child: any, index: number) => renderBlock(child, level + 1, index))}
+        {value?.children &&
+          value.children.map((child: any) => (
+            <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>
+          ))}
       </ol>
     );
   }
@@ -56,23 +63,9 @@ export function ListItemRenderer({ block, level = 0, className }: ListProps) {
 
   const color = ColorMap.get(value?.color);
   return (
-    <li key={id} className={cn(className, color, "pl-1 pt-1")}>
+    <li key={id} className={cn(className, color, "pl-2 pt-1")}>
       {value?.rich_text && <RichText title={value.rich_text} className="whitespace-pre-wrap" />}
-      {block.children && <IndentChildren cb={block.children} level={level+1}></IndentChildren>}
+      {block.children && <IndentChildren cb={block.children} level={level + 1}></IndentChildren>}
     </li>
   );
 }
-
-// function renderNestedList(blocks: any, level: number) {
-//   const { type } = blocks;
-//   const value = blocks[type];
-
-//   if (!value) return null;
-
-//   const isNumberedList = blocks.children[0].type === "numbered_list_item";
-//   if (isNumberedList) {
-//     // style not neccessary for grand-child lists as it will inherit from parent
-//     return <div>{blocks.children.map((block: any, index: number) => renderBlock(block, level, index))}</div>;
-//   }
-//   return <div>{blocks.children.map((block: any, index: number) => renderBlock(block, level, index))}</div>;
-// }

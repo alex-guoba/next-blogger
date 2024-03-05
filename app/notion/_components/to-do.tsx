@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import RichText, { ColorMap } from "../text";
-// import { renderBlock } from "../render";
 import { IndentChildren } from "../render-helper";
 
 interface TodoProps {
@@ -21,7 +20,7 @@ export function TodoRender({ block, className, level = 0 }: TodoProps) {
     <div key={id} className={cn(className, style)}>
       <label htmlFor={id}>
         <input
-          className="m-1 h-[1.1rem] w-[1.1rem] rounded-none border-8 align-middle"
+          className="mx-1 my-1.5 h-[1.1rem] w-[1.1rem] rounded-none border-8 align-middle"
           type="checkbox"
           id={id}
           defaultChecked={checked}
@@ -33,9 +32,7 @@ export function TodoRender({ block, className, level = 0 }: TodoProps) {
         )}
       </label>
       {/**/}
-      {children && (
-        <IndentChildren cb={children} level={level+1}></IndentChildren>
-      )}
+      {children && <IndentChildren cb={children} level={level + 1}></IndentChildren>}
     </div>
   );
 }

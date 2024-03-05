@@ -21,7 +21,7 @@ interface IconProps {
 
 export function IconRender({ type, emoji, external, file }: IconProps, className?: string | undefined) {
   if (type == "emoji") {
-    return <div className={cn(className, "h-6 w-6 self-start text-xl leading-[1em]")}>{emoji}</div>;
+    return <div className={cn(className, "h-6 w-6 text-xl leading-[1em]")}>{emoji}</div>;
   }
   const url = external?.url || file?.url;
   if (!url) {

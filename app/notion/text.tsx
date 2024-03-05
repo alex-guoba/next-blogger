@@ -93,7 +93,7 @@ function mention(rt: any, className: string = "", index: number = 0) {
   return (
     <span className={cn(styels, "font-medium", color)} key={index}>
       {href ? (
-        <a className="underline underline-offset-4 decoration-1" href={href}>
+        <a className="underline decoration-1 underline-offset-4" href={href}>
           {plain_text}
         </a>
       ) : (
@@ -118,7 +118,7 @@ function equation(rt: any, className: string = "", index: number = 0) {
 // This includes styling decisions, such as the use of italics, font size, and font color, as well as formatting,
 // such as the use of hyperlinks or code blocks.
 // See:  https://developers.notion.com/reference/rich-text
-export default function RichText({title, className} : any) {
+export default function RichText({ title, className }: any) {
   // empmty lines should be rendered with &emsp
   if (!title || title?.length == 0) {
     return <span>&nbsp;</span>;

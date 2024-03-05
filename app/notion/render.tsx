@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import React from "react";
 
 import RichText from "./text";
@@ -24,14 +23,18 @@ import { ChildDatabaseRenderer } from "./_components/child-database";
 import { ParagraphRender } from "./_components/paragraph";
 import { TodoRender } from "./_components/to-do";
 import { ListItemRenderer, ListRenderer } from "./_components/list";
-import { IndentChildren } from "./render-helper";
 import { ToggleRender } from "./_components/toggle";
 
-export function renderBlock(block: any, level: number = 1, index: number = 0) {
+interface BlockProps {
+  block: any;
+  level?: number;
+}
+
+export function RenderBlock({block, level= 1} : BlockProps) {
   const { type, id } = block;
   const value = block[type];
 
-  // console.log(type, id);
+  // console.log(type, id, level);
 
   switch (type) {
     case "paragraph":
@@ -57,19 +60,19 @@ export function renderBlock(block: any, level: number = 1, index: number = 0) {
       );
 
     // before list rendering, array should be convert into children array. See getBlocks function.
-    case "bulleted_list": 
+    case "bulleted_list":
     case "numbered_list":
-      return <ListRenderer block={block} level={level}></ListRenderer>
+      return <ListRenderer block={block} level={level}></ListRenderer>;
 
     case "bulleted_list_item":
     case "numbered_list_item":
-      return <ListItemRenderer block={block} level={level}></ListItemRenderer>
+      return <ListItemRenderer block={block} level={level}></ListItemRenderer>;
 
     case "to_do":
       return <TodoRender block={block}></TodoRender>;
 
     case "toggle":
-      return <ToggleRender block={block}></ToggleRender>
+      return <ToggleRender block={block}></ToggleRender>;
 
     case "child_page":
       return <SubPageRender block={block}></SubPageRender>;
@@ -79,7 +82,7 @@ export function renderBlock(block: any, level: number = 1, index: number = 0) {
 
     case "divider":
       return (
-        <div className="my-1 border-gray-200">
+        <div className="my-2 border-gray-200">
           <hr key={id} />
         </div>
       );
@@ -141,4 +144,3 @@ export function renderBlock(block: any, level: number = 1, index: number = 0) {
       return <p key={id}>{`❌ Unsupported block (${type === "unsupported" ? "unsupported by Notion API" : type})`}</p>;
   }
 }
-

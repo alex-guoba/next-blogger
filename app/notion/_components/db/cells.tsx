@@ -96,7 +96,7 @@ export function urlCell(value: any) {
     return null;
   }
   return (
-    <div className="max-w-48 truncate underline underline-offset-4 decoration-1">
+    <div className="max-w-48 truncate underline decoration-1 underline-offset-4">
       <a href={value} target="_blank" rel="noreferrer noopener" className="text-gray-500">
         {value}
       </a>

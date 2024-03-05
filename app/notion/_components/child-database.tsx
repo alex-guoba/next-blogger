@@ -24,11 +24,10 @@ export async function ChildDatabaseRenderer({ block, className }: ChildDatabaseB
   if (!is_inline) {
     // link to the database
     const slug = `/db/${id}`;
-    console.log(slug);
     return (
       <Link key={id} href={slug} className={cn(className, "flex")}>
         {icon && <IconRender type={icon.type} emoji={icon.emoji} external={icon.external} file={icon.file} />}
-        <div className="underline underline-offset-4 decoration-1">
+        <div className="underline decoration-1 underline-offset-4">
           <RichText title={title} />
         </div>
         <span className="sr-only">Inner database</span>
@@ -37,26 +36,13 @@ export async function ChildDatabaseRenderer({ block, className }: ChildDatabaseB
   }
 
   const data = await QueryDatabase(id);
-  return <DatabaseRenderer property={columns} data={data} className="py-1"></DatabaseRenderer>;
-
-  // true if the database appears in the page as an inline block.
-
-  //   if (db?.is_inline) {
-  //     return null
-  //   }
-
-  //   return (
-  //     <div
-  //       key={id}
-  //       className={cn(
-  //         className,
-  //         "inline-flex w-full items-center rounded-md border border-none bg-stone-100 p-4 dark:bg-stone-500"
-  //       )}
-  //     >
-  //       {icon && <IconRender type={icon.type} emoji={icon.emoji} external={icon.external} file={icon.file} />}
-  //       <div className="ml-3 whitespace-pre-wrap break-words">
-  //         <RichText title={rich_text} />
-  //       </div>
-  //     </div>
-  //   );
+  return (
+    <div>
+      <div className="text-lg font-bold">
+        {icon && <IconRender type={icon.type} emoji={icon.emoji} external={icon.external} file={icon.file} />}
+        <RichText title={title} />
+      </div>
+      <DatabaseRenderer property={columns} data={data} className="py-1"></DatabaseRenderer>
+    </div>
+  );
 }

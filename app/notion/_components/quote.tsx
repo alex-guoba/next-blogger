@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import RichText from "../text";
-import { renderBlock } from "../render";
+import { RenderBlock } from "../render";
 
 interface QuoteBlockProps {
   block: any;
@@ -8,7 +8,7 @@ interface QuoteBlockProps {
   className?: string | undefined;
 }
 
-export function QuoteRender({ block, level, className }: QuoteBlockProps) {
+export function QuoteRender({ block, level = 1, className }: QuoteBlockProps) {
   const {
     id,
     children,
@@ -16,9 +16,12 @@ export function QuoteRender({ block, level, className }: QuoteBlockProps) {
   } = block;
 
   return (
-    <blockquote key={id} className={cn(className, "whitespace-pre-wrap border-l-[3px] border-black my-1.5 pl-4")}>
+    <blockquote key={id} className={cn(className, "my-1.5 whitespace-pre-wrap border-l-[3px] border-black pl-4")}>
       <RichText title={rich_text} />
-      {children && children.map((child: any, index: number) => renderBlock(child, level, index))}
+      {children && children.map((child: any) => (
+        <RenderBlock key={child.id} block={child} level={level+1}></RenderBlock>
+      ))}
+      
     </blockquote>
   );
 }
