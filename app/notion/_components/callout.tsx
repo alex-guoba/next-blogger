@@ -1,12 +1,11 @@
 import { cn } from "@/lib/utils";
 import { IconRender } from "./emoji";
 import RichText from "../text";
-import { RenderBlock } from "../render";
 import { IndentChildren } from "../render-helper";
 
 interface CalloutBlockProps {
   block: any;
-  level: number;
+  level?: number;
   className?: string | undefined;
 }
 

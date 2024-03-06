@@ -1,8 +1,9 @@
 import { Client } from "@notionhq/client";
-import { cache } from "react";
+// import { cache } from "react";
 import { env } from "@/env.mjs";
 
 import { GetDatabaseResponse, QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
+import { proxyListBlockChildren, proxyQueryDatabases, proxyRetrieveDatabase, proxyRetrievePage } from "./proxy/proxy";
 
 /**
  * Returns a random integer between the specified values, inclusive.
@@ -27,19 +28,16 @@ const notion = new Client({
  ** see: https://developers.notion.com/reference/retrieve-a-database
  */
 export const RetrieveDatabase = async (database_id: string): Promise<GetDatabaseResponse | null> => {
-  try {
-    const response = await notion.databases.retrieve({
-      database_id: database_id,
-    });
-    return response;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-  // const response = await notion.databases.retrieve({
-  //   database_id: database_id,
-  // });
-  // return response;
+  // try {
+  //   const response = await notion.databases.retrieve({
+  //     database_id: database_id,
+  //   });
+  //   return response;
+  // } catch (error) {
+  //   console.log(error);
+  //   return null;
+  // }
+  return proxyRetrieveDatabase(database_id);
 };
 
 // Get pages from database
@@ -49,9 +47,10 @@ export type TypePostList = QueryDatabaseResponse["results"];
 export const QueryDatabase = async (database_id: string): Promise<TypePostList> => {
   const start = new Date().getTime();
 
-  const response = await notion.databases.query({
-    database_id: database_id,
-  });
+  // const response = await notion.databases.query({
+  //   database_id: database_id,
+  // });
+  const response = await proxyQueryDatabases(database_id);
   const end = new Date().getTime();
   console.log("[QueryDatabase]", `${end - start}ms`);
   return response.results;
@@ -60,18 +59,20 @@ export const QueryDatabase = async (database_id: string): Promise<TypePostList> 
 //
 // 读取一个page的基础数据（page object）
 // API: https://developers.notion.com/reference/retrieve-a-page
-export const retrievePage = cache(async (pageId: any) => {
+export const retrievePage = async (pageId: any) => {
   const start = new Date().getTime();
-  const response = await notion.pages.retrieve({ page_id: pageId });
+  // const response = await notion.pages.retrieve({ page_id: pageId });
+  const response = await proxyRetrievePage(pageId);
   const end = new Date().getTime();
   console.log("[getPage]", `${end - start}ms`);
   return response;
-});
+};
 
 //
 // slug:（计算机）处理后的标题（用于构建固定链接）
 // 根据标题取db中的page列表数据，限制一条
-export const queryPageBySlug = cache(async (database_id: string, slug: string) => {
+// TODO: not cached now
+export const queryPageBySlug = async (database_id: string, slug: string) => {
   const start = new Date().getTime();
 
   const response = await notion.databases.query({
@@ -91,26 +92,30 @@ export const queryPageBySlug = cache(async (database_id: string, slug: string) =
   if (response?.results?.length) {
     return response?.results?.[0];
   }
-});
+};
 
 //
 // Returns a paginated array of child block objects contained in the block using the ID specified.
 // see: https://developers.notion.com/reference/get-block-children
-export const retrieveBlockChildren = cache(async (blockID: string): Promise<any> => {
+export const retrieveBlockChildren = async (blockID: string): Promise<any> => {
   const start = new Date().getTime();
 
-  const blockId = blockID.replaceAll("-", "");
+  const blockId = blockID.replaceAll("-", ""); // ???
 
-  // TODO: only 100, not finished.
-  const { results } = await notion.blocks.children.list({
-    block_id: blockId,
-    page_size: 100,
-  });
+  // TODO: only 100, unfinished and serial
+  // const { results } = await notion.blocks.children.list({
+  //   block_id: blockId,
+  //   page_size: 100,
+  // });
+  const result = await proxyListBlockChildren(blockId);
+  if (!result) {
+    return [];
+  }
 
   // Fetches all child blocks recursively
   // be mindful of rate limits if you have large amounts of nested blocks !!
   // See https://developers.notion.com/docs/working-with-page-content#reading-nested-blocks
-  const childBlocks = results.map(async (block: any) => {
+  const childBlocks = result?.results.map(async (block: any) => {
     // ignore child pages
     if (block.has_children && block.type != "child_page") {
       const children = await retrieveBlockChildren(block.id);
@@ -153,4 +158,4 @@ export const retrieveBlockChildren = cache(async (blockID: string): Promise<any>
       return acc;
     }, [])
   );
-});
+};

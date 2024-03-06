@@ -1,10 +1,10 @@
 // import Head from "next/head";
 import Link from "next/link";
-import { Fragment } from "react";
+// import { Fragment } from "react";
 import { Metadata } from "next";
 
 import { RenderBlock } from "@/app/notion/render";
-import { QueryDatabase, queryPageBySlug, retrieveBlockChildren, retrievePage } from "@/app/notion/api";
+import { queryPageBySlug, retrieveBlockChildren, retrievePage } from "@/app/notion/api";
 import Shell from "@/components/shells/shell";
 import React from "react";
 import { cn } from "@/lib/utils";
@@ -22,13 +22,13 @@ export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || "", 10) 
 // export const dynamicParams = true; // true | false,
 
 // Return a list of `params` to populate the [slug] dynamic segment
-export async function generateStaticParams() {
-  const database = await QueryDatabase(env.NOTION_DATABASE_ID);
-  return database.map((page: any) => {
-    const slug = [page.properties.Slug?.rich_text[0].plain_text];
-    return { slug };
-  });
-}
+// export async function generateStaticParams() {
+//   const database = await QueryDatabase(env.NOTION_DATABASE_ID);
+//   return database.map((page: any) => {
+//     const slug = [page.properties.Slug?.rich_text[0].plain_text];
+//     return { slug };
+//   });
+// }
 
 type Props = {
   params: { slug: string };

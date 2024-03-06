@@ -91,7 +91,7 @@ export function RenderBlock({block, level= 1} : BlockProps) {
       return <EmbedRender block={block}></EmbedRender>;
 
     case "quote":
-      return <QuoteRender block={block} level={level + 1}></QuoteRender>;
+      return <QuoteRender block={block} level={level}></QuoteRender>;
 
     case "code":
       return (
@@ -116,10 +116,10 @@ export function RenderBlock({block, level= 1} : BlockProps) {
       return <TableRenderer block={block}></TableRenderer>;
 
     case "column_list":
-      return <ColumnListRender block={block} level={level + 1}></ColumnListRender>;
+      return <ColumnListRender block={block} level={level}></ColumnListRender>;
 
     case "column":
-      return <ColumnRender block={block} level={level + 1}></ColumnRender>;
+      return <ColumnRender block={block} level={level}></ColumnRender>;
 
     case "callout":
       return <CalloutRender block={block}></CalloutRender>;
