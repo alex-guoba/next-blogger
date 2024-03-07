@@ -1,18 +1,71 @@
-import { unfurl } from "unfurl.js";
 import { NextRequest, NextResponse } from "next/server";
+import { env } from "@/env.mjs";
 
-// type ErrorResponse = { error: string };
-type SuccessResponse = {
-  title?: string | null;
-  description?: string | null;
-  favicon?: string | null;
-  imageSrc?: string | null;
-  oEmbed?: any;
-};
+import { unfurl } from "unfurl.js";
 
-const CACHE_RESULT_SECONDS = 60 * 60 * 24; // 1 day
+import { UnfurlSuccessResponse } from "@/types";
 
-export async function GET(req: NextRequest) {
+// https://iframely.com/docs/iframely-api
+async function queryIframely(url: string) {
+  if (!env.IFRAMELY_URI) {
+    return null;
+  }
+  const param = new URLSearchParams({ url });
+  if (env.IFRAMELY_API_KEY) {
+    param.append("api_key", env.IFRAMELY_API_KEY);
+  }
+  const full = env.IFRAMELY_URI + "?" + param.toString();
+
+  try {
+    const result = await fetch(full, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: { revalidate: 1800 }, // cache time
+    });
+    const res = await result.json();
+    return {
+      title: res?.meta?.title,
+      description: res?.meta?.description,
+      favicon: res?.links?.icon[0]?.href,
+      imageSrc: res?.links?.thumbnail[0].href,
+      from: "iframely",
+      raw: res,
+    } as UnfurlSuccessResponse;
+  } catch (e) {
+    console.error("iframely query error: ", url, e);
+  }
+  return null;
+}
+
+// https://github.com/jacktuck/unfurl
+async function unfurlParse(url: string) {
+  if (!url) {
+    return null;
+  }
+
+  return unfurl(url)
+    .then((unfurlResponse) => {
+      return {
+        title: unfurlResponse.title ?? null,
+        description: unfurlResponse.description ?? null,
+        favicon: unfurlResponse.favicon ?? null,
+        imageSrc: unfurlResponse.open_graph?.images?.[0]?.url ?? null,
+        from: "unfurl",
+        raw: unfurlResponse,
+      } as UnfurlSuccessResponse;
+    })
+    .catch((error) => {
+      console.error("unfurl parse error", url, error.info);
+      return null;
+    });
+}
+
+// TODO: add authorization for client request
+export async function GET(
+  req: NextRequest
+  // res: NextResponse
+) {
   const searchParams = req.nextUrl.searchParams;
   const url = searchParams.get("url");
 
@@ -27,29 +80,25 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  return unfurl(url)
-    .then((unfurlResponse) => {
-      const response: SuccessResponse = {
-        title: unfurlResponse.title ?? null,
-        description: unfurlResponse.description ?? null,
-        favicon: unfurlResponse.favicon ?? null,
-        imageSrc: unfurlResponse.open_graph?.images?.[0]?.url ?? null,
-        oEmbed: unfurlResponse.oEmbed ?? null,
-      };
+  // iframely first
+  if (env.IFRAMELY_URI) {
+    const res = await queryIframely(url);
+    if (res) {
+      return NextResponse.json(res);
+    }
+  }
 
-      const res = NextResponse.json(response);
-      res.headers.set("Cache-Control", `public, max-age=${CACHE_RESULT_SECONDS}`);
-      return res;
-    })
-    .catch((error) => {
-      console.error(error.info);
-      return NextResponse.json(
-        {
-          error: "Internal server error",
-        },
-        {
-          status: 500,
-        }
-      );
-    });
+  const res = await unfurlParse(url);
+  if (res) {
+    return NextResponse.json(res);
+  }
+
+  return NextResponse.json(
+    {
+      error: "Internal server error",
+    },
+    {
+      status: 500,
+    }
+  );
 }

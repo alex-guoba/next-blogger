@@ -20,11 +20,11 @@ export function CalloutRender({ block, className, level = 1 }: CalloutBlockProps
       key={id}
       className={cn(
         className,
-        "flex my-0.5 w-full items-center rounded-md border border-none bg-stone-100 p-4 dark:bg-stone-500"
+        "my-0.5 flex w-full items-center rounded-md border border-none bg-stone-100 p-4 dark:bg-stone-500"
       )}
     >
       {icon && <IconRender type={icon.type} emoji={icon.emoji} external={icon.external} file={icon.file} />}
-      <div className="ml-3 whitespace-pre-wrap break-words w-full">
+      <div className="ml-3 w-full whitespace-pre-wrap break-words">
         <div>
           <RichText title={rich_text} />
         </div>
@@ -33,7 +33,6 @@ export function CalloutRender({ block, className, level = 1 }: CalloutBlockProps
           <RenderBlock key={child.id} block={child} level={level}></RenderBlock>
         ))} */}
       </div>
-      </div>
-      
+    </div>
   );
 }

@@ -25,9 +25,7 @@ export function ToggleRender({ block, className, level = 0 }: ToggleProps) {
         </summary>
 
         <div className="ml-2">
-          {children?.map((child: any) => (
-            <RenderBlock key={child.id} block={child} level={level+1}></RenderBlock>
-          ))}
+          {children?.map((child: any) => <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>)}
         </div>
       </details>
     </div>

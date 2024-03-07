@@ -1,12 +1,9 @@
 "use client";
-// import { cn } from "@/lib/utils";
 
 import { cn } from "@/lib/utils";
-// import Image from "next/image";
 import RichText from "../text";
-// import { useUnfurlUrl } from "@/lib/unfurl";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useIFramelyURL } from "@/lib/iframely";
+import { useUnfurlUrl } from "@/lib/unfurl";
 
 interface VideoProps {
   block: any;
@@ -32,9 +29,9 @@ function VideoOmbed({ block }: VideoProps) {
   } = block;
 
   const url = external?.url || file?.url;
-  const { status, data } = useIFramelyURL(url);
+  const { status, data } = useUnfurlUrl(url);
 
-  //   console.log(status, data);
+  // console.log(status, data);
 
   if (status == "error") {
     // default iframe fallback
@@ -52,7 +49,7 @@ function VideoOmbed({ block }: VideoProps) {
     );
   }
   if (status == "success") {
-    const html = data?.html;
+    const html = data?.raw?.html;
     if (html) {
       return <div className="w-full max-w-full" dangerouslySetInnerHTML={{ __html: html }}></div>;
     }

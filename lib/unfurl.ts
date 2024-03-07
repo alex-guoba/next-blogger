@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
+import { UnfurlSuccessResponse } from "@/types";
 
 type RequestStatus = "iddle" | "loading" | "success" | "error";
 
-export type UrlData = {
-  title: string | null;
-  description?: string | null;
-  favicon?: string | null;
-  imageSrc?: string | null;
-  oEmbed?: any;
-};
+// export type UrlData = {
+//   title: string | null;
+//   description?: string | null;
+//   favicon?: string | null;
+//   imageSrc?: string | null;
+
+//   from: string;
+//   raw?: any;
+// };
 
 export function useUnfurlUrl(url: string) {
   const [status, setStatus] = useState<RequestStatus>("iddle");
-  const [data, setData] = useState<null | UrlData>(null);
+  const [data, setData] = useState<null | UnfurlSuccessResponse>(null);
   useEffect(() => {
     if (url) {
       setStatus("loading");

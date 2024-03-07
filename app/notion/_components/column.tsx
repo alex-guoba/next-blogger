@@ -14,7 +14,7 @@ export function ColumnListRender({ block, level, className }: ColumnListBlockPro
   return (
     <div key={id} className={cn(className, "flex w-full max-w-full flex-col overflow-hidden md:flex-row md:gap-8")}>
       {children.map((child: any) => (
-        <RenderBlock key={child.id} block={child} level={level+1}></RenderBlock>
+        <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>
       ))}
     </div>
   );
@@ -26,7 +26,7 @@ export function ColumnRender({ block, level, className }: ColumnListBlockProps) 
   return (
     <div key={id} className={cn(className, "flex flex-1 flex-col overflow-hidden py-3")}>
       {children.map((child: any) => (
-        <RenderBlock key={child.id} block={child} level={level+1}></RenderBlock>
+        <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>
       ))}
     </div>
   );

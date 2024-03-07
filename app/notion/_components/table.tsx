@@ -1,14 +1,7 @@
 import { cn } from "@/lib/utils";
 import RichText from "../text";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface TableProps {
   block: any;

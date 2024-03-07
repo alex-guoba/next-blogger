@@ -29,7 +29,7 @@ export default async function Home() {
           >
             {posts.map((post: any, i) => {
               const title = post.properties?.Title.title[0].text.content;
-              const slug = post.properties?.Slug?.rich_text[0].plain_text + '/' + post.id;
+              const slug = post.properties?.Slug?.rich_text[0].plain_text + "/" + post.id;
               const edit_time = post.last_edited_time;
               const image = extractFileUrl(post.cover);
               const desc = post.properties?.Summary?.rich_text[0]?.plain_text;

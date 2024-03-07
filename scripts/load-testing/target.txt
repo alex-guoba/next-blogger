@@ -1,3 +1,4 @@
-GET http://127.0.0.1:3000/article/list-blog
+#GET http://127.0.0.1:3000/article/list-blog/4fbccfae-81cf-4ef8-ab8f-471150d98cc6
+GET http://127.0.0.1:3000/article/basic/6e1e971f-63b8-464e-975e-e55d5b4b4e7c
 # specify trace info
 X-Trace-ID: efbdbed17f4c6280e8c8c98d29123b8c

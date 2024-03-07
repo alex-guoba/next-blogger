@@ -26,7 +26,7 @@ export function SyncedBlockRenderer({ block, className, level = 1 }: SyncedBlock
       className={cn(className, `flex flex-1 flex-col overflow-hidden rounded-md border border-white p-1 ${hover}`)}
     >
       {children.map((child: any) => (
-        <RenderBlock key={child.id} block={child} level={level+1}></RenderBlock>
+        <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>
       ))}
     </div>
   );

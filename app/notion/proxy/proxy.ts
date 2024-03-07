@@ -7,7 +7,17 @@ import prisma from "./prisma";
 const notion = new Client({
   auth: env.NOTION_TOKEN,
 });
+
 const enableCache: boolean = !!env.DATABASE_URL;
+
+function expired(updated_at: Date) : boolean {
+  const now = new Date();
+  const distSec = (now.getTime() - updated_at.getTime()) / 1000;
+  if (distSec > env.NOTION_CACHE_EXPIRER) {
+    return true;
+  }
+  return false;
+}
 
 export async function proxyRetrieveDatabase(database_id: string) {
   try {
@@ -18,7 +28,7 @@ export async function proxyRetrieveDatabase(database_id: string) {
           database_id: database_id,
         },
       });
-      if (db?.result) {
+      if (db?.result && !expired(db.updated_at)) {
         const res = JSON.parse(Buffer.from(db.result).toString("utf-8"));
         console.log("retrieveDatabase cached hit for ", database_id);
         return res;
@@ -59,7 +69,7 @@ export async function proxyQueryDatabases(database_id: string) {
           database_id: database_id,
         },
       });
-      if (db?.result) {
+      if (db?.result && !expired(db.updated_at)) {
         const res = JSON.parse(Buffer.from(db.result).toString("utf-8"));
         console.log("proxyQueryDatabases cached hit for ", database_id);
         return res;
@@ -101,7 +111,7 @@ export async function proxyRetrievePage(page_id: string) {
           page_id: page_id,
         },
       });
-      if (db?.result) {
+      if (db?.result && !expired(db.updated_at)) {
         const res = JSON.parse(Buffer.from(db.result).toString("utf-8"));
         console.log("proxyRetrievePage cached hit for ", page_id);
         return res;
@@ -142,7 +152,7 @@ export async function proxyListBlockChildren(block_id: string) {
           block_id: block_id,
         },
       });
-      if (db) {
+      if (db?.result && !expired(db.updated_at)) {
         const res = JSON.parse(Buffer.from(db.result || "{}").toString("utf-8"));
         console.log("proxyListBlockChildren cached hit for ", block_id);
         return res;
@@ -170,7 +180,7 @@ export async function proxyListBlockChildren(block_id: string) {
         },
         where: {
           block_id: block_id,
-        }
+        },
       });
     }
     return response;

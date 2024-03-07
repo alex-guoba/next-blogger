@@ -30,3 +30,17 @@ export interface FooterItem {
     external?: boolean;
   }[];
 }
+
+// unfurl response
+export type UnfurlSuccessResponse = {
+  from: "iframely" | "unfurl" | "skeleton";
+  error?: string;
+
+  title?: string | null;
+  description?: string | null;
+  favicon?: string | null;
+  imageSrc?: string | null;
+
+  // raw response from iframely or unfurl
+  raw?: any;
+};

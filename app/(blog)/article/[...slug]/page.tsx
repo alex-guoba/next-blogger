@@ -17,9 +17,9 @@ import { Separator } from "@/components/ui/separator";
 import { env } from "@/env.mjs";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
-// export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || "", 10) || 300; // revalidate the data interval
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || "", 10) || 300; // revalidate the data interval
+// export const dynamic = 'force-dynamic';
+// export const revalidate = 0;
 
 // export const dynamicParams = true; // true | false,
 

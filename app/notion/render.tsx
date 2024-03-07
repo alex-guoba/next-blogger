@@ -30,7 +30,7 @@ interface BlockProps {
   level?: number;
 }
 
-export function RenderBlock({block, level= 1} : BlockProps) {
+export function RenderBlock({ block, level = 1 }: BlockProps) {
   const { type, id } = block;
   const value = block[type];
 

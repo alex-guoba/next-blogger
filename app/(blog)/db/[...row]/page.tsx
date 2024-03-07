@@ -1,4 +1,3 @@
-
 import Shell from "@/components/shells/shell";
 import React from "react";
 
@@ -10,7 +9,6 @@ import { QueryDatabase, RetrieveDatabase } from "@/app/notion/api";
 import { DatabaseRenderer } from "@/app/notion/_components/db/database";
 import { IconRender } from "@/app/notion/_components/emoji";
 import RichText from "@/app/notion/text";
-
 
 export default async function Page({ params }: { params: { row: string[] } }) {
   const dbID = params.row[0];
@@ -38,7 +36,6 @@ export default async function Page({ params }: { params: { row: string[] } }) {
         <RichText title={description} />
       </PageHeaderDescription>
       <Separator className="mb-2.5" />
-
 
       <DatabaseRenderer property={columns} data={data}></DatabaseRenderer>
     </Shell>

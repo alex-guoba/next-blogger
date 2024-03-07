@@ -1,11 +1,13 @@
 "use client";
 
 import RichText from "../text";
-import { UrlData, useUnfurlUrl } from "@/lib/unfurl";
+import { useUnfurlUrl } from "@/lib/unfurl";
 import Link from "next/link";
 
 import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+
+import { UnfurlSuccessResponse } from "@/types";
 
 interface BookmarkBlockProps {
   block: any;
@@ -18,7 +20,7 @@ function UnfurledBookmarkPreview({
   className,
 }: {
   block: any;
-  data: UrlData | null;
+  data: UnfurlSuccessResponse | null;
   className?: string | undefined;
 }) {
   const {
@@ -58,12 +60,7 @@ function UnfurledBookmarkPreview({
           {image ? (
             <div className="relative hidden h-full max-h-24 w-32 flex-auto md:block">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={image}
-                alt={url}
-                className="object-cover"
-                // priority={i <= 1}
-              />
+              <img src={image} alt={url} className="object-cover" />
             </div>
           ) : // <PlaceholderImage asChild />
           null}
@@ -90,7 +87,8 @@ export function BookmarkPreviewRender({ block, className }: BookmarkBlockProps) 
   }
 
   const raw = new URL(url);
-  const empty: UrlData = {
+  const empty: UnfurlSuccessResponse = {
+    from: "skeleton",
     title: raw.hostname,
     description: "",
   };
