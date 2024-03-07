@@ -10,7 +10,8 @@
     "lint": "next lint",
     "shadcn:add": "npx shadcn-ui@latest add",
     "prettier": "prettier --check --ignore-path .gitignore  \"**/*.{js,jsx,ts,tsx}\"",
-    "prettier:fix": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,ts,tsx}\""
+    "prettier:fix": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,ts,tsx}\"",
+    "db:init": "npx prisma migrate deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

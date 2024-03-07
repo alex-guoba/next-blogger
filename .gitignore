@@ -38,3 +38,4 @@ next-env.d.ts
 
 /scripts/load-testing/output.bin
 Heap.*.heapsnapshot
+README.en.md
