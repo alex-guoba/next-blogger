@@ -28,15 +28,6 @@ const notion = new Client({
  ** see: https://developers.notion.com/reference/retrieve-a-database
  */
 export const RetrieveDatabase = async (database_id: string): Promise<GetDatabaseResponse | null> => {
-  // try {
-  //   const response = await notion.databases.retrieve({
-  //     database_id: database_id,
-  //   });
-  //   return response;
-  // } catch (error) {
-  //   console.log(error);
-  //   return null;
-  // }
   return proxyRetrieveDatabase(database_id);
 };
 
@@ -47,9 +38,6 @@ export type TypePostList = QueryDatabaseResponse["results"];
 export const QueryDatabase = async (database_id: string): Promise<TypePostList> => {
   const start = new Date().getTime();
 
-  // const response = await notion.databases.query({
-  //   database_id: database_id,
-  // });
   const response = await proxyQueryDatabases(database_id);
   const end = new Date().getTime();
   console.log("[QueryDatabase]", `${end - start}ms`);

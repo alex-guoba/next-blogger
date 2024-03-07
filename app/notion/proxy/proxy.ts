@@ -10,7 +10,7 @@ const notion = new Client({
 
 const enableCache: boolean = !!env.DATABASE_URL;
 
-function expired(updated_at: Date) : boolean {
+function expired(updated_at: Date): boolean {
   const now = new Date();
   const distSec = (now.getTime() - updated_at.getTime()) / 1000;
   if (distSec > env.NOTION_CACHE_EXPIRER) {
@@ -71,13 +71,27 @@ export async function proxyQueryDatabases(database_id: string) {
       });
       if (db?.result && !expired(db.updated_at)) {
         const res = JSON.parse(Buffer.from(db.result).toString("utf-8"));
-        console.log("proxyQueryDatabases cached hit for ", database_id);
         return res;
       }
     }
+
+    console.log("proxyQueryDatabases cached miss ", database_id);
+
+    // The response may contain fewer than the default number of results. so we ignored the page size
     const response = await notion.databases.query({
       database_id: database_id,
     });
+
+    // https://developers.notion.com/reference/intro#parameters-for-paginated-requests
+    while (response.has_more && response.next_cursor) {
+      const more = await notion.databases.query({
+        database_id: database_id,
+        start_cursor: response.next_cursor,
+      });
+      response.results.push(...more.results);
+      response.next_cursor = more.next_cursor;
+      response.has_more = more.has_more;
+    }
 
     if (enableCache && response && "object" in response) {
       const result = Buffer.from(JSON.stringify(response));
@@ -113,10 +127,12 @@ export async function proxyRetrievePage(page_id: string) {
       });
       if (db?.result && !expired(db.updated_at)) {
         const res = JSON.parse(Buffer.from(db.result).toString("utf-8"));
-        console.log("proxyRetrievePage cached hit for ", page_id);
         return res;
       }
     }
+
+    console.log("proxyRetrievePage cached miss for ", page_id);
+
     const response = await notion.pages.retrieve({
       page_id: page_id,
     });
@@ -154,18 +170,26 @@ export async function proxyListBlockChildren(block_id: string) {
       });
       if (db?.result && !expired(db.updated_at)) {
         const res = JSON.parse(Buffer.from(db.result || "{}").toString("utf-8"));
-        console.log("proxyListBlockChildren cached hit for ", block_id);
         return res;
       }
     }
 
-    console.log("cache miss", block_id);
+    console.log("proxyListBlockChildren cached miss for ", block_id);
 
-    // TODO: handle has_more
+    // The response may contain fewer than the default number of results. so we ignored the page size
     const response = await notion.blocks.children.list({
       block_id: block_id,
-      page_size: 100,
     });
+
+    while (response.has_more && response.next_cursor) {
+      const more = await notion.blocks.children.list({
+        block_id: block_id,
+        start_cursor: response.next_cursor,
+      });
+      response.results.push(...more.results);
+      response.next_cursor = more.next_cursor;
+      response.has_more = more.has_more;
+    }
 
     if (enableCache && response && "results" in response) {
       const result = Buffer.from(JSON.stringify(response)); //.toString("base64"),
