@@ -11,8 +11,6 @@ import { DatabaseRenderer } from "@/app/notion/_components/db/database";
 import { IconRender } from "@/app/notion/_components/emoji";
 import RichText from "@/app/notion/text";
 
-// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
-// export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || "", 10) || 300; // revalidate the data interval
 
 export default async function Page({ params }: { params: { row: string[] } }) {
   const dbID = params.row[0];

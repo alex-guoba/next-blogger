@@ -1,0 +1,3 @@
+GET http://127.0.0.1:3000/article/list-blog
+# specify trace info
+X-Trace-ID: efbdbed17f4c6280e8c8c98d29123b8c

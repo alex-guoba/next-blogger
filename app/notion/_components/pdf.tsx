@@ -22,6 +22,8 @@ import SimpleBar from "simplebar-react";
 import { useResizeDetector } from "react-resize-detector";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import "simplebar-react/dist/simplebar.min.css";
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
 interface PDFBlockProps {

@@ -18,7 +18,7 @@ export async function proxyRetrieveDatabase(database_id: string) {
           database_id: database_id,
         },
       });
-      if (db) {
+      if (db?.result) {
         const res = JSON.parse(Buffer.from(db.result).toString("utf-8"));
         console.log("retrieveDatabase cached hit for ", database_id);
         return res;
@@ -59,7 +59,7 @@ export async function proxyQueryDatabases(database_id: string) {
           database_id: database_id,
         },
       });
-      if (db) {
+      if (db?.result) {
         const res = JSON.parse(Buffer.from(db.result).toString("utf-8"));
         console.log("proxyQueryDatabases cached hit for ", database_id);
         return res;
@@ -101,7 +101,7 @@ export async function proxyRetrievePage(page_id: string) {
           page_id: page_id,
         },
       });
-      if (db) {
+      if (db?.result) {
         const res = JSON.parse(Buffer.from(db.result).toString("utf-8"));
         console.log("proxyRetrievePage cached hit for ", page_id);
         return res;
