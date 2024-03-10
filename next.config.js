@@ -47,6 +47,9 @@ const nextConfig = {
     config.resolve.alias.canvas = false;
     return config;
   },
+
+  // This will build the project as a standalone app inside the Docker image.
+  output: "standalone",
 };
 
 module.exports = nextConfig;

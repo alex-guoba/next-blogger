@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node .next/standalone/server.js",
     "start:mem": "NODE_OPTIONS='--inspect' next dev",
     "lint": "next lint",
     "shadcn:add": "npx shadcn-ui@latest add",
@@ -46,6 +46,7 @@
     "react-pdf": "^7.7.0",
     "react-resize-detector": "^10.0.1",
     "react-wrap-balancer": "^1.1.0",
+    "sharp": "^0.33.2",
     "simplebar-react": "^3.2.4",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",

@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  iframely:
+    image: dogbin/iframely:latest
+    container_name: iframely
+    ports:
+      - "8061:8061"
+  services:
+    image: next-blogger:1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NOTION_TOKEN=
+        - NOTION_DATABASE_ID=
+    container_name: next-blogger
+    ports:
+      - "3000:3000"
+    environment:
+      - NOTION_TOKEN=
+      - NOTION_DATABASE_ID=
+      - IFRAMELY_URI=
+      - IFRAMELY_KEY=
+      - DATABASE_URL=mysql://user:pwd@mysql-test:3306/notion_blog
+      - NOTION_CACHE_EXPIRER=3600
+    depends_on:
+      - iframely
+    entrypoint:
+      [
+        "/app/scripts/startup/wait-for.sh",
+        "iframely:8061",
+        "--",
+        "node server.js"
+      ]

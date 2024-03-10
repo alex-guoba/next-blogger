@@ -86,11 +86,6 @@ export const retrieveBlockChildren = async (blockID: string): Promise<any> => {
 
   const blockId = blockID.replaceAll("-", ""); // ???
 
-  // TODO: only 100, unfinished and serial
-  // const { results } = await notion.blocks.children.list({
-  //   block_id: blockId,
-  //   page_size: 100,
-  // });
   const result = await proxyListBlockChildren(blockId);
   if (!result) {
     return [];

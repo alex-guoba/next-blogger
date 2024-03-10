@@ -7,7 +7,7 @@ import prisma from "./prisma";
 const notion = new Client({
   auth: env.NOTION_TOKEN,
 });
-
+const dftMaxRetry = 2;
 const enableCache: boolean = !!env.DATABASE_URL;
 
 function expired(updated_at: Date): boolean {
@@ -19,7 +19,7 @@ function expired(updated_at: Date): boolean {
   return false;
 }
 
-export async function proxyRetrieveDatabase(database_id: string) {
+export async function proxyRetrieveDatabase(database_id: string, maxTries: number = dftMaxRetry) {
   try {
     // cache first
     if (enableCache) {
@@ -56,12 +56,16 @@ export async function proxyRetrieveDatabase(database_id: string) {
 
     return response;
   } catch (error) {
-    console.log(error);
+    console.log(error, maxTries);
+
+    if (maxTries > 0) {
+      return proxyRetrieveDatabase(database_id, maxTries - 1);
+    }
     return null;
   }
 }
 
-export async function proxyQueryDatabases(database_id: string) {
+export async function proxyQueryDatabases(database_id: string, maxTries: number = dftMaxRetry) {
   try {
     if (enableCache) {
       const db = await prisma.dBRows.findUnique({
@@ -112,12 +116,15 @@ export async function proxyQueryDatabases(database_id: string) {
 
     return response;
   } catch (error) {
-    console.log(error);
+    console.log(error, maxTries);
+    if (maxTries > 0) {
+      return proxyQueryDatabases(database_id, maxTries - 1);
+    }
     return null;
   }
 }
 
-export async function proxyRetrievePage(page_id: string) {
+export async function proxyRetrievePage(page_id: string, maxTries: number = dftMaxRetry) {
   try {
     if (enableCache) {
       const db = await prisma.pageProperties.findUnique({
@@ -155,12 +162,15 @@ export async function proxyRetrievePage(page_id: string) {
     }
     return response;
   } catch (error) {
-    console.log(error);
+    console.log(error, maxTries);
+    if (maxTries > 0) {
+      return proxyRetrievePage(page_id, maxTries - 1);
+    }
     return null;
   }
 }
 
-export async function proxyListBlockChildren(block_id: string) {
+export async function proxyListBlockChildren(block_id: string, maxTries: number = dftMaxRetry) {
   try {
     if (enableCache) {
       const db = await prisma.blockChildren.findUnique({
@@ -209,7 +219,11 @@ export async function proxyListBlockChildren(block_id: string) {
     }
     return response;
   } catch (error) {
-    console.log(error);
+    console.log(error, maxTries);
+
+    if  (maxTries > 0) {
+      return proxyListBlockChildren(block_id, maxTries - 1);
+    }
     return null;
   }
 }
