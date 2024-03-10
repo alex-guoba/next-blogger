@@ -11,7 +11,7 @@ interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   separated?: boolean;
 }
 
-function PageHeader({ className, children, as: Comp = "section", separated = false, ...props }: PageHeaderProps) {
+function PageHeader({ className, children, as: Comp = "header", separated = false, ...props }: PageHeaderProps) {
   return (
     <Comp className={cn("grid gap-1", className)} {...props}>
       {children}

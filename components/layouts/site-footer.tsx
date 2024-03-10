@@ -5,6 +5,7 @@ import Shell from "../shells/shell";
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { siteConfig } from "@/config/site";
+import { siteMeta } from "@/config/meta";
 import { ModeToggle } from "@/components/layouts/mode-toggle";
 import { buttonVariants } from "@/components/ui/button";
 
@@ -20,7 +21,7 @@ export function SiteFooter() {
           <section id="footer-branding" aria-labelledby="footer-branding-heading">
             <Link href="/" className="flex w-fit items-center space-x-2">
               <Icons.logonew className="h-6 w-6" aria-hidden="true" />
-              <span className="font-bold">{siteConfig.name}</span>
+              <span className="font-bold">{siteMeta.name}</span>
               <span className="sr-only">Home</span>
             </Link>
           </section>
@@ -66,7 +67,7 @@ export function SiteFooter() {
           <div className="flex-1 text-left text-sm leading-loose text-muted-foreground">
             Built by{" "}
             <Link
-              href={siteConfig.links.twitter}
+              href={siteMeta.twitter}
               target="_blank"
               rel="noreferrer"
               className="font-semibold transition-colors hover:text-foreground"
@@ -78,7 +79,7 @@ export function SiteFooter() {
           </div>
           <div className="flex items-center space-x-1">
             <Link
-              href={siteConfig.links.github}
+              href={siteMeta.github}
               target="_blank"
               rel="noreferrer"
               className={cn(

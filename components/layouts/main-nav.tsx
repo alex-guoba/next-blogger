@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import type { MainNavItem } from "@/types";
 
-import { siteConfig } from "@/config/site";
+import { siteMeta } from "@/config/meta";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -26,7 +26,7 @@ export function MainNav({ items }: MainNavProps) {
     <div className="hidden gap-6 lg:flex">
       <Link href="/" className="hidden items-center space-x-2 lg:flex">
         <Icons.logonew className="h-6 w-6" aria-hidden="true" />
-        <span className="hidden font-bold lg:inline-block">{siteConfig.name}</span>
+        <span className="hidden font-bold lg:inline-block">{siteMeta.name}</span>
         <span className="sr-only">Home</span>
       </Link>
 
@@ -44,8 +44,8 @@ export function MainNav({ items }: MainNavProps) {
                         className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                       >
                         <Icons.logonew className="h-6 w-6" aria-hidden="true" />
-                        <div className="mb-2 mt-4 text-lg font-medium">{siteConfig.name}</div>
-                        <p className="text-sm leading-tight text-muted-foreground">{siteConfig.description}</p>
+                        <div className="mb-2 mt-4 text-lg font-medium">{siteMeta.name}</div>
+                        <p className="text-sm leading-tight text-muted-foreground">{siteMeta.description}</p>
                         <span className="sr-only">Home</span>
                       </Link>
                     </NavigationMenuLink>

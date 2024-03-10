@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 
 import RichText from "../text";
 import { bundledLanguages, getHighlighter } from "shiki";
+import { rawText } from "../block-parse";
 
 interface CodeBlockProps {
   block: any;
@@ -32,10 +33,7 @@ export async function ShikiCodeRender({ block, defaultLanguage, className }: Cod
   }
 
   const theme = "github-dark";
-  let codes = "";
-  code.rich_text?.map((item: any) => {
-    codes += item?.plain_text;
-  });
+  const codes = rawText(code?.rich_text);
 
   const highlighter = await getHighlighter({
     langs: [lang],

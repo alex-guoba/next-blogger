@@ -6,7 +6,7 @@ import { useSelectedLayoutSegment } from "next/navigation";
 import type { MainNavItem, SidebarNavItem } from "@/types";
 import { ViewVerticalIcon } from "@radix-ui/react-icons";
 
-import { siteConfig } from "@/config/site";
+import { siteMeta } from "@/config/meta";
 import { cn } from "@/lib/utils";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -52,7 +52,7 @@ export function MobileNav({ mainNavItems, sidebarNavItems }: MobileNavProps) {
         <div className="px-7">
           <Link href="/" className="flex items-center" onClick={() => setIsOpen(false)}>
             <Icons.logo className="mr-2 h-4 w-4" aria-hidden="true" />
-            <span className="font-bold">{siteConfig.name}</span>
+            <span className="font-bold">{siteMeta.name}</span>
             <span className="sr-only">Home</span>
           </Link>
         </div>

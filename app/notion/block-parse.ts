@@ -7,3 +7,11 @@ export const extractFileUrl = (obj: any) => {
   }
   return null;
 };
+
+export const rawText = (rich_texts: any) => {
+  let raw = "";
+  rich_texts?.map((item: any) => {
+    raw += item?.plain_text || "";
+  });
+  return raw;
+};

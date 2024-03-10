@@ -3,20 +3,14 @@ import type { FooterItem, MainNavItem } from "@/types";
 // import { productCategories } from "@/config/products"
 // import { slugify } from "@/lib/utils"
 
+import { siteMeta } from "./meta";
+
 export type SiteConfig = typeof siteConfig;
 
-const links = {
-  twitter: "https://twitter.com/gelco",
-  github: "https://github.com/alex-guoba",
-  githubAccount: "https://github.com/alex-guoba",
-};
-
 export const siteConfig = {
-  name: "Utopian",
-  description: "An open source blog build with everything new in Next.js.",
-  url: "https://skateshop.sadmn.com",
-  ogImage: "https://skateshop.sadmn.com/opengraph-image.png",
-  links,
+  // name: "Utopian",
+  // description: "An open source blog build with everything new in Next.js.",
+  // links,
   mainNav: [
     {
       title: "Utopian",
@@ -93,12 +87,12 @@ export const siteConfig = {
       items: [
         {
           title: "Twitter",
-          href: links.twitter,
+          href: siteMeta.twitter,
           external: true,
         },
         {
           title: "GitHub",
-          href: links.githubAccount,
+          href: siteMeta.github,
           external: true,
         },
       ],

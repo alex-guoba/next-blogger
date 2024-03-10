@@ -13,6 +13,7 @@
 4. 支持深色模式。
 5. 支持[Next静态网站生成](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation)。
 6. 支持压力测试，详见[load-testing](./scripts/load-testing/)。
+7. SEO友好
 
 ## 技术栈
 

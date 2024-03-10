@@ -2,18 +2,19 @@
   <img alt="Example Page" src="https://github.com/alex-guoba/next-blogger/blob/main/assets/2872637/5d23c303-6031-47aa-beec-7aad56357337.png?raw=true" width="689">
 </p>
 
-Blog built on [Next.js](https://nextjs.org/) and [Notion Public API](https://www.notion.so/).
+Next-Blogger built on [Next.js 14+](https://nextjs.org/) and [Tailwind CSS](https://tailwindcss.com/), use [Notion](https://www.notion.so]) to manage your content. 
 
 [简体中文](./README.zh-CN.md)
 
 ## Features
 
-1. Built using Next.js, TS, Tailwind CSS, and other plugins (Shiki, React-pdf, and more).
+1. Built using Next.js(14+ with App Router ), Typescript, Tailwind CSS, and other plugins (Shiki, React-pdf, and more).
 2. Utilizes the [Notion Public API](https://developers.notion.com/).
 3. Supports caching Notion data using Prisma to reduce API calls and improve overall performance.
 4. Includes a dark mode option.
 5. Supports [Static Site Generation](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation).
 6. Includes load testing scripts, see [load-testing](./scripts/load-testing/).
+7. SEO friendly with RSS feed, sitemaps and more!
 
 ## Tech Stack
 

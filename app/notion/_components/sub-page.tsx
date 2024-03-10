@@ -13,8 +13,7 @@ export function SubPageRender({ block, className }: SubPageProps) {
     child_page: { title },
   } = block;
 
-  // Subpage not in blog list. page ID shouldn't be empty
-  const slug = `/article/${title}/${id}`;
+  const slug = `/article/${id}`;
 
   return (
     <div key={id} className={cn(className, "inline-flex w-full flex-wrap items-center")}>

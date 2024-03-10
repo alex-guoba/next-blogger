@@ -1,6 +1,6 @@
-import { Client } from "@notionhq/client";
+// import { Client } from "@notionhq/client";
 // import { cache } from "react";
-import { env } from "@/env.mjs";
+// import { env } from "@/env.mjs";
 
 import { GetDatabaseResponse, QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import { proxyListBlockChildren, proxyQueryDatabases, proxyRetrieveDatabase, proxyRetrievePage } from "./proxy/proxy";
@@ -18,10 +18,6 @@ function getRandomInt(minimum: number, maximum: number): number {
   const max = Math.floor(maximum);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-const notion = new Client({
-  auth: env.NOTION_TOKEN,
-});
 
 /*
  ** retrieve database
@@ -59,28 +55,28 @@ export const retrievePage = async (pageId: any) => {
 //
 // slug:（计算机）处理后的标题（用于构建固定链接）
 // 根据标题取db中的page列表数据，限制一条
-// TODO: not cached now
-export const queryPageBySlug = async (database_id: string, slug: string) => {
-  const start = new Date().getTime();
+// // TODO: not cached now
+// export const queryPageBySlug = async (database_id: string, slug: string) => {
+//   const start = new Date().getTime();
 
-  const response = await notion.databases.query({
-    database_id: database_id,
-    filter: {
-      property: "Slug",
-      formula: {
-        string: {
-          equals: slug,
-        },
-      },
-    },
-  });
-  const end = new Date().getTime();
-  console.log("[getPageFromSlug]", `${end - start}ms`);
+//   const response = await notion.databases.query({
+//     database_id: database_id,
+//     filter: {
+//       property: "Slug",
+//       formula: {
+//         string: {
+//           equals: slug,
+//         },
+//       },
+//     },
+//   });
+//   const end = new Date().getTime();
+//   console.log("[getPageFromSlug]", `${end - start}ms`);
 
-  if (response?.results?.length) {
-    return response?.results?.[0];
-  }
-};
+//   if (response?.results?.length) {
+//     return response?.results?.[0];
+//   }
+// };
 
 //
 // Returns a paginated array of child block objects contained in the block using the ID specified.

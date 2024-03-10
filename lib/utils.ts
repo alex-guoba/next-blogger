@@ -1,3 +1,4 @@
+import { siteMeta } from "@/config/meta";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -41,4 +42,8 @@ export function formatTime(
   return new Intl.DateTimeFormat("en-US", {
     ...options,
   }).format(new Date(date));
+}
+
+export function absoluteUrl(path: string) {
+  return `${siteMeta.siteUrl}/${path}`;
 }
