@@ -221,7 +221,7 @@ export async function proxyListBlockChildren(block_id: string, maxTries: number 
   } catch (error) {
     console.log(error, maxTries);
 
-    if  (maxTries > 0) {
+    if (maxTries > 0) {
       return proxyListBlockChildren(block_id, maxTries - 1);
     }
     return null;

@@ -35,6 +35,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+docker-compose.yaml
 
 /scripts/load-testing/output.bin
 Heap.*.heapsnapshot

@@ -18,8 +18,8 @@ export function ParagraphRender({ block, level = 0, className }: ParagraphProps)
   const style = ColorMap.get(color) || "";
   return (
     <div key={id} className={cn(className, style)}>
-      <p className="p-1">
-        <RichText title={rich_text} className="whitespace-pre-wrap" />
+      <p className="whitespace-pre-wrap py-1">
+        <RichText title={rich_text} />
       </p>
       {children && <IndentChildren cb={children} level={level}></IndentChildren>}
     </div>
