@@ -6,6 +6,7 @@ import RichText from "../text";
 import { useUnfurlUrl } from "@/lib/unfurl";
 import { UnfurlSuccessResponse } from "@/types";
 import { CardContent, CardDescription } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 interface LinkPreviewBlockProps {
   block: any;
@@ -32,12 +33,12 @@ function UnfurledLinkPreview({
   const icon = data?.favicon;
 
   return (
-    <div key={id} className={className}>
+    <div key={id} className={cn(className, "mt-1.5")}>
       <Link href={url} target="_blank">
         <div className="flex w-full max-w-full overflow-hidden rounded-md border border-gray-200 hover:bg-slate-200 dark:hover:bg-stone-500">
           <span className="sr-only">{url}</span>
           {icon ? (
-            <div className="max-w-10 my-auto flex justify-center text-center">
+            <div className="max-w-12 my-auto p-2 flex justify-center text-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={icon} alt={url} />
             </div>

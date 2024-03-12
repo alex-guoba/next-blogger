@@ -34,11 +34,12 @@ function UnfurledBookmarkPreview({
   const icon = data?.favicon;
 
   return (
-    <div key={id} className={cn(className, "space-y-1 py-1")}>
+    <div key={id} className={cn(className, "space-y-1 mt-1.5")}>
       <Link href={url} target="_blank">
         <div className="flex w-full max-w-full overflow-hidden rounded-md border border-gray-200  hover:bg-slate-200 dark:hover:bg-stone-500">
           {/* <span className="sr-only">{url}</span> */}
-          <div className="w-96 flex-auto p-4 flex flex-col space-y-2">
+          <div className="flex-[100%] lg:flex-[65%] p-4 flex flex-col space-y-2">
+
             <CardHeader className="p-0">
               <CardContent className="line-clamp-1 p-0 text-sm font-normal">{title}</CardContent>
             </CardHeader>
@@ -58,7 +59,7 @@ function UnfurledBookmarkPreview({
             </div>
           </div>
           
-          <div className="max-w-0 lg:max-w-60 my-0 max-h-32  flex justify-center items-center">
+          <div className="flex-[0%] lg:flex-[35%] my-0 max-h-32 flex justify-center items-center">
             {image && (
               <div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}

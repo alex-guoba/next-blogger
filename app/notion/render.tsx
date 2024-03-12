@@ -45,23 +45,6 @@ export function RenderBlock({ block, level = 1 }: BlockProps) {
     case "heading_2":
     case "heading_3":
       return <HeadingRender block={block} level={level} as="h1" variant={type}></HeadingRender>;
-    // return (
-    //   <h1 key={id} id={id} className="mt-1.5 py-4 text-3xl font-bold dark:text-white">
-    //     <RichText title={value.rich_text} />
-    //   </h1>
-    // );
-    // case "heading_2":
-    //   return (
-    //     <h2 key={id} id={id} className="mt-1.5 py-3 text-2xl font-bold dark:text-white">
-    //       <RichText title={value.rich_text} />
-    //     </h2>
-    //   );
-    // case "heading_3":
-    //   return (
-    //     <h3 key={id} id={id} className="text-1xl mt-1.5 py-2 font-bold dark:text-white">
-    //       <RichText title={value.rich_text} />
-    //     </h3>
-    //   );
 
     // before list rendering, array should be convert into children array. See getBlocks function.
     case "bulleted_list":

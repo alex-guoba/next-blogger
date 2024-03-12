@@ -1,7 +1,3 @@
-// import { Client } from "@notionhq/client";
-// import { cache } from "react";
-// import { env } from "@/env.mjs";
-
 import { GetDatabaseResponse, QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import { proxyListBlockChildren, proxyQueryDatabases, proxyRetrieveDatabase, proxyRetrievePage } from "./proxy/proxy";
 
@@ -78,6 +74,20 @@ export const retrievePage = async (pageId: any) => {
 //   }
 // };
 
+// Most of the time, block id for query children is block's own id.
+// but some times it will use another id like duplicated synced block
+// see: (https://developers.notion.com/reference/block#duplicate-synced-block)
+const getBlockID = (block: any): string => {
+  if (block?.type == "synced_block") {
+    const id = block["synced_block"]?.synced_from?.block_id;
+    if (id) {
+      return id;
+    }
+  }
+
+  return block.id;
+};
+
 //
 // Returns a paginated array of child block objects contained in the block using the ID specified.
 // see: https://developers.notion.com/reference/get-block-children
@@ -97,7 +107,8 @@ export const retrieveBlockChildren = async (blockID: string): Promise<any> => {
   const childBlocks = result?.results.map(async (block: any) => {
     // ignore child pages
     if (block.has_children && block.type != "child_page") {
-      const children = await retrieveBlockChildren(block.id);
+      const blockID = getBlockID(block);
+      const children = await retrieveBlockChildren(blockID);
       return { ...block, children };
     }
 
