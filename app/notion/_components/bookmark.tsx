@@ -38,32 +38,34 @@ function UnfurledBookmarkPreview({
       <Link href={url} target="_blank">
         <div className="flex w-full max-w-full overflow-hidden rounded-md border border-gray-200  hover:bg-slate-200 dark:hover:bg-stone-500">
           {/* <span className="sr-only">{url}</span> */}
-          <div className="w-96 flex-auto space-y-2 p-4">
+          <div className="w-96 flex-auto p-4 flex flex-col space-y-2">
             <CardHeader className="p-0">
               <CardContent className="line-clamp-1 p-0 text-sm font-normal">{title}</CardContent>
             </CardHeader>
 
             {desc ? (
-              <CardDescription className="h-8 max-h-4 overflow-hidden text-xs leading-4">{desc}</CardDescription>
+              <CardDescription className="line-clamp-2 text-xs">{desc}</CardDescription>
             ) : null}
 
-            <div className="mt-4 flex w-full max-w-full overflow-hidden">
+            <div className="mt-auto flex w-full max-w-full overflow-hidden">
               {icon ? (
-                <div className="flex w-6 flex-none justify-center">
+                <div className="flex max-w-6 flex-none justify-center">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={icon} alt={url} className="pr-1" />
                 </div>
               ) : null}
-              <CardContent className="max-h-4 overflow-hidden p-0 text-xs">{url}</CardContent>
+              <CardContent className="line-clamp-1 p-0 text-xs">{url}</CardContent>
             </div>
           </div>
-          {image ? (
-            <div className="relative hidden h-full max-h-24 w-32 flex-auto md:block">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={image} alt={url} className="object-cover" />
-            </div>
-          ) : // <PlaceholderImage asChild />
-          null}
+          
+          <div className="max-w-0 lg:max-w-60 my-0 max-h-32  flex justify-center items-center">
+            {image && (
+              <div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={image} alt={url} className="object-cover" />
+              </div>
+            )}
+          </div>
         </div>
       </Link>
 

@@ -37,13 +37,13 @@ function UnfurledLinkPreview({
         <div className="flex w-full max-w-full overflow-hidden rounded-md border border-gray-200 hover:bg-slate-200 dark:hover:bg-stone-500">
           <span className="sr-only">{url}</span>
           {icon ? (
-            <div className="flex w-12 flex-none justify-center">
+            <div className="max-w-10 my-auto flex justify-center text-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={icon} alt={url} className="px-1.5" />
+              <img src={icon} alt={url} />
             </div>
           ) : null}
 
-          <div className="w-96 flex-auto space-y-2 p-2">
+          <div className="flex-auto space-y-2 p-2">
             {/* <CardHeader className="p-0"> */}
             <CardContent className="line-clamp-1 overflow-hidden p-0 text-sm font-bold">{title}</CardContent>
             {/* </CardHeader> */}
