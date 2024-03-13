@@ -10,9 +10,14 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url = env("DATABASE_URL")
 }
+
+//datasource db {
+//  provider = "mysql"
+//  url      = env("DATABASE_URL")
+//}
 
 model dBProperties {
   database_id String @id
