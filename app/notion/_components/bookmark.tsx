@@ -34,19 +34,16 @@ function UnfurledBookmarkPreview({
   const icon = data?.favicon;
 
   return (
-    <div key={id} className={cn(className, "space-y-1 mt-1.5")}>
+    <div key={id} className={cn(className, "mt-1.5 space-y-1")}>
       <Link href={url} target="_blank">
         <div className="flex w-full max-w-full overflow-hidden rounded-md border border-gray-200  hover:bg-slate-200 dark:hover:bg-stone-500">
           {/* <span className="sr-only">{url}</span> */}
-          <div className="flex-[100%] lg:flex-[65%] p-4 flex flex-col space-y-2">
-
+          <div className="flex flex-[100%] flex-col space-y-2 p-4 lg:flex-[65%]">
             <CardHeader className="p-0">
               <CardContent className="line-clamp-1 p-0 text-sm font-normal">{title}</CardContent>
             </CardHeader>
 
-            {desc ? (
-              <CardDescription className="line-clamp-2 text-xs">{desc}</CardDescription>
-            ) : null}
+            {desc ? <CardDescription className="line-clamp-2 text-xs">{desc}</CardDescription> : null}
 
             <div className="mt-auto flex w-full max-w-full overflow-hidden">
               {icon ? (
@@ -58,8 +55,8 @@ function UnfurledBookmarkPreview({
               <CardContent className="line-clamp-1 p-0 text-xs">{url}</CardContent>
             </div>
           </div>
-          
-          <div className="flex-[0%] lg:flex-[35%] my-0 max-h-32 flex justify-center items-center">
+
+          <div className="my-0 flex max-h-32 flex-[0%] items-center justify-center lg:flex-[35%]">
             {image && (
               <div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}

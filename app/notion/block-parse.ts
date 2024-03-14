@@ -15,3 +15,48 @@ export const rawText = (rich_texts: any) => {
   });
   return raw;
 };
+
+export const pagePublished = (page: any) => {
+  return page?.properties?.Status?.select?.name == "Published";
+};
+
+// database id must be included in fitler params as it's the unique key for db cache.
+export const filterBase = (dbID: string) => {
+  return {
+    database_id: dbID,
+  };
+};
+
+export const filterSelect = (property: string, value: string) => {
+  return {
+    filter: {
+      property: property,
+      select: {
+        equals: value,
+      },
+    },
+  };
+};
+
+export const filterText = (property: string, value: string) => {
+  return {
+    filter: {
+      property: property,
+      rich_text: {
+        equals: value,
+      },
+    },
+  };
+};
+
+interface sorterProps {
+  property: string;
+  direction: "descending" | "ascending";
+}
+
+export const sorterProperties = (props: sorterProps[]) => {
+  const res = {
+    sorts: props,
+  };
+  return res;
+};

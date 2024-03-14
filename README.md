@@ -12,9 +12,9 @@ Next-Blogger built on [Next.js 14+](https://nextjs.org/) and [Tailwind CSS](http
 2. Utilizes the [Notion Public API](https://developers.notion.com/).
 3. Supports caching Notion data using Prisma to reduce API calls and improve overall performance.
 4. Includes a dark mode option.
-5. Supports [Static Site Generation](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation).
+5. SEO friendly with RSS feed, sitemaps and more!
 6. Includes load testing scripts, see [load-testing](./scripts/load-testing/).
-7. SEO friendly with RSS feed, sitemaps and more!
+7. Supports [Server Rendering](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default) and [Dynamic Rendering](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default).
 
 ## Tech Stack
 

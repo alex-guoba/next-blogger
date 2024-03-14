@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import RichText from "../text";
 import { IconRender } from "./emoji";
 import { DatabaseRenderer } from "./db/database";
+import { filterBase } from "../block-parse";
 
 interface ChildDatabaseBlockProps {
   block: any;
@@ -35,7 +36,8 @@ export async function ChildDatabaseRenderer({ block, className }: ChildDatabaseB
     );
   }
 
-  const data = await QueryDatabase(id);
+  const queryParam = filterBase(id);
+  const data = await QueryDatabase(id, queryParam);
   return (
     <div>
       <div className="text-lg font-bold">

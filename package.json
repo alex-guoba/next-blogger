@@ -5,13 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node .next/standalone/server.js",
+    "start:standalone": "node .next/standalone/server.js",
+    "start": "next start",
     "start:mem": "NODE_OPTIONS='--inspect' next dev",
     "lint": "next lint",
     "shadcn:add": "npx shadcn-ui@latest add",
     "prettier": "prettier --check --ignore-path .gitignore  \"**/*.{js,jsx,ts,tsx}\"",
     "prettier:fix": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,ts,tsx}\"",
-    "db:init": "npx prisma migrate deploy"
+    "db:init": "npx prisma migrate deploy",
+    "db:reset": "npx prisma db push --force-reset"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

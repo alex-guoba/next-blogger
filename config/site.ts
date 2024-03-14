@@ -34,13 +34,13 @@ export const siteConfig = {
       items: [
         {
           title: "Project",
-          href: "/project",
+          href: "/page/project",
           description: "About the project behind Utopian.",
           items: [],
         },
         {
           title: "Author",
-          href: "/author",
+          href: "/page/author",
           description: "About author of Utopian.",
           items: [],
         },
@@ -48,7 +48,7 @@ export const siteConfig = {
     },
     {
       title: "Contact",
-      href: "/contact",
+      href: "/page/contact",
     },
   ] satisfies MainNavItem[],
   footerNav: [
@@ -72,12 +72,7 @@ export const siteConfig = {
       items: [
         {
           title: "About",
-          href: "/pages/about",
-          external: false,
-        },
-        {
-          title: "Privacy",
-          href: "/pages/privacy",
+          href: "/page/about",
           external: false,
         },
       ],

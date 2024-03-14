@@ -1,4 +1,8 @@
-import { GetDatabaseResponse, QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
+import {
+  GetDatabaseResponse,
+  QueryDatabaseParameters,
+  QueryDatabaseResponse,
+} from "@notionhq/client/build/src/api-endpoints";
 import { proxyListBlockChildren, proxyQueryDatabases, proxyRetrieveDatabase, proxyRetrievePage } from "./proxy/proxy";
 
 /**
@@ -23,14 +27,13 @@ export const RetrieveDatabase = async (database_id: string): Promise<GetDatabase
   return proxyRetrieveDatabase(database_id);
 };
 
-// Get pages from database
+// Get rows(pages) from database
 // API: https://developers.notion.com/reference/post-database-query
-// export type TypePostItem = QueryDatabaseResponse["results"][0];
 export type TypePostList = QueryDatabaseResponse["results"];
-export const QueryDatabase = async (database_id: string): Promise<TypePostList> => {
+export const QueryDatabase = async (database_id: string, params: QueryDatabaseParameters): Promise<TypePostList> => {
   const start = new Date().getTime();
 
-  const response = await proxyQueryDatabases(database_id);
+  const response = await proxyQueryDatabases(database_id, params);
   const end = new Date().getTime();
   console.log("[QueryDatabase]", `${end - start}ms`);
   return response.results;
@@ -49,9 +52,6 @@ export const retrievePage = async (pageId: any) => {
 };
 
 //
-// slug:（计算机）处理后的标题（用于构建固定链接）
-// 根据标题取db中的page列表数据，限制一条
-// // TODO: not cached now
 // export const queryPageBySlug = async (database_id: string, slug: string) => {
 //   const start = new Date().getTime();
 

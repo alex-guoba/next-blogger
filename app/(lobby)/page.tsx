@@ -7,11 +7,24 @@ import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/componen
 import { Separator } from "@/components/ui/separator";
 import React from "react";
 import { PostCard, PostCardSkeleton } from "@/components/post-card";
-import { extractFileUrl, rawText } from "@/app/notion/block-parse";
+import { extractFileUrl, filterBase, filterSelect, rawText, sorterProperties } from "@/app/notion/block-parse";
 import { env } from "@/env.mjs";
 
+function dbParams() {
+  const defaultParam = filterBase(env.NOTION_DATABASE_ID);
+  const filters = {
+    filter: {
+      and: [filterSelect("Status", "Published").filter, filterSelect("Type", "Post").filter],
+    },
+  };
+  const sorter = sorterProperties([{ property: "PublishDate", direction: "descending" }]);
+
+  return { ...defaultParam, ...filters, ...sorter };
+}
+
 export default async function Home() {
-  const posts = await QueryDatabase(env.NOTION_DATABASE_ID);
+  const queryParams = dbParams();
+  const posts = await QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
 
   return (
     <Shell className="md:pb-10">
@@ -29,7 +42,7 @@ export default async function Home() {
           {posts.map((post: any, i) => {
             const title = rawText(post.properties?.Title?.title);
             const slug = post.id; // + "/" + post.properties?.Summary?.rich_text[0]?.plain_text;
-            const edit_time = post.last_edited_time;
+            const edit_time = post?.properties?.PublishDate?.date?.start || post?.last_edited_time;
             const image = extractFileUrl(post.cover);
             const desc = rawText(post.properties?.Summary?.rich_text);
 

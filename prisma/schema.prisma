@@ -27,9 +27,11 @@ model dBProperties {
 }
 
 model dBRows {
-  database_id String @id
-  query   String?
-  result  Bytes?
+  // params including database_id
+  params   String @id
+  database_id String
+
+  result   Bytes?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }

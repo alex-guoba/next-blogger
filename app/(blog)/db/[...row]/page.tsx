@@ -9,6 +9,7 @@ import { QueryDatabase, RetrieveDatabase } from "@/app/notion/api";
 import { DatabaseRenderer } from "@/app/notion/_components/db/database";
 import { IconRender } from "@/app/notion/_components/emoji";
 import RichText from "@/app/notion/text";
+import { filterBase } from "@/app/notion/block-parse";
 
 export default async function Page({ params }: { params: { row: string[] } }) {
   const dbID = params.row[0];
@@ -17,7 +18,8 @@ export default async function Page({ params }: { params: { row: string[] } }) {
     return null;
   }
 
-  const data = await QueryDatabase(dbID);
+  const queryParam = filterBase(dbID);
+  const data = await QueryDatabase(dbID, queryParam);
 
   const { icon, title, description } = columns;
   return (

@@ -21,7 +21,7 @@ async function queryIframely(url: string) {
       headers: {
         "Content-Type": "application/json",
       },
-      next: { revalidate: 1800 }, // cache time
+      next: { revalidate: 300 }, // cache time
     });
     const res = await result.json();
     return {

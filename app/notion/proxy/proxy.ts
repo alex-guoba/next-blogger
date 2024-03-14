@@ -3,6 +3,7 @@
 import { env } from "@/env.mjs";
 import { Client } from "@notionhq/client";
 import prisma from "./prisma";
+import { QueryDatabaseParameters } from "@notionhq/client/build/src/api-endpoints";
 
 const notion = new Client({
   auth: env.NOTION_TOKEN,
@@ -17,6 +18,11 @@ function expired(updated_at: Date): boolean {
     return true;
   }
   return false;
+}
+
+// Notion API have rate limitations, so we need to retry after a while
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export async function proxyRetrieveDatabase(database_id: string, maxTries: number = dftMaxRetry) {
@@ -65,12 +71,16 @@ export async function proxyRetrieveDatabase(database_id: string, maxTries: numbe
   }
 }
 
-export async function proxyQueryDatabases(database_id: string, maxTries: number = dftMaxRetry) {
+export async function proxyQueryDatabases(
+  database_id: string,
+  params: QueryDatabaseParameters,
+  maxTries: number = dftMaxRetry
+) {
   try {
     if (enableCache) {
       const db = await prisma.dBRows.findUnique({
         where: {
-          database_id: database_id,
+          params: JSON.stringify(params),
         },
       });
       if (db?.result && !expired(db.updated_at)) {
@@ -81,17 +91,12 @@ export async function proxyQueryDatabases(database_id: string, maxTries: number 
 
     console.log("proxyQueryDatabases cached miss ", database_id);
 
-    // The response may contain fewer than the default number of results. so we ignored the page size
-    const response = await notion.databases.query({
-      database_id: database_id,
-    });
+    const response = await notion.databases.query(params);
 
     // https://developers.notion.com/reference/intro#parameters-for-paginated-requests
     while (response.has_more && response.next_cursor) {
-      const more = await notion.databases.query({
-        database_id: database_id,
-        start_cursor: response.next_cursor,
-      });
+      const stepParam = Object.assign({}, params, { start_cursor: response.next_cursor });
+      const more = await notion.databases.query(stepParam);
       response.results.push(...more.results);
       response.next_cursor = more.next_cursor;
       response.has_more = more.has_more;
@@ -103,13 +108,14 @@ export async function proxyQueryDatabases(database_id: string, maxTries: number 
       await prisma.dBRows.upsert({
         create: {
           database_id: database_id,
+          params: JSON.stringify(params),
           result: result,
         },
         update: {
           result: result,
         },
         where: {
-          database_id: database_id,
+          params: JSON.stringify(params),
         },
       });
     }
@@ -118,7 +124,7 @@ export async function proxyQueryDatabases(database_id: string, maxTries: number 
   } catch (error) {
     console.log(error, maxTries);
     if (maxTries > 0) {
-      return proxyQueryDatabases(database_id, maxTries - 1);
+      return proxyQueryDatabases(database_id, params, maxTries - 1);
     }
     return null;
   }
@@ -222,6 +228,7 @@ export async function proxyListBlockChildren(block_id: string, maxTries: number 
     console.log(error, maxTries);
 
     if (maxTries > 0) {
+      await sleep(200);
       return proxyListBlockChildren(block_id, maxTries - 1);
     }
     return null;

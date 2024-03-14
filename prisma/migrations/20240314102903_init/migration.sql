@@ -10,13 +10,13 @@ CREATE TABLE "dBProperties" (
 
 -- CreateTable
 CREATE TABLE "dBRows" (
+    "params" TEXT NOT NULL,
     "database_id" TEXT NOT NULL,
-    "query" TEXT,
     "result" BYTEA,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "dBRows_pkey" PRIMARY KEY ("database_id")
+    CONSTRAINT "dBRows_pkey" PRIMARY KEY ("params")
 );
 
 -- CreateTable

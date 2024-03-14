@@ -38,7 +38,7 @@ function UnfurledLinkPreview({
         <div className="flex w-full max-w-full overflow-hidden rounded-md border border-gray-200 hover:bg-slate-200 dark:hover:bg-stone-500">
           <span className="sr-only">{url}</span>
           {icon ? (
-            <div className="max-w-12 my-auto p-2 flex justify-center text-center">
+            <div className="my-auto flex max-w-12 justify-center p-2 text-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={icon} alt={url} />
             </div>
