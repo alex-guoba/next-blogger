@@ -12,7 +12,7 @@ interface VideoProps {
 
 function LoadingSkeleton() {
   return (
-    <div className="flex w-full max-w-full overflow-hidden border border-gray-200">
+    <div className="flex w-full max-w-full overflow-hidden border border-gray-300">
       <div className="flex-[4_1_180px] space-y-2 p-4">
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-full" />

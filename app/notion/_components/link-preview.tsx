@@ -35,7 +35,7 @@ function UnfurledLinkPreview({
   return (
     <div key={id} className={cn(className, "mt-1.5")}>
       <Link href={url} target="_blank">
-        <div className="flex w-full max-w-full overflow-hidden rounded-md border border-gray-200 hover:bg-slate-200 dark:hover:bg-stone-500">
+        <div className="flex w-full max-w-full overflow-hidden rounded-md border border-gray-300 hover:bg-slate-300 dark:hover:bg-stone-500">
           <span className="sr-only">{url}</span>
           {icon ? (
             <div className="my-auto flex max-w-12 justify-center p-2 text-center">

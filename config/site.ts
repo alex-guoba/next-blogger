@@ -13,7 +13,7 @@ export const siteConfig = {
   // links,
   mainNav: [
     {
-      title: "Utopian",
+      title: "Articles",
       items: [
         {
           title: "Tags",
@@ -30,25 +30,16 @@ export const siteConfig = {
       ],
     },
     {
-      title: "About",
-      items: [
-        {
-          title: "Project",
-          href: "/page/project",
-          description: "About the project behind Utopian.",
-          items: [],
-        },
-        {
-          title: "Author",
-          href: "/page/author",
-          description: "About author of Utopian.",
-          items: [],
-        },
-      ],
+      title: "Project",
+      href: "/page/project",
     },
     {
-      title: "Contact",
-      href: "/page/contact",
+      title: "Author",
+      href: "/page/author",
+    },
+    {
+      title: "About",
+      href: "/page/about",
     },
   ] satisfies MainNavItem[],
   footerNav: [

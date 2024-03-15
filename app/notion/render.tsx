@@ -69,7 +69,7 @@ export function RenderBlock({ block, level = 1 }: BlockProps) {
 
     case "divider":
       return (
-        <div className="my-2 border-gray-200">
+        <div className="my-2 border-gray-300">
           <hr key={id} />
         </div>
       );

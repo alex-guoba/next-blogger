@@ -25,14 +25,14 @@ export function MainNav({ items }: MainNavProps) {
   return (
     <div className="hidden gap-6 lg:flex">
       <Link href="/" className="hidden items-center space-x-2 lg:flex">
-        <Icons.logonew className="h-6 w-6" aria-hidden="true" />
+        <Icons.pen className="h-6 w-6" aria-hidden="true" />
         <span className="hidden font-bold lg:inline-block">{siteMeta.name}</span>
         <span className="sr-only">Home</span>
       </Link>
 
       <NavigationMenu>
         <NavigationMenuList>
-          {items?.[0]?.items ? (
+          {/* {items?.[0]?.items ? (
             <NavigationMenuItem>
               <NavigationMenuTrigger className="h-auto">{items[0].title}</NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -58,11 +58,11 @@ export function MainNav({ items }: MainNavProps) {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
-          ) : null}
+          ) : null} */}
 
           {items
-            ?.filter((item) => item.title !== items[0]?.title)
-            .map((item) =>
+            // ?.filter((item) => item.title !== items[0]?.title)
+            ?.map((item) =>
               item?.items ? (
                 <NavigationMenuItem key={item.title}>
                   <NavigationMenuTrigger className="h-auto capitalize">{item.title}</NavigationMenuTrigger>
