@@ -17,6 +17,7 @@ export const env = createEnv({
       DATABASE_URL: z.string().optional(),
       NOTION_CACHE_EXPIRER: z.coerce.number().default(3600),
       NOTION_API_LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("warn"),
+      POST_PAGE_SIZES: z.coerce.number().default(8),
   },
 
   /**
@@ -43,6 +44,7 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     NOTION_CACHE_EXPIRER: process.env.NOTION_CACHE_EXPIRER,
     NOTION_API_LOG_LEVEL: process.env.NOTION_API_LOG_LEVEL,
+    POST_PAGE_SIZES: process.env.POST_PAGE_SIZES,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

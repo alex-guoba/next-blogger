@@ -23,10 +23,19 @@ function dbParams() {
   return { ...defaultParam, ...filters, ...sorter };
 }
 
-export default async function Home() {
+
+type Props = {
+  params: { slug: string[] };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export default async function Home({ searchParams }: Props) {
   const queryParams = dbParams();
   const posts = await QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
   const total = posts.length;
+
+  const page = Number(searchParams["page"]) || 1;
+  const subpost = posts.slice((page-1)*env.POST_PAGE_SIZES, page*env.POST_PAGE_SIZES);
 
   return (
     <Shell className="md:pb-10">
@@ -41,7 +50,7 @@ export default async function Home() {
             <PostCardSkeleton key={i} />
           ))}
         >
-          {posts.map((post: any, i) => {
+          {subpost.map((post: any, i) => {
             const title = rawText(post.properties?.Title?.title);
             const slug = post.id; // + "/" + post.properties?.Summary?.rich_text[0]?.plain_text;
             const edit_time = post?.properties?.PublishDate?.date?.start || post?.last_edited_time;
@@ -62,8 +71,8 @@ export default async function Home() {
           })}
         </React.Suspense>
       </section>
-      <Separator className="mt-10" />
-      <PostPagination total={total} pageSize={8} ></PostPagination>
+      {/* <Separator className="mt-10" /> */}
+      <PostPagination total={total} pageSize={env.POST_PAGE_SIZES} ></PostPagination>
     </Shell>
   );
 }

@@ -11,10 +11,10 @@ import {
 } from "@/components/ui/pagination";
 
 import Head from "next/head";
-import Link from "next/link";
+// import Link from "next/link";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { Icons } from "./icons";
+// import { Icons } from "./icons";
 import { getPageNumbers } from "@/lib/page-numbers";
 import { cn } from "@/lib/utils";
 
@@ -28,13 +28,9 @@ interface PaginationProps {
    * The max number of per pages
    */
   pageSize: number;
-  /**
-   * Extra props to pass to the next.js links
-   */
-  linkProps?: { [key: string]: any };
 }
 
-export function PostPagination({ total, pageSize, linkProps }: PaginationProps) {
+export function PostPagination({ total, pageSize}: PaginationProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
@@ -76,8 +72,8 @@ export function PostPagination({ total, pageSize, linkProps }: PaginationProps) 
               <PaginationLink
                 href={createPageURL(pageNumber)}
                 prefetch={false}
-                isActive={currentPage == i+1}
-              > {i+1} </PaginationLink>
+                isActive={currentPage == pageNumber}
+              > {pageNumber} </PaginationLink>
             </PaginationItem>
           )
         )}
