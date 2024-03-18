@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start:standalone": "node .next/standalone/server.js",
     "start": "next start",
     "start:mem": "NODE_OPTIONS='--inspect' next dev",
