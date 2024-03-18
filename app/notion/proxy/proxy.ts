@@ -1,13 +1,15 @@
 // proxy for notion api, to avoid api limititation and http latancy
 
 import { env } from "@/env.mjs";
-import { Client } from "@notionhq/client";
+import { APIErrorCode, Client, ClientErrorCode, LogLevel } from "@notionhq/client";
 import prisma from "./prisma";
 import { QueryDatabaseParameters } from "@notionhq/client/build/src/api-endpoints";
 
 const notion = new Client({
   auth: env.NOTION_TOKEN,
+  logLevel: env.NOTION_API_LOG_LEVEL as LogLevel,
 });
+
 const dftMaxRetry = 2;
 const enableCache: boolean = !!env.DATABASE_URL;
 
@@ -23,6 +25,17 @@ function expired(updated_at: Date): boolean {
 // Notion API have rate limitations, so we need to retry after a while
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function shouldRetry(error: any) {
+  if (error?.code === ClientErrorCode.RequestTimeout) {
+    return true;
+  }
+  if (error?.code === APIErrorCode.RateLimited) {
+    sleep(100);
+    return true;
+  }
+  return false;
 }
 
 export async function proxyRetrieveDatabase(database_id: string, maxTries: number = dftMaxRetry) {
@@ -61,12 +74,12 @@ export async function proxyRetrieveDatabase(database_id: string, maxTries: numbe
     }
 
     return response;
-  } catch (error) {
-    console.log(error, maxTries);
-
-    if (maxTries > 0) {
+  } catch (error: any) {
+    if (maxTries > 0 && shouldRetry(error)) {
+      console.log("retringing retrieveDatabase ", database_id);
       return proxyRetrieveDatabase(database_id, maxTries - 1);
     }
+    console.log(error, maxTries);
     return null;
   }
 }
@@ -122,10 +135,11 @@ export async function proxyQueryDatabases(
 
     return response;
   } catch (error) {
-    console.log(error, maxTries);
-    if (maxTries > 0) {
+    if (maxTries > 0 && shouldRetry(error)) {
+      console.log("retringing proxyQueryDatabases ", database_id);
       return proxyQueryDatabases(database_id, params, maxTries - 1);
     }
+    console.log(error, maxTries);
     return null;
   }
 }
@@ -168,10 +182,11 @@ export async function proxyRetrievePage(page_id: string, maxTries: number = dftM
     }
     return response;
   } catch (error) {
-    console.log(error, maxTries);
-    if (maxTries > 0) {
+    if (maxTries > 0 && shouldRetry(error)) {
+      console.log("retringing proxyRetrievePage ", page_id);
       return proxyRetrievePage(page_id, maxTries - 1);
     }
+    console.log(error, maxTries);
     return null;
   }
 }
@@ -225,12 +240,11 @@ export async function proxyListBlockChildren(block_id: string, maxTries: number 
     }
     return response;
   } catch (error) {
-    console.log(error, maxTries);
-
-    if (maxTries > 0) {
-      await sleep(200);
+    if (maxTries > 0 && shouldRetry(error)) {
+      console.log("retringing proxyListBlockChildren ", block_id);
       return proxyListBlockChildren(block_id, maxTries - 1);
     }
+    console.log(error, maxTries);
     return null;
   }
 }

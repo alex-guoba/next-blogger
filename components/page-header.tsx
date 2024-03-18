@@ -47,6 +47,7 @@ const descriptionVariants = cva("max-w-[750px] text-muted-foreground", {
   variants: {
     size: {
       default: "text-base sm:text-lg",
+      xs: "text-xs sm:text-sm",
       sm: "text-sm sm:text-base",
       lg: "text-lg sm:text-xl",
     },

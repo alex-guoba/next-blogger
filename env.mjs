@@ -9,13 +9,14 @@ export const env = createEnv({
   server: {
     NODE_ENV: z
       .enum(["development", "test", "production"])
-      .default("development"),
+      .default("production"),
       IFRAMELY_URI: z.string().optional(),
       IFRAMELY_API_KEY: z.string().optional(),
       NOTION_TOKEN: z.string(),
       NOTION_DATABASE_ID: z.string(),
       DATABASE_URL: z.string().optional(),
       NOTION_CACHE_EXPIRER: z.coerce.number().default(3600),
+      NOTION_API_LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("warn"),
   },
 
   /**
@@ -41,6 +42,7 @@ export const env = createEnv({
     NOTION_DATABASE_ID: process.env.NOTION_DATABASE_ID,
     DATABASE_URL: process.env.DATABASE_URL,
     NOTION_CACHE_EXPIRER: process.env.NOTION_CACHE_EXPIRER,
+    NOTION_API_LOG_LEVEL: process.env.NOTION_API_LOG_LEVEL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

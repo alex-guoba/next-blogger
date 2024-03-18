@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/page-header";
-import { Separator } from "@/components/ui/separator";
+// import { Separator } from "@/components/ui/separator";
 
 import { siteMeta } from "@/config/meta";
 import { filterBase, filterSelect, filterText, rawText } from "@/app/notion/block-parse";
@@ -113,14 +113,13 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   }
 
   return (
-    <Shell as="article" className="relative flex min-h-screen flex-col">
+    <Shell as="article" variant="markdown" className="relative flex min-h-screen flex-col">
       <PageHeader>
         <PageHeaderHeading>{title}</PageHeaderHeading>
-        <PageHeaderDescription variant="sm">{summary}</PageHeaderDescription>
+        <PageHeaderDescription size="sm" className="text-center">{summary}</PageHeaderDescription>
       </PageHeader>
-      <Separator className="mb-2.5" />
 
-      <section className="flex w-full flex-col gap-y-0.5">
+      <section className="flex w-full flex-col gap-y-0.5 mt-8">
         {blocks.map((block: any) => (
           <RenderBlock key={block.id} block={block}></RenderBlock>
         ))}

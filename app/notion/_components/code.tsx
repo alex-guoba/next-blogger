@@ -29,7 +29,7 @@ export async function ShikiCodeRender({ block, defaultLanguage, className }: Cod
     lang = "asm";
   }
   if (!(lang in bundledLanguages)) {
-    throw new Error('Unsupported language "' + lang + '"');
+    lang = "text"; // fallback language
   }
 
   const theme = "github-dark";
