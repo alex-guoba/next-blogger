@@ -16,6 +16,8 @@ import { filterBase, filterSelect, filterText, rawText } from "@/app/notion/bloc
 import { notFound } from "next/navigation";
 import { env } from "@/env.mjs";
 
+export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
+
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
 // export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || "", 10) || 60; // revalidate the data interval
 // // export const dynamic = 'force-dynamic';
@@ -113,7 +115,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   }
 
   return (
-    <Shell as="article" variant="markdown" className="relative flex min-h-screen flex-col">
+    <Shell as="article" className="relative flex min-h-screen flex-col">
       <PageHeader>
         <PageHeaderHeading>{title}</PageHeaderHeading>
         <PageHeaderDescription size="sm" className="text-center">{summary}</PageHeaderDescription>

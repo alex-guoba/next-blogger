@@ -58,17 +58,17 @@ npm install
 NOTION_TOKEN=
 NOTION_DATABASE_ID=
 ```
-4. (Optional) For performance considerations, it is recommended to configure database caching. See the Prisma documentation for various database [Connection URLs](https://www.prisma.io/docs/orm/reference/connection-urls). The default in the code is [Mysql](/prisma/schema.prisma):
+4. (Optional) For performance considerations, it is recommended to configure database caching. See the Prisma documentation for various database [Connection URLs](https://www.prisma.io/docs/orm/reference/connection-urls). The default in the code is [postgresql](/prisma/schema.prisma):
 
 ```prisma
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 ```
 
 ```ini
-DATABASE_URL="mysql://xxx:yyy@host:3306/dbname"
+DATABASE_URL="postgres://xxxx"
 ```
 
 The first time you run it, you need to create the relevant table structure.
@@ -89,6 +89,11 @@ npm run start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+
+### deploy
+
+Follow the deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
 
 ## Supported Blocks
 

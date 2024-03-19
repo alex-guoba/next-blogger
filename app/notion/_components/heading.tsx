@@ -4,7 +4,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import React from "react";
 import { RenderBlock } from "../render";
 
-const headingVariants = cva("font-bold dark:text-white mt-1.5", {
+const headingVariants = cva("font-bold break-words dark:text-white mt-1.5", {
   variants: {
     variant: {
       heading_1: "py-4 text-3xl",

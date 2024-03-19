@@ -39,6 +39,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "*.medium.com",
       },
+      {
+        protocol: "https",
+        hostname: "*.tumblr.com",
+      },
     ],
     // unoptimized: true,
   },

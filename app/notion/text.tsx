@@ -89,15 +89,16 @@ function mention(rt: any, className: string = "", index: number = 0) {
   const { mention, annotations, href, plain_text } = rt;
   const styels = annotationStyle(annotations, className);
   const color = mention?.type == "date" ? "text-gray-500" : "";
+  const plain = mention?.type == "date" ? `@${plain_text}` : plain_text;
 
   return (
     <span className={cn(styels, "font-medium", color)} key={index}>
       {href ? (
         <a className="underline decoration-1 underline-offset-4" href={href}>
-          {plain_text}
+          {plain}
         </a>
       ) : (
-        plain_text
+        plain
       )}
     </span>
   );

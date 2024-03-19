@@ -128,6 +128,6 @@ export function RenderBlock({ block, level = 1 }: BlockProps) {
       );
 
     default:
-      return <p key={id}>{`❌ Unsupported block (${type === "unsupported" ? "unsupported by Notion API" : type})`}</p>;
+      return <div key={id} className="hidden">{`❌ Unsupported block (${type === "unsupported" ? "unsupported by Notion API" : type})`}</div>;
   }
 }
