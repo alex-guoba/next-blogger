@@ -30,12 +30,13 @@ interface PostCardProps {
   image?: string;
   desc: string;
   edit_time: string;
+  prefetch: boolean;
   i: number;
 }
 
-export function PostCard({ slug, title, image, desc, edit_time, i }: PostCardProps) {
+export function PostCard({ slug, title, image, desc, edit_time, prefetch, i }: PostCardProps) {
   return (
-    <Link key={slug} href={slug}>
+    <Link key={slug} href={slug} prefetch={prefetch}>
       <span className="sr-only">{title}</span>
       <article className="space-y-4">
         <AspectRatio ratio={16 / 9}>

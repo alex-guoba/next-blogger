@@ -1,4 +1,5 @@
 // proxy for notion api, to avoid api limititation and http latancy
+import { cache } from 'react'
 
 import { env } from "@/env.mjs";
 import { APIErrorCode, Client, ClientErrorCode, LogLevel } from "@notionhq/client";
@@ -191,7 +192,7 @@ export async function proxyRetrievePage(page_id: string, maxTries: number = dftM
   }
 }
 
-export async function proxyListBlockChildren(block_id: string, maxTries: number = dftMaxRetry) {
+export const proxyListBlockChildren = cache(async (block_id: string, maxTries: number = dftMaxRetry): Promise<any> => {
   try {
     if (enableCache) {
       const db = await prisma.blockChildren.findUnique({
@@ -247,4 +248,4 @@ export async function proxyListBlockChildren(block_id: string, maxTries: number 
     console.log(error, maxTries);
     return null;
   }
-}
+});

@@ -65,6 +65,7 @@ export default async function Home({ searchParams }: Props) {
                 edit_time={edit_time}
                 desc={desc}
                 image={image}
+                prefetch={false}
                 i={i}
               />
             );

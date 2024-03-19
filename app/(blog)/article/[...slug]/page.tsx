@@ -15,9 +15,10 @@ import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/componen
 import { siteMeta } from "@/config/meta";
 import { pagePublished, rawText } from "@/app/notion/block-parse";
 import { notFound } from "next/navigation";
+import { env } from "@/env.mjs";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
-// export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || "", 10) || 60; // revalidate the data interval
+export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
 // // export const dynamic = 'force-dynamic';
 // // export const revalidate = 0;
 // // export const dynamicParams = true; // true | false,

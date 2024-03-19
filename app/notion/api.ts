@@ -47,7 +47,7 @@ export const retrievePage = async (pageId: any) => {
   // const response = await notion.pages.retrieve({ page_id: pageId });
   const response = await proxyRetrievePage(pageId);
   const end = new Date().getTime();
-  console.log("[getPage]", `${end - start}ms`);
+  console.log("[getPage] for ", `${pageId}: ${end - start}ms`);
   return response;
 };
 
