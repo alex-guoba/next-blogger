@@ -41,8 +41,12 @@ export default async function Home({ searchParams }: Props) {
   return (
     <Shell variant="centered" className="md:pb-10">
       <PageHeader>
-        <PageHeaderHeading size="lg" className="text-center">Project</PageHeaderHeading>
-        <PageHeaderDescription size="xs" className="py-4">Showcase your project.</PageHeaderDescription>
+        <PageHeaderHeading size="lg" className="text-center">
+          Project
+        </PageHeaderHeading>
+        <PageHeaderDescription size="xs" className="py-4">
+          Showcase your project.
+        </PageHeaderDescription>
       </PageHeader>
       <PostCardLayout items={subpost}></PostCardLayout>
       {total > env.POST_PAGE_SIZES ? (

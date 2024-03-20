@@ -26,7 +26,13 @@ export const viewport: Viewport = {
 
 function Analytics() {
   if (env.NEXT_ANALYTICS_UMAMI_ID) {
-    return <script defer src="https://analytics.us.umami.is/script.js" data-website-id={env.NEXT_ANALYTICS_UMAMI_ID}></script>
+    return (
+      <script
+        defer
+        src="https://analytics.us.umami.is/script.js"
+        data-website-id={env.NEXT_ANALYTICS_UMAMI_ID}
+      ></script>
+    );
   }
   return null;
 }
