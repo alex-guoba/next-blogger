@@ -15,6 +15,7 @@ Next-Blogger built on [Next.js 14+](https://nextjs.org/) and [Tailwind CSS](http
 5. SEO friendly with RSS feed, sitemaps and more!
 6. Includes load testing scripts, see [load-testing](./scripts/load-testing/).
 7. Supports [Server Rendering](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default) and [Dynamic Rendering](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default).
+8. Integrate with [umami](https://umami.is/).
 
 ## Tech Stack
 

@@ -7,7 +7,7 @@ import { PlaceholderImage } from "@/components/post-skeleton";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatDate } from "@/lib/utils";
+// import { formatDate } from "@/lib/utils";
 
 export function PostCardSkeleton() {
   return (
@@ -29,12 +29,12 @@ interface PostCardProps {
   title: string;
   image?: string;
   desc: string;
-  edit_time: string;
+  // edit_time: string;
   prefetch: boolean;
   i: number;
 }
 
-export function PostCard({ slug, title, image, desc, edit_time, prefetch, i }: PostCardProps) {
+export function PostCard({ slug, title, image, desc, prefetch, i }: PostCardProps) {
   return (
     <Link key={slug} href={slug} prefetch={prefetch}>
       <span className="sr-only">{title}</span>
@@ -58,7 +58,7 @@ export function PostCard({ slug, title, image, desc, edit_time, prefetch, i }: P
             <CardTitle className="line-clamp-1">{title}</CardTitle>
             <CardDescription className="line-clamp-2">{desc}</CardDescription>
           </CardHeader>
-          <CardDescription>{formatDate(edit_time)}</CardDescription>
+          {/* <CardDescription>{formatDate(edit_time)}</CardDescription> */}
         </div>
       </article>
     </Link>

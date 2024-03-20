@@ -31,7 +31,7 @@ export const siteConfig = {
     },
     {
       title: "Project",
-      href: "/page/project",
+      href: "/project",
     },
     {
       title: "Author",
