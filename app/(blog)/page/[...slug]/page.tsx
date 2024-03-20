@@ -15,6 +15,7 @@ import { siteMeta } from "@/config/meta";
 import { filterBase, filterSelect, filterText, rawText } from "@/app/notion/block-parse";
 import { notFound } from "next/navigation";
 import { env } from "@/env.mjs";
+import { ContentLoadingSkeleton } from "@/components/post-skeleton";
 
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
 
@@ -101,6 +102,21 @@ async function filterPageBySlug(slug: string[]) {
   return info;
 }
 
+async function ContentRender({ pageID }: { pageID: string }) {
+  const blocks = await retrieveBlockChildren(pageID);
+  if (!blocks) {
+    return <div />;
+  }
+
+  return (
+    <section className="mt-8 flex w-full flex-col gap-y-0.5">
+      {blocks.map((block: any) => (
+        <RenderBlock key={block.id} block={block}></RenderBlock>
+      ))}
+    </section>
+  );
+}
+
 export default async function Page({ params }: { params: { slug: string[] } }) {
   // retrieve page meta info by page ID
   const { pageID, title, summary } = await filterPageBySlug(params.slug);
@@ -109,23 +125,29 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     return notFound();
   }
 
-  const blocks = await retrieveBlockChildren(pageID);
-  if (!blocks) {
-    return <div />;
-  }
+  // const blocks = await retrieveBlockChildren(pageID);
+  // if (!blocks) {
+  //   return <div />;
+  // }
 
   return (
     <Shell as="article" className="relative flex min-h-screen flex-col">
       <PageHeader>
         <PageHeaderHeading>{title}</PageHeaderHeading>
-        <PageHeaderDescription size="sm" className="text-center">{summary}</PageHeaderDescription>
+        <PageHeaderDescription size="sm" className="text-center">
+          {summary}
+        </PageHeaderDescription>
       </PageHeader>
 
-      <section className="flex w-full flex-col gap-y-0.5 mt-8">
+      {/* <section className="flex w-full flex-col gap-y-0.5 mt-8">
         {blocks.map((block: any) => (
           <RenderBlock key={block.id} block={block}></RenderBlock>
         ))}
-      </section>
+      </section> */}
+
+      <React.Suspense fallback={<ContentLoadingSkeleton></ContentLoadingSkeleton>}>
+        <ContentRender pageID={pageID}></ContentRender>
+      </React.Suspense>
 
       <Link href="/" className={cn(buttonVariants({ variant: "ghost", className: "mx-auto mt-4 w-fit" }))}>
         <ChevronLeftIcon className="mr-2 h-4 w-4" aria-hidden="true" />

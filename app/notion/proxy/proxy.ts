@@ -1,5 +1,5 @@
 // proxy for notion api, to avoid api limititation and http latancy
-import { cache } from 'react'
+import { cache } from "react";
 
 import { env } from "@/env.mjs";
 import { APIErrorCode, Client, ClientErrorCode, LogLevel } from "@notionhq/client";

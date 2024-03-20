@@ -3,7 +3,7 @@ import Link from "next/link";
 
 // import { CardHeader } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton";
-import { PlaceholderImage } from "@/components/placeholder-image";
+import { PlaceholderImage } from "@/components/post-skeleton";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";

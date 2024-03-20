@@ -38,14 +38,14 @@ function UnfurledBookmarkPreview({
       <Link href={url} target="_blank">
         <div className="flex w-full max-w-full overflow-hidden rounded-md border border-gray-300  hover:bg-slate-300 dark:hover:bg-stone-500">
           {/* <span className="sr-only">{url}</span> */}
-          <div className="flex flex-[100%] flex-col p-4 lg:flex-[65%] justify-between">
+          <div className="flex flex-[100%] flex-col justify-between p-4 lg:flex-[65%]">
             <CardHeader className="p-0">
               <CardContent className="line-clamp-1 p-0 text-sm font-normal">{title}</CardContent>
             </CardHeader>
 
-            {desc ? <CardDescription className="line-clamp-2 text-xs my-2">{desc}</CardDescription> : null}
+            {desc ? <CardDescription className="my-2 line-clamp-2 text-xs">{desc}</CardDescription> : null}
 
-            <div className="flex w-full max-w-full overflow-hidden align-middle items-center">
+            <div className="flex w-full max-w-full items-center overflow-hidden align-middle">
               {icon ? (
                 <div className="flex max-w-6 flex-none justify-center">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

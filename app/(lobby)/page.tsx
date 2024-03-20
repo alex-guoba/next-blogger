@@ -23,7 +23,6 @@ function dbParams() {
   return { ...defaultParam, ...filters, ...sorter };
 }
 
-
 type Props = {
   params: { slug: string[] };
   searchParams: { [key: string]: string | string[] | undefined };
@@ -35,7 +34,7 @@ export default async function Home({ searchParams }: Props) {
   const total = posts.length;
 
   const page = Number(searchParams["page"]) || 1;
-  const subpost = posts.slice((page-1)*env.POST_PAGE_SIZES, page*env.POST_PAGE_SIZES);
+  const subpost = posts.slice((page - 1) * env.POST_PAGE_SIZES, page * env.POST_PAGE_SIZES);
 
   return (
     <Shell className="md:pb-10">
@@ -73,7 +72,7 @@ export default async function Home({ searchParams }: Props) {
         </React.Suspense>
       </section>
       {/* <Separator className="mt-10" /> */}
-      <PostPagination total={total} pageSize={env.POST_PAGE_SIZES} ></PostPagination>
+      <PostPagination total={total} pageSize={env.POST_PAGE_SIZES}></PostPagination>
     </Shell>
   );
 }

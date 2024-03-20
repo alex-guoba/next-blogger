@@ -30,7 +30,7 @@ interface PaginationProps {
   pageSize: number;
 }
 
-export function PostPagination({ total, pageSize}: PaginationProps) {
+export function PostPagination({ total, pageSize }: PaginationProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
@@ -69,11 +69,10 @@ export function PostPagination({ total, pageSize}: PaginationProps) {
             </PaginationItem>
           ) : (
             <PaginationItem key={pageNumber}>
-              <PaginationLink
-                href={createPageURL(pageNumber)}
-                prefetch={false}
-                isActive={currentPage == pageNumber}
-              > {pageNumber} </PaginationLink>
+              <PaginationLink href={createPageURL(pageNumber)} prefetch={false} isActive={currentPage == pageNumber}>
+                {" "}
+                {pageNumber}{" "}
+              </PaginationLink>
             </PaginationItem>
           )
         )}
@@ -89,5 +88,4 @@ export function PostPagination({ total, pageSize}: PaginationProps) {
       </PaginationContent>
     </Pagination>
   );
-  
 }
