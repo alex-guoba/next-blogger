@@ -189,7 +189,6 @@ The Notion API has frequency limitations, and for some deeply nested pages, mult
 
 ## TODO
 
-- [ ] Deploy on Vercel
 
 ## Reference
 

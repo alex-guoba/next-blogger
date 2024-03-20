@@ -19,6 +19,7 @@ export const env = createEnv({
       NOTION_API_LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("warn"),
       POST_PAGE_SIZES: z.coerce.number().default(8),
       REVALIDATE_PAGES: z.coerce.number().default(600),
+      NEXT_ANALYTICS_UMAMI_ID: z.string().default(''),
   },
 
   /**
@@ -47,6 +48,7 @@ export const env = createEnv({
     NOTION_API_LOG_LEVEL: process.env.NOTION_API_LOG_LEVEL,
     POST_PAGE_SIZES: process.env.POST_PAGE_SIZES,
     REVALIDATE_PAGES: process.env.NEXT_REVALIDATE_PAGES,
+    NEXT_ANALYTICS_UMAMI_ID: process.env.NEXT_ANALYTICS_UMAMI_ID,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
