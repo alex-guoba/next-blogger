@@ -98,6 +98,7 @@ export async function proxyQueryDatabases(
         },
       });
       if (db?.result && !expired(db.updated_at)) {
+        console.log("proxyQueryDatabases cached hit ", database_id);
         const res = JSON.parse(Buffer.from(db.result).toString("utf-8"));
         return res;
       }
@@ -154,6 +155,7 @@ export async function proxyRetrievePage(page_id: string, maxTries: number = dftM
         },
       });
       if (db?.result && !expired(db.updated_at)) {
+        console.log("proxyRetrievePage cached hit for ", page_id);
         const res = JSON.parse(Buffer.from(db.result).toString("utf-8"));
         return res;
       }
@@ -201,6 +203,7 @@ export const proxyListBlockChildren = cache(async (block_id: string, maxTries: n
         },
       });
       if (db?.result && !expired(db.updated_at)) {
+        console.log("proxyListBlockChildren cached hit for ", block_id);
         const res = JSON.parse(Buffer.from(db.result || "{}").toString("utf-8"));
         return res;
       }
