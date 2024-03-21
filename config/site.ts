@@ -34,10 +34,6 @@ export const siteConfig = {
       href: "/project",
     },
     {
-      title: "Author",
-      href: "/page/author",
-    },
-    {
       title: "About",
       href: "/page/about",
     },

@@ -5,13 +5,9 @@ import React from "react";
 import { rawText } from "@/app/notion/block-parse";
 import Link from "next/link";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatDate } from "@/lib/utils";
-// import { PlaceholderImage } from "../post-skeleton";
-// import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-// import Image from "next/image";
-// import { PostCardSkeleton } from "../post-card";
+import { cn, formatDate } from "@/lib/utils";
 
-interface PostRowLayoutProps {
+interface PostRowLayoutProps extends React.HTMLAttributes<HTMLDivElement>{
   items: TypePostList;
 }
 
@@ -35,27 +31,17 @@ function PostRowGrid({ post }: { post: any }) {
           </CardHeader>
         </Link>
         <CardDescription className="py-2 text-base">{desc}</CardDescription>
-
-        {/* <CardFooter className="pl-0 py-1 text-base font-medium hidden group-hover:block">
-          <Link
-            href={`/article/${slug}`}
-            className=""
-            aria-label={`Read more: "${title}"`}
-          >
-            Read more &rarr;
-          </Link>
-        </CardFooter> */}
       </article>
     </div>
   );
 }
 
-export function PostRowsLayout({ items }: PostRowLayoutProps) {
+export function PostRowsLayout({ items, className }: PostRowLayoutProps) {
   if (items.length == 0) {
     return null;
   }
   return (
-    <section className="grid grid-cols-2 gap-8">
+    <section className={cn("grid grid-cols-2 gap-8", className)}>
       {items.map((post: any) => {
         return <PostRowGrid key={post?.id} post={post}></PostRowGrid>;
       })}

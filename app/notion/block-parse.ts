@@ -39,6 +39,17 @@ export const filterSelect = (property: string, value: string) => {
   };
 };
 
+export const filterMultiSelect = (property: string, value: string) => {
+  return {
+    filter: {
+      property: property,
+      multi_select: {
+        contains: value,
+      },
+    },
+  };
+};
+
 export const filterText = (property: string, value: string) => {
   return {
     filter: {
