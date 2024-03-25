@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 import { RenderBlock } from "@/app/notion/render";
-import { retrieveBlockChildren, retrievePage } from "@/app/notion/api";
 import Shell from "@/components/shells/shell";
 import React from "react";
 import { cn } from "@/lib/utils";
@@ -10,19 +9,18 @@ import { buttonVariants } from "@/components/ui/button";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import { formatDate } from "@/lib/utils";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/page-header";
-// import { Separator } from "@/components/ui/separator";
 
 import { siteMeta } from "@/config/meta";
 import { pagePublished, rawText } from "@/app/notion/block-parse";
 import { notFound } from "next/navigation";
 import { env } from "@/env.mjs";
 import { ContentLoadingSkeleton } from "@/components/post-skeleton";
+import { NotionApiCache } from "@/app/notion/cache";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
-// // export const dynamic = 'force-dynamic';
-// // export const revalidate = 0;
-// // export const dynamicParams = true; // true | false,
+
+// export const dynamic = 'force-dynamic';
 
 /**
  * If you want to enable static rendering, uncommment the following function
@@ -67,7 +65,7 @@ async function parseSlug(slug: string[]) {
   if (slug.length >= 1) {
     pageID = slug[0];
 
-    const page: any = await retrievePage(pageID);
+    const page: any = await NotionApiCache.RetrievePage(pageID);
     if (page && pagePublished(page)) {
       summary = rawText(page?.properties?.Summary?.rich_text);
       // May be linked from child-page not in database list which still have a default title property
@@ -79,7 +77,7 @@ async function parseSlug(slug: string[]) {
 }
 
 async function ContentRender({ pageID }: { pageID: string }) {
-  const blocks = await retrieveBlockChildren(pageID);
+  const blocks = await NotionApiCache.RetrieveBlockChildren(pageID);
   if (!blocks) {
     return <div />;
   }

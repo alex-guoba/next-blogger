@@ -7,7 +7,7 @@ import Link from "next/link";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn, formatDate } from "@/lib/utils";
 
-interface PostRowLayoutProps extends React.HTMLAttributes<HTMLDivElement>{
+interface PostRowLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   items: TypePostList;
 }
 

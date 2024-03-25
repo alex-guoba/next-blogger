@@ -5,21 +5,22 @@ import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/componen
 import { Separator } from "@/components/ui/separator";
 
 // import { env } from "@/env.mjs";
-import { QueryDatabase, RetrieveDatabase } from "@/app/notion/api";
+// import { QueryDatabase } from "@/app/notion/api";
 import { DatabaseRenderer } from "@/app/notion/_components/db/database";
 import { IconRender } from "@/app/notion/_components/emoji";
 import RichText from "@/app/notion/text";
 import { filterBase } from "@/app/notion/block-parse";
+import { NotionApiCache } from "@/app/notion/cache";
 
 export default async function Page({ params }: { params: { row: string[] } }) {
   const dbID = params.row[0];
-  const columns: any = await RetrieveDatabase(dbID);
+  const columns: any = await NotionApiCache.RetrieveDatabase(dbID);
   if (!columns) {
     return null;
   }
 
   const queryParam = filterBase(dbID);
-  const data = await QueryDatabase(dbID, queryParam);
+  const data = await NotionApiCache.QueryDatabase(dbID, queryParam);
 
   const { icon, title, description } = columns;
   return (

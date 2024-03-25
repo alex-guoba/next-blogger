@@ -1,10 +1,15 @@
+import { cache } from "react";
+
 import {
   GetDatabaseResponse,
   QueryDatabaseParameters,
   QueryDatabaseResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-import { proxyListBlockChildren, proxyQueryDatabases, proxyRetrieveDatabase, proxyRetrievePage } from "./proxy/proxy";
 
+// import { proxyListBlockChildren, proxyQueryDatabases, proxyRetrieveDatabase, proxyRetrievePage } from "./proxy/proxy";
+import { NotionAPIWithRetry } from "./public";
+
+const api = new NotionAPIWithRetry();
 /**
  * Returns a random integer between the specified values, inclusive.
  * The value is no lower than `min`, and is less than or equal to `max`.
@@ -23,56 +28,32 @@ function getRandomInt(minimum: number, maximum: number): number {
  ** retrieve database
  ** see: https://developers.notion.com/reference/retrieve-a-database
  */
-export const RetrieveDatabase = async (database_id: string): Promise<GetDatabaseResponse | null> => {
-  return proxyRetrieveDatabase(database_id);
-};
+export const RetrieveDatabase = cache(async (database_id: string): Promise<GetDatabaseResponse | null> => {
+  return api.RetrieveDatabase(database_id);
+});
 
-// Get rows(pages) from database
 // API: https://developers.notion.com/reference/post-database-query
 export type TypePostList = QueryDatabaseResponse["results"];
-export const QueryDatabase = async (database_id: string, params: QueryDatabaseParameters): Promise<TypePostList> => {
-  const start = new Date().getTime();
+export const QueryDatabase = cache(
+  async (database_id: string, params: QueryDatabaseParameters): Promise<TypePostList> => {
+    const start = new Date().getTime();
 
-  const response = await proxyQueryDatabases(database_id, params);
-  const end = new Date().getTime();
-  console.log("[QueryDatabase]", `${end - start}ms`);
-  return response.results;
-};
+    const response = await api.QueryDatabases(database_id, params);
+    const end = new Date().getTime();
+    console.log("[QueryDatabase]", `${end - start}ms`);
+    return response.results;
+  }
+);
 
 //
-// 读取一个page的基础数据（page object）
 // API: https://developers.notion.com/reference/retrieve-a-page
-export const retrievePage = async (pageId: any) => {
+export const RetrievePage = cache(async (page_id: string) => {
   const start = new Date().getTime();
-  // const response = await notion.pages.retrieve({ page_id: pageId });
-  const response = await proxyRetrievePage(pageId);
+  const response = await api.RetrievePage(page_id);
   const end = new Date().getTime();
-  console.log("[getPage] for ", `${pageId}: ${end - start}ms`);
+  console.log("[getPage] for ", `${page_id}: ${end - start}ms`);
   return response;
-};
-
-//
-// export const queryPageBySlug = async (database_id: string, slug: string) => {
-//   const start = new Date().getTime();
-
-//   const response = await notion.databases.query({
-//     database_id: database_id,
-//     filter: {
-//       property: "Slug",
-//       formula: {
-//         string: {
-//           equals: slug,
-//         },
-//       },
-//     },
-//   });
-//   const end = new Date().getTime();
-//   console.log("[getPageFromSlug]", `${end - start}ms`);
-
-//   if (response?.results?.length) {
-//     return response?.results?.[0];
-//   }
-// };
+});
 
 // Most of the time, block id for query children is block's own id.
 // but some times it will use another id like duplicated synced block
@@ -91,12 +72,13 @@ const getBlockID = (block: any): string => {
 //
 // Returns a paginated array of child block objects contained in the block using the ID specified.
 // see: https://developers.notion.com/reference/get-block-children
-export const retrieveBlockChildren = async (blockID: string): Promise<any> => {
+// NOTE: Calling a memoized function outside of a component will not use the cache.
+export const RetrieveBlockChildren = cache(async (block_id: string): Promise<any> => {
   const start = new Date().getTime();
 
-  const blockId = blockID.replaceAll("-", ""); // ???
+  const blockId = block_id.replaceAll("-", ""); // ???
 
-  const result = await proxyListBlockChildren(blockId);
+  const result = await api.ListBlockChildren(blockId);
   if (!result) {
     return [];
   }
@@ -108,7 +90,7 @@ export const retrieveBlockChildren = async (blockID: string): Promise<any> => {
     // ignore child pages
     if (block.has_children && block.type != "child_page") {
       const blockID = getBlockID(block);
-      const children = await retrieveBlockChildren(blockID);
+      const children = await RetrieveBlockChildren(blockID);
       return { ...block, children };
     }
 
@@ -148,4 +130,4 @@ export const retrieveBlockChildren = async (blockID: string): Promise<any> => {
       return acc;
     }, [])
   );
-};
+});

@@ -1,6 +1,6 @@
 // import Link from "next/link";
 
-import { QueryDatabase, TypePostList } from "@/app/notion/api";
+import { TypePostList } from "@/app/notion/api";
 import "@/app/styles/globals.css";
 import Shell from "@/components/shells/shell";
 import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/components/page-header";
@@ -10,6 +10,7 @@ import { filterBase, filterSelect, sorterProperties } from "@/app/notion/block-p
 import { env } from "@/env.mjs";
 import { ContentLoadingSkeleton } from "@/components/post-skeleton";
 import { TagList } from "@/components/layouts/tag";
+import { NotionApiCache } from "../notion/cache";
 
 function dbParams() {
   const defaultParam = filterBase(env.NOTION_DATABASE_ID);
@@ -35,14 +36,12 @@ async function TagRender({ posts }: { posts: TypePostList }) {
     });
   });
 
-  return (
-    <TagList tagCounter={tagCounter} />
-  );
+  return <TagList tagCounter={tagCounter} />;
 }
 
 export default async function Home() {
   const queryParams = dbParams();
-  const posts = await QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
+  const posts = await NotionApiCache.QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
 
   return (
     <Shell variant="centered" className="md:pb-10">

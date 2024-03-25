@@ -1,6 +1,6 @@
 // import Link from "next/link";
 
-import { QueryDatabase, TypePostList } from "@/app/notion/api";
+import { TypePostList } from "@/app/notion/api";
 import "@/app/styles/globals.css";
 import Shell from "@/components/shells/shell";
 import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/components/page-header";
@@ -12,6 +12,7 @@ import { PostPagination } from "@/components/pagination";
 // import { PostCardLayout } from "@/components/layouts/list-postcard";
 import { PostRowsLayout } from "@/components/layouts/list-post-row";
 import { TagList } from "@/components/layouts/tag";
+import { NotionApiCache } from "../notion/cache";
 
 function dbParams() {
   const defaultParam = filterBase(env.NOTION_DATABASE_ID);
@@ -42,14 +43,12 @@ async function TagFoot({ posts }: { posts: TypePostList }) {
     });
   });
 
-  return (
-    <TagList tagCounter={tagCounter} className="gap-0.5 grid-cols-3 md:grid-cols-4 lg:grid-cols-5" />
-  );
+  return <TagList tagCounter={tagCounter} className="grid-cols-3 gap-0.5 md:grid-cols-4 lg:grid-cols-5" />;
 }
 
 export default async function Home({ searchParams }: Props) {
   const queryParams = dbParams();
-  const posts = await QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
+  const posts = await NotionApiCache.QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
   const total = posts.length;
 
   const page = Number(searchParams["page"]) || 1;

@@ -2,9 +2,9 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 import { RenderBlock } from "@/app/notion/render";
-import { QueryDatabase, retrieveBlockChildren } from "@/app/notion/api";
+// import { QueryDatabase } from "@/app/notion/api";
 import Shell from "@/components/shells/shell";
-import React from "react";
+import React, { cache } from "react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
@@ -16,6 +16,7 @@ import { filterBase, filterSelect, filterText, rawText } from "@/app/notion/bloc
 import { notFound } from "next/navigation";
 import { env } from "@/env.mjs";
 import { ContentLoadingSkeleton } from "@/components/post-skeleton";
+import { NotionApiCache } from "@/app/notion/cache";
 
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
 
@@ -42,7 +43,7 @@ type Props = {
 
 // Generate metadata for this page.
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const pageInfo = await filterPageBySlug(params.slug);
+  const pageInfo = await filterPageBySlug(params.slug[0]);
 
   return {
     title: pageInfo.title,
@@ -77,7 +78,8 @@ function slugParam(slug: string) {
   return { ...defaultParam, ...filters };
 }
 
-async function filterPageBySlug(slug: string[]) {
+// cache: If your arguments are not primitives (ex. objects, functions, arrays), ensure you’re passing the same object reference.
+const filterPageBySlug = cache(async (slug: string) => {
   const info = {
     pageID: "",
     lastEditTime: "",
@@ -85,10 +87,10 @@ async function filterPageBySlug(slug: string[]) {
     summary: "",
   };
 
-  if (slug.length >= 1) {
-    const params = slugParam(slug[0]);
+  if (slug) {
+    const params = slugParam(slug);
 
-    const posts = await QueryDatabase(env.NOTION_DATABASE_ID, params);
+    const posts = await NotionApiCache.QueryDatabase(env.NOTION_DATABASE_ID, params);
     if (posts.length == 0) {
       return info;
     }
@@ -100,10 +102,10 @@ async function filterPageBySlug(slug: string[]) {
     info.lastEditTime = post?.properties?.PublishDate?.date?.start || post?.last_edited_time;
   }
   return info;
-}
+});
 
 async function ContentRender({ pageID }: { pageID: string }) {
-  const blocks = await retrieveBlockChildren(pageID);
+  const blocks = await NotionApiCache.RetrieveBlockChildren(pageID);
   if (!blocks) {
     return <div />;
   }
@@ -119,16 +121,11 @@ async function ContentRender({ pageID }: { pageID: string }) {
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   // retrieve page meta info by page ID
-  const { pageID, title, summary } = await filterPageBySlug(params.slug);
+  const { pageID, title, summary } = await filterPageBySlug(params.slug[0]);
   if (!pageID || !title) {
     console.log("page not found or unpublished", pageID, title);
     return notFound();
   }
-
-  // const blocks = await retrieveBlockChildren(pageID);
-  // if (!blocks) {
-  //   return <div />;
-  // }
 
   return (
     <Shell as="article" className="relative flex min-h-screen flex-col">
@@ -138,12 +135,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
           {summary}
         </PageHeaderDescription>
       </PageHeader>
-
-      {/* <section className="flex w-full flex-col gap-y-0.5 mt-8">
-        {blocks.map((block: any) => (
-          <RenderBlock key={block.id} block={block}></RenderBlock>
-        ))}
-      </section> */}
 
       <React.Suspense fallback={<ContentLoadingSkeleton></ContentLoadingSkeleton>}>
         <ContentRender pageID={pageID}></ContentRender>

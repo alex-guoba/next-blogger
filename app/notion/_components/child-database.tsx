@@ -1,11 +1,12 @@
 import Link from "next/link";
 
-import { QueryDatabase, RetrieveDatabase } from "../api";
+// import { QueryDatabase } from "../api";
 import { cn } from "@/lib/utils";
 import RichText from "../text";
 import { IconRender } from "./emoji";
 import { DatabaseRenderer } from "./db/database";
 import { filterBase } from "../block-parse";
+import { NotionApiCache } from "../cache";
 
 interface ChildDatabaseBlockProps {
   block: any;
@@ -16,7 +17,7 @@ export async function ChildDatabaseRenderer({ block, className }: ChildDatabaseB
   const { id } = block;
 
   // Note: database view in Notion client can't be retrieved, as it's has a invliad id which has no relationship with the original one
-  const columns: any = await RetrieveDatabase(id);
+  const columns: any = await NotionApiCache.RetrieveDatabase(id);
   if (!columns) {
     return null;
   }
@@ -37,7 +38,7 @@ export async function ChildDatabaseRenderer({ block, className }: ChildDatabaseB
   }
 
   const queryParam = filterBase(id);
-  const data = await QueryDatabase(id, queryParam);
+  const data = await NotionApiCache.QueryDatabase(id, queryParam);
   return (
     <div>
       <div className="text-lg font-bold">
