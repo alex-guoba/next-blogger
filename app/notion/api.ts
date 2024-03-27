@@ -41,7 +41,7 @@ export const QueryDatabase = cache(
     const response = await api.QueryDatabases(database_id, params);
     const end = new Date().getTime();
     console.log("[QueryDatabase]", `${end - start}ms`);
-    return response.results;
+    return response?.results || [];
   }
 );
 

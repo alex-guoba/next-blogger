@@ -28,7 +28,7 @@
     "**/*.tsx", 
     "**/*.mjs",
     ".next/types/**/*.ts",
-    "app/notion/argo/tab-group",
+    "app/notion/argo/tab-group", "lib/cache-handler.js",
 
   ],
   "exclude": ["node_modules"]
