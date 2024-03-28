@@ -41,7 +41,7 @@ export function PostRowsLayout({ items, className }: PostRowLayoutProps) {
     return null;
   }
   return (
-    <section className={cn("grid grid-cols-2 gap-8", className)}>
+    <section className={cn("grid grid-cols-1 gap-8 md:grid-cols-2", className)}>
       {items.map((post: any) => {
         return <PostRowGrid key={post?.id} post={post}></PostRowGrid>;
       })}

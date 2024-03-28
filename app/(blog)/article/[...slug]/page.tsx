@@ -16,22 +16,25 @@ import { notFound } from "next/navigation";
 import { env } from "@/env.mjs";
 import { ContentLoadingSkeleton } from "@/components/post-skeleton";
 import { NotionApiCache } from "@/app/notion/cache";
+import { ArticlePost, dbQueryParams } from "@/app/notion/fitler";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
 
-// export const dynamic = 'force-dynamic';
-
 /**
- * If you want to enable static rendering, uncommment the following function
+ * SSG for Homepage
  */
-// export async function generateStaticParams() {
-//   const database = await QueryDatabase(env.NOTION_DATABASE_ID);
-//   return database.map((page: any) => {
-//     const slug = [page.id];
-//     return { slug };
-//   });
-// }
+export async function generateStaticParams() {
+  const queryParams = dbQueryParams(env.NOTION_DATABASE_ID, ArticlePost);
+  const posts = await NotionApiCache.QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
+
+  const subpost = posts.slice(0, env.POST_PAGE_SIZES);
+
+  return subpost.map((page) => {
+    const slug = [page.id];
+    return { slug };
+  });
+}
 
 type Props = {
   params: { slug: string[] };

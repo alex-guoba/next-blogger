@@ -6,25 +6,13 @@ import Shell from "@/components/shells/shell";
 import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/components/page-header";
 // import { Separator } from "@/components/ui/separator";
 import React from "react";
-import { filterBase, filterSelect, sorterProperties } from "@/app/notion/block-parse";
 import { env } from "@/env.mjs";
 import { PostPagination } from "@/components/pagination";
 import { PostCardLayout } from "@/components/layouts/list-postcard";
 import { NotionApiCache } from "@/app/notion/cache";
+import { ArticleProject, dbQueryParams } from "@/app/notion/fitler";
 
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
-
-function dbParams() {
-  const defaultParam = filterBase(env.NOTION_DATABASE_ID);
-  const filters = {
-    filter: {
-      and: [filterSelect("Status", "Published").filter, filterSelect("Type", "Project").filter],
-    },
-  };
-  const sorter = sorterProperties([{ property: "PublishDate", direction: "descending" }]);
-
-  return { ...defaultParam, ...filters, ...sorter };
-}
 
 type Props = {
   params: { slug: string[] };
@@ -32,7 +20,7 @@ type Props = {
 };
 
 export default async function Home({ searchParams }: Props) {
-  const queryParams = dbParams();
+  const queryParams = dbQueryParams(env.NOTION_DATABASE_ID, ArticleProject);
   const posts = await NotionApiCache.QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
   const total = posts.length;
 

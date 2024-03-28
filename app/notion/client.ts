@@ -2,7 +2,13 @@
 
 import { env } from "@/env.mjs";
 import { APIErrorCode, Client, ClientErrorCode, LogLevel } from "@notionhq/client";
-import { GetDatabaseResponse, GetPageResponse, ListBlockChildrenResponse, QueryDatabaseParameters, QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
+import {
+  GetDatabaseResponse,
+  GetPageResponse,
+  ListBlockChildrenResponse,
+  QueryDatabaseParameters,
+  QueryDatabaseResponse,
+} from "@notionhq/client/build/src/api-endpoints";
 
 const dftMaxRetry = 2;
 
@@ -32,7 +38,10 @@ export class NotionAPIWithRetry {
     return false;
   }
 
-  public async RetrieveDatabase(database_id: string, maxTries: number = dftMaxRetry): Promise<GetDatabaseResponse | null> {
+  public async RetrieveDatabase(
+    database_id: string,
+    maxTries: number = dftMaxRetry
+  ): Promise<GetDatabaseResponse | null> {
     try {
       const response = await this.notion.databases.retrieve({
         database_id: database_id,
@@ -92,7 +101,10 @@ export class NotionAPIWithRetry {
     }
   }
 
-  public async ListBlockChildren(block_id: string, maxTries: number = dftMaxRetry): Promise<ListBlockChildrenResponse | null> {
+  public async ListBlockChildren(
+    block_id: string,
+    maxTries: number = dftMaxRetry
+  ): Promise<ListBlockChildrenResponse | null> {
     try {
       // The response may contain fewer than the default number of results. so we ignored the page size
       const response = await this.notion.blocks.children.list({

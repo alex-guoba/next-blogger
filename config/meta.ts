@@ -11,7 +11,7 @@ export const siteMeta = {
 
   // mastodon: 'https://mastodon.social/@mastodonuser',
   email: "address@yoursite.com",
-  github: "https://github.com/alex-guoba",
+  github: "https://github.com/alex-guoba/next-blogger",
   twitter: "https://twitter.com/gelco",
   // facebook: 'https://facebook.com',
   // youtube: 'https://youtube.com',

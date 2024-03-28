@@ -67,7 +67,7 @@ export function MainNav({ items }: MainNavProps) {
                 <NavigationMenuItem key={item.title}>
                   <NavigationMenuTrigger className="h-auto capitalize">{item.title}</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                    <ul className="grid w-[350px] grid-cols-1 gap-3 p-4">
                       {item.items.map((item) => (
                         <ListItem key={item.title} title={item.title} href={item.href}>
                           {item.description}

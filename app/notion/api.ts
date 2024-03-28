@@ -7,7 +7,7 @@ import {
 } from "@notionhq/client/build/src/api-endpoints";
 
 // import { proxyListBlockChildren, proxyQueryDatabases, proxyRetrieveDatabase, proxyRetrievePage } from "./proxy/proxy";
-import { NotionAPIWithRetry } from "./public";
+import { NotionAPIWithRetry } from "./client";
 
 const api = new NotionAPIWithRetry();
 /**

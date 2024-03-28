@@ -4,7 +4,7 @@ import React from "react";
 import Shell from "../shells/shell";
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
-import { siteConfig } from "@/config/site";
+// import { siteConfig } from "@/config/site";
 import { siteMeta } from "@/config/meta";
 import { ModeToggle } from "@/components/layouts/mode-toggle";
 import { buttonVariants } from "@/components/ui/button";
@@ -13,7 +13,7 @@ export function SiteFooter() {
   return (
     <footer className="w-full border-t bg-background">
       <Shell>
-        <section
+        {/* <section
           id="footer-content"
           aria-labelledby="footer-content-heading"
           className="flex flex-col gap-10 lg:flex-row lg:gap-20"
@@ -51,7 +51,7 @@ export function SiteFooter() {
               </div>
             ))}
           </section>
-          {/* <section
+          <section
                 id="newsletter"
                 aria-labelledby="newsletter-heading"
                 className="space-y-3"
@@ -60,19 +60,19 @@ export function SiteFooter() {
                   Subscribe to our newsletter
                 </h4>
                 <JoinNewsletterForm />
-              </section> */}
-        </section>
+              </section>
+        </section> */}
 
         <section id="footer-bottom" aria-labelledby="footer-bottom-heading" className="flex items-center space-x-4">
           <div className="flex-1 text-left text-sm leading-loose text-muted-foreground">
-            Built by{" "}
+            Powered by{" "}
             <Link
-              href={siteMeta.twitter}
+              href={siteMeta.github}
               target="_blank"
               rel="noreferrer"
               className="font-semibold transition-colors hover:text-foreground"
             >
-              gelco
+              next-blogger
               <span className="sr-only">Twitter</span>
             </Link>
             .

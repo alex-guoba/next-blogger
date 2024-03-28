@@ -6,23 +6,11 @@ import Shell from "@/components/shells/shell";
 import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
-import { filterBase, filterSelect, sorterProperties } from "@/app/notion/block-parse";
 import { env } from "@/env.mjs";
 import { ContentLoadingSkeleton } from "@/components/post-skeleton";
 import { TagList } from "@/components/layouts/tag";
 import { NotionApiCache } from "../notion/cache";
-
-function dbParams() {
-  const defaultParam = filterBase(env.NOTION_DATABASE_ID);
-  const filters = {
-    filter: {
-      and: [filterSelect("Status", "Published").filter, filterSelect("Type", "Post").filter],
-    },
-  };
-  const sorter = sorterProperties([{ property: "PublishDate", direction: "descending" }]);
-
-  return { ...defaultParam, ...filters, ...sorter };
-}
+import { ArticlePost, dbQueryParams } from "../notion/fitler";
 
 async function TagRender({ posts }: { posts: TypePostList }) {
   if (!posts || posts.length == 0) {
@@ -40,7 +28,7 @@ async function TagRender({ posts }: { posts: TypePostList }) {
 }
 
 export default async function Home() {
-  const queryParams = dbParams();
+  const queryParams = dbQueryParams(env.NOTION_DATABASE_ID, ArticlePost);
   const posts = await NotionApiCache.QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
 
   return (
