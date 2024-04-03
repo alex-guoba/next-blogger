@@ -4,7 +4,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import React from "react";
 import { RenderBlock } from "../render";
 
-const headingVariants = cva("font-bold break-words dark:text-white mt-1.5", {
+const headingVariants = cva("font-bold break-words dark:text-white mt-1.5 scroll-mt-16 tracking-tight", {
   variants: {
     variant: {
       heading_1: "py-4 text-3xl",
@@ -52,7 +52,7 @@ export function HeadingRender({
     // <div key={id} =>
     <details key={id} className={cn(className, style)}>
       <summary>
-        <Comp key={id} id={id} className={cn(headingVariants({ variant }), "inline-block")} {...props}>
+        <Comp id={id} className={cn(headingVariants({ variant }), "inline-block")} {...props}>
           <RichText title={rich_text} />
         </Comp>
       </summary>

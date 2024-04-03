@@ -18,7 +18,7 @@ export function TagFooter({ posts }: { posts: TypePostList }) {
     <div>
       <Separator className="my-8" />
       <p className="py-6 font-bold antialiased">Explore articles by category:</p>
-      <TagList tagCounter={tagCounter} className="grid-cols-3 gap-0.5 md:grid-cols-4 lg:grid-cols-5" />;
+      <TagList tagCounter={tagCounter} className="grid-cols-3 gap-0.5 md:grid-cols-4 lg:grid-cols-5" />
     </div>
   );
 }

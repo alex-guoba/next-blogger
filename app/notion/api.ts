@@ -73,7 +73,7 @@ const getBlockID = (block: any): string => {
 // Returns a paginated array of child block objects contained in the block using the ID specified.
 // see: https://developers.notion.com/reference/get-block-children
 // NOTE: Calling a memoized function outside of a component will not use the cache.
-export const RetrieveBlockChildren = cache(async (block_id: string): Promise<any> => {
+export const RetrieveBlockChildren = cache(async (block_id: string): Promise<Array<any>> => {
   const start = new Date().getTime();
 
   const blockId = block_id.replaceAll("-", ""); // ???
