@@ -1,7 +1,7 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from "@/components/ui/data-table/column-header";
-import { formatDate } from "@/lib/utils";
+// import { DataTableColumnHeader } from "@/components/ui/data-table/column-header";
+// import { formatDate } from "@/lib/utils";
 
 export type NotionRowProps = {
   id: string;
@@ -35,7 +35,7 @@ export function BaseColumn(): ColumnDef<NotionRowProps>[] {
       enableSorting: false,
       enableHiding: false,
     },
-    {
+    /*{
       accessorKey: "id",
       header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />,
       enableSorting: false,
@@ -87,7 +87,8 @@ export function BaseColumn(): ColumnDef<NotionRowProps>[] {
           />
         );
       },
-    },
+    },*/
+
     // {
     //   accessorKey: "url",
     //   header: ({ column }) => <DataTableColumnHeader column={column} title="URL" />,

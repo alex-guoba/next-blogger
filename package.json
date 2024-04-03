@@ -4,21 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start:standalone": "node .next/standalone/server.js",
     "start": "next start",
     "start:mem": "NODE_OPTIONS='--inspect' next dev",
     "lint": "next lint",
     "shadcn:add": "npx shadcn-ui@latest add",
     "prettier": "prettier --check --ignore-path .gitignore  \"**/*.{js,jsx,ts,tsx}\"",
-    "prettier:fix": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,ts,tsx}\"",
-    "db:init": "npx prisma migrate deploy",
-    "db:reset": "npx prisma db push --force-reset"
+    "prettier:fix": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@notionhq/client": "^2.2.14",
-    "@prisma/client": "^5.10.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -47,6 +44,7 @@
     "react-hook-form": "^7.50.1",
     "react-pdf": "^7.7.0",
     "react-resize-detector": "^10.0.1",
+    "react-share": "^5.1.0",
     "react-wrap-balancer": "^1.1.0",
     "sharp": "^0.33.2",
     "simplebar-react": "^3.2.4",
@@ -66,7 +64,6 @@
     "postcss": "^8",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "prisma": "^5.10.2",
     "shiki": "^1.1.7",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"

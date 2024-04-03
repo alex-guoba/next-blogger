@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Example Page" src="https://github.com/alex-guoba/next-blogger/blob/main/assets/2872637/5d23c303-6031-47aa-beec-7aad56357337.png?raw=true" width="689">
+  <img alt="Example Page" src="https://github.com/alex-guoba/next-blogger/assets/2872637/b05f04b0-3d05-4ab3-8a8e-be2093a349c5" width="689">
 </p>
 
 Next-Blogger built on [Next.js 14+](https://nextjs.org/) and [Tailwind CSS](https://tailwindcss.com/), use [Notion](https://www.notion.so]) to manage your content. 
@@ -10,7 +10,7 @@ Next-Blogger built on [Next.js 14+](https://nextjs.org/) and [Tailwind CSS](http
 
 1. Built using Next.js(14+ with App Router ), Typescript, Tailwind CSS, and other plugins (Shiki, React-pdf, and more).
 2. Utilizes the [Notion Public API](https://developers.notion.com/).
-3. Supports caching Notion data using Prisma to reduce API calls and improve overall performance.
+3. Supports caching Notion data using `unstable_cache` to reduce API calls and improve overall performance.
 4. Includes a dark mode option.
 5. SEO friendly with RSS feed, sitemaps and more!
 6. Includes load testing scripts, see [load-testing](./scripts/load-testing/).
@@ -24,7 +24,6 @@ Next-Blogger built on [Next.js 14+](https://nextjs.org/) and [Tailwind CSS](http
 1. [Next.js](https://nextjs.org/)
 2. [Notion](https://www.notion.so/)
 3. [Tailwind CSS](https://tailwindcss.com/) and [shadcn](https://ui.shadcn.com/)
-4. [Prisma](https://www.prisma.io/)
 
 ### Components
 
@@ -59,26 +58,8 @@ npm install
 NOTION_TOKEN=
 NOTION_DATABASE_ID=
 ```
-4. (Optional) For performance considerations, it is recommended to configure database caching. See the Prisma documentation for various database [Connection URLs](https://www.prisma.io/docs/orm/reference/connection-urls). The default in the code is [postgresql](/prisma/schema.prisma):
 
-```prisma
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-```
-
-```ini
-DATABASE_URL="postgres://xxxx"
-```
-
-The first time you run it, you need to create the relevant table structure.
-
-```shell
-npm run db:init
-```
-
-5. Run locally:
+4. Run locally:
 
 ```bash
 # Locally
@@ -176,19 +157,12 @@ The main reason is that most implementations on GitHub are based on Notion's uno
 - During testing, I found that the unofficial API sometimes fails to fetch large pages. In contrast, the public API supports pagination and is more stable.
 In summary, while the Public API lacks some advanced features like Database View support, it meets the basic requirements. Therefore, I chose to implement it using the Notion Public API.
 
-3. Why Use `Prisma` to Cache Notion Data
-
-The Notion API has frequency limitations, and for some deeply nested pages, multiple accesses can easily exceed these limitations. Additionally, API access can be unstable in certain regions, significantly impacting page performance. To address these issues, caching is used. Furthermore, some data returned by the Notion API, such as image URLs, have a limited validity period, necessitating cache invalidation. By default, the cache expires after one hour. For more details on expiration strategies, refer to the official documentation on [notion-hosted-files](https://developers.notion.com/reference/file-object#notion-hosted-files).
-
-`Prisma` is chosen as the caching component due to its flexibility and support for various databases, including MySQL, MongoDB, and others. For more information, refer to the official [Doc](https://www.prisma.io/docs/orm/overview/databases).
 
 ### Why iframely?
 
 1. For block types such as `image`, `video`, `bookmark`, and `link-preview`, the Notion API only returns URLs without rendering the relevant data structures (e.g., title, description, icon, etc.). Therefore, an alternative solution is needed, and iframely is chosen for this purpose. Notion officially also uses [iframely](https://www.notion.so/help/embed-and-connect-other-apps#embeds-in-notion).
 
 2. Since iframely requires payment, unfurl.js is used as a fallback option, although there may be some differences in effectiveness.
-
-## TODO
 
 
 ## Reference

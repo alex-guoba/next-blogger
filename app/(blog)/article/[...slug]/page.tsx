@@ -19,6 +19,7 @@ import { NotionApiCache } from "@/app/notion/cache";
 import { ArticlePost, dbQueryParams } from "@/app/notion/fitler";
 import { getTableOfContents } from "@/app/notion/toc";
 import { DashboardTableOfContents } from "@/components/layouts/toc";
+import { ShareBar } from "@/components/share-bar";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
@@ -92,6 +93,8 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   if (!blocks) {
     return <div />;
   }
+  const url = siteMeta.siteUrl + "/" + params.slug.join("/");
+
   const toc = getTableOfContents(blocks);
   const has_toc = toc.items.length > 0;
 
@@ -104,7 +107,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
             {formatDate(lastEditTime)}
           </PageHeaderDescription>
         </PageHeader>
-        {/* <Separator className="mb-2.5" /> */}
 
         <React.Suspense fallback={<ContentLoadingSkeleton></ContentLoadingSkeleton>}>
           <section className="mt-8 flex w-full flex-col gap-y-0.5">
@@ -113,6 +115,8 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
             ))}
           </section>
         </React.Suspense>
+
+        <ShareBar url={url} title={title} image={siteMeta.siteUrl + siteMeta.socialBanner}></ShareBar>
 
         <Link href="/" className={cn(buttonVariants({ variant: "ghost", className: "mx-auto mt-4 w-fit" }))}>
           <ChevronLeftIcon className="mr-2 h-4 w-4" aria-hidden="true" />
