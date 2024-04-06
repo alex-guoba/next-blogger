@@ -32,11 +32,12 @@ Next-Blogger built on [Next.js 14+](https://nextjs.org/) and [Tailwind CSS](http
 3. [iframely](https://iframely.com/) / [unfurl](https://github.com/jacktuck/unfurl): Renders `bookmark`, `link-preview`, and `video` blocks (Notion only returns URLs without Open Graph infos).
 4. [Katex](https://katex.org/): Renders `equation` blocks.
 
-### Platforms
+## Live demo
 
-(To be added)
+- https://goroutine.cn/
+- https://next-blogger-inky.vercel.app/
 
-## ✨ Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -59,7 +60,8 @@ NOTION_TOKEN=
 NOTION_DATABASE_ID=
 ```
 
-4. Run locally:
+
+1. Run locally:
 
 ```bash
 # Locally
@@ -146,7 +148,7 @@ Disabling `dynamic routes` can reduce redundant rendering and significantly impr
 
 ## Learn More
 
-### Why Notion?
+### Why Notion ?
 
 1. Why choose Notion as the content editor?
 I have been using Notion for many years. In the past, when creating blogs, I would write content in Notion, copy it to editors like Markdown, and then publish it using hexo. This process was cumbersome and required converting the format to Markdown, which was inconvenient. By using Notion as a CMS, I can directly publish content written in Notion without the need for frequent synchronization after making changes.
@@ -160,13 +162,25 @@ The main reason is that most implementations on GitHub are based on Notion's uno
 In summary, while the Public API lacks some advanced features like Database View support, it meets the basic requirements. Therefore, I chose to implement it using the Notion Public API.
 
 
-### Why iframely?
+### Why iframely ?
 
 1. For block types such as `image`, `video`, `bookmark`, and `link-preview`, the Notion API only returns URLs without rendering the relevant data structures (e.g., title, description, icon, etc.). Therefore, an alternative solution is needed, and iframely is chosen for this purpose. Notion officially also uses [iframely](https://www.notion.so/help/embed-and-connect-other-apps#embeds-in-notion).
 
 2. Since iframely requires payment, unfurl.js is used as a fallback option, although there may be some differences in effectiveness.
 
+### How to get `NOTION_TOKEN` ?
 
-## Reference
+- Open https://www.notion.so/my-integrations in your browser.
+- Click "New integration" and enter a name to submit.
+- Click "show" and then copy the token.
+- Copy this [Notion template](https://gelco.notion.site/577a7365a3d3442aa3cddb18b4458c88?v=c0455cd1391e41a2b05d9b1536398d13), delete all the data, and click the settings button in the top right corner. Add the integration you created under Connections.
+
+### How to get `NOTION_DATABASE_ID` ?
+
+- Open the Notion database, click the "Share" button in the top right corner, and then click "Copy link".
+- The link will look like this: https://gelco.notion.site/577a7365a3d3442aa3cddb18b4458c88?v=c0455cd1391e41a2b05d9b1536398d13. The **577a7365a3d3442aa3cddb18b4458c88** part is the Database ID.
+
+## Acknowledgments
 
 1. [Notion Public API](https://developers.notion.com/reference/intro)
+2. [Taxonomy](https://tx.shadcn.com/)

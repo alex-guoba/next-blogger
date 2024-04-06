@@ -31,8 +31,10 @@
 3. [iframely](https://iframely.com/) / [unfurl](https://github.com/jacktuck/unfurl): 渲染`bookmark`、`link-preview`和`video`块（Notion仅返回URL，不含Open Graph信息）
 4. [Katex](https://katex.org/): 渲染`equation`块
 
-### 平台
+## Live demo
 
+- https://goroutine.cn/
+- https://next-blogger-inky.vercel.app/
 
 ## 入门指南
 
@@ -156,6 +158,18 @@ npm run start
 1. `image`, `video`, `bookmark` 以及 `link-preview`等类型的block，Notion API仅返回URL，没有渲染相关数据结构（如title、desciprtion、icon等）。所以需要自己寻求解决方案，此处选择了iframely作为替代。Notion官方也是采用[iframely](https://www.notion.so/help/embed-and-connect-other-apps#embeds-in-notion)。
 
 2. iframely需要付费，所以也采用了unfurl.js作为兜底，效果上会有差距。
+
+3. 获取NotionToken
+
+- 浏览器打开https://www.notion.so/my-integrations
+- 点击New integration 输入name提交
+- 点击show，然后copy
+- 复制这个[Notion模板](https://gelco.notion.site/910de43a0db24ebc9a34209ffab613a7?v=7f2614c5918f4a5bab3a6637b12a19f9&pvs=4)，删掉所有的数据，并点击右上角设置，Connections添加你创建的Integration。
+
+4. 获取NotionDatabaseID
+
+打开Notion数据库，点击右上角的Share，然后点击Copy link
+获取链接后比如https://gelco.notion.site/910de43a0db24ebc9a34209ffab613a7?v=7f2614c5918f4a5bab3a6637b12a19f9&pvs=4 中间的**910de43a0db24ebc9a34209ffab613a7**就是DatabaseID
 
 
 ## Reference
