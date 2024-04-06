@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       description: pageInfo.summary,
       type: "article",
-      url: siteMeta.siteUrl + "/" + params.slug.join("/"),
+      url: siteMeta.siteUrl + "/article/" + params.slug.join("/"),
       // image: pageInfo.cover,
     },
     twitter: {
@@ -93,7 +93,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   if (!blocks) {
     return <div />;
   }
-  const url = siteMeta.siteUrl + "/" + params.slug.join("/");
+  const url = siteMeta.siteUrl + "/article/" + params.slug.join("/");
 
   const toc = getTableOfContents(blocks);
   const has_toc = toc.items.length > 0;

@@ -68,6 +68,8 @@ npm run dev
 # Production
 npm run build
 npm run start
+# or use pm2 to manage
+pm2 start npm --  start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.

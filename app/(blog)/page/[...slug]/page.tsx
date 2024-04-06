@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       description: pageInfo.summary,
       type: "article",
-      url: siteMeta.siteUrl + "/" + params.slug.join("/"),
+      url: siteMeta.siteUrl + "/page/" + params.slug.join("/"),
       // image: pageInfo.cover,
     },
     twitter: {
