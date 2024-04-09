@@ -63,7 +63,11 @@ export function SiteFooter() {
               </section>
         </section> */}
 
-        <section id="footer-bottom" aria-labelledby="footer-bottom-heading" className="flex items-center justify-between space-x-4">
+        <section
+          id="footer-bottom"
+          aria-labelledby="footer-bottom-heading"
+          className="flex items-center justify-between space-x-4"
+        >
           <div className="text-left text-sm leading-loose text-muted-foreground">
             Powered by{" "}
             <Link
@@ -77,7 +81,7 @@ export function SiteFooter() {
             </Link>
             .
           </div>
-          <div className="text-sm leading-loose font-sans">{siteMeta.copyright}</div>
+          <div className="font-sans text-sm leading-loose">{siteMeta.copyright}</div>
           <div className="flex items-center space-x-1">
             <Link
               href={siteMeta.github}

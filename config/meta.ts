@@ -19,7 +19,7 @@ export const siteMeta = {
   // instagram: 'https://www.instagram.com',
   locale: "en-US",
   copyright: "",
-  
+
   // newsletter: {
   //   // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
   //   // Please add your .env file and modify it according to your selection

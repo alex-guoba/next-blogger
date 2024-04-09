@@ -103,7 +103,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
       <Shell as="article" className={cn("relative mx-auto flex min-h-screen flex-col", has_toc ? "xl:pl-[150px]" : "")}>
         <PageHeader>
           <PageHeaderHeading>{title}</PageHeaderHeading>
-          <PageHeaderDescription size="sm" className="text-center pt-4">
+          <PageHeaderDescription size="sm" className="pt-4 text-center">
             {formatDate(lastEditTime)}
           </PageHeaderDescription>
         </PageHeader>
