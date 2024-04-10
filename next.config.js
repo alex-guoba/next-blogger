@@ -1,3 +1,4 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["tsx", "mdx", "ts", "js"],
@@ -53,10 +54,14 @@ const nextConfig = {
   },
 
   // cacheHandler: require.resolve('./lib/cache-handler.js'),
-  // cacheMaxMemorySize: 0, // disable default in-memory caching
+  cacheMaxMemorySize: 400000000, // disable default in-memory caching
 
   // This will build the project as a standalone app inside the Docker image.
   //output: "standalone",
 };
 
-module.exports = nextConfig;
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+module.exports = withBundleAnalyzer(nextConfig);

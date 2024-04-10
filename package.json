@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:stats": "ANALYZE=true npm run build",
+    "clean": "rimraf .next .swc out coverage",
     "start:standalone": "node .next/standalone/server.js",
     "start": "next start",
     "start:mem": "NODE_OPTIONS='--inspect' next dev",
@@ -15,6 +17,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "@next/bundle-analyzer": "^14.1.4",
     "@notionhq/client": "^2.2.14",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
