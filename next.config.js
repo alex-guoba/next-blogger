@@ -1,4 +1,3 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["tsx", "mdx", "ts", "js"],
@@ -58,10 +57,14 @@ const nextConfig = {
 
   // This will build the project as a standalone app inside the Docker image.
   //output: "standalone",
+
+  experimental: {
+    serverComponentsExternalPackages: ["pino", "pino-pretty"],
+  },
 };
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
 
 module.exports = withBundleAnalyzer(nextConfig);

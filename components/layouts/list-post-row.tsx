@@ -20,13 +20,13 @@ function PostRowGrid({ post }: { post: any }) {
   return (
     <div
       key={slug}
-      className="group bg-zinc-100 px-4 py-8 hover:bg-inherit hover:bg-slate-300  dark:bg-inherit dark:hover:bg-stone-500"
+      className="group rounded bg-zinc-100 px-4 py-8 hover:bg-inherit  hover:bg-slate-300 dark:bg-inherit dark:hover:bg-stone-500"
     >
       <article className="flex flex-1 flex-col space-y-2">
         <span className="sr-only">{title}</span>
         <CardDescription>{formatDate(edit_time)}</CardDescription>
         <Link href={`/article/${slug}`} prefetch={false}>
-          <CardHeader className="px-0 py-1 font-serif group-hover:text-red-500">
+          <CardHeader className="px-0 py-1 group-hover:text-red-500">
             <CardTitle>{title}</CardTitle>
           </CardHeader>
         </Link>

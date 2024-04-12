@@ -27,7 +27,6 @@ function renderHeader(children: any) {
 }
 
 function renderCell(has_column_header: boolean, has_row_header: boolean, children: any) {
-  // console.log(children);
   return (
     <TableBody>
       {children?.map((child: any, index: number) => {

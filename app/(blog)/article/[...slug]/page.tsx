@@ -20,6 +20,7 @@ import { ArticlePost, dbQueryParams } from "@/app/notion/fitler";
 import { getTableOfContents } from "@/app/notion/toc";
 import { DashboardTableOfContents } from "@/components/layouts/toc";
 import { ShareBar } from "@/components/share-bar";
+import { logger } from "@/lib/logger";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
@@ -86,7 +87,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   // retrieve page meta info by page ID
   const { pageID, lastEditTime, title } = await parseSlug(params.slug);
   if (!pageID || !title) {
-    console.log("Post not found or unpublished", pageID, title);
+    logger.info(`Post not found or unpublished ${pageID} ${title}`);
     return notFound();
   }
   const blocks = await NotionApiCache.RetrieveBlockChildren(pageID);

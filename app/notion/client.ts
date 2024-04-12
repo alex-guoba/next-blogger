@@ -1,6 +1,7 @@
 // Notion Public API
 
 import { env } from "@/env.mjs";
+import { logger } from "@/lib/logger";
 import { APIErrorCode, Client, ClientErrorCode, LogLevel } from "@notionhq/client";
 import {
   GetDatabaseResponse,
@@ -50,10 +51,10 @@ export class NotionAPIWithRetry {
       return response;
     } catch (error: any) {
       if (maxTries > 0 && this.shouldRetry(error)) {
-        console.log("retringing retrieveDatabase ", database_id);
+        logger.info(`retringing retrieveDatabase ${database_id}`);
         return this.RetrieveDatabase(database_id, maxTries - 1);
       }
-      console.log(error, maxTries);
+      logger.error(`Failed to retrieve Database ${error}`);
       return null;
     }
   }
@@ -77,10 +78,10 @@ export class NotionAPIWithRetry {
       return response;
     } catch (error) {
       if (maxTries > 0 && this.shouldRetry(error)) {
-        console.log("retringing proxyQueryDatabases ", database_id);
+        logger.info(`retringing proxyQueryDatabases ${database_id}`);
         return this.QueryDatabases(database_id, params, maxTries - 1);
       }
-      console.log(error, maxTries);
+      logger.error(`Failed to query Database ${error}`);
       return null;
     }
   }
@@ -93,10 +94,10 @@ export class NotionAPIWithRetry {
       return response;
     } catch (error) {
       if (maxTries > 0 && this.shouldRetry(error)) {
-        console.log("retringing proxyRetrievePage ", page_id);
+        logger.info(`retringing proxyRetrievePage ${page_id}`);
         return this.RetrievePage(page_id, maxTries - 1);
       }
-      console.log(error, maxTries);
+      logger.error(`Failed to retrieve page ${error}`);
       return null;
     }
   }
@@ -124,10 +125,11 @@ export class NotionAPIWithRetry {
       return response;
     } catch (error) {
       if (maxTries > 0 && this.shouldRetry(error)) {
-        console.log("retringing proxyListBlockChildren ", block_id);
+        logger.info(`retringing proxyListBlockChildren ${block_id}`);
         return this.ListBlockChildren(block_id, maxTries - 1);
       }
-      console.log(error, maxTries);
+      logger.error(`Failed to list blockchildren $error`);
+
       return null;
     }
   }

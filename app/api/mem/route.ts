@@ -1,22 +1,22 @@
 // for debugging purposes only
 
-import { NextRequest, NextResponse } from "next/server";
-import v8 from "v8";
+import { NextResponse } from "next/server";
+// import v8 from "v8";
 
-export async function GET(req: NextRequest) {
-  const searchParams = req.nextUrl.searchParams;
-  const state = searchParams.get("gc");
+export async function GET() {
+  // const searchParams = req.nextUrl.searchParams;
+  // const state = searchParams.get("gc");
 
-  // dump
-  if (state == "dump") {
-    const fileName = v8.writeHeapSnapshot();
-    console.log(`Created heapdump file: ${fileName}`);
+  // // dump
+  // if (state == "dump") {
+  //   const fileName = v8.writeHeapSnapshot();
+  //   console.log(`Created heapdump file: ${fileName}`);
 
-    return NextResponse.json({
-      result: "dump success",
-      fileName: fileName,
-    });
-  }
+  //   return NextResponse.json({
+  //     result: "dump success",
+  //     fileName: fileName,
+  //   });
+  // }
 
   const formatMemoryUsage = (data: number) => `${Math.round((data / 1024 / 1024) * 100) / 100} MB`;
 

@@ -65,7 +65,7 @@ export function MainNav({ items }: MainNavProps) {
             ?.map((item) =>
               item?.items ? (
                 <NavigationMenuItem key={item.title}>
-                  <NavigationMenuTrigger className="h-auto capitalize">{item.title}</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="h-auto text-base capitalize">{item.title}</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[350px] grid-cols-1 gap-3 p-4">
                       {item.items.map((item) => (
@@ -80,7 +80,7 @@ export function MainNav({ items }: MainNavProps) {
                 item.href && (
                   <NavigationMenuItem key={item.title}>
                     <Link href={item.href} legacyBehavior passHref>
-                      <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "h-auto")}>
+                      <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "h-auto text-base")}>
                         {item.title}
                       </NavigationMenuLink>
                     </Link>

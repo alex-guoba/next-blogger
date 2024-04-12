@@ -48,23 +48,14 @@ function useActiveItem(itemIds: (string | undefined)[]) {
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        // entries.forEach((entry) => {
-        //   if (entry.isIntersecting) {
-        //     console.log("actived", entry.target.id);
-        //     // setActiveId(entry.target.id);
-        //   }
-        // });
-
         entries.some((entry) => {
           if (entry.isIntersecting) {
-            // console.log("the active", entry.target.id);
             setActiveId(entry.target.id);
             return true;
           }
         });
       },
       { rootMargin: `-64px 0px 0px 0px` }
-      // {threshold: 0.5,}
     );
 
     itemIds?.forEach((id) => {

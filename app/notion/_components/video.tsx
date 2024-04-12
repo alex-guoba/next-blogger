@@ -31,8 +31,6 @@ function VideoOmbed({ block }: VideoProps) {
   const url = external?.url || file?.url;
   const { status, data } = useUnfurlUrl(url);
 
-  // console.log(status, data);
-
   if (status == "error") {
     // default iframe fallback
     return (

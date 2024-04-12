@@ -8,6 +8,7 @@ import {
 
 // import { proxyListBlockChildren, proxyQueryDatabases, proxyRetrieveDatabase, proxyRetrievePage } from "./proxy/proxy";
 import { NotionAPIWithRetry } from "./client";
+import { logger } from "@/lib/logger";
 
 const api = new NotionAPIWithRetry();
 /**
@@ -40,7 +41,7 @@ export const QueryDatabase = cache(
 
     const response = await api.QueryDatabases(database_id, params);
     const end = new Date().getTime();
-    console.log("[QueryDatabase]", `${end - start}ms`);
+    logger.info(`[QueryDatabase] ${end - start}ms`);
     return response?.results || [];
   }
 );
@@ -51,7 +52,7 @@ export const RetrievePage = cache(async (page_id: string) => {
   const start = new Date().getTime();
   const response = await api.RetrievePage(page_id);
   const end = new Date().getTime();
-  console.log("[getPage] for ", `${page_id}: ${end - start}ms`);
+  logger.info(`[RetrievePage] for ${page_id}: ${end - start}ms`);
   return response;
 });
 
@@ -98,7 +99,7 @@ export const RetrieveBlockChildren = cache(async (block_id: string): Promise<Arr
   });
 
   const end = new Date().getTime();
-  console.log("[retrieveBlockChildren]", `${end - start}ms`);
+  logger.info(`retrieveBlockChildren ${end - start}ms`);
 
   return Promise.all(childBlocks).then((blocks) =>
     blocks.reduce((acc, curr) => {

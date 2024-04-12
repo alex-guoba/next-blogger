@@ -15,6 +15,7 @@ import {
   titleCell,
   urlCell,
 } from "./cells";
+import { logger } from "@/lib/logger";
 
 /* Unsupported field types:
 - "created_by"
@@ -169,7 +170,7 @@ export function CustomColumn(dbProps: any): ColumnDef<NotionRowProps>[] {
         break;
 
       default: // ignore other types
-        console.log("Unsupported column type: ", value?.type);
+        logger.error(`Unsupported column type ${value?.type}`);
         break;
     }
   }

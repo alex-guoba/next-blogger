@@ -19,7 +19,6 @@ export function DatabaseRenderer({ property, data, className }: DatabaseRenderer
   const custom = CustomColumn(property);
 
   const columns: ColumnDef<any>[] = [...base, ...custom];
-  //   console.log(columns);
 
   const rows = data || [];
 

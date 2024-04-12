@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { UnfurlSuccessResponse } from "@/types";
+import { logger } from "./logger";
 
 type RequestStatus = "iddle" | "loading" | "success" | "error";
 
@@ -31,7 +32,7 @@ export function useUnfurlUrl(url: string) {
           }
         })
         .catch((error) => {
-          console.error(error);
+          logger.error(error);
 
           setStatus("error");
         });

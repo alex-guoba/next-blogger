@@ -65,8 +65,6 @@ export function PdfRenderer({ block, className }: PDFBlockProps) {
     resolver: zodResolver(CustomPageValidator),
   });
 
-  // console.log(errors)
-
   const { width, ref } = useResizeDetector();
 
   const handlePageSubmit = ({ page }: TCustomPageValidator) => {

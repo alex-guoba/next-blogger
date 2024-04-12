@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       {/* <head /> */}
       {/* <body className={`${inter.className} min-h-screen bg-background antialiased`}> */}
-      <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable, fontMono.variable)}>
+      <body className={cn("min-h-screen bg-background font-serif antialiased", fontSans.variable, fontMono.variable)}>
         <TailwindIndicator />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <SiteHeader />

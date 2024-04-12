@@ -17,6 +17,7 @@ import { notFound } from "next/navigation";
 import { env } from "@/env.mjs";
 import { ContentLoadingSkeleton } from "@/components/post-skeleton";
 import { NotionApiCache } from "@/app/notion/cache";
+import { logger } from "@/lib/logger";
 
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
 
@@ -123,7 +124,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   // retrieve page meta info by page ID
   const { pageID, title, summary } = await filterPageBySlug(params.slug[0]);
   if (!pageID || !title) {
-    console.log("page not found or unpublished", pageID, title);
+    logger.info(`page not found or unpublished ${pageID} ${title}`);
     return notFound();
   }
 

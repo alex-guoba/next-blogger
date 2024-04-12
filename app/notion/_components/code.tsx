@@ -44,7 +44,6 @@ export async function ShikiCodeRender({ block, defaultLanguage, className }: Cod
     lang: lang,
     theme: theme,
   });
-  // console.log(html);
 
   const caption = code.caption;
 
@@ -52,7 +51,7 @@ export async function ShikiCodeRender({ block, defaultLanguage, className }: Cod
     <div key={id} className={cn(className, "w-full max-w-full flex-col overflow-hidden text-sm")}>
       <div
         dangerouslySetInnerHTML={{
-          __html: `<pre class="language-${lang}" style="background: #24292e; padding: 1em; margin: 0.5em 0px; overflow: auto;" tabIndex="0"><code class="language-${lang}">${html}</code></pre>`,
+          __html: `<pre class="language-${lang}" style="background: #24292e; padding: 1em; margin: 0.5em 0px; border-radius: 0.375rem; overflow: auto;" tabIndex="0"><code class="language-${lang}">${html}</code></pre>`,
         }}
       />
       {caption && caption.length > 0 && (
