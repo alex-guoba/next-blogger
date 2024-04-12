@@ -58,9 +58,9 @@ const nextConfig = {
   // This will build the project as a standalone app inside the Docker image.
   //output: "standalone",
 
-  experimental: {
-    serverComponentsExternalPackages: ["pino", "pino-pretty"],
-  },
+  // experimental: {
+  //   serverComponentsExternalPackages: ["pino"],
+  // },
 };
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({

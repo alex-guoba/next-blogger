@@ -1,16 +1,20 @@
 import pino, { LoggerOptions } from "pino";
-
 import { env } from "@/env.mjs";
 
+// We recommend against using pino-pretty in production and highly recommend installing pino-pretty as a development dependency.
+// https://stackoverflow.com/questions/71938587/unable-to-determine-transport-target-for-pino-pretty
 let options: LoggerOptions = {
   level: env.LOG_LEVEL,
-  transport: {
-    target: "pino-pretty",
-    options: {
-      colorize: true,
-      translateTime: "SYS:standard",
-    },
-  },
+  base: { pid: process.pid },
+  timestamp: pino.stdTimeFunctions.isoTime,
+
+  // transport: {
+  //   target: "pino-pretty",
+  //   options: {
+  //     colorize: true,
+  //     translateTime: "SYS:standard",
+  //   },
+  // },
 };
 
 // if (env.NODE_ENV == "production") {

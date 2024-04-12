@@ -4,7 +4,6 @@ import { env } from "@/env.mjs";
 import { unfurl } from "unfurl.js";
 
 import { UnfurlSuccessResponse } from "@/types";
-import { logger } from "@/lib/logger";
 
 // https://iframely.com/docs/iframely-api
 async function queryIframely(url: string) {
@@ -34,7 +33,7 @@ async function queryIframely(url: string) {
       raw: res,
     } as UnfurlSuccessResponse;
   } catch (e) {
-    logger.error(e, `iframely query error: ${url}`);
+    console.log(`iframely query error: ${url}`, e);
   }
   return null;
 }
@@ -57,7 +56,7 @@ async function unfurlParse(url: string) {
       } as UnfurlSuccessResponse;
     })
     .catch((error) => {
-      logger.error(error, `unfurl parse error ${url}`);
+      console.log(`unfurl parse error ${url}`, error);
       return null;
     });
 }
