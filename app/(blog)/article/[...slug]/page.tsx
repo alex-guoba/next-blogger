@@ -101,7 +101,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
   return (
     <section className={cn("lg:gap-10 xl:grid", has_toc ? "xl:grid-cols-[1fr_300px]" : "")}>
-      <Shell as="article" className={cn("relative mx-auto flex min-h-screen flex-col", has_toc ? "xl:pl-[150px]" : "")}>
+      <Shell as="article" className={cn("relative mx-auto flex min-h-screen flex-col", has_toc ? "xl:pl-[250px]" : "xl:px-[100px]")}>
         <PageHeader>
           <PageHeaderHeading>{title}</PageHeaderHeading>
           <PageHeaderDescription size="sm" className="pt-4 text-center">

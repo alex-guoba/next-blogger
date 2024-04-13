@@ -26,7 +26,7 @@ function PostRowGrid({ post }: { post: any }) {
         <span className="sr-only">{title}</span>
         <CardDescription>{formatDate(edit_time)}</CardDescription>
         <Link href={`/article/${slug}`} prefetch={false}>
-          <CardHeader className="px-0 py-1 group-hover:text-red-500">
+          <CardHeader className="px-0 py-1 font-serif group-hover:text-red-500">
             <CardTitle>{title}</CardTitle>
           </CardHeader>
         </Link>

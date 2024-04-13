@@ -5,7 +5,7 @@ import "@/app/styles/globals.css";
 import { cn } from "@/lib/utils";
 
 // const inter = Inter({ subsets: ['latin'] })
-import { fontMono, fontSans } from "@/lib/fonts";
+import { fontMono, fontSans, fontSerif } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/providers";
 import TailwindIndicator from "@/components/helpers/tailwind-indicator";
 import { SiteHeader } from "@/components/layouts/site-header";
@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       {/* <head /> */}
       {/* <body className={`${inter.className} min-h-screen bg-background antialiased`}> */}
-      <body className={cn("min-h-screen bg-background font-serif antialiased", fontSans.variable, fontMono.variable)}>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable, fontMono.variable, fontSerif.variable)}>
         <TailwindIndicator />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <SiteHeader />
