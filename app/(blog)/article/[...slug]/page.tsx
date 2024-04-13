@@ -100,8 +100,11 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const has_toc = toc.items.length > 0;
 
   return (
-    <section className={cn("lg:gap-10 xl:grid", has_toc ? "xl:grid-cols-[1fr_300px]" : "")}>
-      <Shell as="article" className={cn("relative mx-auto flex min-h-screen flex-col", has_toc ? "xl:pl-[250px]" : "xl:px-[100px]")}>
+    <section className={cn("lg:gap-8 xl:grid", has_toc ? "xl:grid-cols-[1fr_400px]" : "")}>
+      <Shell
+        as="article"
+        className={cn("relative mx-auto flex min-h-screen flex-col", has_toc ? "xl:pl-[250px]" : "xl:px-[100px]")}
+      >
         <PageHeader>
           <PageHeaderHeading>{title}</PageHeaderHeading>
           <PageHeaderDescription size="sm" className="pt-4 text-center">
@@ -128,7 +131,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
       {has_toc && (
         <aside className="hidden text-sm xl:block">
-          <div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
+          <div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pb-5 pt-10">
             <DashboardTableOfContents toc={toc} />
           </div>
         </aside>

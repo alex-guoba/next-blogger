@@ -9,15 +9,14 @@ export const fontSans = FontSans({
 export const fontMono = FontMono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ['400', '700'],
+  weight: ["400", "700"],
 });
 
 export const fontSerif = FontSerif({
   subsets: ["latin"],
   variable: "--font-serif",
-  weight: ['400', '700'],
+  weight: ["400", "700"],
 });
-
 
 // // Font files can be colocated inside of `pages`
 // export const fontHeading = localFont({

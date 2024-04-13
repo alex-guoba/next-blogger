@@ -29,13 +29,14 @@ interface ListProps {
 }
 
 // notion应该是使用了div来代替li，样式上会有差别。为保留html语义，这里保留list实现
+// see https://stackoverflow.com/questions/4373046/css-control-space-between-bullet-and-li
 export function ListRenderer({ block, level = 0, className }: ListProps) {
   const { id, type } = block;
   const value = block[type];
 
   if (type == "bulleted_list") {
     return (
-      <ul key={id} className={cn(className, bulletListStyle(level), "list-inside space-y-0.5 marker:text-lg")}>
+      <ul key={id} className={cn(className, bulletListStyle(level), "list-outside space-y-1 pl-4 marker:text-lg")}>
         {value?.children &&
           value.children.map((child: any) => (
             <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>
@@ -46,7 +47,7 @@ export function ListRenderer({ block, level = 0, className }: ListProps) {
 
   if (type == "numbered_list") {
     return (
-      <ol key={id} className={cn(className, numberListStyle(level), "list-inside space-y-0.5")}>
+      <ol key={id} className={cn(className, numberListStyle(level), "list-outside space-y-1 pl-4")}>
         {value?.children &&
           value.children.map((child: any) => (
             <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>
@@ -63,9 +64,11 @@ export function ListItemRenderer({ block, level = 0, className }: ListProps) {
 
   const color = ColorMap.get(value?.color);
   return (
-    <li key={id} className={cn(className, color, "pl-2 pt-1")}>
+    <li key={id} className={cn(className, color, "pl-2 pt-0.5")}>
       {value?.rich_text && <RichText title={value.rich_text} className="whitespace-pre-wrap" />}
-      {block.children && <IndentChildren cb={block.children} level={level + 1}></IndentChildren>}
+      {/* {block.children && <IndentChildren cb={block.children} level={level + 1}></IndentChildren>} */}
+      {block.children &&
+        block.children.map((child: any) => <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>)}
     </li>
   );
 }
