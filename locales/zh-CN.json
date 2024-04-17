@@ -1,0 +1,16 @@
+{
+  "Meta": {
+    "Title": "Next Notion Blogger",
+    "Description": "一款免费的开源静态博客，采用Next.js和Notion创建，旨在为您带来最佳体验，它基于Next.js的SSG（静态站点生成）、TypeScript、Shadcn UI和Tailwind CSS构建而成。"
+  },
+  "NotFound": {
+    "404Title": "找不到页面",
+    "404Description": "抱歉，文章已过期或未发布.",
+    "BackToHomeButtonLabel": "返回首页"
+  },
+  "Posts": {
+    "Title": "文章列表",
+    "Description": "浏览博客的最新文章",
+    "SeeAllButtonLabel": "查看全部文章"
+  }
+}

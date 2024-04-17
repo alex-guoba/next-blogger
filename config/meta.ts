@@ -1,8 +1,6 @@
 export const siteMeta = {
-  name: "Utopian",
-  title: "Next.js Notion Blogger",
+  name: "NextBlogger",
   author: "alex-guoba",
-  description: "A blog created with Next.js and Notion for the best experience.",
   language: "en-us",
   siteUrl: "http://127.0.0.1:3000",
   siteRepo: "https://github.com/alex-guoba/next-blogger",
@@ -12,12 +10,6 @@ export const siteMeta = {
   email: "address@yoursite.com",
   github: "https://github.com/alex-guoba/next-blogger",
   twitter: "https://twitter.com/gelco",
-  // facebook: 'https://facebook.com',
-  // youtube: 'https://youtube.com',
-  // linkedin: 'https://www.linkedin.com',
-  // threads: 'https://www.threads.net',
-  // instagram: 'https://www.instagram.com',
-  locale: "en-US",
   copyright: "",
 
   // newsletter: {

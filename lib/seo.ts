@@ -1,14 +1,20 @@
 import { siteMeta } from "@/config/meta";
 import type { Metadata } from "next";
 
-export function defaultMeta(): Metadata {
+import { getTranslations } from "next-intl/server";
+
+export async function defaultMeta(locale: string): Promise<Metadata> {
+  const t = await getTranslations({
+    locale,
+    namespace: "Meta",
+  });
   const metadata: Metadata = {
     metadataBase: new URL(siteMeta.siteUrl),
     title: {
-      default: siteMeta.title,
-      template: `%s | ${siteMeta.title}`,
+      default: t("Title"),
+      template: `%s | ${t("Title")}`,
     },
-    description: siteMeta.description,
+    description: t("Description"),
     keywords: ["nextjs", "notion"],
     creator: siteMeta.author,
     authors: [
@@ -19,21 +25,21 @@ export function defaultMeta(): Metadata {
     ],
     openGraph: {
       title: {
-        default: siteMeta.title,
-        template: `%s | ${siteMeta.title}`,
+        default: t("Title"),
+        template: `%s | ${t("Title")}`,
       },
-      description: siteMeta.description,
+      description: t("Description"),
       url: "./",
-      siteName: siteMeta.title,
+      siteName: t("Title"),
       images: [siteMeta.socialBanner],
-      locale: siteMeta.locale,
+      locale: locale,
       type: "website",
     },
 
     twitter: {
       title: {
-        default: siteMeta.title,
-        template: `%s | ${siteMeta.title}`,
+        default: t("Title"),
+        template: `%s | ${t("Title")}`,
       },
       card: "summary_large_image",
       images: [siteMeta.socialBanner],

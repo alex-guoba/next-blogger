@@ -9,8 +9,8 @@ import React from "react";
 import { env } from "@/env.mjs";
 import { ContentLoadingSkeleton } from "@/components/post-skeleton";
 import { TagList } from "@/components/layouts/tag";
-import { NotionApiCache } from "../notion/cache";
-import { ArticlePost, dbQueryParams } from "../notion/fitler";
+import { NotionApiCache } from "../../notion/cache";
+import { ArticlePost, dbQueryParams } from "../../notion/fitler";
 
 async function TagRender({ posts }: { posts: TypePostList }) {
   if (!posts || posts.length == 0) {

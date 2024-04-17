@@ -21,6 +21,9 @@ import { getTableOfContents } from "@/app/notion/toc";
 import { DashboardTableOfContents } from "@/components/layouts/toc";
 import { ShareBar } from "@/components/share-bar";
 import { logger } from "@/lib/logger";
+// import { LocaleConfig } from "@/config/locale";
+
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
@@ -83,8 +86,9 @@ async function parseSlug(slug: string[]) {
   return { pageID, lastEditTime, title, summary };
 }
 
-export default async function Page({ params }: { params: { slug: string[] } }) {
-  // retrieve page meta info by page ID
+export default async function Page({ params }: { params: { slug: string[]; locale: string } }) {
+  unstable_setRequestLocale(params.locale);
+
   const { pageID, lastEditTime, title } = await parseSlug(params.slug);
   if (!pageID || !title) {
     logger.info(`Post not found or unpublished ${pageID} ${title}`);
@@ -98,6 +102,8 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
   const toc = getTableOfContents(blocks);
   const has_toc = toc.items.length > 0;
+
+  const t = await getTranslations("Posts");
 
   return (
     <section className={cn("lg:gap-8 xl:grid", has_toc ? "xl:grid-cols-[1fr_400px]" : "")}>
@@ -124,8 +130,8 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
         <Link href="/" className={cn(buttonVariants({ variant: "ghost", className: "mx-auto mt-4 w-fit" }))}>
           <ChevronLeftIcon className="mr-2 h-4 w-4" aria-hidden="true" />
-          See all posts
-          <span className="sr-only">See all posts</span>
+          {t("SeeAllButtonLabel")}
+          <span className="sr-only">{t("SeeAllButtonLabel")}</span>
         </Link>
       </Shell>
 

@@ -1,6 +1,6 @@
-import type { Metadata, Viewport } from "next";
-// import { Inter } from 'next/font/google'
+import type { Viewport } from "next";
 import React from "react";
+
 import "@/app/styles/globals.css";
 import { cn } from "@/lib/utils";
 
@@ -11,10 +11,7 @@ import TailwindIndicator from "@/components/helpers/tailwind-indicator";
 import { SiteHeader } from "@/components/layouts/site-header";
 import { SiteFooter } from "@/components/layouts/site-footer";
 
-import { defaultMeta } from "@/lib/seo";
 import { env } from "@/env.mjs";
-
-export const metadata: Metadata = defaultMeta();
 
 export const viewport: Viewport = {
   colorScheme: "dark light",
@@ -37,9 +34,15 @@ function Analytics() {
   return null;
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+  params: { locale },
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <Analytics></Analytics>
       </head>

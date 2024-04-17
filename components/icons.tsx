@@ -6,6 +6,7 @@ import {
   CaretRightIcon,
   FileTextIcon,
   DownloadIcon,
+  GlobeIcon,
 } from "@radix-ui/react-icons";
 import React from "react";
 
@@ -332,4 +333,5 @@ export const Icons = {
   caretLeft: CaretLeftIcon,
   caretRight: CaretRightIcon,
   textFile: FileTextIcon,
+  global: GlobeIcon,
 };

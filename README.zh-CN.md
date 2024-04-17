@@ -15,6 +15,7 @@
 6. 支持压力测试，详见[load-testing](./scripts/load-testing/)。
 7. SEO友好
 8. 使用[umami](https://umami.is/)作为站点统计工具。
+9. 多语言支持, 详见[多语言](./config/locale.ts)。 
 
 ## 技术栈
 

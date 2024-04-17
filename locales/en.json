@@ -1,0 +1,16 @@
+{
+  "Meta": {
+    "Title": "Next Notion Blogger",
+    "Description": "A free and open-source, high-performance static blog created with Next.js and Notion for the best experience, built with Next.js SSG, TypeScript, Shadcn UI, and Tailwind CSS."
+  },
+  "NotFound": {
+    "404Title": "Page not found",
+    "404Description": "Sorry, this article is out of date or unpublished.",
+    "BackToHomeButtonLabel": "Go back home"
+  },
+  "Posts": {
+    "Title": "Blogs",
+    "Description": "Expore the latest articles from Next Notion Blogger",
+    "SeeAllButtonLabel": "See all posts"
+  }
+}

@@ -9,9 +9,10 @@ import { env } from "@/env.mjs";
 import { PostPagination } from "@/components/pagination";
 // import { PostCardLayout } from "@/components/layouts/list-postcard";
 import { PostRowsLayout } from "@/components/layouts/list-post-row";
-import { NotionApiCache } from "../notion/cache";
+import { NotionApiCache } from "../../notion/cache";
 import { TagFooter } from "@/components/tag-footer";
-import { ArticlePost, dbQueryParams } from "../notion/fitler";
+import { ArticlePost, dbQueryParams } from "../../notion/fitler";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   params: { slug: string[] };
@@ -26,11 +27,13 @@ export default async function Home({ searchParams }: Props) {
   const page = Number(searchParams["page"]) || 1;
   const subpost = posts.slice((page - 1) * env.POST_PAGE_SIZES, page * env.POST_PAGE_SIZES);
 
+  const t = await getTranslations("Posts");
+
   return (
     <Shell className="md:pb-10">
       <PageHeader>
-        <PageHeaderHeading>Blog</PageHeaderHeading>
-        <PageHeaderDescription>Explore the latest blogs.</PageHeaderDescription>
+        <PageHeaderHeading>{t("Title")}</PageHeaderHeading>
+        <PageHeaderDescription>{t("Description")}</PageHeaderDescription>
       </PageHeader>
       <Separator className="mb-2.5" />
       <PostRowsLayout items={subpost}></PostRowsLayout>
