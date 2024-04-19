@@ -46,6 +46,7 @@ export function getTableOfContents(blocks: Array<any>): TableOfContents {
       if (parent) {
         parent.items.push(item);
       } else {
+        // 2nd level heading without parent, just level up to root
         root.items.push(item);
       }
     } else {

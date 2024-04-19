@@ -36,7 +36,7 @@ export function ListRenderer({ block, level = 0, className }: ListProps) {
 
   if (type == "bulleted_list") {
     return (
-      <ul key={id} className={cn(className, bulletListStyle(level), "list-outside space-y-1 pl-4 marker:text-lg")}>
+      <ul key={id} className={cn(className, bulletListStyle(level), "list-outside space-y-1 pl-6 marker:text-lg")}>
         {value?.children &&
           value.children.map((child: any) => (
             <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>
@@ -47,7 +47,7 @@ export function ListRenderer({ block, level = 0, className }: ListProps) {
 
   if (type == "numbered_list") {
     return (
-      <ol key={id} className={cn(className, numberListStyle(level), "list-outside space-y-1 pl-4")}>
+      <ol key={id} className={cn(className, numberListStyle(level), "list-outside space-y-1 pl-6")}>
         {value?.children &&
           value.children.map((child: any) => (
             <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>

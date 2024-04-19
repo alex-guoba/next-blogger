@@ -59,13 +59,14 @@ const nextConfig = withNextIntl({
 
   // cacheHandler: require.resolve('./lib/cache-handler.js'),
   cacheMaxMemorySize: 400000000, // disable default in-memory caching
+  //cacheMaxMemorySize: 0, // disable default in-memory caching
 
   // This will build the project as a standalone app inside the Docker image.
   //output: "standalone",
 
-  // experimental: {
-  //   serverComponentsExternalPackages: ["pino"],
-  // },
+  experimental: {
+    instrumentationHook: true,
+  },
 });
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({

@@ -39,4 +39,5 @@ docker-compose.yaml
 
 /scripts/load-testing/output.bin
 Heap.*.heapsnapshot
+Heap.*.heapprofile
 README.en.md

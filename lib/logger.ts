@@ -6,7 +6,8 @@ import { env } from "@/env.mjs";
 let options: LoggerOptions = {
   level: env.LOG_LEVEL,
   base: { pid: process.pid },
-  timestamp: pino.stdTimeFunctions.isoTime,
+  // timestamp: pino.stdTimeFunctions.isoTime,
+  timestamp: () => `,"time":"${new Date(Date.now()).toLocaleString()}"`,
 
   // transport: {
   //   target: "pino-pretty",

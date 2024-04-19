@@ -10,7 +10,7 @@
     "clean": "rimraf .next .swc out coverage",
     "start:standalone": "node .next/standalone/server.js",
     "start": "next start",
-    "start:mem": "NODE_OPTIONS='--inspect' next dev",
+    "start:mem": "NODE_OPTIONS='--inspect' next start",
     "lint": "next lint",
     "shadcn:add": "npx shadcn-ui@latest add",
     "prettier": "prettier --check --ignore-path .gitignore  \"**/*.{js,jsx,ts,tsx}\"",
