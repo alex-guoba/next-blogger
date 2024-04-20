@@ -1,16 +1,14 @@
-import { cache } from "react";
-
 import {
   GetDatabaseResponse,
   QueryDatabaseParameters,
   QueryDatabaseResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
+import { RetrieveDatabase, QueryDatabases, RetrievePage, ListBlockChildren } from "./retry-wrapper";
+
 // import { proxyListBlockChildren, proxyQueryDatabases, proxyRetrieveDatabase, proxyRetrievePage } from "./proxy/proxy";
-import { NotionAPIWithRetry } from "./client";
 import { logger } from "@/lib/logger";
 
-const api = new NotionAPIWithRetry();
 /**
  * Returns a random integer between the specified values, inclusive.
  * The value is no lower than `min`, and is less than or equal to `max`.
@@ -29,32 +27,38 @@ function getRandomInt(minimum: number, maximum: number): number {
  ** retrieve database
  ** see: https://developers.notion.com/reference/retrieve-a-database
  */
-export const RetrieveDatabase = cache(async (database_id: string): Promise<GetDatabaseResponse | null> => {
-  return api.RetrieveDatabase(database_id);
-});
+export const StatRetrieveDatabase = async (database_id: string): Promise<GetDatabaseResponse | null> => {
+  const start = new Date().getTime();
+
+  const result = RetrieveDatabase(database_id);
+  const end = new Date().getTime();
+  logger.info(`[StatRetrieveDatabase] ${end - start}ms`);
+  return result;
+};
 
 // API: https://developers.notion.com/reference/post-database-query
 export type TypePostList = QueryDatabaseResponse["results"];
-export const QueryDatabase = cache(
-  async (database_id: string, params: QueryDatabaseParameters): Promise<TypePostList> => {
-    const start = new Date().getTime();
+export const StatQueryDatabase = async (
+  database_id: string,
+  params: QueryDatabaseParameters
+): Promise<TypePostList> => {
+  const start = new Date().getTime();
 
-    const response = await api.QueryDatabases(database_id, params);
-    const end = new Date().getTime();
-    logger.info(`[QueryDatabase] ${end - start}ms`);
-    return response?.results || [];
-  }
-);
+  const response = await QueryDatabases(database_id, params);
+  const end = new Date().getTime();
+  logger.info(`[StatQueryDatabase] ${end - start}ms`);
+  return response?.results || [];
+};
 
 //
 // API: https://developers.notion.com/reference/retrieve-a-page
-export const RetrievePage = cache(async (page_id: string) => {
+export const StatRetrievePage = async (page_id: string) => {
   const start = new Date().getTime();
-  const response = await api.RetrievePage(page_id);
+  const response = await RetrievePage(page_id);
   const end = new Date().getTime();
   logger.info(`[RetrievePage] for ${page_id}: ${end - start}ms`);
   return response;
-});
+};
 
 // Most of the time, block id for query children is block's own id.
 // but some times it will use another id like duplicated synced block
@@ -74,12 +78,12 @@ const getBlockID = (block: any): string => {
 // Returns a paginated array of child block objects contained in the block using the ID specified.
 // see: https://developers.notion.com/reference/get-block-children
 // NOTE: Calling a memoized function outside of a component will not use the cache.
-export const RetrieveBlockChildren = cache(async (block_id: string): Promise<Array<any>> => {
+export const StatRetrieveBlockChildren = async (block_id: string): Promise<Array<any>> => {
   const start = new Date().getTime();
 
   const blockId = block_id.replaceAll("-", ""); // ???
 
-  const result = await api.ListBlockChildren(blockId);
+  const result = await ListBlockChildren(blockId);
   if (!result) {
     return [];
   }
@@ -91,7 +95,7 @@ export const RetrieveBlockChildren = cache(async (block_id: string): Promise<Arr
     // ignore child pages
     if (block.has_children && block.type != "child_page") {
       const blockID = getBlockID(block);
-      const children = await RetrieveBlockChildren(blockID);
+      const children = await StatRetrieveBlockChildren(blockID);
       return { ...block, children };
     }
 
@@ -99,7 +103,7 @@ export const RetrieveBlockChildren = cache(async (block_id: string): Promise<Arr
   });
 
   const end = new Date().getTime();
-  logger.info(`retrieveBlockChildren ${end - start}ms`);
+  logger.info(`StatRetrieveBlockChildren ${end - start}ms`);
 
   return Promise.all(childBlocks).then((blocks) =>
     blocks.reduce((acc, curr) => {
@@ -131,4 +135,4 @@ export const RetrieveBlockChildren = cache(async (block_id: string): Promise<Arr
       return acc;
     }, [])
   );
-});
+};

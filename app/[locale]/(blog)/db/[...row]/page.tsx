@@ -10,17 +10,17 @@ import { DatabaseRenderer } from "@/app/notion/_components/db/database";
 import { IconRender } from "@/app/notion/_components/emoji";
 import RichText from "@/app/notion/text";
 import { filterBase } from "@/app/notion/block-parse";
-import { NotionApiCache } from "@/app/notion/cache";
+import { CacheQueryDatabase, CacheRetrieveDatabase } from "@/app/notion/api/cache-wrapper";
 
 export default async function Page({ params }: { params: { row: string[] } }) {
   const dbID = params.row[0];
-  const columns: any = await NotionApiCache.RetrieveDatabase(dbID);
+  const columns: any = await CacheRetrieveDatabase(dbID);
   if (!columns) {
     return null;
   }
 
   const queryParam = filterBase(dbID);
-  const data = await NotionApiCache.QueryDatabase(dbID, queryParam);
+  const data = await CacheQueryDatabase(dbID, queryParam);
 
   const { icon, title, description } = columns;
   return (

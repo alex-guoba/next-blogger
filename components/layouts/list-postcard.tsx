@@ -1,4 +1,4 @@
-import { TypePostList } from "@/app/notion/api";
+import { TypePostList } from "@/app/notion/api/api-stat";
 import React from "react";
 import { PostCard, PostCardSkeleton } from "../post-card";
 import { extractFileUrl, rawText } from "@/app/notion/block-parse";

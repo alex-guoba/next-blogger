@@ -15,25 +15,24 @@ import { pagePublished, rawText } from "@/app/notion/block-parse";
 import { notFound } from "next/navigation";
 import { env } from "@/env.mjs";
 import { ContentLoadingSkeleton } from "@/components/post-skeleton";
-import { NotionApiCache } from "@/app/notion/cache";
 import { ArticlePost, dbQueryParams } from "@/app/notion/fitler";
 import { getTableOfContents } from "@/app/notion/toc";
 import { DashboardTableOfContents } from "@/components/layouts/toc";
 import { ShareBar } from "@/components/share-bar";
 import { logger } from "@/lib/logger";
-// import { LocaleConfig } from "@/config/locale";
+import { CacheQueryDatabase, CacheRetrievePage, CacheRetrieveBlockChildren } from "@/app/notion/api/cache-wrapper";
 
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
-export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
+// export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
 
 /**
  * SSG for Homepage
  */
 export async function generateStaticParams() {
   const queryParams = dbQueryParams(env.NOTION_DATABASE_ID, ArticlePost);
-  const posts = await NotionApiCache.QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
+  const posts = await CacheQueryDatabase(env.NOTION_DATABASE_ID, queryParams);
 
   const subpost = posts.slice(0, env.POST_PAGE_SIZES);
 
@@ -75,7 +74,7 @@ async function parseSlug(slug: string[]) {
   if (slug.length >= 1) {
     pageID = slug[0];
 
-    const page: any = await NotionApiCache.RetrievePage(pageID);
+    const page: any = await CacheRetrievePage(pageID);
     if (page && pagePublished(page)) {
       summary = rawText(page?.properties?.Summary?.rich_text);
       // May be linked from child-page not in database list which still have a default title property
@@ -89,12 +88,14 @@ async function parseSlug(slug: string[]) {
 export default async function Page({ params }: { params: { slug: string[]; locale: string } }) {
   unstable_setRequestLocale(params.locale);
 
+  logger.info(`access page ${params.slug}`);
+
   const { pageID, lastEditTime, title } = await parseSlug(params.slug);
   if (!pageID || !title) {
     logger.info(`Post not found or unpublished ${pageID} ${title}`);
     return notFound();
   }
-  const blocks = await NotionApiCache.RetrieveBlockChildren(pageID);
+  const blocks = await CacheRetrieveBlockChildren(pageID);
   if (!blocks) {
     return <div />;
   }
@@ -104,6 +105,8 @@ export default async function Page({ params }: { params: { slug: string[]; local
   const has_toc = toc.items.length > 0;
 
   const t = await getTranslations("Posts");
+
+  logger.info(`rending ${params.slug}`);
 
   return (
     <section className={cn("lg:gap-8 xl:grid", has_toc ? "xl:grid-cols-[1fr_400px]" : "")}>

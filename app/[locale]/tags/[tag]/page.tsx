@@ -10,7 +10,7 @@ import { filterBase, filterMultiSelect, filterSelect, sorterProperties } from "@
 import { env } from "@/env.mjs";
 import { PostPagination } from "@/components/pagination";
 import { PostRowsLayout } from "@/components/layouts/list-post-row";
-import { NotionApiCache } from "@/app/notion/cache";
+import { CacheQueryDatabase } from "@/app/notion/api/cache-wrapper";
 // import { PostCardLayout } from "@/components/layouts/list-postcard";
 
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
@@ -39,7 +39,7 @@ type Props = {
 export default async function Home({ params, searchParams }: Props) {
   const tag = decodeURI(params.tag || "");
   const queryParams = dbParams(tag);
-  const posts = await NotionApiCache.QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
+  const posts = await CacheQueryDatabase(env.NOTION_DATABASE_ID, queryParams);
   const total = posts.length;
 
   const page = Number(searchParams["page"]) || 1;

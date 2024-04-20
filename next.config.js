@@ -52,8 +52,19 @@ const nextConfig = withNextIntl({
     // unoptimized: true,
   },
 
-  webpack: (config) => {
+  // webpack: (config) => {
+  //   config.resolve.alias.canvas = false;
+  //   return config;
+  // },
+  webpack: (config, { dev }) => {
+    if (config.cache && !dev) {
+      config.cache = Object.freeze({
+        type: "memory",
+      });
+      config.cache.maxMemoryGenerations = 0;
+    }
     config.resolve.alias.canvas = false;
+    // Important: return the modified config
     return config;
   },
 
@@ -66,6 +77,14 @@ const nextConfig = withNextIntl({
 
   experimental: {
     instrumentationHook: true,
+  },
+
+  // reactStrictMode: false,
+
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
   },
 });
 

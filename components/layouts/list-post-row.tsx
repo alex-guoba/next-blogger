@@ -1,6 +1,6 @@
 // "use client";
 
-import { TypePostList } from "@/app/notion/api";
+import { TypePostList } from "@/app/notion/api/api-stat";
 import React from "react";
 import { rawText } from "@/app/notion/block-parse";
 import Link from "next/link";

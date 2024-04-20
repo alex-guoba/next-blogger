@@ -1,6 +1,6 @@
 // import Link from "next/link";
 
-import { TypePostList } from "@/app/notion/api";
+import { TypePostList } from "@/app/notion/api/api-stat";
 import "@/app/styles/globals.css";
 import Shell from "@/components/shells/shell";
 import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/components/page-header";
@@ -9,7 +9,7 @@ import React from "react";
 import { env } from "@/env.mjs";
 import { ContentLoadingSkeleton } from "@/components/post-skeleton";
 import { TagList } from "@/components/layouts/tag";
-import { NotionApiCache } from "../../notion/cache";
+import { CacheQueryDatabase } from "../../notion/api/cache-wrapper";
 import { ArticlePost, dbQueryParams } from "../../notion/fitler";
 
 async function TagRender({ posts }: { posts: TypePostList }) {
@@ -29,7 +29,7 @@ async function TagRender({ posts }: { posts: TypePostList }) {
 
 export default async function Home() {
   const queryParams = dbQueryParams(env.NOTION_DATABASE_ID, ArticlePost);
-  const posts = await NotionApiCache.QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
+  const posts = await CacheQueryDatabase(env.NOTION_DATABASE_ID, queryParams);
 
   return (
     <Shell variant="centered" className="md:pb-10">

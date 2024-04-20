@@ -1,4 +1,4 @@
-import { TypePostList } from "@/app/notion/api";
+import { TypePostList } from "@/app/notion/api/api-stat";
 import { TagList } from "@/components/layouts/tag";
 import { Separator } from "@/components/ui/separator";
 

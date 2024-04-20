@@ -9,7 +9,7 @@ import { env } from "@/env.mjs";
 import { PostPagination } from "@/components/pagination";
 // import { PostCardLayout } from "@/components/layouts/list-postcard";
 import { PostRowsLayout } from "@/components/layouts/list-post-row";
-import { NotionApiCache } from "../../notion/cache";
+import { CacheQueryDatabase } from "../../notion/api/cache-wrapper";
 import { TagFooter } from "@/components/tag-footer";
 import { ArticlePost, dbQueryParams } from "../../notion/fitler";
 import { getTranslations } from "next-intl/server";
@@ -21,7 +21,7 @@ type Props = {
 
 export default async function Home({ searchParams }: Props) {
   const queryParams = dbQueryParams(env.NOTION_DATABASE_ID, ArticlePost);
-  const posts = await NotionApiCache.QueryDatabase(env.NOTION_DATABASE_ID, queryParams);
+  const posts = await CacheQueryDatabase(env.NOTION_DATABASE_ID, queryParams);
   const total = posts.length;
 
   const page = Number(searchParams["page"]) || 1;

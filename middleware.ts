@@ -1,11 +1,17 @@
+// import "server-only";
+
 import createMiddleware from "next-intl/middleware";
 import { AllLocales, LocaleConfig } from "./config/locale";
 
-export default createMiddleware({
+import { withLogging } from "./middleware/withLogging";
+
+const intl = createMiddleware({
   locales: AllLocales,
   defaultLocale: LocaleConfig.defaultLocale,
   localePrefix: "as-needed",
 });
+
+export default withLogging(intl);
 
 export const config = {
   // Match only internationalized pathnames

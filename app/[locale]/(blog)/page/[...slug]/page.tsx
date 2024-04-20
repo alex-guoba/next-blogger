@@ -16,7 +16,8 @@ import { filterBase, filterSelect, filterText, rawText } from "@/app/notion/bloc
 import { notFound } from "next/navigation";
 import { env } from "@/env.mjs";
 import { ContentLoadingSkeleton } from "@/components/post-skeleton";
-import { NotionApiCache } from "@/app/notion/cache";
+import { CacheQueryDatabase, CacheRetrieveBlockChildren } from "@/app/notion/api/cache-wrapper";
+
 import { logger } from "@/lib/logger";
 
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
@@ -91,7 +92,7 @@ const filterPageBySlug = cache(async (slug: string) => {
   if (slug) {
     const params = slugParam(slug);
 
-    const posts = await NotionApiCache.QueryDatabase(env.NOTION_DATABASE_ID, params);
+    const posts = await CacheQueryDatabase(env.NOTION_DATABASE_ID, params);
     if (posts.length == 0) {
       return info;
     }
@@ -106,7 +107,7 @@ const filterPageBySlug = cache(async (slug: string) => {
 });
 
 async function ContentRender({ pageID }: { pageID: string }) {
-  const blocks = await NotionApiCache.RetrieveBlockChildren(pageID);
+  const blocks = await CacheRetrieveBlockChildren(pageID);
   if (!blocks) {
     return <div />;
   }
