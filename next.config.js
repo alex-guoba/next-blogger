@@ -69,8 +69,10 @@ const nextConfig = withNextIntl({
     return config;
   },
 
-  // cacheHandler: require.resolve('./lib/cache-handler.js'),
-  cacheMaxMemorySize: 400000000, // disable default in-memory caching
+  // Next.js does not use the cache in development mode. Use production mode to enable caching.
+  cacheHandler: process.env.NODE_ENV === 'production' ? require.resolve('./lib/cache-handler.mjs') : undefined,
+  // cacheMaxMemorySize: 400000000, // disable default in-memory caching
+
   //cacheMaxMemorySize: 0, // disable default in-memory caching
 
   // This will build the project as a standalone app inside the Docker image.
