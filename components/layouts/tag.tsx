@@ -13,7 +13,7 @@ export function TagList({ tagCounter, className }: TagListProps) {
         return (
           <div key={value[0]} className="px-4 py-1 font-serif text-base">
             <Link
-              href={`/tags/${encodeURI(value[0])}`}
+              href={`/tags/${encodeURI(value[0])}/`}
               className="font-medium leading-tight hover:text-red-500"
               aria-label={`View posts tagged ${value[0]}`}
             >

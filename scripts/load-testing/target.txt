@@ -1,4 +1,23 @@
-#GET http://127.0.0.1:3000/article/list-blog/4fbccfae-81cf-4ef8-ab8f-471150d98cc6
-GET http://127.0.0.1:3000/article/basic/6e1e971f-63b8-464e-975e-e55d5b4b4e7c
-# specify trace info
-X-Trace-ID: efbdbed17f4c6280e8c8c98d29123b8c
+GET http://localhost:3000/zh-CN/article/0c72cd00-fdd1-4fc6-b31a-3aca91c71ea6
+GET http://localhost:3000/zh-CN/article/38e8ddd8-1fd7-4bc9-88e0-248ba9141526
+GET http://localhost:3000/zh-CN/article/05001c72-d12c-4cee-89ef-d21dce745e3e
+GET http://localhost:3000/zh-CN/article/3327213c-6a49-497b-869f-bbb4273315d6
+GET http://localhost:3000/zh-CN/article/d79d214b-fe89-4d47-87b4-43039912433d
+GET http://localhost:3000/zh-CN/article/78ee432c-103f-4c19-a42a-b614d25e7ebc
+GET http://localhost:3000/zh-CN/article/8be5941d-81a6-45a4-b8fd-179cada466ab
+
+GET http://localhost:3000/zh-CN/article/3396de35-07cf-442c-9eca-3ecb9e87dbed
+GET http://localhost:3000/zh-CN/article/3aa786a1-993a-4fc2-a97a-56f0a8485dd1
+GET http://localhost:3000/zh-CN/article/a7c2027d-07fc-470a-9dd2-10a5a40438de
+GET http://localhost:3000/zh-CN/article/ba89f208-4c7b-4180-84b0-5e7b5b60fa1c
+GET http://localhost:3000/zh-CN/article/9cc5209b-eec8-488b-838f-c4a31d9a768e
+
+GET http://localhost:3000/zh-CN/article/c130da25-f53e-4e85-b919-1e8741fb4841
+GET http://localhost:3000/zh-CN/article/5d2ca7f6-99f1-413d-b0a5-28dcaa1f707c
+GET http://localhost:3000/zh-CN/article/33bffd06-f3fc-470d-b55e-20e41cc8bd7f
+GET http://localhost:3000/zh-CN/article/a7cab5a0-04be-4b27-9b33-38545344cac3
+
+GET http://localhost:3000/zh-CN
+GET http://localhost:3000/zh-CN/tags/Notion
+GET http://localhost:3000/zh-CN/project
+GET http://localhost:3000/zh-CN/page/about

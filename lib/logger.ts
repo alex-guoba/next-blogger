@@ -14,7 +14,9 @@ const options: LoggerOptions = {
   },
 
   level: env.LOG_LEVEL,
-  base: { pid: process.pid },
+  // pid not supported in NextJS runtime
+  // base: { pid: process.pid },
+  
   // timestamp: pino.stdTimeFunctions.isoTime,
   timestamp: () => `,"time":"${new Date(Date.now()).toLocaleString()}"`,
 };

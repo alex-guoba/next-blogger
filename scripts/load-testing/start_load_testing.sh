@@ -17,11 +17,11 @@
 BASEDIR=$(dirname $0)
 
 TARGET="${BASEDIR}/target.txt"
-RATE=40
-DURATION="240s"
+RATE=2
+DURATION="120s"
 OUTPUT="${BASEDIR}/output.bin"
-WORKERS=10
-MAX_WORKERS=20
+WORKERS=5
+MAX_WORKERS=10
 
 if [ -f "$OUTPUT" ] ; then
     rm "$OUTPUT"

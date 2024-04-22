@@ -38,6 +38,7 @@ next-env.d.ts
 docker-compose.yaml
 
 /scripts/load-testing/output.bin
+/scripts/load-testing/target.txt
 Heap.*.heapsnapshot
 Heap.*.heapprofile
 README.en.md

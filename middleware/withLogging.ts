@@ -6,7 +6,7 @@ import { logger } from "@/lib/logger";
 
 export const withLogging: MiddlewareFactory = (next) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
-    logger.info(`[${request.method}] ${request.nextUrl.toString()}`);
+    logger.info(`[${request.method}] ${request.url}`);
     return next(request, _next);
   };
 };

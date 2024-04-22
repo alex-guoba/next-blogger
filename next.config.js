@@ -56,6 +56,7 @@ const nextConfig = withNextIntl({
   //   config.resolve.alias.canvas = false;
   //   return config;
   // },
+  // see https://nextjs.org/docs/app/building-your-application/optimizing/memory-usage#disable-webpack-cache
   webpack: (config, { dev }) => {
     if (config.cache && !dev) {
       config.cache = Object.freeze({

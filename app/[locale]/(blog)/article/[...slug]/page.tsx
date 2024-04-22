@@ -87,9 +87,6 @@ async function parseSlug(slug: string[]) {
 
 export default async function Page({ params }: { params: { slug: string[]; locale: string } }) {
   unstable_setRequestLocale(params.locale);
-
-  logger.info(`access page ${params.slug}`);
-
   const { pageID, lastEditTime, title } = await parseSlug(params.slug);
   if (!pageID || !title) {
     logger.info(`Post not found or unpublished ${pageID} ${title}`);
@@ -105,8 +102,6 @@ export default async function Page({ params }: { params: { slug: string[]; local
   const has_toc = toc.items.length > 0;
 
   const t = await getTranslations("Posts");
-
-  logger.info(`rending ${params.slug}`);
 
   return (
     <section className={cn("lg:gap-8 xl:grid", has_toc ? "xl:grid-cols-[1fr_400px]" : "")}>
