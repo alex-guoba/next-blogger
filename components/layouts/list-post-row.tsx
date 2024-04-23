@@ -21,12 +21,12 @@ function PostRowGrid({ post, className }: { post: any; className?: string }) {
   const desc = rawText(post.properties?.Summary?.rich_text);
   const tags = post.properties?.Tags?.multi_select;
   return (
-    <div key={slug} className={cn(className, "group rounded px-4 py-8")}>
+    <div key={slug} className={cn(className, "group rounded px-4")}>
       <article className="flex flex-1 flex-col space-y-2">
         <CardDescription className="inline-block">{formatDate(edit_time)}</CardDescription>
         <span className="sr-only">{title}</span>
         <Link href={`/article/${slug}`} prefetch={false}>
-          <CardHeader className="px-0 py-1 font-serif group-hover:text-red-500">
+          <CardHeader className="px-0 py-1 font-serif group-hover:text-primary">
             <CardTitle>{title}</CardTitle>
           </CardHeader>
         </Link>

@@ -13,7 +13,7 @@ export function PostCardLayout({ items }: PostCardLayoutProps) {
   }
 
   return (
-    <section className="grid grid-cols-1 gap-8 md:grid-cols-2">
+    <section className="grid grid-cols-1 gap-8 md:grid-cols-3">
       <React.Suspense
         fallback={Array.from({ length: 2 }).map((_, i) => (
           <PostCardSkeleton key={i} />

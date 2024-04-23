@@ -30,7 +30,7 @@ export function PostTags({ tags, className }: PostTagProps) {
 
 export function TagItem({ name }: { name: string }) {
   return (
-    <li className="inline-block px-2 font-serif hover:text-accent-foreground">
+    <li className="inline-block pr-2 font-serif hover:text-accent-foreground">
       <Link
         href={`/tags/${encodeURI(name)}/`}
         className="font-medium leading-tight hover:text-red-500"

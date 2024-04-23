@@ -20,7 +20,7 @@ export function TodoRender({ block, className, level = 0 }: TodoProps) {
     <div key={id} className={cn(className, style)}>
       <label htmlFor={id}>
         <input
-          className="mx-1 my-1.5 h-[1.1rem] w-[1.1rem] rounded-none border-8 align-middle"
+          className="mx-1 my-1.5 h-[1.1rem] w-[1.1rem] rounded-none border-8 border-inherit align-middle"
           type="checkbox"
           id={id}
           defaultChecked={checked}

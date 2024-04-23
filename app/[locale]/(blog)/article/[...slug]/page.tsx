@@ -106,7 +106,6 @@ export default async function Page({ params }: { params: { slug: string[]; local
   return (
     <section className={cn("lg:gap-8 xl:grid", has_toc ? "xl:grid-cols-[1fr_400px]" : "")}>
       <Shell
-        variant={"sidebar"}
         as="article"
         className={cn("relative mx-auto flex min-h-screen flex-col", has_toc ? "xl:pl-[250px]" : "xl:px-[100px]")}
       >

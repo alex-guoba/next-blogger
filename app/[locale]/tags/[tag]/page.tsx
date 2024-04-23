@@ -11,6 +11,7 @@ import { env } from "@/env.mjs";
 import { PostPagination } from "@/components/pagination";
 import { PostRowsLayout } from "@/components/layouts/list-post-row";
 import { CacheQueryDatabase } from "@/app/notion/api/cache-wrapper";
+import { Separator } from "@/components/ui/separator";
 // import { PostCardLayout } from "@/components/layouts/list-postcard";
 
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
@@ -52,7 +53,8 @@ export default async function Home({ params, searchParams }: Props) {
           {tag}
         </PageHeaderHeading>
       </PageHeader>
-      <PostRowsLayout items={subpost} className="divide-y"></PostRowsLayout>
+      <Separator className="mb-2.5" />
+      <PostRowsLayout items={subpost} className="gap-2 divide-y" gridClassName="py-6"></PostRowsLayout>
       {total > env.POST_PAGE_SIZES ? (
         <PostPagination total={total} pageSize={env.POST_PAGE_SIZES}></PostPagination>
       ) : null}

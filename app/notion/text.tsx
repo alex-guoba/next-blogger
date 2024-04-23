@@ -53,7 +53,7 @@ function annotationStyle(annotations: any, className?: string) {
   const { bold, code, color, italic, strikethrough, underline } = annotations;
   const names = [
     bold ? "font-bold" : "",
-    code ? "text-red-600 bg-slate-200	px-1" : "",
+    code ? "text-ring bg-muted px-1" : "",
     italic ? "italic" : "",
     strikethrough ? "line-through" : "",
     underline ? "underline underline-offset-4 decoration-1" : "",

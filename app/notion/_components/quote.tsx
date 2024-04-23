@@ -16,7 +16,7 @@ export function QuoteRender({ block, level = 1, className }: QuoteBlockProps) {
   } = block;
 
   return (
-    <blockquote key={id} className={cn(className, "my-1.5 whitespace-pre-wrap border-l-[3px] border-black pl-4")}>
+    <blockquote key={id} className={cn(className, "my-1.5 whitespace-pre-wrap border-l-[4px] border-secondary pl-4")}>
       <RichText title={rich_text} />
       {children &&
         children.map((child: any) => <RenderBlock key={child.id} block={child} level={level + 1}></RenderBlock>)}

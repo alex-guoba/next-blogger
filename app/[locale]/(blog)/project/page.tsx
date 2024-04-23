@@ -28,7 +28,7 @@ export default async function Home({ searchParams }: Props) {
   const subpost = posts.slice((page - 1) * env.POST_PAGE_SIZES, page * env.POST_PAGE_SIZES);
 
   return (
-    <Shell variant="centered" className="md:pb-10">
+    <Shell variant="default" className="md:pb-10">
       <PageHeader>
         <PageHeaderHeading size="lg" className="text-center">
           Project
