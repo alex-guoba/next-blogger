@@ -46,13 +46,13 @@ export default async function Home({ params, searchParams }: Props) {
   const subpost = posts.slice((page - 1) * env.POST_PAGE_SIZES, page * env.POST_PAGE_SIZES);
 
   return (
-    <Shell variant="centered" className="md:pb-10">
+    <Shell variant="default" className="md:px-48 md:pb-10">
       <PageHeader>
         <PageHeaderHeading size="lg" className="text-center">
           {tag}
         </PageHeaderHeading>
       </PageHeader>
-      <PostRowsLayout items={subpost} className="grid-cols-1"></PostRowsLayout>
+      <PostRowsLayout items={subpost} className="divide-y"></PostRowsLayout>
       {total > env.POST_PAGE_SIZES ? (
         <PostPagination total={total} pageSize={env.POST_PAGE_SIZES}></PostPagination>
       ) : null}

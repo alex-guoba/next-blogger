@@ -14,7 +14,8 @@
     "lint": "next lint",
     "shadcn:add": "npx shadcn-ui@latest add",
     "prettier": "prettier --check --ignore-path .gitignore  \"**/*.{js,jsx,ts,tsx}\"",
-    "prettier:fix": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,ts,tsx}\""
+    "prettier:fix": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,ts,tsx}\"",
+    "coupling-graph": "npx madge --extensions js,jsx,ts,tsx,css,md,mdx ./ --exclude '.next|tailwind.config.js|reset.d.ts|prettier.config.js|postcss.config.js|playwright.config.ts|next.config.js|README.md|.eslintrc.js' --image graph.svg"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

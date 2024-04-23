@@ -36,7 +36,11 @@ export default async function Home({ searchParams }: Props) {
         <PageHeaderDescription>{t("Description")}</PageHeaderDescription>
       </PageHeader>
       <Separator className="mb-2.5" />
-      <PostRowsLayout items={subpost}></PostRowsLayout>
+      <PostRowsLayout
+        items={subpost}
+        className="gap-8 md:grid-cols-2"
+        gridClassName="bg-zinc-100 dark:bg-inherit"
+      ></PostRowsLayout>
       {/* <Separator className="mt-10" /> */}
       <PostPagination total={total} pageSize={env.POST_PAGE_SIZES}></PostPagination>
       {page == 1 && <TagFooter posts={posts}></TagFooter>}
