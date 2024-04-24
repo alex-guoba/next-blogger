@@ -12,6 +12,8 @@ import { TagList } from "@/components/layouts/tag";
 import { CacheQueryDatabase } from "../../notion/api/cache-wrapper";
 import { ArticlePost, dbQueryParams } from "../../notion/fitler";
 
+export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
+
 async function TagRender({ posts }: { posts: TypePostList }) {
   if (!posts || posts.length == 0) {
     return <div />;

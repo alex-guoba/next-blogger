@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { IconRender } from "./emoji";
 import RichText from "../text";
-import { IndentChildren } from "../render-helper";
+import { IndentChildren } from "../helper/render-helper";
 
 interface CalloutBlockProps {
   block: any;

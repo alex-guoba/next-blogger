@@ -1,5 +1,5 @@
 import React from "react";
-import { RenderBlock } from "./render";
+import { RenderBlock } from "../render";
 
 export function IndentChildren({ cb, level = 0, blanket = true }: { cb: any; level: number; blanket?: boolean }) {
   if (!cb) {

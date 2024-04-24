@@ -1,11 +1,10 @@
-// "use client";
-
 import React from "react";
 import { cn } from "@/lib/utils";
 
 import RichText from "../text";
-import { bundledLanguages, getHighlighter } from "shiki";
+import { bundledLanguages, codeToHtml } from "shiki";
 import { rawText } from "../block-parse";
+import CopyToClipboard from "../helper/copy-to-clipboard";
 
 interface CodeBlockProps {
   block: any;
@@ -35,23 +34,33 @@ export async function ShikiCodeRender({ block, defaultLanguage, className }: Cod
   const theme = "github-dark";
   const codes = rawText(code?.rich_text);
 
-  const highlighter = await getHighlighter({
-    langs: [lang],
-    themes: [theme],
-  });
+  // const highlighter = await getHighlighter({
+  //   langs: [lang],
+  //   themes: [theme],
+  // });
 
-  const html = await highlighter.codeToHtml(codes, {
-    lang: lang,
-    theme: theme,
+  // const html = await highlighter.codeToHtml(codes, {
+  //   lang: lang,
+  //   theme: theme,
+  // });
+
+  const html = await codeToHtml(codes, {
+    lang,
+    theme,
   });
 
   const caption = code.caption;
 
   return (
-    <div key={id} className={cn(className, "w-full max-w-full flex-col overflow-hidden text-sm")}>
+    <div key={id} className={cn(className, "w-full max-w-full flex-col overflow-hidden rounded-md text-sm")}>
+      <div className="flex items-center justify-between bg-gradient-to-r from-neutral-800 to-neutral-700">
+        <span className="px-4 text-primary-foreground">{lang}</span>
+        <CopyToClipboard code={codes} />
+      </div>
+
       <div
         dangerouslySetInnerHTML={{
-          __html: `<pre class="language-${lang}" style="background: #24292e; padding: 1em; margin: 0.5em 0px; border-radius: 0.375rem; overflow: auto;" tabIndex="0"><code class="language-${lang}">${html}</code></pre>`,
+          __html: `<pre class="language-${lang}" style="overflow: auto; background: #24292e; padding: 1em; " tabIndex="0"><code class="language-${lang}">${html}</code></pre>`,
         }}
       />
       {caption && caption.length > 0 && (

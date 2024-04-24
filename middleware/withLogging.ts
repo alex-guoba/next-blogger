@@ -6,7 +6,10 @@ import { logger } from "@/lib/logger";
 
 export const withLogging: MiddlewareFactory = (next) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
-    logger.info(`[${request.method}] ${request.url}`);
+    const forwarded = request.headers.get("x-forwarded-for");
+    const ip = forwarded ? forwarded.split(/, /)[0] : "";
+
+    logger.info(`[${request.method}] [${ip}] ${request.url}`);
     return next(request, _next);
   };
 };

@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import RichText, { ColorMap } from "../text";
-import { IndentChildren } from "../render-helper";
+import { IndentChildren } from "../helper/render-helper";
 
 interface TodoProps {
   block: any;

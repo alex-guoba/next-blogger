@@ -11,7 +11,7 @@ import {
   QueryDatabaseResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
-import client from "./client";
+import { client } from "./client";
 
 const dftMaxRetry = 2;
 
@@ -70,11 +70,11 @@ export async function QueryDatabases(
     return response;
   } catch (error) {
     if (maxTries > 0 && shouldRetry(error)) {
-      logger.info(`retringing proxyQueryDatabases ${database_id}`);
+      logger.info(`retringing proxyQueryDatabases ${database_id} as ${error}`);
       return QueryDatabases(database_id, params, maxTries - 1);
     }
     logger.error(`Failed to query Database ${error}`);
-    return null;
+    throw error;
   }
 }
 export async function RetrievePage(page_id: string, maxTries: number = dftMaxRetry): Promise<GetPageResponse | null> {
@@ -85,7 +85,7 @@ export async function RetrievePage(page_id: string, maxTries: number = dftMaxRet
     return response;
   } catch (error) {
     if (maxTries > 0 && shouldRetry(error)) {
-      logger.info(`retringing proxyRetrievePage ${page_id}`);
+      logger.info(`retringing proxyRetrievePage ${page_id} as ${error}`);
       return RetrievePage(page_id, maxTries - 1);
     }
     logger.error(`Failed to retrieve page ${error}`);
@@ -116,7 +116,7 @@ export async function ListBlockChildren(
     return response;
   } catch (error) {
     if (maxTries > 0 && shouldRetry(error)) {
-      logger.info(`retringing proxyListBlockChildren ${block_id}`);
+      logger.info(`retringing proxyListBlockChildren ${block_id} as ${error}`);
       return ListBlockChildren(block_id, maxTries - 1);
     }
     logger.error(`Failed to list blockchildren $error`);

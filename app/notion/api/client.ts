@@ -8,4 +8,4 @@ const client = new Client({
   logLevel: env.NOTION_API_LOG_LEVEL as LogLevel,
 });
 
-export default client;
+export { client };

@@ -5,7 +5,6 @@ import { env } from "@/env.mjs";
 
 const revalidate = env.NEXT_DATACACHE_EXPIRE;
 
-// export class NotionApiCache {
 export const CacheRetrieveBlockChildren = unstable_cache(
   (page_id: string) => StatRetrieveBlockChildren(page_id),
   ["block-cache-key"],
@@ -36,4 +35,9 @@ export const CacheQueryDatabase = unstable_cache(
     tags: ["posts"],
   }
 );
-// }
+
+// export const CacheRetrieveBlockChildren = (page_id: string) => StatRetrieveBlockChildren(page_id);
+// export const CacheRetrievePage = (page_id: string) => StatRetrievePage(page_id);
+// export const CacheRetrieveDatabase = (database_id: string) => StatRetrieveDatabase(database_id);
+// export const CacheQueryDatabase = (database_id: string, params: QueryDatabaseParameters) =>
+//   StatQueryDatabase(database_id, params);
