@@ -1,7 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-import RichText from "../text";
+// import RichText from "../text";
 import { bundledLanguages, codeToHtml } from "shiki";
 import { rawText } from "../block-parse";
 import CopyToClipboard from "../helper/copy-to-clipboard";
@@ -49,12 +49,12 @@ export async function ShikiCodeRender({ block, defaultLanguage, className }: Cod
     theme,
   });
 
-  const caption = code.caption;
+  let caption = `[${lang}] ${rawText(code?.caption)}`;
 
   return (
     <div key={id} className={cn(className, "w-full max-w-full flex-col overflow-hidden rounded-md text-sm")}>
       <div className="flex items-center justify-between bg-gradient-to-r from-neutral-800 to-neutral-700">
-        <span className="px-4 text-primary-foreground">{lang}</span>
+        <span className="px-4 text-primary-foreground">{caption}</span>
         <CopyToClipboard code={codes} />
       </div>
 
@@ -63,11 +63,11 @@ export async function ShikiCodeRender({ block, defaultLanguage, className }: Cod
           __html: `<pre class="language-${lang}" style="overflow: auto; background: #24292e; padding: 1em; " tabIndex="0"><code class="language-${lang}">${html}</code></pre>`,
         }}
       />
-      {caption && caption.length > 0 && (
+      {/* {caption && caption.length > 0 && (
         <figcaption className="px-1.5 text-sm font-normal text-slate-600">
           <RichText title={caption} />
         </figcaption>
-      )}
+      )} */}
     </div>
   );
 }

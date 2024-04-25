@@ -20,6 +20,7 @@ export const env = createEnv({
       REVALIDATE_PAGES: z.coerce.number().default(600),
       NEXT_ANALYTICS_UMAMI_ID: z.string().default(''),
       NEXT_DATACACHE_EXPIRE: z.coerce.number().default(1600),
+      NEXT_DATACACHE_SWR_EXPIRE: z.number().optional(),
   },
 
   /**
@@ -49,6 +50,7 @@ export const env = createEnv({
     REVALIDATE_PAGES: process.env.NEXT_REVALIDATE_PAGES,
     NEXT_ANALYTICS_UMAMI_ID: process.env.NEXT_ANALYTICS_UMAMI_ID,
     NEXT_DATACACHE_EXPIRE: process.env.NEXT_DATACACHE_EXPIRE,
+    NEXT_DATACACHE_SWR_EXPIRE: process.env.NEXT_DATACACHE_SWR_EXPIRE,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

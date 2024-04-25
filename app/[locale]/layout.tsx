@@ -25,5 +25,5 @@ export default async function LobyLayout({
   params: { locale: string };
 }) {
   unstable_setRequestLocale(locale);
-  return <div className="relative flex min-h-screen flex-col">{children}</div>;
+  return <div className="relative flex min-h-screen flex-col leading-relaxed">{children}</div>;
 }
