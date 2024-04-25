@@ -20,7 +20,7 @@ export const env = createEnv({
       REVALIDATE_PAGES: z.coerce.number().default(600),
       NEXT_ANALYTICS_UMAMI_ID: z.string().default(''),
       NEXT_DATACACHE_EXPIRE: z.coerce.number().default(1600),
-      NEXT_DATACACHE_SWR_EXPIRE: z.number().optional(),
+      NEXT_DATACACHE_SWR_EXPIRE: z.coerce.number().optional(),
   },
 
   /**

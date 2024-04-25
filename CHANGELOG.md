@@ -1,0 +1,83 @@
+# 0.1.0 (2024-04-25)
+
+
+### Bug Fixes
+
+* add index for react component in renderBlock ([8f8d505](https://github.com/alex-guoba/next-blogger/commit/8f8d505d606c70953a300704676263b33bbaae9f))
+* **lib/unfurl.ts:** remove logger ([e9211f5](https://github.com/alex-guoba/next-blogger/commit/e9211f5efe98d1fcf5b69b740928f0008058f3bb))
+* **logger.ts:** remove pino-pretty ([38d3af5](https://github.com/alex-guoba/next-blogger/commit/38d3af5d28f663402f09fe5443b4738f9b9723e8))
+* **pino:** set timstamp to localtime in pino logger ([d746b6b](https://github.com/alex-guoba/next-blogger/commit/d746b6b0e2382fe23231d0931a34c6ecff3a61f4))
+* remove logger for column component ([16ed93a](https://github.com/alex-guoba/next-blogger/commit/16ed93a81189022d32378bb4d565e8bf427e7495))
+* **tag page render:** bugfix for tag page rendering. adapter color for tailwindcss theme ([1562a20](https://github.com/alex-guoba/next-blogger/commit/1562a2018d77eaa0ae29a149e2d1e28a0422aa01))
+
+
+### Features
+
+* add Block-types in `Readme` ([fdd8afd](https://github.com/alex-guoba/next-blogger/commit/fdd8afd87afbb1140b9db166abfa779a99ed3b47))
+* add color support and children rendering for todo, list, toggle component ([5999897](https://github.com/alex-guoba/next-blogger/commit/59998970dc002bb81c62913590ccd76a7e9a1014))
+* add copyright ([b588fb3](https://github.com/alex-guoba/next-blogger/commit/b588fb3ad2df0e012884d839fb3b370c15f63929))
+* add cover iamge for homepage blog list ([58287bd](https://github.com/alex-guoba/next-blogger/commit/58287bdcf3d9959b87f9a8d4ffbaacee583d2299))
+* add dashboard for table of contents ([884bd3a](https://github.com/alex-guoba/next-blogger/commit/884bd3a561b299339a6c398479cc21d3346dd25f))
+* add data cache for Notion API ([534f643](https://github.com/alex-guoba/next-blogger/commit/534f643b064b8bfb61746ad9e924cb4c951ba9dd))
+* add debug for memory leak ([aa0de9a](https://github.com/alex-guoba/next-blogger/commit/aa0de9a1654ed664461db0ea32ee7916a717d94f))
+* add docker support ([7fd9bd9](https://github.com/alex-guoba/next-blogger/commit/7fd9bd95ce50d1d44ddcf5821560da8e91f965e7))
+* add embed support ([ffca678](https://github.com/alex-guoba/next-blogger/commit/ffca678f870fbea1fec5d0a6a179eb4dba089b49))
+* add iframely support ([7180e59](https://github.com/alex-guoba/next-blogger/commit/7180e5956ab4674288f7ea8c4457a49c4ce7fc89))
+* Add not-found page, tailwind-incator ([77cbad0](https://github.com/alex-guoba/next-blogger/commit/77cbad097cb323e9cdd25fd996023eede7ed4b97))
+* add pagination component ([9938912](https://github.com/alex-guoba/next-blogger/commit/9938912bd201e6b710891306842df48a3521f86d))
+* add pagination for blog list ([ec154de](https://github.com/alex-guoba/next-blogger/commit/ec154de69995ade00e797fe3d899b2b9679e22b1))
+* add pagination for notion api calling ([1e249ee](https://github.com/alex-guoba/next-blogger/commit/1e249ee113017d1b10cec581ce1eb2c59d229990))
+* add prettier and eslint rules ([d9f3aeb](https://github.com/alex-guoba/next-blogger/commit/d9f3aebc78bf3a1092c8c8010192fa3b420a5c6c))
+* add prisma support for Notion API ([79ee44e](https://github.com/alex-guoba/next-blogger/commit/79ee44e835de96d0a4223e6e28ee64b0a5bfd398))
+* add project page ([0921909](https://github.com/alex-guoba/next-blogger/commit/0921909d01c45b3aad0f8bb1cd78fb86c769b435))
+* add reame.zh-cn ([9933656](https://github.com/alex-guoba/next-blogger/commit/9933656aa391008198e5a16ffef529c400c20207))
+* add SEO, metainfo ([a17d731](https://github.com/alex-guoba/next-blogger/commit/a17d7314f49e43874590d77ad90626ddca5b3300))
+* add sharebar, remove prisma cache ([591a6ac](https://github.com/alex-guoba/next-blogger/commit/591a6ac0b8d11eb73e1cd9acf1f117da8d04d499))
+* add site footer ([d3addaf](https://github.com/alex-guoba/next-blogger/commit/d3addaf2807da519c86949160bc2be8a4a946d73))
+* add SSG for homepage blogs ([a851a9e](https://github.com/alex-guoba/next-blogger/commit/a851a9e8a69e3ebb678396eea431201cb620c57d))
+* add suspence for blog content loading ([58bdbca](https://github.com/alex-guoba/next-blogger/commit/58bdbca24e699efd854ec708133c3d7280720c25))
+* add tag page ([15c0fe5](https://github.com/alex-guoba/next-blogger/commit/15c0fe5038810c9562ffa8c7d2ac49e303b94d12))
+* add type, pubdate, status field for blog database; add filter & sort function for query database ([bcdf657](https://github.com/alex-guoba/next-blogger/commit/bcdf6572bc766220b8276b99569c26647bedb893))
+* add umami analysis support ([d7e52b2](https://github.com/alex-guoba/next-blogger/commit/d7e52b2b10cb0d3936f6876f08c3b94956627997))
+* add unfurl for bookmark ([3ef8e18](https://github.com/alex-guoba/next-blogger/commit/3ef8e18b1b78e05dffd4860da99d1a8073d22f89))
+* add video support ([235467d](https://github.com/alex-guoba/next-blogger/commit/235467d2956f13f1435bc83dc1da06ec0b1eb8a7))
+* adjust home page layout ([d4896c2](https://github.com/alex-guoba/next-blogger/commit/d4896c22245b795b07a1189799db21ed04533af6))
+* block layout for code ([b373b5f](https://github.com/alex-guoba/next-blogger/commit/b373b5fecaf58cd1d493b71d71c844eaeef355ee))
+* block layout for image ([322c4a6](https://github.com/alex-guoba/next-blogger/commit/322c4a6a48567c0dfb6458bdfec24934f0e03eaf))
+* block layout for list ([e8b3665](https://github.com/alex-guoba/next-blogger/commit/e8b3665966b4863a30041dbffc7cae229057ffb9))
+* **cache:** support redis cache to replace memory cache ([4873e13](https://github.com/alex-guoba/next-blogger/commit/4873e139ca6fac48bd1e67b4db2577bbfcf63923))
+* change default db to prisma ([d82ca7e](https://github.com/alex-guoba/next-blogger/commit/d82ca7e4f45abd7af0ba88de44cf5b0963e3dc54))
+* change default font. replace logger package with pino.js ([53c223e](https://github.com/alex-guoba/next-blogger/commit/53c223e3a9b5aa171d3a3e600decf94accaaf72e))
+* children block rendering for heading block types ([c2edeb6](https://github.com/alex-guoba/next-blogger/commit/c2edeb6a3847f214e40a9d0e589c72c7d7665870))
+* **code component:** add copy-to-clip to code component ([596d51c](https://github.com/alex-guoba/next-blogger/commit/596d51ccd5e394b2afc13da351562e630e380ef7))
+* converge iframely and unfurl ([af3166d](https://github.com/alex-guoba/next-blogger/commit/af3166dc10368e086fa92980a39836c3c90b7783))
+* fix build errors ([da84c58](https://github.com/alex-guoba/next-blogger/commit/da84c58433d73d6d552caa7dc2c4de8a0c8fe634))
+* fix build for prisma generate ([71eb0db](https://github.com/alex-guoba/next-blogger/commit/71eb0db426867453503a81a4e8a2038fb5720f1d))
+* **font:** add font for simplie chinese. adjust width for blog pages ([8982ed8](https://github.com/alex-guoba/next-blogger/commit/8982ed8f411cc4dfdea4edc8f27239f4227e5f40))
+* **i18n:** multi-language with next-intl ([2eea6d4](https://github.com/alex-guoba/next-blogger/commit/2eea6d40d6445bd9e081b02fe72933b9d753102f))
+* layout optimization ([548fa1b](https://github.com/alex-guoba/next-blogger/commit/548fa1b4ed2fcb18929a9f44bcbbea68e35bcb3b))
+* layout optimization ([bfe31f8](https://github.com/alex-guoba/next-blogger/commit/bfe31f88e12fe5a33ab4c380af064e91fc966338))
+* optmize layout of bookmark & link-preview ([37da522](https://github.com/alex-guoba/next-blogger/commit/37da5229cb567f472665a2b8db8a8d7227f45549))
+* replace html table with shdcn:table ([73c5cf9](https://github.com/alex-guoba/next-blogger/commit/73c5cf9ce3965bddb5436e5c21214a85b7f1dca8))
+* replace html table with shdcn:table ([9dcecd3](https://github.com/alex-guoba/next-blogger/commit/9dcecd3c9aa5d5418ee2c0e141de9cca69a086be))
+* replace prismjs with Shiki ([4de2568](https://github.com/alex-guoba/next-blogger/commit/4de256880e6e04ca76294025cf0b91904499bea5))
+* support child_database ([90a4176](https://github.com/alex-guoba/next-blogger/commit/90a41763bd4498450bd9f62cd573e5232a66776d))
+* support database basic ([6d4c65d](https://github.com/alex-guoba/next-blogger/commit/6d4c65d6ec536e17188959e0db02de980583beb0))
+* support pdf、table ([2407d0c](https://github.com/alex-guoba/next-blogger/commit/2407d0cf20e8151abb38c822f242e90d88131080))
+* support sub-page blocks ([d15164d](https://github.com/alex-guoba/next-blogger/commit/d15164dfc1600e1bcc56a646677841a6b84aa356))
+* **tags:** add tag component for blog posts ([85263ed](https://github.com/alex-guoba/next-blogger/commit/85263ed9421b8c53d03e99e36433a9de5da5b67b))
+* update layout ([20e74cf](https://github.com/alex-guoba/next-blogger/commit/20e74cffccd93637b7e1c338205fb8be616c2f10))
+* update layout for some blocks to support darkmode ([80b713b](https://github.com/alex-guoba/next-blogger/commit/80b713b6dc4e0ee250f907437d7620f04fb60e57))
+* update link-preview ([6162be0](https://github.com/alex-guoba/next-blogger/commit/6162be0c5cb2ec98c6d941140b54be5b50bb7546))
+* update readme ([180a09a](https://github.com/alex-guoba/next-blogger/commit/180a09a484aee947ad8fd8987ec0d6d33371b533))
+* update readme ([e19436f](https://github.com/alex-guoba/next-blogger/commit/e19436f66061e88bf4c27650da4b4993375fca3a))
+* update README ([3b8b868](https://github.com/alex-guoba/next-blogger/commit/3b8b8687b56cf06efd6c1c5b77807ad93a97108b))
+* upgrade nextjs & bug fix ([1eda3b1](https://github.com/alex-guoba/next-blogger/commit/1eda3b19340a70274d1275e2b7a858512bd5f7c0))
+
+
+### BREAKING CHANGES
+
+* **i18n:** Multi-lang support
+
+
+
