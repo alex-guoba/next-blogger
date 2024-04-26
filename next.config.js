@@ -89,6 +89,21 @@ const nextConfig = withNextIntl({
       fullUrl: true,
     },
   },
+
+  // see: https://nextjs.org/docs/app/building-your-application/deploying#streaming-and-suspense
+  async headers() {
+    return [
+      {
+        source: '/:path*{/}?',
+        headers: [
+          {
+            key: 'X-Accel-Buffering',
+            value: 'no',
+          },
+        ],
+      },
+    ]
+  },
 });
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({

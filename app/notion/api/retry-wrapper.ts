@@ -119,7 +119,7 @@ export async function ListBlockChildren(
       logger.info(`retringing proxyListBlockChildren ${block_id} as ${error}`);
       return ListBlockChildren(block_id, maxTries - 1);
     }
-    logger.error(`Failed to list blockchildren $error`);
+    logger.error(`Failed to list blockchildren ${error}`);
 
     return null;
   }
