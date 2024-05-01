@@ -94,15 +94,15 @@ const nextConfig = withNextIntl({
   async headers() {
     return [
       {
-        source: '/:path*{/}?',
+        source: "/:path*{/}?",
         headers: [
           {
-            key: 'X-Accel-Buffering',
-            value: 'no',
+            key: "X-Accel-Buffering",
+            value: "no",
           },
         ],
       },
-    ]
+    ];
   },
 });
 

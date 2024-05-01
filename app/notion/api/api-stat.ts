@@ -32,7 +32,7 @@ export const StatRetrieveDatabase = async (database_id: string): Promise<GetData
 
   const result = RetrieveDatabase(database_id);
   const end = new Date().getTime();
-  logger.info(`[StatRetrieveDatabase] ${end - start}ms`);
+  logger.info(`[StatRetrieveDatabase] ${database_id} ${end - start}ms`);
   return result;
 };
 

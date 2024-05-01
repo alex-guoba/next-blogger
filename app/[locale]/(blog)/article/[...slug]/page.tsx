@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 import { RenderBlock } from "@/app/notion/render";
 import Shell from "@/components/shells/shell";
-import React from "react";
+import React, { cache } from "react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-async function parseSlug(slug: string[]) {
+const parseSlug = cache(async (slug: string[]) => {
   let pageID, lastEditTime, title, summary;
   if (slug.length >= 1) {
     pageID = slug[0];
@@ -83,7 +83,7 @@ async function parseSlug(slug: string[]) {
     }
   }
   return { pageID, lastEditTime, title, summary };
-}
+});
 
 export default async function Page({ params }: { params: { slug: string[]; locale: string } }) {
   unstable_setRequestLocale(params.locale);

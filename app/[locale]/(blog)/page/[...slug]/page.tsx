@@ -22,22 +22,6 @@ import { logger } from "@/lib/logger";
 
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
 
-// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
-// export const revalidate = parseInt(process.env.NEXT_REVALIDATE_PAGES || "", 10) || 60; // revalidate the data interval
-// // export const dynamic = 'force-dynamic';
-// // export const revalidate = 0;
-// // export const dynamicParams = true; // true | false,
-/**
- * If you want to enable static rendering, uncommment the following function
- */
-// export async function generateStaticParams() {
-//   const database = await QueryDatabase(env.NOTION_DATABASE_ID);
-//   return database.map((page: any) => {
-//     const slug = [page.id];
-//     return { slug };
-//   });
-// }
-
 type Props = {
   params: { slug: string[] };
   searchParams: { [key: string]: string | string[] | undefined };

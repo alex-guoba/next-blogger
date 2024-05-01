@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:debug": "next build -d",
     "build:heap": "next build --experimental-debug-memory-usage",
     "build:stats": "ANALYZE=true npm run build",
     "clean": "rimraf .next .swc out coverage",
