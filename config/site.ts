@@ -17,13 +17,13 @@ export const siteConfig = {
         {
           title: "Tags",
           href: "/tags",
-          description: "All the products we have to offer.",
+          description: "All the posts group by tag.",
           items: [],
         },
         {
-          title: "Recent",
-          href: "/recent",
-          description: "Build your own custom skateboard.",
+          title: "Saas Templates",
+          href: "/page/mdx",
+          description: "Use MDX in Notion to build your own SaaS templates.",
           items: [],
         },
       ],

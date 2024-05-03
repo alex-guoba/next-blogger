@@ -1,16 +1,8 @@
-import Link from "next/link";
 import { Metadata } from "next";
 
 import { RenderBlock } from "@/app/notion/render";
-// import { QueryDatabase } from "@/app/notion/api";
 import Shell from "@/components/shells/shell";
 import React, { cache } from "react";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { ChevronLeftIcon } from "@radix-ui/react-icons";
-import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/page-header";
-// import { Separator } from "@/components/ui/separator";
-
 import { siteMeta } from "@/config/meta";
 import { filterBase, filterSelect, filterText, rawText } from "@/app/notion/block-parse";
 import { notFound } from "next/navigation";
@@ -107,30 +99,17 @@ async function ContentRender({ pageID }: { pageID: string }) {
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   // retrieve page meta info by page ID
-  const { pageID, title, summary } = await filterPageBySlug(params.slug[0]);
+  const { pageID, title } = await filterPageBySlug(params.slug[0]);
   if (!pageID || !title) {
     logger.info(`page not found or unpublished ${pageID} ${title}`);
     return notFound();
   }
 
   return (
-    <Shell as="article" className="relative flex min-h-screen flex-col">
-      <PageHeader>
-        <PageHeaderHeading>{title}</PageHeaderHeading>
-        <PageHeaderDescription size="sm" className="text-center">
-          {summary}
-        </PageHeaderDescription>
-      </PageHeader>
-
+    <Shell variant={"sidebar"} as="article" className="relative flex min-h-screen flex-col">
       <React.Suspense fallback={<ContentLoadingSkeleton></ContentLoadingSkeleton>}>
         <ContentRender pageID={pageID}></ContentRender>
       </React.Suspense>
-
-      <Link href="/" className={cn(buttonVariants({ variant: "ghost", className: "mx-auto mt-4 w-fit" }))}>
-        <ChevronLeftIcon className="mr-2 h-4 w-4" aria-hidden="true" />
-        See all posts
-        <span className="sr-only">See all posts</span>
-      </Link>
     </Shell>
   );
 }

@@ -23,6 +23,6 @@ interface ShellProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<
   as?: React.ElementType;
 }
 
-export default function shell({ className, as: Comp = "section", variant, ...props }: ShellProps) {
+export default function Shell({ className, as: Comp = "section", variant, ...props }: ShellProps) {
   return <Comp className={cn(shellVariants({ variant }), className)} {...props} />;
 }

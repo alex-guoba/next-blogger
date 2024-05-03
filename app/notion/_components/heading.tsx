@@ -4,12 +4,13 @@ import { VariantProps, cva } from "class-variance-authority";
 import React from "react";
 import { RenderBlock } from "../render";
 
-const headingVariants = cva("font-bold break-words dark:text-white mt-1.5 scroll-mt-16 tracking-tight", {
+// see: https://ui.shadcn.com/docs/components/typography#h1
+const headingVariants = cva("break-words dark:text-white mt-1.5 scroll-mt-16 tracking-tight", {
   variants: {
     variant: {
-      heading_1: "py-4 text-3xl",
-      heading_2: "py-3 text-2xl",
-      heading_3: "py-2 text-1xl",
+      heading_1: "py-4 text-3xl font-extrabold",
+      heading_2: "py-3 text-2xl font-bold",
+      heading_3: "py-2 text-1xl font-bold",
     },
   },
   defaultVariants: {
