@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { bundledLanguages, codeToHtml } from "shiki";
 import { rawText } from "../block-parse";
 import CopyToClipboard from "../helper/copy-to-clipboard";
+import { MdxRenderer } from "./mdx/mdx";
+import { env } from "@/env.mjs";
 
 interface CodeBlockProps {
   block: any;
@@ -31,8 +33,14 @@ export async function ShikiCodeRender({ block, defaultLanguage, className }: Cod
     lang = "text"; // fallback language
   }
 
-  const theme = "github-dark";
   const codes = rawText(code?.rich_text);
+  if (codes.length == 0) {
+    return null;
+  }
+
+  if (lang == "markdown" && env.RENDER_MDX) {
+    return <MdxRenderer className={className} source={codes}></MdxRenderer>;
+  }
 
   // const highlighter = await getHighlighter({
   //   langs: [lang],
@@ -44,6 +52,7 @@ export async function ShikiCodeRender({ block, defaultLanguage, className }: Cod
   //   theme: theme,
   // });
 
+  const theme = "github-dark";
   const html = await codeToHtml(codes, {
     lang,
     theme,
