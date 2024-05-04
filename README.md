@@ -1,90 +1,92 @@
-<p align="center">
-  <img alt="Example Page" src="https://github.com/alex-guoba/next-blogger/assets/2872637/b05f04b0-3d05-4ab3-8a8e-be2093a349c5" width="689">
-</p>
 
-Next-Blogger built on [Next.js 14+](https://nextjs.org/) and [Tailwind CSS](https://tailwindcss.com/), use [Notion](https://www.notion.so]) to manage your content. 
+基于[Next.js](https://nextjs.org/)和[Notion Public API](https://www.notion.so/)构建的博客系统，支持在Notion中嵌入[MDX](https://mdxjs.com/)代码来实现更加丰富的效果。
 
-[简体中文](./README.zh-CN.md)
+[English](./README.en.md)
 
-## Features
+## 特性
 
-1. Built using Next.js(14+ with App Router ), Typescript, Tailwind CSS, and other plugins (Shiki, React-pdf, and more).
-2. Utilizes the [Notion Public API](https://developers.notion.com/).
-3. Supports caching Notion data using `unstable_cache` to reduce API calls and improve overall performance.
-4. Includes a dark mode option.
-5. SEO friendly with RSS feed, sitemaps and more!
-6. Includes load testing scripts, see [load-testing](./scripts/load-testing/).
-7. Supports [Server Rendering](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default) and [Dynamic Rendering](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default).
-8. Integrate with [umami](https://umami.is/).
-9.  Multi-language (i18n) with [next-intl](https://next-intl-docs.vercel.app/)
+1. 使用Next.js、TypeS、TailwindCSS构建。
+2. 使用Notion作为CMS，支持在Notion中嵌入[MDX](https://mdxjs.com/)代码。
+3. 使用Notion Public API，同时支持缓存数据，提升整体性能。
+4. 支持深色模式、多语言支持。
+5. 支持[Next SSG](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation)。
+6. SEO友好
+7. 使用[umami](https://umami.is/)作为站点统计工具。
 
-## Tech Stack
+## 技术栈
 
-### Frameworks
+### 框架
 
 1. [Next.js](https://nextjs.org/)
 2. [Notion](https://www.notion.so/)
-3. [Tailwind CSS](https://tailwindcss.com/) and [shadcn](https://ui.shadcn.com/)
+3. [Tailwind CSS](https://tailwindcss.com/) 和 [shadcn](https://ui.shadcn.com/)
 
-### Components
+### 组件
 
-1. [Shiki](https://shiki.style/): Renders `code` blocks.
-2. [React-pdf](https://react-pdf.org/): Renders `pdf` blocks.
-3. [iframely](https://iframely.com/) / [unfurl](https://github.com/jacktuck/unfurl): Renders `bookmark`, `link-preview`, and `video` blocks (Notion only returns URLs without Open Graph infos).
-4. [Katex](https://katex.org/): Renders `equation` blocks.
+1. [Shiki](https://shiki.style/): 渲染`code`块
+2. [React-pdf](https://react-pdf.org/): 渲染`pdf`块
+3. [iframely](https://iframely.com/) / [unfurl](https://github.com/jacktuck/unfurl): 渲染`bookmark`、`link-preview`和`video`块（Notion仅返回URL，不含Open Graph信息）
+4. [Katex](https://katex.org/): 渲染`equation`块
+5. [MDX](https://mdxjs.com/): 渲染mdx
 
 ## Live demo
 
 - https://goroutine.cn/
 - https://next-blogger-inky.vercel.app/
 
-## Getting Started
+## 入门指南
 
-### Prerequisites
+### 前提条件
 
-1. Duplicate [this Notion template](https://gelco.notion.site/577a7365a3d3442aa3cddb18b4458c88?v=c0455cd1391e41a2b05d9b1536398d13) and edit your blog.
-2. Follow Notion's [getting started guide](https://developers.notion.com/docs/getting-started) to get a `NOTION_TOKEN` and a `NOTION_DATABASE_ID`.
+1. 复制[这个Notion模板](https://www.notion.so/gelco/577a7365a3d3442aa3cddb18b4458c88?v=c0455cd1391e41a2b05d9b1536398d13)，并编辑你的博客内容。
+2. 按照Notion的[入门指南](https://developers.notion.com/docs/getting-started)获取`NOTION_TOKEN`和`NOTION_DATABASE_ID`。
 
-### Development
+### 开发及部署
 
-1. Set up: Star and Fork the repository.
-2. Install the dependencies:
+1. 设置：对项目标星并Fork
+2. 安装依赖：
 
 ```bash
 npm install
 ```
 
-3. Set up your `.env` file with `NOTION_TOKEN` and `NOTION_DATABASE_ID`:
+3. 设置你的`.env`文件，填入`NOTION_TOKEN`和`NOTION_DATABASE_ID`
 
 ```ini
 NOTION_TOKEN=
 NOTION_DATABASE_ID=
 ```
-
-
-1. Run locally:
+4. 本地运行
 
 ```bash
-# Locally
+# 本地开发
 npm run dev
 
-# Production
+# 生产环境构建与启动
 npm run build
 npm run start
-# or use pm2 to manage
-pm2 start npm --  start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+打开[http://localhost:3000](http://localhost:3000)即可在浏览器中查看结果。
 
-### deploy
+## 关于Notion
 
-Follow the deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### 方案选型
+
+1. 为何选用Notion作为内容编辑器？
+本人已有多年使用Notion的习惯，以前博客的做法是将用Notion写好后再copy到Markdown等编辑器，然后使用hexo发布。这样流程会非常长，而且需要转换为markdown格式，流程非常的不方便。所以直接使用Notion作为CMS，写好的内容可以直接发布。也不需要修改后的频繁同步。
+
+2. 为何要重造轮子，而不是直接使用`react-notion-x`等已有的能力实现。
+原因主要是git上大部分实现都是基于Notion非公开的API，存在以下缺陷：
+- 非公开的API要求将Notion数据publish到外网，无法保障数据隐私。
+- 非公开的API需要cookie，存在后续可能废弃、变更的隐患，稳定性无法保障。
+- 非公开的API在测试时发现page内容过大时会存在拉取失败的情况。而公共API支持分页，稳定性更可靠。
+总之，虽然Public API在高级特性上有所缺失，比如不支持 Database View 等能力，但是基本能力已经可以满足需求。故最终选择采用Notion Public API实现。
 
 
-## Supported Blocks
+### 支持的Notion Block类型
 
-Most common block types are supported. But some blocks information not supported in Public API, So we give an abbreviated rendering.
+大多数常见的块类型都受支持。但是，Public API中不支持某些块的信息，因此我们提供了简化的渲染。
 
 | Block Type             | Supported | Notes                                                   |
 |------------------------|-----------|---------------------------------------------------------|
@@ -95,7 +97,7 @@ Most common block types are supported. But some blocks information not supported
 | Callout                | ✅ Yes     |                                                         |
 | Child Databases        | ✅ Yes     | Use [tanstack/table](https://tanstack.com/table/latest) |
 | Child page             | ✅ Yes     |                                                         |
-| Code                   | ✅ Yes     | Use [shiki](https://shiki.style/)                       |
+| Code                   | ✅ Yes     | Use [shiki](https://shiki.style/) and MDX               |
 | Column list and column | ✅ Yes     |                                                         |
 | Embed                  | ✅ Yes     |                                                         |
 | Equation               | ✅ Yes     | Use [katex ](https://katex.org/)                        |
@@ -117,71 +119,21 @@ Most common block types are supported. But some blocks information not supported
 | Table Of Contents      | ❌ Missing | API Unsupported.                                        |
 
 
-## Performance
+### Why iframely?
 
-1. [Dynamic Routes](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)
+1. `image`, `video`, `bookmark` 以及 `link-preview`等类型的block，Notion API仅返回URL，没有渲染相关数据结构（如title、desciprtion、icon等）。所以需要自己寻求解决方案，此处选择了iframely作为替代。Notion官方也是采用[iframely](https://www.notion.so/help/embed-and-connect-other-apps#embeds-in-notion)。
 
-Disabling `dynamic routes` can reduce redundant rendering and significantly improve performance. Below is a performance comparison between enabling and disabling this feature:
+2. iframely需要付费，所以也采用了unfurl.js作为兜底，效果上会有差距。
 
-- `force-dynamic`:
+## 配置
 
-| Bucket          | #    | %!|(MISSING) Histogram                                                           |
-|-----------------|------|--------|---------------------------------------------------------------------|
-| [0s,     10ms]  | 0    | 0.00%!|(MISSING)                                                                     |
-| [10ms,   40ms]  | 1    | 0.01%!|(MISSING)                                                                     |
-| [40ms,   80ms]  | 0    | 0.00%!|(MISSING)                                                                     |
-| [80ms,   200ms] | 1    | 0.01%!|(MISSING)                                                                     |
-| [200ms,  500ms] | 906  | 10.30%!|(MISSING) #######                                                             |
-| [500ms,  1s]    | 7885 | 89.67%!|(MISSING) ################################################################### |
-| [1s,     +Inf]  | 0    | 0.00%!|(MISSING)                                                                     |
+1. [顶部导航](./config/site.ts)
+2. 支持的[环境变量](./env.mjs), 包括`NOTION_TOKEN`, `NOTION_DATABASE_ID`等。
+- 自部署时请在`.env`文件中设置。或者在vercel面板上设置。
+- MDX开启： `RENDER_MDX=true` 且在notion的code block中设置语言为`markdown`
+- redis缓存开启： `REDIS_URL="redis://localhost:6379"`，否则使用内存、文件缓存
+- Notion数据过期时间 `NEXT_DATACACHE_EXPIRE`，默认1小时。注意如果使用Notion存储了pdf、图片等文件，过期时间不要过长，否则文件链接可能过期。
 
-- `auto` (default):
-
-| Bucket          | #    | %!|(MISSING) Histogram                                                          |
-|-----------------|------|--------|------------------------------------------------------------------|
-| [0s,     10ms]  | 0    | 0.00%!|(MISSING)                                                                  |
-| [10ms,   40ms]  | 7727 | 80.49%!|(MISSING) ############################################################ |
-| [40ms,   80ms]  | 1816 | 18.92%!|(MISSING) ##############                                               |
-| [80ms,   200ms] | 54   | 0.56%!|(MISSING)                                                              |
-| [200ms,  500ms] | 3    | 0.03%!|(MISSING)                                                              |
-| [500ms,  1s]    | 0    | 0.00%!|(MISSING)                                                              |
-| [1s,     +Inf]  | 0    | 0.00%!|(MISSING)                                                              |
-
-## Learn More
-
-### Why Notion ?
-
-1. Why choose Notion as the content editor?
-I have been using Notion for many years. In the past, when creating blogs, I would write content in Notion, copy it to editors like Markdown, and then publish it using hexo. This process was cumbersome and required converting the format to Markdown, which was inconvenient. By using Notion as a CMS, I can directly publish content written in Notion without the need for frequent synchronization after making changes.
-
-2. Why reinvent the wheel instead of using existing solutions like `react-notion-x`?
-The main reason is that most implementations on GitHub are based on Notion's unofficial API, which has several drawbacks:
-- The unofficial API does not have official documentation, so one has to figure out the data structure on their own.
-- The unofficial API requires publishing Notion data to the internet, which may compromise data privacy.
-- The unofficial API may be deprecated or changed in the future, making it unstable.
-- During testing, I found that the unofficial API sometimes fails to fetch large pages. In contrast, the public API supports pagination and is more stable.
-In summary, while the Public API lacks some advanced features like Database View support, it meets the basic requirements. Therefore, I chose to implement it using the Notion Public API.
-
-
-### Why iframely ?
-
-1. For block types such as `image`, `video`, `bookmark`, and `link-preview`, the Notion API only returns URLs without rendering the relevant data structures (e.g., title, description, icon, etc.). Therefore, an alternative solution is needed, and iframely is chosen for this purpose. Notion officially also uses [iframely](https://www.notion.so/help/embed-and-connect-other-apps#embeds-in-notion).
-
-2. Since iframely requires payment, unfurl.js is used as a fallback option, although there may be some differences in effectiveness.
-
-### How to get `NOTION_TOKEN` ?
-
-- Open https://www.notion.so/my-integrations in your browser.
-- Click "New integration" and enter a name to submit.
-- Click "show" and then copy the token.
-- Copy this [Notion template](https://gelco.notion.site/577a7365a3d3442aa3cddb18b4458c88?v=c0455cd1391e41a2b05d9b1536398d13), delete all the data, and click the settings button in the top right corner. Add the integration you created under Connections.
-
-### How to get `NOTION_DATABASE_ID` ?
-
-- Open the Notion database, click the "Share" button in the top right corner, and then click "Copy link".
-- The link will look like this: https://gelco.notion.site/577a7365a3d3442aa3cddb18b4458c88?v=c0455cd1391e41a2b05d9b1536398d13. The **577a7365a3d3442aa3cddb18b4458c88** part is the Database ID.
-
-## Acknowledgments
-
+## Reference
 1. [Notion Public API](https://developers.notion.com/reference/intro)
-2. [Taxonomy](https://tx.shadcn.com/)
+2. [Next.js](https://nextjs.org/)
