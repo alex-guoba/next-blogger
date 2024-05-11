@@ -12,5 +12,10 @@
     "Title": "文章列表",
     "Description": "浏览博客的最新文章",
     "SeeAllButtonLabel": "查看全部文章"
+  },
+  "Notes": {
+    "Title": "读书笔记",
+    "Description": "读书是学习，摘抄是整理，写作是创造。",
+    "SeeAllButtonLabel": "查看全部笔记"
   }
 }

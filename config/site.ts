@@ -1,15 +1,10 @@
 import type { MainNavItem } from "@/types";
 
-// import { productCategories } from "@/config/products"
-// import { slugify } from "@/lib/utils"
-// import { siteMeta } from "./meta";
 
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  // name: "Utopian",
-  // description: "An open source blog build with everything new in Next.js.",
-  // links,
+
   mainNav: [
     {
       title: "Articles",
@@ -27,6 +22,10 @@ export const siteConfig = {
           items: [],
         },
       ],
+    },
+    {
+      title: "BookNotes",
+      href: "/notes",
     },
     {
       title: "Project",

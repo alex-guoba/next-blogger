@@ -83,6 +83,11 @@ npm run start
 - 非公开的API在测试时发现page内容过大时会存在拉取失败的情况。而公共API支持分页，稳定性更可靠。
 总之，虽然Public API在高级特性上有所缺失，比如不支持 Database View 等能力，但是基本能力已经可以满足需求。故最终选择采用Notion Public API实现。
 
+### 其他说明
+
+1. 读书笔记支持
+读书笔记内容来源于微信读书，将微信读书的内容定期同步到Notion中，然后通过Notion的API获取数据，再通过Next.js渲染。
+同步方案参考 [sync-notion](https://github.com/alex-guoba/sync-notion)
 
 ### 支持的Notion Block类型
 
@@ -133,7 +138,9 @@ npm run start
 - MDX开启： `RENDER_MDX=true` 且在notion的code block中设置语言为`markdown`
 - redis缓存开启： `REDIS_URL="redis://localhost:6379"`，否则使用内存、文件缓存
 - Notion数据过期时间 `NEXT_DATACACHE_EXPIRE`，默认1小时。注意如果使用Notion存储了pdf、图片等文件，过期时间不要过长，否则文件链接可能过期。
+- 开启微信读书笔记：配置`NOTION_NOTE_DATABASE_ID`
 
 ## Reference
 1. [Notion Public API](https://developers.notion.com/reference/intro)
 2. [Next.js](https://nextjs.org/)
+

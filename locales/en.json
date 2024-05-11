@@ -12,5 +12,10 @@
     "Title": "Blogs",
     "Description": "Expore the latest articles from Next Notion Blogger",
     "SeeAllButtonLabel": "See all posts"
+  },
+  "Notes": {
+    "Title": "BookNotes",
+    "Description": "Reading is learning, excerpting is sorting, and writing is creating.",
+    "SeeAllButtonLabel": "See all book notes"
   }
 }

@@ -14,3 +14,16 @@ export function dbQueryParams(database_id: string, type: string) {
 
   return { ...defaultParam, ...filters, ...sorter };
 }
+
+
+export function noteDbQueryParams(database_id: string) {
+  const defaultParam = filterBase(database_id);
+  const filters = {
+    filter: {
+      and: [filterSelect("Published", "Y").filter],
+    },
+  };
+  const sorter = sorterProperties([{ property: "PublishDate", direction: "descending" }]);
+
+  return { ...defaultParam, ...filters, ...sorter };
+}
