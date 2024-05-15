@@ -1,5 +1,6 @@
 import type { Viewport } from "next";
 import React from "react";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 import "@/app/styles/globals.css";
 import { cn } from "@/lib/utils";
@@ -31,6 +32,13 @@ function Analytics() {
   return null;
 }
 
+function StartGoogleAnalytics() {
+  if (env.NEXT_ANALYTICS_GOOGLE_ID) {
+    return <GoogleAnalytics gaId={env.NEXT_ANALYTICS_GOOGLE_ID}></GoogleAnalytics>
+  }
+  return null;
+}
+
 export default function RootLayout({
   children,
   params: { locale },
@@ -54,8 +62,10 @@ export default function RootLayout({
         <TailwindIndicator />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <main>{children}</main>
+
         </ThemeProvider>
       </body>
+      <StartGoogleAnalytics></StartGoogleAnalytics>
     </html>
   );
 }

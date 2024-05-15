@@ -51,7 +51,7 @@ export function MobileNav({ mainNavItems, sidebarNavItems }: MobileNavProps) {
       <SheetContent side="left" className="pl-1 pr-0">
         <div className="px-7">
           <Link href="/" className="flex items-center" onClick={() => setIsOpen(false)}>
-            <Icons.logo className="mr-2 h-4 w-4" aria-hidden="true" />
+            <Icons.pen className="mr-2 h-4 w-4" aria-hidden="true" />
             <span className="font-bold">{siteMeta.name}</span>
             <span className="sr-only">Home</span>
           </Link>

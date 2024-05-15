@@ -16,6 +16,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Icons } from "@/components/icons";
+import { Button } from "../ui/button";
 
 interface MainNavProps {
   items?: MainNavItem[];
@@ -23,7 +24,7 @@ interface MainNavProps {
 
 export function MainNav({ items }: MainNavProps) {
   return (
-    <div className="hidden gap-6 lg:flex">
+    <div className="hidden w-full items-center justify-between lg:flex">
       <Link href="/" className="hidden items-center space-x-2 lg:flex">
         <Icons.pen className="h-6 w-6" aria-hidden="true" />
         <span className="hidden font-bold lg:inline-block">{siteMeta.name}</span>
@@ -62,6 +63,14 @@ export function MainNav({ items }: MainNavProps) {
             )}
         </NavigationMenuList>
       </NavigationMenu>
+
+      <Button>
+        <Link href={siteMeta.github} target="_blank" rel="noreferrer">
+          {/* <ChevronLeftIcon className="mr-2 h-4 w-4" aria-hidden="true" /> */}
+          {/* <span className="sr-only">{t("SeeAllButtonLabel")}</span> */}
+          Start for Free
+        </Link>
+      </Button>
     </div>
   );
 }
