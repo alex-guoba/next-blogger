@@ -58,10 +58,10 @@ export function MobileNav({ mainNavItems, sidebarNavItems }: MobileNavProps) {
         </div>
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
           <div className="pl-1 pr-7">
-            <Accordion type="multiple" defaultValue={navItems.map((item) => item.title)} className="w-full">
+            <Accordion type="multiple" defaultValue={navItems.map((item) => item.title!)} className="w-full">
               {navItems?.map((item, index) =>
                 item.items && item.items?.length > 0 ? (
-                  <AccordionItem value={item.title} key={index}>
+                  <AccordionItem value={item.title!} key={index}>
                     <AccordionTrigger className="text-sm capitalize">{item.title}</AccordionTrigger>
                     <AccordionContent>
                       <div className="flex flex-col space-y-2">
@@ -87,7 +87,7 @@ export function MobileNav({ mainNavItems, sidebarNavItems }: MobileNavProps) {
                   </AccordionItem>
                 ) : (
                   item.href && (
-                    <AccordionItem key={index} value={item.title}>
+                    <AccordionItem key={index} value={item.title!}>
                       <Link href={item.href} legacyBehavior passHref>
                         {/* <MobileLink
                           className={cn(navigationMenuTriggerStyle(), "h-auto")}

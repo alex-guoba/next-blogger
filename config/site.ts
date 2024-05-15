@@ -1,81 +1,35 @@
 import type { MainNavItem } from "@/types";
 
-
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-
   mainNav: [
     {
-      title: "Articles",
+      id: "Articles",
       items: [
         {
-          title: "Tags",
+          id: "Tags",
           href: "/tags",
-          description: "All the posts group by tag.",
           items: [],
         },
         {
-          title: "Saas Templates",
+          id: "MDX",
           href: "/page/mdx",
-          description: "Use MDX in Notion to build your own SaaS templates.",
           items: [],
         },
       ],
     },
     {
-      title: "BookNotes",
+      id: "Notes",
       href: "/notes",
     },
     {
-      title: "Project",
+      id: "Project",
       href: "/project",
     },
     {
-      title: "About",
+      id: "About",
       href: "/page/about",
     },
   ] satisfies MainNavItem[],
-  // footerNav: [
-  //   {
-  //     title: "Credits",
-  //     items: [
-  //       {
-  //         title: "Taxonomy",
-  //         href: "https://tx.shadcn.com/",
-  //         external: true,
-  //       },
-  //       {
-  //         title: "shadcn/ui",
-  //         href: "https://ui.shadcn.com",
-  //         external: true,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     title: "Help",
-  //     items: [
-  //       {
-  //         title: "About",
-  //         href: "/page/about",
-  //         external: false,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     title: "Social",
-  //     items: [
-  //       {
-  //         title: "Twitter",
-  //         href: siteMeta.twitter,
-  //         external: true,
-  //       },
-  //       {
-  //         title: "GitHub",
-  //         href: siteMeta.github,
-  //         external: true,
-  //       },
-  //     ],
-  //   },
-  // ] satisfies FooterItem[],
 };

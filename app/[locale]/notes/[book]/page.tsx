@@ -73,7 +73,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const parseBook = cache(async (book: string) => {
-  let pageID, title, author, category, intro, url, rating;
+  let pageID, title, author, category, intro, url, rating, note_count, review_count;
   pageID = book;
 
   const page: any = await CacheRetrievePage(pageID);
@@ -85,14 +85,30 @@ const parseBook = cache(async (book: string) => {
     intro = rawText(page?.properties?.Intro?.rich_text);
     url = page?.properties?.URL?.url;
     rating = page?.properties?.Rating?.number;
+    note_count = page?.properties?.NoteCount?.number;
+    review_count = page?.properties?.ReviewCount?.number;
   } else {
     pageID = null;
   }
 
-  return { pageID, title, author, category, intro, url, rating };
+  return { pageID, title, author, category, intro, url, rating, note_count, review_count };
 });
 
-function BookDetail({ author, category, url, rating }: { author?: string; category?: string; url?: string, rating?: number }) {
+function BookDetail({
+  author,
+  category,
+  url,
+  rating,
+  note_count,
+  review_count,
+}: {
+  author?: string;
+  category?: string;
+  url?: string;
+  rating?: number;
+  note_count?: number;
+  review_count?: number;
+}) {
   return (
     <Table className="border border-solid border-inherit">
       <TableBody>
@@ -105,7 +121,7 @@ function BookDetail({ author, category, url, rating }: { author?: string; catego
 
         <TableRow>
           <TableCell className="w-1/12 bg-secondary">推荐值</TableCell>
-          <TableCell className="w-5/12">{rating && rating*100} %</TableCell>
+          <TableCell className="w-5/12">{rating && rating * 100} %</TableCell>
           <TableCell className="w-1/12 bg-secondary">来源</TableCell>
           <TableCell>
             {url && (
@@ -115,6 +131,13 @@ function BookDetail({ author, category, url, rating }: { author?: string; catego
             )}
           </TableCell>
         </TableRow>
+
+        <TableRow>
+          <TableCell className="w-1/12 bg-secondary">笔记数量</TableCell>
+          <TableCell className="w-5/12">{note_count}</TableCell>
+          <TableCell className="w-1/12 bg-secondary">评论数量</TableCell>
+          <TableCell> {review_count} </TableCell>
+        </TableRow>
       </TableBody>
     </Table>
   );
@@ -122,7 +145,9 @@ function BookDetail({ author, category, url, rating }: { author?: string; catego
 
 export default async function Page({ params }: { params: { book: string; locale: string } }) {
   unstable_setRequestLocale(params.locale);
-  const { pageID, title, author, category, url, intro, rating } = await parseBook(params.book);
+  const { pageID, title, author, category, url, intro, rating, note_count, review_count } = await parseBook(
+    params.book
+  );
   if (!pageID || !title) {
     logger.info(`Post not found ${pageID} ${title}`);
     return notFound();
@@ -150,7 +175,14 @@ export default async function Page({ params }: { params: { book: string; locale:
         <PageHeader>
           <PageHeaderHeading>{title}</PageHeaderHeading>
         </PageHeader>
-        <BookDetail author={author} category={category} url={url} rating={rating}></BookDetail>
+        <BookDetail
+          author={author}
+          category={category}
+          url={url}
+          rating={rating}
+          note_count={note_count}
+          review_count={review_count}
+        ></BookDetail>
 
         {intro && <div className="pt-2 text-muted-foreground">简介：{intro}</div>}
 

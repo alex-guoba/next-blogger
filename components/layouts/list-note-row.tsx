@@ -1,4 +1,3 @@
-
 import React from "react";
 import Link from "next/link";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,7 +15,6 @@ interface NoteGridProps {
 }
 
 export function NoteGrid({ title, author, slug, className, cover, category, intro }: NoteGridProps) {
-
   return (
     <Card key={slug} className={cn(className, "flex px-4")}>
       <div>

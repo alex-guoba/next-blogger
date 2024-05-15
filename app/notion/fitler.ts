@@ -15,7 +15,6 @@ export function dbQueryParams(database_id: string, type: string) {
   return { ...defaultParam, ...filters, ...sorter };
 }
 
-
 export function noteDbQueryParams(database_id: string) {
   const defaultParam = filterBase(database_id);
   const filters = {

@@ -11,11 +11,22 @@
   "Posts": {
     "Title": "Blogs",
     "Description": "Expore the latest articles from Next Notion Blogger",
-    "SeeAllButtonLabel": "See all posts"
+    "SeeAllButtonLabel": "See all posts",
+    "AllTags": "Explore articles by category"
   },
   "Notes": {
     "Title": "BookNotes",
     "Description": "Reading is learning, excerpting is sorting, and writing is creating.",
     "SeeAllButtonLabel": "See all book notes"
+  },
+  "Headers": {
+    "Articles": "Articles",
+    "Tags": "Tags",
+    "Tags_Description": "All the posts group by tag.",
+    "MDX": "MDX Templates",
+    "MDX_Description": "All the posts group by tag.",
+    "Notes": "Notes",
+    "Project": "Project",
+    "About": "About"
   }
 }

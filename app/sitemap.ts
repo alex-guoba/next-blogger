@@ -29,7 +29,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [...articles, ...books];
   }
-  
 
   return [...articles];
 }

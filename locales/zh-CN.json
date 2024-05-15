@@ -11,11 +11,22 @@
   "Posts": {
     "Title": "文章列表",
     "Description": "浏览博客的最新文章",
-    "SeeAllButtonLabel": "查看全部文章"
+    "SeeAllButtonLabel": "查看全部文章",
+    "AllTags": "根据分类查看"
   },
   "Notes": {
     "Title": "读书笔记",
     "Description": "读书是学习，摘抄是整理，写作是创造。",
     "SeeAllButtonLabel": "查看全部笔记"
+  },
+  "Headers": {
+    "Articles": "文章",
+    "Tags": "标签",
+    "Tags_Description": "根据标签分类的文章",
+    "MDX": "MDX模板",
+    "MDX_Description": "使用MDX模板创建文章",
+    "Notes": "笔记",
+    "Project": "项目",
+    "About": "关于"
   }
 }
