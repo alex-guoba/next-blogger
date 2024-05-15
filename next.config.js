@@ -80,7 +80,10 @@ const nextConfig = withNextIntl({
 
   experimental: {
     instrumentationHook: true,
+    serverSourceMaps: false,
   },
+  // see https://nextjs.org/docs/app/building-your-application/optimizing/memory-usage#disable-source-maps
+  productionBrowserSourceMaps: false,
 
   // reactStrictMode: false,
 

@@ -44,7 +44,7 @@ export default async function Home({ searchParams }: Props) {
   const subpost = posts.slice((page - 1) * env.POST_PAGE_SIZES, page * env.POST_PAGE_SIZES);
 
   const t = await getTranslations("Notes");
-  
+
   return (
     <Shell className="md:pb-10">
       <PageHeader>

@@ -3,6 +3,8 @@ import { unstable_setRequestLocale } from "next-intl/server";
 
 import { defaultMeta } from "@/lib/seo";
 import { AllLocales } from "@/config/locale";
+import { SiteHeader } from "@/components/layouts/site-header";
+import { SiteFooter } from "@/components/layouts/site-footer";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   return await defaultMeta(locale);
@@ -25,5 +27,11 @@ export default async function LobyLayout({
   params: { locale: string };
 }) {
   unstable_setRequestLocale(locale);
-  return <div className="relative flex min-h-screen flex-col leading-relaxed">{children}</div>;
+  return (
+    <div className="relative flex min-h-screen flex-col leading-relaxed">
+      <SiteHeader />
+      <main>{children}</main>
+      <SiteFooter />
+    </div>
+  );
 }

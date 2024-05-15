@@ -4,12 +4,9 @@ import React from "react";
 import "@/app/styles/globals.css";
 import { cn } from "@/lib/utils";
 
-// const inter = Inter({ subsets: ['latin'] })
 import { fontMono, fontSans, fontSerif } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/providers";
 import TailwindIndicator from "@/components/helpers/tailwind-indicator";
-import { SiteHeader } from "@/components/layouts/site-header";
-import { SiteFooter } from "@/components/layouts/site-footer";
 
 import { env } from "@/env.mjs";
 
@@ -46,8 +43,6 @@ export default function RootLayout({
       <head>
         <Analytics></Analytics>
       </head>
-      {/* <head /> */}
-      {/* <body className={`${inter.className} min-h-screen bg-background antialiased`}> */}
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -58,11 +53,7 @@ export default function RootLayout({
       >
         <TailwindIndicator />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <SiteHeader />
           <main>{children}</main>
-          <SiteFooter />
-          {/* <TailwindIndicator />
-          <Analytics /> */}
         </ThemeProvider>
       </body>
     </html>
