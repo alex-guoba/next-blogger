@@ -16,7 +16,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Icons } from "@/components/icons";
-import { Button, buttonVariants } from "../ui/button";
+import { Button } from "../ui/button";
 
 interface MainNavProps {
   items?: MainNavItem[];
