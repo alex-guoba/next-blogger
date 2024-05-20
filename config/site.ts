@@ -28,6 +28,10 @@ export const siteConfig = {
       href: "/project",
     },
     {
+      id: "IndieDev",
+      href: "/page/indiehackers",
+    },
+    {
       id: "About",
       href: "/page/about",
     },
