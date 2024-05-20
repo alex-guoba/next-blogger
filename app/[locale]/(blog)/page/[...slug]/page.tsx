@@ -106,7 +106,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   }
 
   return (
-    <Shell variant={"sidebar"} as="article" className="relative flex min-h-screen flex-col">
+    <Shell as="article" className="relative flex min-h-screen flex-col">
       <React.Suspense fallback={<ContentLoadingSkeleton></ContentLoadingSkeleton>}>
         <ContentRender pageID={pageID}></ContentRender>
       </React.Suspense>
