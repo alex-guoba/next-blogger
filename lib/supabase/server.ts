@@ -20,7 +20,7 @@ export function createClient() {
             // The `set` method was called from a Server Component.
             // This can be ignored if you have middleware refreshing
             // user sessions.
-            logger.error('supabase cooke set error')
+            logger.error(`supabase cooke set error: ${error}`)
           }
         },
         remove(name: string, options: CookieOptions) {
@@ -30,9 +30,12 @@ export function createClient() {
             // The `delete` method was called from a Server Component.
             // This can be ignored if you have middleware refreshing
             // user sessions.
-            logger.error('supabase cooke remove error')
+            logger.error(`supabase cooke remove error: ${error}`)
           }
         },
+      },
+      auth: {
+        flowType: "pkce"
       },
     }
   )

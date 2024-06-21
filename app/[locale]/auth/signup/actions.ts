@@ -1,8 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+
 import { createClient } from "@/lib/supabase/server";
 import { authSchema } from "@/lib/validations/auth";
+import { absoluteUrl } from "@/lib/utils";
 
 export type State =
   | {
@@ -19,10 +21,8 @@ export type State =
     }
   | null;
 
-export async function actSignIn(prevState: State | null, formData: FormData): Promise<State> {
+export async function actSignUp(prevState: State | null, formData: FormData): Promise<State> {
   const supabase = createClient();
-
-  console.log("formData:", formData);
 
   // validate
   const result = authSchema.safeParse(formData);
@@ -37,11 +37,17 @@ export async function actSignIn(prevState: State | null, formData: FormData): Pr
     };
   }
 
-  const { error } = await supabase.auth.signInWithPassword(result.data);
+  const { error } = await supabase.auth.signUp({
+    email: result.data.email,
+    password: result.data.password,
+    options: {
+      emailRedirectTo: absoluteUrl("auth/signup/confirm"),
+    }
+  });
   if (error) {
     return {
       status: "error",
-      message: "Invalid credentials",
+      message: error.message,
       errors: [
         {
           path: "",
@@ -52,11 +58,10 @@ export async function actSignIn(prevState: State | null, formData: FormData): Pr
   }
 
   // revalidate the path to ensure that the user is logged in?
-  revalidatePath("/", "layout");
+  // revalidatePath("/", "layout");
 
-  // redirect("/");
   return {
     status: "success",
-    message: "Successfully sign in",
+    message: "Successfully sign up",
   };
 }

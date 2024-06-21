@@ -10,21 +10,22 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import Shell from "@/components/shells/shell"
-import { SignInForm } from "../_components/signin-form"
+import { SignUpForm } from "./signup-form"
+
 
 export const metadata: Metadata = {
-  title: "Sign In",
-  description: "Sign in to your account",
+  title: "Sign up",
+  description: "Sign up for an account",
 }
 
-export default function SignInPage() {
+export default function SignUpPage() {
   return (
     <Shell className="max-w-lg">
       <Card>
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Sign in</CardTitle>
+          <CardTitle className="text-2xl">Sign Up</CardTitle>
           <CardDescription>
-            Choose your preferred sign in method
+            Choose your preferred sign up method
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
@@ -40,7 +41,7 @@ export default function SignInPage() {
             </div>
           </div>
 
-          <SignInForm/>
+          <SignUpForm/>
 
         </CardContent>
         <CardFooter className="flex flex-wrap items-center justify-between gap-2">
@@ -49,20 +50,13 @@ export default function SignInPage() {
               Don&apos;t have an account?
             </span>
             <Link
-              aria-label="Sign up"
-              href="/signup"
+              aria-label="Sign in"
+              href="/auth/signin"
               className="text-primary underline-offset-4 transition-colors hover:underline"
             >
-              Sign up
+              Sign in
             </Link>
           </div>
-          <Link
-            aria-label="Reset password"
-            href="/signin/reset-password"
-            className="text-sm text-primary underline-offset-4 transition-colors hover:underline"
-          >
-            Reset password
-          </Link>
         </CardFooter>
       </Card>
     </Shell>

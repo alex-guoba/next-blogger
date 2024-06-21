@@ -18,7 +18,7 @@ import { Icons } from "@/components/icons";
 import { PasswordInput } from "@/components/password-input";
 import { toast } from "@/components/ui/use-toast";
 
-import { actSignIn } from "../signin/actions";
+import { actSignIn } from "./actions";
 
 type Inputs = z.infer<typeof authSchema>;
 
@@ -68,7 +68,7 @@ export function SignInForm() {
         title: "Sigin Success",
         duration: 3000,
       });
-      router.push("/");
+      router.push("/dashboard/profile");
     }
   }, [router, state]);
 

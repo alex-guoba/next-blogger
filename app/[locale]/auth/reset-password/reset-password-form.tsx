@@ -1,54 +1,48 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useFormState, useFormStatus } from "react-dom";
-import { useRouter } from "next/navigation";
-import { ToastAction } from "@/components/ui/toast";
-
 import type { z } from "zod";
 
-// import { showErrorToast } from "@/lib/handle-error"
-import { authSchema } from "@/lib/validations/auth";
+import { checkEmailSchema } from "@/lib/validations/auth";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Icons } from "@/components/icons";
-import { PasswordInput } from "@/components/password-input";
+import { useFormState, useFormStatus } from "react-dom";
+
+import { actResetPasswrod } from "./actions";
 import { toast } from "@/components/ui/use-toast";
+import { ToastAction } from "@radix-ui/react-toast";
 
-import { actSignUp } from "../signup/actions";
+type Inputs = z.infer<typeof checkEmailSchema>;
 
-type Inputs = z.infer<typeof authSchema>;
-
-// The useFormStatus Hook must be called from a component that is rendered inside a <form>.
-function SignUpButton({ valid }: { valid: boolean }) {
+function ResetPasswordButton({ valid }: { valid: boolean }) {
   const { pending } = useFormStatus();
 
   return (
     <Button type="submit" className="mt-2" disabled={pending || !valid}>
       {pending && <Icons.spinner className="mr-2 size-4 animate-spin" aria-hidden="true" />}
-      Sign up
+      Continue to reset password
       <span className="sr-only">Sign up</span>
     </Button>
   );
 }
 
-export function SignUpForm() {
+export function ResetPasswordForm() {
   const router = useRouter();
+  // react-hook-form
   const form = useForm<Inputs>({
-    // https://react-hook-form.com/docs/useform#mode
     mode: "all",
-    resolver: zodResolver(authSchema),
+    resolver: zodResolver(checkEmailSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
-  //   const { toast } = useToast();
-  const [state, act] = useFormState(actSignUp, null);
+  const [state, act] = useFormState(actResetPasswrod, null);
 
   React.useEffect(() => {
     if (!state) {
@@ -58,19 +52,20 @@ export function SignUpForm() {
     if (state.status == "error") {
       toast({
         variant: "destructive",
-        title: "Sigup Error",
+        title: "Reset password Error",
         description: state.message,
         duration: 10000,
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     } else {
       toast({
-        // duration: 10000,
-        title: "Sigup Success",
-        description: "We sent you an email confirmation. Pleas check your email and click the link to verify your account.",
+        duration: 10000,
+        title: "Reset Success",
+        description:
+          "Please check your email for a password reset link to log in.",
         action: <ToastAction altText="OK">OK</ToastAction>,
       });
-      router.push("/");
+    //   router.push("/");
     }
   }, [router, state]);
 
@@ -84,26 +79,13 @@ export function SignUpForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="alex@gmail.com" {...field} />
+                <Input placeholder="alex@gmail.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <PasswordInput placeholder="**********" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <SignUpButton valid={form.formState.isValid}></SignUpButton>
+        <ResetPasswordButton valid={form.formState.isValid}></ResetPasswordButton>
       </form>
     </Form>
   );
