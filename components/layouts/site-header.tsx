@@ -13,7 +13,10 @@ export async function SiteHeader() {
   const t = await getTranslations("Headers");
   const navs = siteConfig.mainNav;
 
-  const user = await getCacheUser();
+  let user = null;
+  if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    user = await getCacheUser();
+  }
 
   // translate on the server side
   navs.map((item: MainNavItem) => {
@@ -34,7 +37,7 @@ export async function SiteHeader() {
         <MainNav items={navs} />
         <MobileNav mainNavItems={navs} sidebarNavItems={dashboardConfig.sidebarNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
-          <AuthDropdown user={user} className="" />
+          {user && <AuthDropdown user={user} className="" />}
         </div>
       </nav>
     </header>
