@@ -3,7 +3,7 @@
 import "@/app/styles/globals.css";
 import Shell from "@/components/shells/shell";
 import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/components/page-header";
-import { Separator } from "@/components/ui/separator";
+// import { Separator } from "@/components/ui/separator";
 import React from "react";
 import { env } from "@/env.mjs";
 import { PostPagination } from "@/components/pagination";
