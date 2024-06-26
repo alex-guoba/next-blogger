@@ -40,7 +40,7 @@ export async function actResetPasswrod(prevState: State | null, formData: FormDa
     // redirectTo: "reset-password/confirm",
     redirectTo: absoluteUrl("auth/reset-password/confirm"),
   });
-  
+
   if (error) {
     return {
       status: "error",

@@ -45,14 +45,15 @@ export function formatTime(
 }
 
 export function absoluteUrl(path: string) {
-  return `${siteMeta.siteUrl}/${path}`;
+  const url = new URL(path, siteMeta.siteUrl);
+  return url.toString();
+  // return `${siteMeta.siteUrl}/${path}`;
 }
 
 export function safeURL(urlString: string) {
-  try { 
-    return new URL(urlString); 
-  }
-  catch(e){ 
-    return null; 
+  try {
+    return new URL(urlString);
+  } catch (e) {
+    return null;
   }
 }

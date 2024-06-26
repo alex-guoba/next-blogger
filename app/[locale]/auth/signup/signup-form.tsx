@@ -67,7 +67,8 @@ export function SignUpForm() {
       toast({
         duration: 10000,
         title: "Sigup Success",
-        description: "We sent you an email confirmation. Pleas check your email and click the link to verify your account.",
+        description:
+          "We sent you an email confirmation. Pleas check your email and click the link to verify your account.",
         action: <ToastAction altText="OK">OK</ToastAction>,
       });
       // router.push("/");

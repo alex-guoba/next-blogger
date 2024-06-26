@@ -31,10 +31,10 @@ export async function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <nav className="container flex h-16 items-center">
-        <MainNav items={navs}/>
+        <MainNav items={navs} />
         <MobileNav mainNavItems={navs} sidebarNavItems={dashboardConfig.sidebarNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
-          <AuthDropdown user={user} className=""/>
+          <AuthDropdown user={user} className="" />
         </div>
       </nav>
     </header>

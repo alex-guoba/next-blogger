@@ -21,7 +21,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       </main>
       <div className="relative aspect-video size-full">
         <Image
-          src="/images/auth-layout.webp"
+          src="/static/images/auth-layout.png"
           alt="A skateboarder dropping into a bowl"
           fill
           className="absolute inset-0 object-cover"
@@ -29,22 +29,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background to-black/80 lg:to-black/40" />
-        {/* <div className="absolute bottom-4 right-4 z-20 line-clamp-1 rounded-md bg-muted px-3 py-1.5 text-sm text-muted-foreground">
-          Photo by{" "}
-          <a
-            href="https://unsplash.com/ja/@pixelperfektion?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-            className="underline transition-colors hover:text-foreground"
-          >
-            pixelperfektion
-          </a>
-          {" on "}
-          <a
-            href="https://unsplash.com/photos/OS2WODdxy1A?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-            className="underline transition-colors hover:text-foreground"
-          >
-            Unsplash
-          </a>
-        </div> */}
       </div>
     </div>
   );

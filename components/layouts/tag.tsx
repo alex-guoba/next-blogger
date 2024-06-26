@@ -16,6 +16,7 @@ export function TagList({ tagCounter, className }: TagListProps) {
               href={`/tags/${encodeURI(value[0])}/`}
               className="font-medium leading-tight hover:text-red-500"
               aria-label={`View posts tagged ${value[0]}`}
+              prefetch={false}
             >
               {value[0]}
             </Link>

@@ -1,22 +1,14 @@
-import { type Metadata } from "next"
-import Link from "next/link"
+import { type Metadata } from "next";
+import Link from "next/link";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import Shell from "@/components/shells/shell"
-import { SignUpForm } from "./signup-form"
-
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import Shell from "@/components/shells/shell";
+import { SignUpForm } from "./signup-form";
 
 export const metadata: Metadata = {
   title: "Sign up",
   description: "Sign up for an account",
-}
+};
 
 export default function SignUpPage() {
   return (
@@ -24,9 +16,7 @@ export default function SignUpPage() {
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Sign Up</CardTitle>
-          <CardDescription>
-            Choose your preferred sign up method
-          </CardDescription>
+          <CardDescription>Choose your preferred sign up method</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
           {/* <OAuthSignIn /> */}
@@ -35,20 +25,15 @@ export default function SignUpPage() {
               <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
-                Or continue with
-              </span>
+              <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
             </div>
           </div>
 
-          <SignUpForm/>
-
+          <SignUpForm />
         </CardContent>
         <CardFooter className="flex flex-wrap items-center justify-between gap-2">
           <div className="text-sm text-muted-foreground">
-            <span className="mr-1 hidden sm:inline-block">
-              Don&apos;t have an account?
-            </span>
+            <span className="mr-1 hidden sm:inline-block">Don&apos;t have an account?</span>
             <Link
               aria-label="Sign in"
               href="/auth/signin"
@@ -60,5 +45,5 @@ export default function SignUpPage() {
         </CardFooter>
       </Card>
     </Shell>
-  )
+  );
 }

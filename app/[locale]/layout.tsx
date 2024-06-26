@@ -27,7 +27,5 @@ export default async function LobyLayout({
   params: { locale: string };
 }) {
   unstable_setRequestLocale(locale);
-  return (
-      <main>{children}</main>
-  );
+  return <main>{children}</main>;
 }

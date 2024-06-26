@@ -34,12 +34,12 @@ export async function actResetPasswrodConfirm(prevState: State | null, formData:
     };
   }
 
-  const { data, error } = await supabase.auth.updateUser({
-    password: result.data.password
+  const { error } = await supabase.auth.updateUser({
+    password: result.data.password,
   });
 
-  console.log(data.user, error);
-  
+  // console.log(data.user, error);
+
   if (error) {
     return {
       status: "error",

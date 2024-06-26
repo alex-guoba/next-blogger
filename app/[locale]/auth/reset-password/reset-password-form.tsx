@@ -61,11 +61,10 @@ export function ResetPasswordForm() {
       toast({
         duration: 10000,
         title: "Reset Success",
-        description:
-          "Please check your email for a password reset link to log in.",
+        description: "Please check your email for a password reset link to log in.",
         action: <ToastAction altText="OK">OK</ToastAction>,
       });
-    //   router.push("/");
+      //   router.push("/");
     }
   }, [router, state]);
 

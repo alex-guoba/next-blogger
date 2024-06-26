@@ -62,20 +62,18 @@ export function ResetPasswordConfirmForm() {
       toast({
         duration: 10000,
         title: "Reset Success",
-        description:
-          "Reset success.",
+        description: "Reset success.",
         action: <ToastAction altText="OK">OK</ToastAction>,
       });
-      
+
       router.push("/auth/signin");
     }
-
   }, [router, state]);
 
   return (
     <Form {...form}>
       <form className="grid gap-4" action={act}>
-      <FormField
+        <FormField
           control={form.control}
           name="password"
           render={({ field }) => (

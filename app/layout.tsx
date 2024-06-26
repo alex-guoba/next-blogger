@@ -8,8 +8,7 @@ import { cn } from "@/lib/utils";
 import { fontMono, fontSans, fontSerif } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/providers";
 import TailwindIndicator from "@/components/helpers/tailwind-indicator";
-import { Toaster } from "@/components/ui/toaster"
-
+import { Toaster } from "@/components/ui/toaster";
 
 import { env } from "@/env.mjs";
 
@@ -64,7 +63,7 @@ export default function RootLayout({
         <TailwindIndicator />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <main>{children}</main>
-          <Toaster/>
+          <Toaster />
         </ThemeProvider>
       </body>
       <StartGoogleAnalytics></StartGoogleAnalytics>

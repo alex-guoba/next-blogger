@@ -12,6 +12,7 @@ Based on Next.js and Notion Public API, this blog system supports embedding MDX 
 5. Supports [Next SSG](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation).
 6. SEO-friendly.
 7. Uses umami as the website analytics tool.
+8. Use supabase to manage user siginup/signin
 
 ## Tech Stack
 
@@ -20,6 +21,7 @@ Based on Next.js and Notion Public API, this blog system supports embedding MDX 
 1. [Next.js](https://nextjs.org/)
 2. [Notion](https://www.notion.so/)
 3. [Tailwind CSS](https://tailwindcss.com/) and [shadcn](https://ui.shadcn.com/)
+4. [Supabase](https://supabase.com/)
 
 ### Components
 
@@ -56,6 +58,10 @@ npm install
 ```ini
 NOTION_TOKEN=
 NOTION_DATABASE_ID=
+
+# for supabase
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ```
 
 4. Run locally:

@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
   const forwarded = request.headers.get("x-forwarded-for");
   const ip = forwarded ? forwarded.split(/, /)[0] : "";
   logger.info(`[${request.method}] [${ip}] ${request.url}`);
-  
+
   // intl request
   const response = await intl(request);
 

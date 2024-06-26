@@ -1,12 +1,11 @@
-import * as React from "react"
-import Link from "next/link"
-import { DashboardIcon, ExitIcon, GearIcon } from "@radix-ui/react-icons"
+import * as React from "react";
+import Link from "next/link";
+import { ExitIcon, GearIcon } from "@radix-ui/react-icons";
 
-// import { getStoreByUserId } from "@/lib/queries/store"
-import { cn } from "@/lib/utils"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { Button, type ButtonProps } from "@/components/ui/button"
+import { Button, type ButtonProps } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,22 +15,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Skeleton } from "@/components/ui/skeleton"
-import { Icons } from "@/components/icons"
-import { User } from "@supabase/supabase-js"
+} from "@/components/ui/dropdown-menu";
+// import { Skeleton } from "@/components/ui/skeleton"
+import { Icons } from "@/components/icons";
+import { User } from "@supabase/supabase-js";
 
-interface AuthDropdownProps
-  extends React.ComponentPropsWithRef<typeof DropdownMenuTrigger>,
-    ButtonProps {
-  user: User | null
+interface AuthDropdownProps extends React.ComponentPropsWithRef<typeof DropdownMenuTrigger>, ButtonProps {
+  user: User | null;
 }
 
-export async function AuthDropdown({
-  user,
-  className,
-  ...props
-}: AuthDropdownProps) {
+export async function AuthDropdown({ user, className, ...props }: AuthDropdownProps) {
   if (!user) {
     return (
       <Button size="sm" className={cn(className)} {...props} asChild>
@@ -40,27 +33,20 @@ export async function AuthDropdown({
           <span className="sr-only">Sign In</span>
         </Link>
       </Button>
-    )
+    );
   }
 
-//   const initials = `${user.firstName?.charAt(0) ?? ""} ${
-//     user.lastName?.charAt(0) ?? ""
-//   }`
-  const name = user.email?.split("@")[0];
+  const name = user.user_metadata["user_name"] || user.email?.split("@")[0];
   const email = user.email;
-
-//   const storePromise = getStoreByUserId({ userId: user.id })
+  const avartar = user.user_metadata["avatar_url"] || "/static/images/avatar.jpg";
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="secondary"
-          className={cn("size-8 rounded-full", className)}
-          {...props}
-        >
+        <Button variant="secondary" className={cn("size-8 rounded-full", className)} {...props}>
           <Avatar className="size-8">
             {/* <AvatarImage src={user.imageUrl} alt={user.username ?? ""} /> */}
+            {avartar && <AvatarImage src={avartar} alt={name ?? ""} />}
             <AvatarFallback>{name}</AvatarFallback>
           </Avatar>
         </Button>
@@ -68,12 +54,8 @@ export async function AuthDropdown({
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">
-              {name}
-            </p>
-            <p className="text-xs leading-none text-muted-foreground">
-              {email}
-            </p>
+            <p className="text-sm font-medium leading-none">{name}</p>
+            <p className="text-xs leading-none text-muted-foreground">{email}</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
@@ -100,7 +82,7 @@ export async function AuthDropdown({
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
 
 // interface AuthDropdownGroupProps {
@@ -108,7 +90,6 @@ export async function AuthDropdown({
 // }
 
 function AuthDropdownGroup() {
-
   return (
     <DropdownMenuGroup>
       {/* <DropdownMenuItem asChild>
@@ -133,5 +114,5 @@ function AuthDropdownGroup() {
         </Link>
       </DropdownMenuItem>
     </DropdownMenuGroup>
-  )
+  );
 }

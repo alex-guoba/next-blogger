@@ -42,7 +42,7 @@ export async function actSignUp(prevState: State | null, formData: FormData): Pr
     password: result.data.password,
     options: {
       emailRedirectTo: absoluteUrl("auth/signup/confirm"),
-    }
+    },
   });
   if (error) {
     return {
@@ -58,7 +58,7 @@ export async function actSignUp(prevState: State | null, formData: FormData): Pr
   }
 
   // revalidate the path to ensure that the user is logged in?
-  // revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
 
   return {
     status: "success",

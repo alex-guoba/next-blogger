@@ -4,7 +4,6 @@ import { type Metadata } from "next";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Shell from "@/components/shells/shell";
-import { createClient } from "@/lib/supabase/server";
 import { ResetPasswordConfirmForm } from "./reset-password-confirm-form";
 
 export const metadata: Metadata = {
@@ -13,11 +12,6 @@ export const metadata: Metadata = {
 };
 
 export default async function ResetPasswordConfirmPage() {
-  const supabase = createClient();
-
-  const { data } = await supabase.auth.getUser();
-  console.log("reset confirm user data", data);
-
   return (
     <Shell className="max-w-lg">
       <Card>
