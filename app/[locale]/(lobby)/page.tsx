@@ -3,7 +3,7 @@
 import "@/app/styles/globals.css";
 import Shell from "@/components/shells/shell";
 import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/components/page-header";
-import { Separator } from "@/components/ui/separator";
+// import { Separator } from "@/components/ui/separator";
 import React from "react";
 import { env } from "@/env.mjs";
 import { PostPagination } from "@/components/pagination";
@@ -35,8 +35,8 @@ export default async function Home({ searchParams }: Props) {
         <PageHeaderHeading>{t("Title")}</PageHeaderHeading>
         <PageHeaderDescription>{t("Description")}</PageHeaderDescription>
       </PageHeader>
-      <Separator className="mb-2.5" />
-      <PostRowsLayout items={subpost} className="gap-4 md:grid-cols-2" gridClassName="py-8 bg-muted"></PostRowsLayout>
+      {/* <Separator className="mb-2.5" /> */}
+      <PostRowsLayout items={subpost} className="gap-4 md:grid-cols-2" gridClassName="py-6 bg-muted"></PostRowsLayout>
       {/* <Separator className="mt-10" /> */}
       <PostPagination total={total} pageSize={env.POST_PAGE_SIZES}></PostPagination>
       {page == 1 && <TagFooter posts={posts} title={t("AllTags")}></TagFooter>}

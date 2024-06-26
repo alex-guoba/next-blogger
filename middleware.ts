@@ -3,7 +3,9 @@
 import createMiddleware from "next-intl/middleware";
 import { AllLocales, LocaleConfig } from "./config/locale";
 
-import { withLogging } from "./middleware/withLogging";
+import { logger } from "./lib/logger";
+import { updateSession } from "./lib/supabase/middleware";
+import { NextRequest } from "next/server";
 
 const intl = createMiddleware({
   locales: AllLocales,
@@ -11,7 +13,21 @@ const intl = createMiddleware({
   localePrefix: "as-needed",
 });
 
-export default withLogging(intl);
+// export default withLogging(intl);
+export async function middleware(request: NextRequest) {
+  // log request
+  const forwarded = request.headers.get("x-forwarded-for");
+  const ip = forwarded ? forwarded.split(/, /)[0] : "";
+  logger.info(`[${request.method}] [${ip}] ${request.url}`);
+
+  // intl request
+  const response = await intl(request);
+
+  // auth request
+  const rsp = updateSession(request, response);
+
+  return rsp;
+}
 
 export const config = {
   // Match only internationalized pathnames

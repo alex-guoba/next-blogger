@@ -11,7 +11,8 @@
 4. 支持深色模式、多语言支持。
 5. 支持[Next SSG](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation)。
 6. SEO友好
-7. 使用[umami](https://umami.is/)作为站点统计工具。
+7. 使用[umami](https://umami.is/)、[Google Analytics](https://analytics.google.com/) 作为站点统计工具。
+8. 使用[Supabase](https://supabase.com/)实现用户认证管理
 
 ## 技术栈
 
@@ -20,6 +21,7 @@
 1. [Next.js](https://nextjs.org/)
 2. [Notion](https://www.notion.so/)
 3. [Tailwind CSS](https://tailwindcss.com/) 和 [shadcn](https://ui.shadcn.com/)
+4. [Supabase](https://supabase.com/)
 
 ### 组件
 
@@ -55,6 +57,10 @@ npm install
 ```ini
 NOTION_TOKEN=
 NOTION_DATABASE_ID=
+
+# for supabase
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ```
 4. 本地运行
 

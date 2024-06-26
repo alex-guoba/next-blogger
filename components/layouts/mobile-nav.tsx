@@ -4,8 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import type { MainNavItem, SidebarNavItem } from "@/types";
-import { ViewVerticalIcon } from "@radix-ui/react-icons";
-
 import { siteMeta } from "@/config/meta";
 import { cn } from "@/lib/utils";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -42,16 +40,17 @@ export function MobileNav({ mainNavItems, sidebarNavItems }: MobileNavProps) {
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
+          size="icon"
+          className="size-5 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
         >
-          <ViewVerticalIcon className="h-6 w-6" aria-hidden="true" />
+          <Icons.menu aria-hidden="true" />
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="pl-1 pr-0">
         <div className="px-7">
           <Link href="/" className="flex items-center" onClick={() => setIsOpen(false)}>
-            <Icons.pen className="mr-2 h-4 w-4" aria-hidden="true" />
+            <Icons.logo className="mr-2 h-4 w-4" aria-hidden="true" />
             <span className="font-bold">{siteMeta.name}</span>
             <span className="sr-only">Home</span>
           </Link>
