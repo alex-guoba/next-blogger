@@ -35,9 +35,9 @@ export default async function Home({ searchParams }: Props) {
         <PageHeaderHeading>{t("Title")}</PageHeaderHeading>
         <PageHeaderDescription>{t("Description")}</PageHeaderDescription>
       </PageHeader>
-      {/* <Separator className="mb-2.5" /> */}
+
       <PostRowsLayout items={subpost} className="gap-4 md:grid-cols-2" gridClassName="py-6 bg-muted"></PostRowsLayout>
-      {/* <Separator className="mt-10" /> */}
+
       <PostPagination total={total} pageSize={env.POST_PAGE_SIZES}></PostPagination>
       {page == 1 && <TagFooter posts={posts} title={t("AllTags")}></TagFooter>}
     </Shell>

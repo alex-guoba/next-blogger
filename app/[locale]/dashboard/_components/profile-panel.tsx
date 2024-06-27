@@ -7,6 +7,7 @@ const providerIcons: Record<string, typeof Icons.google> = {
   google: Icons.google,
   github: Icons.gitHub,
   email: Icons.email,
+  twitter: Icons.twitter,
 };
 
 export function ProfilePanel({ user }: { user: User }) {

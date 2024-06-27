@@ -33,10 +33,10 @@ export function TagItem({ name }: { name: string }) {
     <li className="inline-block pr-2 font-serif hover:text-accent-foreground">
       <Link
         href={`/tags/${encodeURI(name)}/`}
-        className="font-medium leading-tight hover:text-red-500"
+        className="font-semibold leading-tight hover:text-red-500"
         aria-label={`View posts tagged ${name}`}
       >
-        # {name}
+        #{name}
       </Link>
     </li>
   );

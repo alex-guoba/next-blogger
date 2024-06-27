@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import { RenderBlock } from "@/app/notion/render";
 import Shell from "@/components/shells/shell";
 import React, { cache } from "react";
-import { cn } from "@/lib/utils";
+import { absoluteUrl, cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import { formatDate } from "@/lib/utils";
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       description: pageInfo.summary,
       type: "article",
-      url: siteMeta.siteUrl + "/article/" + params.slug.join("/"),
+      url: absoluteUrl("/article/" + params.slug.join("/")),
       // image: pageInfo.cover,
     },
     twitter: {
@@ -96,7 +96,7 @@ export default async function Page({ params }: { params: { slug: string[]; local
   if (!blocks) {
     return <div />;
   }
-  const url = siteMeta.siteUrl + "/article/" + params.slug.join("/");
+  const url = absoluteUrl("/article/" + params.slug.join("/"));
 
   const toc = getTableOfContents(blocks);
   const has_toc = toc.items.length > 0;
@@ -124,7 +124,7 @@ export default async function Page({ params }: { params: { slug: string[]; local
           </section>
         </React.Suspense>
 
-        <ShareBar url={url} title={title} image={siteMeta.siteUrl + siteMeta.socialBanner}></ShareBar>
+        <ShareBar url={url} title={title} image={absoluteUrl(siteMeta.socialBanner)}></ShareBar>
 
         <Link href="/" className={cn(buttonVariants({ variant: "ghost", className: "mx-auto mt-4 w-fit" }))}>
           <ChevronLeftIcon className="mr-2 h-4 w-4" aria-hidden="true" />

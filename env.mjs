@@ -12,6 +12,7 @@ export const env = createEnv({
       .default("production"),
       IFRAMELY_URI: z.string().optional(),
       IFRAMELY_API_KEY: z.string().optional(),
+      SITE_URL: z.string().url(),
       NOTION_TOKEN: z.string(),
       NOTION_DATABASE_ID: z.string().trim().min(1),
       NOTION_NOTE_DATABASE_ID: z.string().optional(),
@@ -24,6 +25,7 @@ export const env = createEnv({
       NEXT_DATACACHE_EXPIRE: z.coerce.number().default(3200),
       NEXT_DATACACHE_SWR_EXPIRE: z.coerce.number().optional(),
       RENDER_MDX: z.coerce.boolean().default(false),
+      COPYRIGHT: z.string().default(''),
   },
 
   /**
@@ -57,6 +59,8 @@ export const env = createEnv({
     NEXT_DATACACHE_EXPIRE: process.env.NEXT_DATACACHE_EXPIRE,
     NEXT_DATACACHE_SWR_EXPIRE: process.env.NEXT_DATACACHE_SWR_EXPIRE,
     RENDER_MDX: process.env.RENDER_MDX,
+    COPYRIGHT: process.env.COPYRIGHT,
+    SITE_URL: process.env.SITE_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

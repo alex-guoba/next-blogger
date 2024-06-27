@@ -1,4 +1,5 @@
-import { siteMeta } from "@/config/meta";
+// import { siteMeta } from "@/config/meta";
+import { env } from "@/env.mjs";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -45,7 +46,7 @@ export function formatTime(
 }
 
 export function absoluteUrl(path: string) {
-  const url = new URL(path, siteMeta.siteUrl);
+  const url = new URL(path, env.SITE_URL);
   return url.toString();
   // return `${siteMeta.siteUrl}/${path}`;
 }

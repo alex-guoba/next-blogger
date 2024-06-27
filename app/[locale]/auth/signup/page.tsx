@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Shell from "@/components/shells/shell";
 import { SignUpForm } from "./signup-form";
+import { OAuthSignIn } from "../oauth/oauth-signin";
 
 export const metadata: Metadata = {
   title: "Sign up",
@@ -19,7 +20,7 @@ export default function SignUpPage() {
           <CardDescription>Choose your preferred sign up method</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          {/* <OAuthSignIn /> */}
+          <OAuthSignIn />
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />

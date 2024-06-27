@@ -37,7 +37,7 @@ export async function SiteHeader() {
         <MainNav items={navs} />
         <MobileNav mainNavItems={navs} sidebarNavItems={dashboardConfig.sidebarNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
-          {user && <AuthDropdown user={user} className="" />}
+          {process.env.NEXT_PUBLIC_SUPABASE_URL && <AuthDropdown user={user} className="" />}
         </div>
       </nav>
     </header>
