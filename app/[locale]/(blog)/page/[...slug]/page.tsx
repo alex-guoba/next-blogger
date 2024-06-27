@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import { RenderBlock } from "@/app/notion/render";
 import Shell from "@/components/shells/shell";
 import React, { cache } from "react";
-import { siteMeta } from "@/config/meta";
 import { filterBase, filterSelect, filterText, rawText } from "@/app/notion/block-parse";
 import { notFound } from "next/navigation";
 import { env } from "@/env.mjs";
@@ -11,6 +10,7 @@ import { ContentLoadingSkeleton } from "@/components/post-skeleton";
 import { CacheQueryDatabase, CacheRetrieveBlockChildren } from "@/app/notion/api/cache-wrapper";
 
 import { logger } from "@/lib/logger";
+import { absoluteUrl } from "@/lib/utils";
 
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
 
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       description: pageInfo.summary,
       type: "article",
-      url: siteMeta.siteUrl + "/page/" + params.slug.join("/"),
+      url: absoluteUrl("/page/" + params.slug.join("/")),
       // image: pageInfo.cover,
     },
     twitter: {

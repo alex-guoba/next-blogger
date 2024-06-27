@@ -10,7 +10,6 @@ export const siteMeta = {
   email: "address@yoursite.com",
   github: "https://github.com/alex-guoba/next-blogger",
   twitter: "https://twitter.com/gelco",
-  copyright: "",
 
   // newsletter: {
   //   // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus

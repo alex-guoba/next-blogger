@@ -11,9 +11,11 @@ import { actSignInWithOAuth } from "./actions";
 import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 
+// Custom if you want to add more providers
 const oauthProviders = [
-  { name: "Google", strategy: "google", icon: "google" },
+  // { name: "Google", strategy: "google", icon: "google" },
   { name: "Github", strategy: "github", icon: "gitHub" },
+  { name: "Twitter", strategy: "twitter", icon: "twitter" },
 ] satisfies {
   name: string;
   icon: keyof typeof Icons;

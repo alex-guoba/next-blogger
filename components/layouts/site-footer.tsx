@@ -9,6 +9,7 @@ import { ModeToggle } from "@/components/layouts/mode-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import LocaleSwitcher from "../locale-swither";
 import { NextIntlClientProvider } from "next-intl";
+import { env } from "@/env.mjs";
 
 export function SiteFooter() {
   return (
@@ -32,7 +33,7 @@ export function SiteFooter() {
             </Link>
             .
           </div>
-          <div className="font-sans text-sm leading-loose">{siteMeta.copyright}</div>
+          <div className="font-sans text-sm leading-loose">{env.COPYRIGHT}</div>
           <div className="flex items-center space-x-1">
             <Link
               href={siteMeta.github}
