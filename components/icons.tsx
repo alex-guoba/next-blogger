@@ -9,6 +9,7 @@ import {
   GlobeIcon,
   HomeIcon,
   GearIcon,
+  PersonIcon,
 } from "@radix-ui/react-icons";
 import React from "react";
 
@@ -350,4 +351,5 @@ export const Icons = {
   global: GlobeIcon,
   dashboard: HomeIcon,
   settings: GearIcon,
+  person: PersonIcon,
 };

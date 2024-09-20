@@ -33,7 +33,11 @@ export function SiteFooter() {
             </Link>
             .
           </div>
-          <div className="font-sans text-sm leading-loose">{env.COPYRIGHT}</div>
+          <div className="font-sans text-sm leading-loose">
+            <Link href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">
+              {env.COPYRIGHT}
+            </Link>
+          </div>
           <div className="flex items-center space-x-1">
             <Link
               href={siteMeta.github}

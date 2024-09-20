@@ -14,9 +14,6 @@ export interface DashboardSidebarSheetProps extends React.ComponentPropsWithRef<
 
 export function DashboardSidebarSheet({ children, className, ...props }: DashboardSidebarSheetProps) {
   const { open, setOpen } = useSidebar();
-  //   const isDesktop = useMediaQuery("(min-width: 1024px)")
-
-  //   if (isDesktop) return null
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>

@@ -1,8 +1,5 @@
 import React from "react";
 import { redirect } from "next/navigation";
-
-// import { SiteHeader } from "@/components/layouts/site-header";
-// import { SiteFooter } from "@/components/layouts/site-footer";
 import { getCacheUser } from "@/lib/supabase/user";
 import { SidebarProvider } from "@/components/layouts/sidebar-provider";
 import { DashboardSidebar } from "./_components/dashboard-sidebar";
@@ -20,7 +17,6 @@ export default async function LobyLayout({ children }: { children: React.ReactNo
   }
 
   return (
-    // <div className="relative flex min-h-screen flex-col leading-relaxed">
     <SidebarProvider>
       <div className="grid min-h-screen w-full lg:grid-cols-[17.5rem_1fr]">
         <DashboardSidebar className="top-0 z-30 hidden flex-col gap-4 border-r border-border/60 lg:sticky lg:block"></DashboardSidebar>
@@ -31,10 +27,9 @@ export default async function LobyLayout({ children }: { children: React.ReactNo
               <DashboardSidebar></DashboardSidebar>
             </DashboardSidebarSheet>
           </DashboardHeader>
-          <main className="flex-1 overflow-hidden px-6">{children}</main>
+          <main className="flex-1 overflow-hidden px-6 lg:max-w-3xl">{children}</main>
         </div>
       </div>
     </SidebarProvider>
-    // </div>
   );
 }

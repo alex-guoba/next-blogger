@@ -22,14 +22,14 @@ export function DashboardSidebar({ children, className, ...props }: DashboardSid
     {
       title: "Profile",
       href: `/dashboard/profile`,
-      icon: "product",
+      icon: "person",
       active: segments.includes("profile"),
     },
     {
-      title: "Settings",
-      href: `/dashboard/settings`,
-      icon: "settings",
-      active: segments.includes("settings"),
+      title: "Account",
+      href: `/dashboard/account`,
+      icon: "credit",
+      active: segments.includes("account"),
     },
   ];
 

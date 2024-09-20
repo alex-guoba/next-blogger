@@ -4,7 +4,6 @@ import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useFormState, useFormStatus } from "react-dom";
-import { useRouter } from "next/navigation";
 import { ToastAction } from "@/components/ui/toast";
 
 import type { z } from "zod";
@@ -36,7 +35,7 @@ function SignUpButton({ valid }: { valid: boolean }) {
 }
 
 export function SignUpForm() {
-  const router = useRouter();
+  // const router = useRouter();
   const form = useForm<Inputs>({
     // https://react-hook-form.com/docs/useform#mode
     mode: "all",
@@ -73,7 +72,7 @@ export function SignUpForm() {
       });
       // router.push("/");
     }
-  }, [router, state]);
+  }, [state]);
 
   return (
     <Form {...form}>
