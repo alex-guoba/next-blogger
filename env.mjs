@@ -26,6 +26,7 @@ export const env = createEnv({
       NEXT_DATACACHE_SWR_EXPIRE: z.coerce.number().optional(),
       RENDER_MDX: z.coerce.boolean().default(false),
       COPYRIGHT: z.string().default(''),
+      SITE_TITLE: z.string().optional(),
   },
 
   /**
@@ -61,6 +62,7 @@ export const env = createEnv({
     RENDER_MDX: process.env.RENDER_MDX,
     COPYRIGHT: process.env.COPYRIGHT,
     SITE_URL: process.env.SITE_URL,
+    SITE_TITLE: process.env.SITE_TITLE,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -36,7 +36,7 @@ function SignUpButton({ valid }: { valid: boolean }) {
 }
 
 export function SignUpForm() {
-  const router = useRouter();
+  // const router = useRouter();
   const form = useForm<Inputs>({
     // https://react-hook-form.com/docs/useform#mode
     mode: "all",
@@ -73,7 +73,7 @@ export function SignUpForm() {
       });
       // router.push("/");
     }
-  }, [router, state]);
+  }, [state]);
 
   return (
     <Form {...form}>
