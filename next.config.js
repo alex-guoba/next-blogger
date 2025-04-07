@@ -76,7 +76,7 @@ const nextConfig = withNextIntl({
   //cacheMaxMemorySize: 0, // disable default in-memory caching
 
   // This will build the project as a standalone app inside the Docker image.
-  //output: "standalone",
+  output: "standalone",
 
   experimental: {
     instrumentationHook: true,

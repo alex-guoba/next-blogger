@@ -7,7 +7,7 @@ import { UnfurlSuccessResponse } from "@/types";
 
 // https://iframely.com/docs/iframely-api
 async function queryIframely(url: string) {
-  if (!env.IFRAMELY_URI) {
+  if (!env.IFRAMELY_URI || env.IFRAMELY_URI.length === 0) {
     return null;
   }
   const param = new URLSearchParams({ url });

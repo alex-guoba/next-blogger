@@ -14,6 +14,19 @@
 7. 使用[umami](https://umami.is/)、[Google Analytics](https://analytics.google.com/) 作为站点统计工具。
 8. 使用[Supabase](https://supabase.com/)实现用户认证管理
 
+## 快速开始
+
+使用docker快速部署。
+
+1. Git clone
+2. 准备Notion API Key以及Notion数据库ID
+3. 准备 `.env` 文件，参考 [env.example](./.env.example)
+4. 运行docker-compose.yml
+``` shell
+docker-compose up -d
+```
+5. 访问 `http://localhost:3010`。
+
 ## 技术栈
 
 ### 框架
@@ -43,7 +56,7 @@
 1. 复制[这个Notion模板](https://www.notion.so/gelco/577a7365a3d3442aa3cddb18b4458c88?v=c0455cd1391e41a2b05d9b1536398d13)，并编辑你的博客内容。
 2. 按照Notion的[入门指南](https://developers.notion.com/docs/getting-started)获取`NOTION_TOKEN`和`NOTION_DATABASE_ID`。
 
-### 开发及部署
+### 开发
 
 1. 设置：对项目标星并Fork
 2. 安装依赖：
