@@ -16,7 +16,7 @@ Based on Next.js and Notion Public API, this blog system supports embedding MDX 
 
 ## Quick Start
 1. Clone the repository.
-2. Prepare your Notion API key and database ID.
+2. Prepare your Notion API key and database ID. See [Prerequisites](#prerequisites)
 3. Prepare `.env` file.
 4. Run `docker compose up -d` to start the container.
 5. Visit `http://localhost:3010` to see the website.

@@ -19,7 +19,7 @@
 使用docker快速部署。
 
 1. Git clone
-2. 准备Notion API Key以及Notion数据库ID
+2. 准备Notion API Key以及Notion数据库ID。参考[前提条件](#前提条件)。
 3. 准备 `.env` 文件，参考 [env.example](./.env.example)
 4. 运行docker-compose.yml
 ``` shell
@@ -157,8 +157,8 @@ npm run start
 - MDX开启： `RENDER_MDX=true` 且在notion的code block中设置语言为`markdown`
 - redis缓存开启： `REDIS_URL="redis://localhost:6379"`，否则使用内存、文件缓存
 - Notion数据过期时间 `NEXT_DATACACHE_EXPIRE`，默认1小时。注意如果使用Notion存储了pdf、图片等文件，过期时间不要过长，否则文件链接可能过期。
-- 开启微信读书笔记：配置`NOTION_NOTE_DATABASE_ID`
-3. Supabase配置
+- 开启微信读书笔记：配置`NOTION_NOTE_DATABASE_ID`. 如果不需要，可以屏蔽 [site.ts](./config/site.ts)中的入口。
+1. Supabase配置
 - NEXT_PUBLIC_SUPABASE_URL: Supabase URL
 - NEXT_PUBLIC_SUPABASE_ANON_KEY: Supabase Anon Key
 可以直接使用官方的 [Supabase](https://supabase.com/) 部署，也可以自部署supabase。自部署参考 [supabse-docker](https://github.com/alex-guoba/supabase-docker)
