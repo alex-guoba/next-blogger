@@ -144,9 +144,13 @@ Most common block types are supported. But some blocks information not supported
 - Enable MDX: `RENDER_MDX=true` and set the language to markdown in Notion's code block.
 - Enable Redis caching: `REDIS_URL="redis://localhost:6379"`, otherwise, memory and file caching will be used.
 - Notion data expiration time: `NEXT_DATACACHE_EXPIRE`, defaulting to 1 hour. Note that if Notion is used to store files such as PDFs or images, the expiration time should not be too long to avoid expired file links.
-
+3. Supabase configuration:
+- NEXT_PUBLIC_SUPABASE_URL: Supabase URL
+- NEXT_PUBLIC_SUPABASE_ANON_KEY: Supabase Anon Key
+You can directly use the official [Supabase](https://supabase.com/) for deployment, or you can self-hosted-deploy Supabase. For self-hosted-deployment, refer to [supabse-docker](https://github.com/alex-guoba/supabase-docker). 
 
 ## Reference
 1. [Notion Public API](https://developers.notion.com/reference/intro)
 2. [Next.js](https://nextjs.org/)
+3. [Supabase](https://supabase.com/)
 
