@@ -45,6 +45,14 @@ export function formatTime(
   }).format(new Date(date));
 }
 
+// get current url for sever side
+export function getCurrentUrl(headers: Headers) {
+  const protocol = headers.get("x-forwarded-proto") || "https";
+  const host = headers.get("x-forwarded-host") || headers.get("host");
+
+  return `${protocol}://${host}`;
+}
+
 export function absoluteUrl(path: string) {
   const url = new URL(path, env.SITE_URL);
   return url.toString();
