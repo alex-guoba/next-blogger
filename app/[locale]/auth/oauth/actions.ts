@@ -6,6 +6,7 @@ import { absoluteUrl } from "@/lib/utils";
 // import { authSchema } from "@/lib/validations/auth";
 import { Provider } from "@supabase/auth-js";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function actSignInWithOAuth({ provider }: { provider: Provider }) {
@@ -14,7 +15,7 @@ export async function actSignInWithOAuth({ provider }: { provider: Provider }) {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: absoluteUrl("auth/callback"),
+      redirectTo: absoluteUrl("auth/callback", headers()),
     },
   });
   if (error) {

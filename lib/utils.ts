@@ -45,10 +45,24 @@ export function formatTime(
   }).format(new Date(date));
 }
 
-export function absoluteUrl(path: string) {
-  const url = new URL(path, env.SITE_URL);
+// get current url for sever side
+export function getCurrentUrl(headers: Headers) {
+  const protocol = headers.get("x-forwarded-proto") || "https";
+  const host = headers.get("x-forwarded-host") || headers.get("host");
+
+  return `${protocol}://${host}`;
+}
+
+// headers: see doc from https://nextjs.org/docs/app/api-reference/functions/headers
+export function absoluteUrl(path: string, headers: Headers | undefined = undefined) {
+  let host = env.SITE_URL; // for page generate during build process.
+  if (headers) {
+    host = getCurrentUrl(headers);
+  }
+
+  const url = new URL(path, host);
+
   return url.toString();
-  // return `${siteMeta.siteUrl}/${path}`;
 }
 
 export function safeURL(urlString: string) {

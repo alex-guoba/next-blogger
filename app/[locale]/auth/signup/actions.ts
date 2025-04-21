@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { authSchema } from "@/lib/validations/auth";
 import { absoluteUrl } from "@/lib/utils";
+import { headers } from "next/headers";
 
 export type State =
   | {
@@ -41,7 +42,7 @@ export async function actSignUp(prevState: State | null, formData: FormData): Pr
     email: result.data.email,
     password: result.data.password,
     options: {
-      emailRedirectTo: absoluteUrl("auth/signup/confirm"),
+      emailRedirectTo: absoluteUrl("auth/signup/confirm", headers()),
     },
   });
   if (error) {
