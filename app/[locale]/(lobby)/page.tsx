@@ -3,16 +3,15 @@
 import "@/app/styles/globals.css";
 import Shell from "@/components/shells/shell";
 import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/components/page-header";
-// import { Separator } from "@/components/ui/separator";
 import React from "react";
 import { env } from "@/env.mjs";
 import { PostPagination } from "@/components/pagination";
-// import { PostCardLayout } from "@/components/layouts/list-postcard";
 import { PostRowsLayout } from "@/components/layouts/list-post-row";
 import { CacheQueryDatabase } from "../../notion/api/cache-wrapper";
 import { TagFooter } from "@/components/tag-footer";
 import { ArticlePost, dbQueryParams } from "../../notion/fitler";
 import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: { slug: string[] };
@@ -26,6 +25,10 @@ export default async function Home({ searchParams }: Props) {
 
   const page = Number(searchParams["page"]) || 1;
   const subpost = posts.slice((page - 1) * env.POST_PAGE_SIZES, page * env.POST_PAGE_SIZES);
+
+  if (page > 1 && page > Math.ceil(total / env.POST_PAGE_SIZES)) {
+    return notFound();
+  }
 
   const t = await getTranslations("Posts");
 

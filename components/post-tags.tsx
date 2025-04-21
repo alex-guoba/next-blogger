@@ -35,6 +35,7 @@ export function TagItem({ name }: { name: string }) {
         href={`/tags/${encodeURI(name)}/`}
         className="font-semibold leading-tight hover:text-red-500"
         aria-label={`View posts tagged ${name}`}
+        prefetch={false}
       >
         #{name}
       </Link>

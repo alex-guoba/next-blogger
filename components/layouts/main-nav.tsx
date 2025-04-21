@@ -25,7 +25,7 @@ interface MainNavProps {
 export function MainNav({ items }: MainNavProps) {
   return (
     <div className="hidden gap-6 lg:flex">
-      <Link href="/" className="hidden items-center space-x-2 lg:flex">
+      <Link href="/" className="hidden items-center space-x-2 lg:flex" prefetch={false}>
         <Icons.logo className="h-6 w-6" aria-hidden="true" />
         <span className="hidden font-bold lg:inline-block">{siteMeta.name}</span>
         <span className="sr-only">Home</span>
@@ -52,7 +52,7 @@ export function MainNav({ items }: MainNavProps) {
               ) : (
                 item.href && (
                   <NavigationMenuItem key={item.title}>
-                    <Link href={item.href} legacyBehavior passHref>
+                    <Link href={item.href} legacyBehavior passHref prefetch={false}>
                       <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "h-auto w-[80px] text-base")}>
                         {item.title}
                       </NavigationMenuLink>
