@@ -53,10 +53,21 @@ export function getCurrentUrl(headers: Headers) {
   return `${protocol}://${host}`;
 }
 
-export function absoluteUrl(path: string) {
-  const url = new URL(path, env.SITE_URL);
+// headers: see doc from https://nextjs.org/docs/app/api-reference/functions/headers
+export function absoluteUrl(path: string, headers: Headers | undefined = undefined) {
+  let host = env.SITE_URL; // for page generate during build process.
+  if (headers) {
+    // log
+    console.log("[absoluteUrl]", path, headers);
+    host = getCurrentUrl(headers);
+  } else {
+    // log
+    console.log("[absoluteUrl no header]", path, host);
+  }
+
+  const url = new URL(path, host);
+
   return url.toString();
-  // return `${siteMeta.siteUrl}/${path}`;
 }
 
 export function safeURL(urlString: string) {

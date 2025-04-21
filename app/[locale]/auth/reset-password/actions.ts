@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { checkEmailSchema } from "@/lib/validations/auth";
 import { absoluteUrl } from "@/lib/utils";
+import { headers } from "next/headers";
 
 export type State =
   | {
@@ -38,7 +39,7 @@ export async function actResetPasswrod(prevState: State | null, formData: FormDa
 
   const { error } = await supabase.auth.resetPasswordForEmail(result.data.email, {
     // redirectTo: "reset-password/confirm",
-    redirectTo: absoluteUrl("auth/reset-password/confirm"),
+    redirectTo: absoluteUrl("auth/reset-password/confirm", headers()),
   });
 
   if (error) {

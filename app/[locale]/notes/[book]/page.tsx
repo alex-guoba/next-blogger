@@ -23,6 +23,7 @@ import { CacheQueryDatabase, CacheRetrievePage, CacheRetrieveBlockChildren } fro
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { headers } from "next/headers";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
 // export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
@@ -61,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       description: pageInfo.intro,
       type: "article",
-      url: absoluteUrl("/notes/" + params.book),
+      url: absoluteUrl("/notes/" + params.book, headers()),
       // image: pageInfo.cover,
     },
     twitter: {
@@ -156,7 +157,7 @@ export default async function Page({ params }: { params: { book: string; locale:
   if (!blocks) {
     return <div />;
   }
-  const share_url = absoluteUrl("/notes/" + params.book);
+  const share_url = absoluteUrl("/notes/" + params.book, headers());
 
   const toc = getTableOfContents(blocks);
   const has_toc = toc.items.length > 0;
@@ -194,7 +195,7 @@ export default async function Page({ params }: { params: { book: string; locale:
           </section>
         </React.Suspense>
 
-        <ShareBar url={share_url} title={title} image={absoluteUrl(siteMeta.socialBanner)}></ShareBar>
+        <ShareBar url={share_url} title={title} image={absoluteUrl(siteMeta.socialBanner, headers())}></ShareBar>
 
         <Link href="/notes" className={cn(buttonVariants({ variant: "ghost", className: "mx-auto mt-4 w-fit" }))}>
           <ChevronLeftIcon className="mr-2 h-4 w-4" aria-hidden="true" />

@@ -3,6 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 
 import { createClient } from "@/lib/supabase/server";
 import { absoluteUrl, safeURL } from "@/lib/utils";
+import { headers } from "next/headers";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest) {
   if (nexUrl) {
     redirectTo = next;
   } else {
-    redirectTo = absoluteUrl(next);
+    redirectTo = absoluteUrl(next, headers());
   }
 
   if (token_hash && type) {
@@ -32,5 +33,5 @@ export async function GET(request: NextRequest) {
   }
 
   // return the user to an error page with some instructions
-  return NextResponse.redirect(absoluteUrl("auth/auth-code-error"));
+  return NextResponse.redirect(absoluteUrl("auth/auth-code-error", headers()));
 }

@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 // import { type CookieOptions, createServerClient } from '@supabase/ssr'
 import { createClient } from "@/lib/supabase/server";
 import { absoluteUrl } from "@/lib/utils";
+import { headers } from "next/headers";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -14,10 +15,10 @@ export async function GET(request: Request) {
     const supabase = createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
-      return NextResponse.redirect(absoluteUrl(next));
+      return NextResponse.redirect(absoluteUrl(next, headers()));
     }
   }
 
   // return the user to an error page with instructions
-  return NextResponse.redirect(absoluteUrl("auth/auth-code-error"));
+  return NextResponse.redirect(absoluteUrl("auth/auth-code-error", headers()));
 }
