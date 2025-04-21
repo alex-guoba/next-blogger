@@ -57,12 +57,7 @@ export function getCurrentUrl(headers: Headers) {
 export function absoluteUrl(path: string, headers: Headers | undefined = undefined) {
   let host = env.SITE_URL; // for page generate during build process.
   if (headers) {
-    // log
-    console.log("[absoluteUrl]", path, headers);
     host = getCurrentUrl(headers);
-  } else {
-    // log
-    console.log("[absoluteUrl no header]", path, host);
   }
 
   const url = new URL(path, host);
