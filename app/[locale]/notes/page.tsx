@@ -11,6 +11,7 @@ import { NoteGrid } from "@/components/layouts/list-note-row";
 import { PostPagination } from "@/components/pagination";
 import { rawText } from "@/app/notion/block-parse";
 import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 
 export const revalidate = env.REVALIDATE_PAGES; // revalidate the data interval
 
@@ -42,6 +43,10 @@ export default async function Home({ searchParams }: Props) {
   const total = posts.length;
   const page = Number(searchParams["page"]) || 1;
   const subpost = posts.slice((page - 1) * env.POST_PAGE_SIZES, page * env.POST_PAGE_SIZES);
+
+  if (page > 1 && page > Math.ceil(total / env.POST_PAGE_SIZES)) {
+    return notFound();
+  }
 
   const t = await getTranslations("Notes");
 
