@@ -2,6 +2,14 @@
 name: next-blogger
 
 services:
+  next-redis::
+    image: redis:alpine
+    restart: always
+    command: redis-server --port 6378 # 强制端口 6378
+    networks:
+      - dokploy-network
+    volumes:
+      - next-redis-data:/data/redis
   next-blogger:
     image: next-blogger:1.0
     build:
@@ -14,7 +22,7 @@ services:
       - "3010:3000"
     environment:
       PORT: 3000
-      REDIS_URL: redis://redis:6379
+      REDIS_URL: redis://next-redis:6378
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
