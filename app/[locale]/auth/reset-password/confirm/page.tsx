@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Reset your password",
 };
 
-export default async function ResetPasswordConfirmPage() {
+export default async function ResetPasswordConfirmPage({searchParams}: {searchParams: {code: string}}) {
   return (
     <Shell className="max-w-lg">
       <Card>
@@ -20,7 +20,7 @@ export default async function ResetPasswordConfirmPage() {
           <CardDescription>Reset your password and confirm it</CardDescription>
         </CardHeader>
         <CardContent>
-          <ResetPasswordConfirmForm />
+          <ResetPasswordConfirmForm code={searchParams.code}/>
         </CardContent>
       </Card>
     </Shell>

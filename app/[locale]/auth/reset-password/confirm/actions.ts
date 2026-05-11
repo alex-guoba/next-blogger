@@ -18,7 +18,7 @@ export type State =
     }
   | null;
 
-export async function actResetPasswrodConfirm(prevState: State | null, formData: FormData): Promise<State> {
+export async function actResetPasswrodConfirm(code: string, prevState: State | null, formData: FormData): Promise<State> {
   const supabase = createClient();
 
   // validate
@@ -33,6 +33,9 @@ export async function actResetPasswrodConfirm(prevState: State | null, formData:
       })),
     };
   }
+
+  // exchange code for session
+  await supabase.auth.exchangeCodeForSession(code)
 
   const { error } = await supabase.auth.updateUser({
     password: result.data.password,
