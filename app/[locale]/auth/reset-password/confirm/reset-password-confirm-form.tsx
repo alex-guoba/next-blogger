@@ -31,7 +31,7 @@ function ResetPasswordConfirmButton({ valid }: { valid: boolean }) {
   );
 }
 
-export function ResetPasswordConfirmForm() {
+export function ResetPasswordConfirmForm({code}: {code: string}) {
   const router = useRouter();
   // react-hook-form
   const form = useForm<Inputs>({
@@ -43,7 +43,9 @@ export function ResetPasswordConfirmForm() {
     },
   });
 
-  const [state, act] = useFormState(actResetPasswrodConfirm, null);
+  // bind code to action
+  const boundAction = actResetPasswrodConfirm.bind(null, code);
+  const [state, act] = useFormState(boundAction, null);
 
   React.useEffect(() => {
     if (!state) {
