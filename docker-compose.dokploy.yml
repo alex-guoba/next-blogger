@@ -8,8 +8,6 @@ services:
     command: redis-server --port 6378 # 强制端口 6378
     networks:
       - dokploy-network
-    volumes:
-      - next-redis-data:/data/redis
   next-blogger:
     image: next-blogger:1.0
     build:
