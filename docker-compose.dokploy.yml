@@ -8,6 +8,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: next-blogger
+    networks:
+      - dokploy-network # 必须加，Dokploy 靠这个路由
     ports:
       - 3001
     environment:
