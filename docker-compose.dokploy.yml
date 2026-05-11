@@ -2,7 +2,7 @@
 name: next-blogger
 
 services:
-  next-redis::
+  next-redis:
     image: redis:alpine
     restart: always
     command: redis-server --port 6378 # 强制端口 6378
