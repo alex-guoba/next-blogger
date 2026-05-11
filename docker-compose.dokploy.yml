@@ -2,11 +2,6 @@
 name: next-blogger
 
 services:
-  next-redis:
-    container_name: next-redis
-    image: redis:7.2.7
-    ports:
-      - 6379
   next-blogger:
     image: next-blogger:1.0
     build:
@@ -14,13 +9,10 @@ services:
       dockerfile: Dockerfile
     container_name: next-blogger
     ports:
-      - 3000
+      - 3001
     environment:
-      PORT: 3000
-      REDIS_URL: redis://next-redis:6379
-    depends_on:
-      next-redis:
-        condition: service_started
+      PORT: 3001
+      REDIS_URL: redis://redis:6379
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
