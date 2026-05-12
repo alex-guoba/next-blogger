@@ -1,6 +1,11 @@
 import { createEnv } from "@t3-oss/env-nextjs"
 import { z } from "zod"
 
+const booleanEnv = z
+  .string()
+  .refine((s) => s === "true" || s === "false")
+  .transform((s) => s === "true");
+
 export const env = createEnv({
   /**
    * Specify your server-side environment variables schema here. This way you can ensure the app
@@ -24,7 +29,7 @@ export const env = createEnv({
       NEXT_ANALYTICS_GOOGLE_ID: z.string().default(''),
       NEXT_DATACACHE_EXPIRE: z.coerce.number().default(3200),
       NEXT_DATACACHE_SWR_EXPIRE: z.coerce.number().optional(),
-      RENDER_MDX: z.coerce.boolean().default(false),
+      RENDER_MDX: booleanEnv.default(false),
       COPYRIGHT: z.string().default(''),
       SITE_TITLE: z.string().optional(),
   },
@@ -38,6 +43,11 @@ export const env = createEnv({
     // NEXT_PUBLIC_APP_URL: z.string().url(),
     // NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
     // NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
+    NEXT_PUBLIC_SHARE_FACEBOOK: booleanEnv,
+    NEXT_PUBLIC_SHARE_REDDIT: booleanEnv,
+    NEXT_PUBLIC_SHARE_TWITTER: booleanEnv,
+    NEXT_PUBLIC_SHARE_TELEGRAM: booleanEnv,
+    NEXT_PUBLIC_SHARE_WEIBO: booleanEnv,
   },
 
   /**
@@ -63,6 +73,11 @@ export const env = createEnv({
     COPYRIGHT: process.env.COPYRIGHT,
     SITE_URL: process.env.SITE_URL,
     SITE_TITLE: process.env.SITE_TITLE,
+    NEXT_PUBLIC_SHARE_FACEBOOK: process.env.NEXT_PUBLIC_SHARE_FACEBOOK,
+    NEXT_PUBLIC_SHARE_REDDIT: process.env.NEXT_PUBLIC_SHARE_REDDIT,
+    NEXT_PUBLIC_SHARE_TWITTER: process.env.NEXT_PUBLIC_SHARE_TWITTER,
+    NEXT_PUBLIC_SHARE_TELEGRAM: process.env.NEXT_PUBLIC_SHARE_TELEGRAM,
+    NEXT_PUBLIC_SHARE_WEIBO: process.env.NEXT_PUBLIC_SHARE_WEIBO,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
