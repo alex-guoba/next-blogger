@@ -33,7 +33,7 @@ async function queryIframely(url: string) {
       raw: res,
     } as UnfurlSuccessResponse;
   } catch (e) {
-    console.log(`iframely query error: ${url}`, e);
+    console.log(`iframely query error: ${full}`, e);
   }
   return null;
 }
