@@ -31,8 +31,8 @@ async function queryIframely(url: string) {
     return {
       title: res?.meta?.title,
       description: res?.meta?.description,
-      favicon: res?.links?.[0]?.href,
-      imageSrc: res?.links?.[1]?.href,
+      favicon: res?.links?.[1]?.href,
+      imageSrc: res?.links?.[0]?.href,
       from: "iframely",
       raw: res,
     } as UnfurlSuccessResponse;
