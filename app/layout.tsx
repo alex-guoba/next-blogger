@@ -50,7 +50,8 @@ export default function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <Analytics></Analytics>
+        <Analytics />
+        <StartGoogleAnalytics />
       </head>
       <body
         className={cn(
@@ -66,7 +67,6 @@ export default function RootLayout({
           <Toaster />
         </ThemeProvider>
       </body>
-      <StartGoogleAnalytics></StartGoogleAnalytics>
     </html>
   );
 }

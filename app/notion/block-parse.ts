@@ -16,9 +16,11 @@ export const rawText = (rich_texts: any) => {
   return raw;
 };
 
-// sub pages doesn't have status field
+// sub pages doesn't have status field; treat missing status as unpublished
 export const pagePublished = (page: any) => {
-  return page?.properties?.Status?.select?.name == "Unpublished" ? false : true;
+  const status = page?.properties?.Status?.select?.name;
+  if (status === undefined || status === null) return false;
+  return status === "Published";
 };
 
 // database id must be included in fitler params as it's the unique key for db cache.

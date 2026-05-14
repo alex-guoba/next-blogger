@@ -4,7 +4,17 @@ import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 // import v8 from "v8";
 
+const ALLOWED_TOKEN = process.env.DEBUG_API_TOKEN;
+
 export async function GET(req: NextRequest) {
+  // Block access entirely in production unless a secret token is provided
+  if (process.env.NODE_ENV === "production") {
+    const token = req.nextUrl.searchParams.get("token");
+    if (!ALLOWED_TOKEN || token !== ALLOWED_TOKEN) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+  }
+
   const searchParams = req.nextUrl.searchParams;
   const state = searchParams.get("gc");
 
@@ -15,9 +25,7 @@ export async function GET(req: NextRequest) {
 
     revalidateTag("posts");
 
-    return NextResponse.json({
-      result: "success",
-    });
+    return NextResponse.json({ result: "success" });
   }
 
   const formatMemoryUsage = (data: number) => `${Math.round((data / 1024 / 1024) * 100) / 100} MB`;

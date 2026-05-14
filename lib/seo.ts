@@ -11,7 +11,7 @@ export async function defaultMeta(locale: string): Promise<Metadata> {
   });
   const title = env.SITE_TITLE || t("Title");
   const metadata: Metadata = {
-    metadataBase: new URL(siteMeta.siteUrl),
+    metadataBase: new URL(env.SITE_URL),
     title: {
       default: title,
       template: `%s | ${title}`,

@@ -31,5 +31,3 @@ export default function NotFoundPage() {
     </>
   );
 }
-
-// export default NotFoundPage;

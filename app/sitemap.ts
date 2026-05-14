@@ -15,10 +15,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const queryParams = { ...defaultParam, ...filter };
   const posts = await CacheQueryDatabase(env.NOTION_DATABASE_ID, queryParams);
 
-  const articles = posts.map((post: any) => ({
-    url: absoluteUrl(`article/${post.id}`, headers()),
-    lastModified: post.last_edited_time,
-  }));
+  interface NotionPage {
+    id: string;
+    last_edited_time: string;
+  }
+
+  const articles = (posts as NotionPage[])
+    .filter((post) => post.id)
+    .map((post) => ({
+      url: absoluteUrl(`article/${post.id}`, headers()),
+      lastModified: post.last_edited_time,
+    }));
 
   if (env.NOTION_NOTE_DATABASE_ID) {
     const notesQueryParams = noteDbQueryParams(env.NOTION_NOTE_DATABASE_ID);

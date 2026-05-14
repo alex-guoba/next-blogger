@@ -21,7 +21,7 @@ export function getTableOfContents(blocks: Array<any>): TableOfContents {
     items: new Array(),
   };
 
-  blocks.map((block: any) => {
+  blocks.forEach((block: any) => {
     const { id, type } = block;
     if (type != heading_level_1 && type != heading_level_2 && type != heading_level_3) {
       return;

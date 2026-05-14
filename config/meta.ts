@@ -2,7 +2,6 @@ export const siteMeta = {
   name: "NextBlogger",
   author: "alex-guoba",
   language: "en-us",
-  siteUrl: "http://localhost:3000",
   siteRepo: "https://github.com/alex-guoba/next-blogger",
   siteLogo: "/static/images/logo.png",
   socialBanner: "/static/images/twitter-card.png",
