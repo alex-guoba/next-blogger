@@ -23,12 +23,16 @@ async function queryIframely(url: string) {
       },
       next: { revalidate: 300 }, // cache time
     });
+    if (!result.ok) {
+      console.log(`iframely query failed: ${full}, status: ${result.status}`);
+      return null;
+    }
     const res = await result.json();
     return {
       title: res?.meta?.title,
       description: res?.meta?.description,
-      favicon: res?.links?.icon[0]?.href,
-      imageSrc: res?.links?.thumbnail[0].href,
+      favicon: res?.links?.icon?.[0]?.href,
+      imageSrc: res?.links?.thumbnail?.[0]?.href,
       from: "iframely",
       raw: res,
     } as UnfurlSuccessResponse;
